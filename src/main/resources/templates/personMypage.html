@@ -1,65 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>개인 마이페이지 샘플</title>
+    <title>개인 마이페이지 -> 프로필 관리</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
     <style>
         .mb-30 {
             margin-bottom: 30px;
         }
-        .mr- {
-            margin-right: 30px;
+
+        .ml-100 {
+            margin-left: 100px;
         }
-        .ml-5 {
-            margin-left: 5px;
-        }
+
         .m-30 {
             margin: 30px;
         }
-        .container {
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        /* 왼쪽 마이페이지 */
+        .mypageBox {
             display: flex;
             flex-direction: row;
         }
-        .menu {
+
+        .mypageTitle {
+            text-align: center;
+        }
+
+        .btnMypageMenuBox {
+            width: 95%;
+        }
+
+        .mypageMenu {
             width: 25%;
             border-right: 1px solid #ccc;
             padding-right: 10px;
         }
-        .content {
-            width: 75%;
-            padding-left: 10px;
-        }
-        form {
-            margin-top: 50px;
-            width: 70%;
-        }
-        .profile-img {
-            width: 150px; /* 변경된 이미지 크기 */
+
+        .mypageImage {
+            width: 200px;
             height: auto;
             border-radius: 50%;
-            position: relative;
         }
-        .profile-img button {
-            position: absolute;
-            bottom: 5px;
-            right: -30px;
-            background-color: #ccc; /* 수정 버튼 색상 */
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            color: #fff;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .menu-btn {
+
+        .btnMypageMenu {
             display: block;
-            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -68,12 +60,50 @@
             text-decoration: none;
             color: #333;
         }
-        .menu-btn:hover {
+
+        .btnMypageMenu:hover {
             background-color: #f0f0f0;
         }
-        .save-btn {
+
+        /* 오른쪽 프로필 관리 */
+        .profileBox {
+            width: 50%;
+            padding-left: 10px;
+        }
+
+        form {
+            margin-top: 50px;
+            width: 70%;
+        }
+
+        .profileImagebox {
+            position: relative;
+        }
+
+        .profileImage {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .btnImage {
+            position: absolute;
+            bottom: -10px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            color: #fff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .btnSave {
             display: block;
-            width: 100%;
+            width: 30%;
             padding: 10px;
             border: none;
             border-radius: 5px;
@@ -81,57 +111,60 @@
             margin-top: 20px;
             text-decoration: none;
             color: #ffffff;
-            background-color: #082D37; /* 저장 버튼 색상 */
-        }
-        .save-btn:hover {
-            background-color: #05313e; /* 저장 버튼 마우스 호버 색상 */
+            background-color: #082D37;
+            margin: auto;
         }
 
-        .profile-img-lg {
-    width: 200px; /* 수정된 부분 */
-    height: 200px; /* 수정된 부분 */
-    border-radius: 50%;
-}
+        .btnSave:hover {
+            background-color: #05313e;
+        }
     </style>
 </head>
-<body>
-<div class="container m-30">
-    <div class="menu">
-        <div class="title ml-5"><h1>마이페이지</h1></div>
-        <img src="C:\Users\USER\Desktop\sample1.png" alt="프로필 이미지" class="profile-img-lg mb-30"> <!-- 수정된 부분 -->
-        <ul>
-            <li><a href="#" class="menu-btn" onclick="showProfile()">프로필 관리</a></li>
-            <li><a href="#" class="menu-btn">이력서 관리</a></li>
-            <li><a href="#" class="menu-btn">좋아요한 기업</a></li>
-            <li><a href="#" class="menu-btn">지원현황</a></li>
-            <li><a href="#" class="menu-btn">로그아웃</a></li>
-        </ul>
-    </div>
 
-    <div class="content m-30" id="profileForm" style="display: none;">
-        <h2>프로필 관리</h2>
-        <div class="profile-img mb-30">
-            <img src="C:\Users\USER\Desktop\sample1.png" alt="프로필 이미지" class="profile-img">
-            <button type="button">수정</button>
+<body>
+
+    <div class="mypageBox m-30">
+        <div class="mypageMenu">
+            <div class="mypageTitle">
+                <h1>마이페이지</h1>
+            </div>
+            <img src="C:\Users\USER\Desktop\sample1.png"class="mypageImage ml-100 mt-10 mb-30">
+            <ul class="btnMypageMenuBox">
+                <li><a href="#" class="btnMypageMenu" onclick="showProfile()">프로필 관리</a></li>
+                <li><a href="#" class="btnMypageMenu">이력서 관리</a></li>
+                <li><a href="#" class="btnMypageMenu">좋아요한 기업</a></li>
+                <li><a href="#" class="btnMypageMenu">지원현황</a></li>
+                <li><a href="#" class="btnMypageMenu">로그아웃</a></li>
+            </ul>
         </div>
+
+
+        <div class="profileBox m-30" id="profileForm" style="display: none;">
+            <h2>프로필 관리</h2>
+            <div class="profileImagebox mb-30">
+
+                <img src="C:\Users\USER\Desktop\sample1.png" class="profileImage">
+                <button class="btnImage">수정</button>
+
+            </div>
             <div class="mb-3">
-                <label for="name" class="form-label">이름</label>
+                <label for="name" class="profileMenu">이름</label>
                 <input type="text" class="form-control" id="name" name="name" value="홍길동">
             </div>
             <div class="mb-3">
-                <label for="age" class="form-label">나이</label>
+                <label for="age" class="profileMenu">나이</label>
                 <input type="text" class="form-control" id="age" name="age">
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label">전화번호</label>
+                <label for="phone" class="profileMenu">전화번호</label>
                 <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
             </div>
             <div class="mb-3">
-                <label for="address" class="form-label">주소</label>
+                <label for="address" class="profileMenu">주소</label>
                 <input type="text" class="form-control" id="address" name="address">
             </div>
             <div class="mb-3">
-                <label for="skills" class="form-label">기술 스택</label>
+                <label for="skills" class="profileMenu">기술 스택</label>
                 <select class="form-select" id="skills" name="skills">
                     <option value="Java">Java</option>
                     <option value="JavaScript">JavaScript</option>
@@ -143,7 +176,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="interests" class="form-label">관심 분야</label>
+                <label for="interests" class="profileMenu">관심 분야</label>
                 <select class="form-select" id="interests" name="interests">
                     <option value="Web Development">Web Development</option>
                     <option value="Mobile Development">Mobile Development</option>
@@ -152,43 +185,46 @@
                     <option value="Artificial Intelligence">Artificial Intelligence</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary save-btn">저장</button>
-        </form>
+            <br>
+            <br>
+            <button type="button" class="btnSave">저장</button>
+            </form>
+        </div>
     </div>
-</div>
 
-<script>
-    // 페이지 로드 시 프로필 관리 내용을 보이도록 설정
-    window.onload = function() {
-        document.getElementById("profileForm").style.display = "block";
-    };
+    <script>
+        // 페이지 로드 시 프로필 관리 내용을 보이도록 설정
+        window.onload = function () {
+            document.getElementById("profileForm").style.display = "block";
+        };
 
-    function showProfile() {
-        document.getElementById("profileForm").style.display = "block";
-    }
+        function showProfile() {
+            document.getElementById("profileForm").style.display = "block";
+        }
 
-    // 저장 버튼 클릭 시 동작
-    document.querySelector('.save-btn').addEventListener('click', function() {
-        var name = document.getElementById('name').value;
-        var age = document.getElementById('age').value;
-        var phone = document.getElementById('phone').value;
-        var address = document.getElementById('address').value;
-        var skills = document.getElementById('skills').value;
-        var interests = document.getElementById('interests').value;
+        // 저장 버튼 클릭 시 동작
+        document.querySelector('.save-btn').addEventListener('click', function () {
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+            var phone = document.getElementById('phone').value;
+            var address = document.getElementById('address').value;
+            var skills = document.getElementById('skills').value;
+            var interests = document.getElementById('interests').value;
 
-        // 여기서 정보를 저장하는 동작을 수행하면 됩니다.
-        // 예를 들어, 서버로 정보를 전송하거나 로컬 스토리지에 저장하는 등의 방법으로 구현할 수 있습니다.
-        // 이 예시에서는 각 입력란의 값을 콘솔에 출력하는 것으로 대체합니다.
-        console.log('이름:', name);
-        console.log('나이:', age);
-        console.log('전화번호:', phone);
-        console.log('주소:', address);
-        console.log('기술 스택:', skills);
-        console.log('관심 분야:', interests);
+            // 여기서 정보를 저장하는 동작을 수행하면 됩니다.
+            // 예를 들어, 서버로 정보를 전송하거나 로컬 스토리지에 저장하는 등의 방법으로 구현할 수 있습니다.
+            // 이 예시에서는 각 입력란의 값을 콘솔에 출력하는 것으로 대체합니다.
+            console.log('이름:', name);
+            console.log('나이:', age);
+            console.log('전화번호:', phone);
+            console.log('주소:', address);
+            console.log('기술 스택:', skills);
+            console.log('관심 분야:', interests);
 
-        // 필요한 저장 로직을 추가하세요.
-    });
-</script>
+            // 필요한 저장 로직을 추가하세요.
+        });
+    </script>
 
 </body>
+
 </html>
