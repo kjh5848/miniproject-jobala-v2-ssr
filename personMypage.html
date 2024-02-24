@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>개인 마이페이지 샘플</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <style>
+        .mb-30{
+            margin-bottom: 30px;
+        }
+
+        .mr-{
+            margin-right: 30px;
+        }
+        .ml-5{
+            margin-left: 5px;
+        }
+        .m-30{
+            margin: 30px;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+        .menu {
+            width: 25%;
+            border-right: 1px solid #ccc; /* 테두리 선 설정 */
+            padding-right: 10px; /* 메뉴와 테두리 사이 여백 설정 */
+        }
+        .content {
+            width: 75%;
+            padding-left: 10px; /* 내용과 테두리 사이 여백 설정 */
+        }
+        form {
+            margin-top: 50px;
+            width: 70%; /* 폼의 너비 조절 */
+        }
+        .profile-img {
+            width: 100%; /* 이미지 크기 조절 */
+            height: auto;
+            border-radius: 50%; /* 원형 프로필 이미지를 위한 둥근 테두리 */
+        }
+        ul {
+            list-style-type: none; /* 목록 기호 제거 */
+            padding: 0;
+        }
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc; /* 네모 모양의 테두리 설정 */
+            border-radius: 5px; /* 버튼의 모서리를 둥글게 만듭니다. */
+            text-align: center; /* 텍스트를 가운데 정렬합니다. */
+            margin-bottom: 10px; /* 각 버튼 사이의 간격을 설정합니다. */
+            text-decoration: none; /* 기본 링크 효과를 제거합니다. */
+            color: #333; /* 텍스트 색상을 지정합니다. */
+        }
+        .menu-btn:hover {
+            background-color: #f0f0f0; /* 마우스를 올렸을 때 배경색을 변경합니다. */
+        }
+    </style>
+</head>
+<body>
+<div class="container m-30">
+    <div class="menu">
+        <div class="title ml-5"><h1>마이페이지</h1></div>
+        <img src="C:\Users\USER\Desktop\sample1.png" alt="프로필 이미지" class="profile-img mb-30">
+        <ul>
+            <li><a href="#" class="menu-btn">프로필 관리</a></li>
+            <li><a href="#" class="menu-btn">이력서 관리</a></li>
+            <li><a href="#" class="menu-btn">좋아요한 기업</a></li>
+            <li><a href="#" class="menu-btn">지원현황</a></li>
+            <li><a href="#" class="menu-btn">로그아웃</a></li>
+        </ul>
+    </div>
+
+    <div class="content m-30">
+        <h2>회원정보 수정</h2>
+        <form action="#" method="post">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" value="홍길동"><br><br>
+
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" value="hong@example.com"><br><br>
+
+            <label for="phone">전화번호:</label>
+            <input type="tel" id="phone" name="phone" value="010-1234-5678"><br><br>
+
+            <input type="submit" value="저장">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
