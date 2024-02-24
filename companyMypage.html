@@ -23,8 +23,6 @@
         .container {
             display: flex;
             flex-direction: row;
-            justify-content: center; /* 수평 가운데 정렬 */
-            align-items: center; /* 수직 가운데 정렬 */
         }
         .menu {
             width: 25%;
@@ -62,38 +60,116 @@
         .menu-btn:hover {
             background-color: #f0f0f0; /* 마우스를 올렸을 때 배경색을 변경합니다. */
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {background-color:#f5f5f5;}
+
+        .save-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #082D37;
+        }
+        .save-btn:hover {
+            background-color: #05313e;
+        }
+        .profile-img {
+            width: 200px; /* 수정된 부분 */
+            height: 200px; /* 수정된 부분 */
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
-<div class="container m-30">
-    <div class="menu">
-        <div class="title ml-5"><h1>마이페이지</h1></div>
-        <img src="C:\Users\USER\Desktop\sample2.png" alt="프로필 이미지" class="profile-img mb-30">
-        <ul>
-            <li><a href="#" class="menu-btn">담당자 프로필 관리</a></li>
-            <li><a href="#" class="menu-btn">공고 관리</a></li>
-            <li><a href="#" class="menu-btn">지원자 관리</a></li>
-            <li><a href="#" class="menu-btn">자유게시판</a></li>
-            <li><a href="#" class="menu-btn">로그아웃</a></li>
-        </ul>
+    <div class="container m-30">
+        <div class="menu">
+            <div class="title ml-5"><h1>마이페이지</h1></div>
+            <img src="C:\Users\USER\Desktop\sample2.png"class="profile-img mb-30">
+            <ul>
+                <li><a href="#" class="menu-btn">담당자 프로필 관리</a></li>
+                <li><a href="#" class="menu-btn">공고 관리</a></li>
+                <li><a href="#" class="menu-btn">지원자 관리</a></li>
+                <li><a href="#" class="menu-btn">자유게시판</a></li>
+                <li><a href="#" class="menu-btn">로그아웃</a></li>
+            </ul>
+        </div>
+    
+        <div class="content">
+            <div class="content">
+                <h1>담당자 프로필 관리</h1>
+     <div class="profile-img mb-30">
+                <img src="C:\Users\USER\Desktop\sample2.png" class="profile-img">
+                <button type="button">수정</button>
+            </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" value="홍길동">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">나이</label>
+                    <input type="text" class="form-control" id="age" name="age">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">전화번호</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">주소</label>
+                    <input type="text" class="form-control" id="address" name="address">
+                </div>
+                <button type="button" class="btn btn-primary save-btn">저장</button>
+            </form>
+        </div>
     </div>
-
-    <div class="content m-30">
-        <h2>담당자 정보 수정</h2>
-        <form action="#" method="post">
-            <label for="name">이름:</label>
-            <input type="text" id="name" name="name" value="홍길동"><br><br>
-
-            <label for="email">이메일:</label>
-            <input type="email" id="email" name="email" value="hong@example.com"><br><br>
-
-            <label for="phone">전화번호:</label>
-            <input type="tel" id="phone" name="phone" value="010-1234-5678"><br><br>
-
-            <input type="submit" value="저장">
-        </form>
-    </div>
-</div>
-
-</body>
-</html>
+    
+    <script>
+        // 페이지 로드 시 프로필 관리 내용을 보이도록 설정
+        window.onload = function() {
+            document.getElementById("profileForm").style.display = "block";
+        };
+    
+        function showProfile() {
+            document.getElementById("profileForm").style.display = "block";
+        }
+    
+        // 저장 버튼 클릭 시 동작
+        document.querySelector('.save-btn').addEventListener('click', function() {
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+            var phone = document.getElementById('phone').value;
+            var address = document.getElementById('address').value;
+            var skills = document.getElementById('skills').value;
+            var interests = document.getElementById('interests').value;
+    
+            // 여기서 정보를 저장하는 동작을 수행하면 됩니다.
+            // 예를 들어, 서버로 정보를 전송하거나 로컬 스토리지에 저장하는 등의 방법으로 구현할 수 있습니다.
+            // 이 예시에서는 각 입력란의 값을 콘솔에 출력하는 것으로 대체합니다.
+            console.log('이름:', name);
+            console.log('나이:', age);
+            console.log('전화번호:', phone);
+            console.log('주소:', address);
+            console.log('기술 스택:', skills);
+            console.log('관심 분야:', interests);
+    
+            // 필요한 저장 로직을 추가하세요.
+        });
+    </script>
+    
+    </body>
+    </html>
