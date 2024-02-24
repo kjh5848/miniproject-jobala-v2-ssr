@@ -17,45 +17,45 @@
             margin-top: 50px;
         }
 
-        .ml-20 {
-            margin-left: 20px;
-        }
-
         .vipCompanyInfoBox {
             display: grid;
             grid-template-columns: auto auto auto auto auto;
             grid-column-gap: 10px;
             align-content: center;
+            transition: border-color 0.3s ease; /* 테두리 색상 변화에 대한 transition 추가 */
         }
 
         .vipCompanyInfoImageBox img {
             border: 1px solid #000;
-            padding: 5px;
+            padding: 10px;
             border-radius: 20px;
             height: 100%;
             width: 100%;
         }
 
+        .vipCompanyInfoImageBox img:hover {
+            border-color: #EDEBC7; /* 마우스 오버시 테두리 색상 변경 */
+            border-width: 5px; /* 마우스 오버시 테두리 두께 변경 */
+        }
+
         .companyInfoBox {
             display: grid;
-            grid-template-columns: auto auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto auto;
             grid-gap: 10px;
-            justify-content: center;
-            align-content: center;
         }
 
         .companyInfoImage {
             border: 1px solid #000;
-            padding: 5px;
             border-radius: 20px;
             height: 150px;
-            width: 327px;
+            width: 270px;
+            padding: 5px;
         }
 
         .companyInfoImage img {
             height: 40%;
             width: 40%;
-            border-radius: 20px;
+            padding: 5px;
         }
     </style>
 </head>
@@ -67,7 +67,7 @@
     <div class="vipCompanyInfo m-20">
         <div class="vipCompanyInfoBox">
             <div class="vipCompanyInfoImageBox">
-                <img src="image/vipimage1.png">
+                <a href="/kakao채용공고"><img src="image/vipimage1.png"></a>
             </div>
             <div class="vipCompanyInfoImageBox">
                 <img src="image/vipimage2.png">
@@ -117,6 +117,20 @@
                  src="image/companyimage4.png">
             <div class="text">정부과제 기획자 (5년 이상)</div>
             <div class="text">(주)블루앤트</div>
+            <div class="text">서울전체|5년|대졸이상</div>
+        </div>
+        <div class="companyInfoImage">
+            <img class="companyImage"
+                 src="image/companyimage5.png">
+            <div class="text">EAI 컨설팅 부문 경력채용</div>
+            <div class="text">현대오토에버(주)</div>
+            <div class="text">서울전체|경력무관|학력무관</div>
+        </div>
+        <div class="companyInfoImage">
+            <img class="companyImage"
+                 src="image/companyimage6.png">
+            <div class="text">보안솔루션 기술영업 경력직원 채용</div>
+            <div class="text">한국전자인증(주)</div>
             <div class="text">서울전체|5년|대졸이상</div>
         </div>
     </div>
