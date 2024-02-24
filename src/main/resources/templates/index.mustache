@@ -50,6 +50,13 @@
             height: 150px;
             width: 270px;
             padding: 5px;
+            transition: border-color 0.3s ease; /* 테두리 색상 변화에 대한 transition 추가 */
+            cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 것임을 표시 */
+        }q
+
+        .companyInfoImage:hover {
+            border-color: #EDEBC7; /* 마우스 오버시 테두리 색상 변경 */
+            border-width: 5px; /* 마우스 오버시 테두리 두께 변경 */
         }
 
         .companyInfoImage img {
@@ -91,9 +98,8 @@
     <div class="companyInfo mt-50 m-20"><h3><b>채용 공고</b></h3></div>
 
     <div class="companyInfoBox m-20">
-        <div class="companyInfoImage">
-            <img class="companyImage"
-                 src="image/companyimage1.png">
+        <div class="companyInfoImage" onclick="window.location.href='/companyList'">
+            <img class="companyImage" src="image/companyimage1.png">
             <div class="text">플랫폼 프론트엔드 개발자 모집</div>
             <div class="text">팡고지와이</div>
             <div class="text">서울전체|2년|대졸이상</div>
