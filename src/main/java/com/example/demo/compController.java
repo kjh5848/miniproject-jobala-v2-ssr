@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class BoardController {
+public class compController {
 
     @GetMapping("/comp/mainForm")
     public String compMain() {
@@ -33,6 +33,6 @@ public class BoardController {
 
     @GetMapping("/comp/logout")
     public String logout() {
-        return "compMain"; // index.mustache 템플릿 파일을 반환
+        return "index"; // index.mustache 템플릿 파일을 반환
     }
 }

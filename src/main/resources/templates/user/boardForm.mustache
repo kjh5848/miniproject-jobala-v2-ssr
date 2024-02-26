@@ -16,9 +16,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="profileBox mt-3" id="profileForm">
-                    <h2 class="text-center mb-4">자유게시판</h2>
-                    <table class="table table-bordered">
+                <div class="applyBox">
+                    <h2 class="text-left">자유게시판</h2>
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -46,37 +46,44 @@
             </div>
         </div>
     </div>
+
+
     <div class="card-body">
         <div class="text-center mb-3">
             <button class="btn btn-primary" id="writeBtn">글쓰기</button>
         </div>
     </div>
-</div>
 
-<!-- 글쓰기 모달 -->
-<div class="modal fade" id="writeModal" tabindex="-1" aria-labelledby="writeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="writeModalLabel">글쓰기</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- 글쓰기 폼 -->
-                <form id="writeForm">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">이름</label>
-                        <input type="text" class="form-control" id="name" name="name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="title" class="form-label">문의 제목</label>
-                        <input type="text" class="form-control" id="title" name="title">
-                    </div>
-                    <button type="submit" class="btn btn-primary">작성</button>
-                </form>
+
+    <!-- 글쓰기 모달 -->
+    <div class="modal fade" id="writeModal" tabindex="-1" aria-labelledby="writeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="writeModalLabel">글쓰기</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 글쓰기 폼 -->
+                    <form id="writeForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">이름</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">문의 제목</label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                        <button type="submit" class="btn btn-primary">작성</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+</div>
 </div>
 
 </body>

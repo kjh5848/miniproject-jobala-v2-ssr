@@ -36,4 +36,9 @@ public class UserController {
         return "/user/boardForm"; // index.mustache 템플릿 파일을 반환
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        return "index"; // index.mustache 템플릿 파일을 반환
+    }
+
 }

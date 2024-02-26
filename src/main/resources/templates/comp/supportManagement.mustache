@@ -1,4 +1,4 @@
-{{> layout/header1}}
+{{> layout/header}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +15,6 @@
             padding: 30px;
             border-radius: 10px;
             border: none; /* 하단 테두리 제거 */
-        }
-
-        .table th {
-            background-color: #f8f9fa;
         }
 
         .badge.bg-primary {
@@ -47,65 +43,82 @@
     </div>
 
     <div class="card-body">
-        <div class="profileBox mt-3" id="profileForm">
+        <div class="profileBox" id="profileForm">
 
-            <h2 class="text-left mb-4">제안 <span class="badge bg-primary">5</span></h2>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">이력서</th>
-                    <th scope="col">공고명</th>
-                    <th scope="col">포지션</th>
-                    <th scope="col">상태</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>홍길동</td>
-                    <td>이력서1.pdf</td>
-                    <td>소프트웨어 엔지니어</td>
-                    <td>개발자</td>
-                    <td>제안중</td>
-                </tr>
-                <!-- 추가 제안 내용들 -->
-                </tbody>
-            </table>
+            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-primary">5</span></h2>
+            <div class="row">
+                <div class="col">
+                    <div class="applyBox">
+                        <table class="table" style="margin-top: -10px;">
+                            <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">이력서</th>
+                                <th scope="col">공고명</th>
+                                <th scope="col">포지션</th>
+                                <th scope="col">상태</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>홍길동</td>
+                                <td>이력서1.pdf</td>
+                                <td>소프트웨어 엔지니어</td>
+                                <td>개발자</td>
+                                <td>제안중</td>
+                            </tr>
+                            <!-- 추가 제안 내용들 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-body">
-        <div class="profileBox mt-3" id="profileForm">
-            <h2 class="text-left mb-4">지원자 <span class="badge bg-primary">10</span></h2>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">이력서</th>
-                    <th scope="col">지원 공고</th>
-                    <th scope="col">경력</th>
-                    <th scope="col">상태</th>
-                    <th scope="col">응답</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>홍길동</td>
-                    <td>이력서1.pdf</td>
-                    <td>소프트웨어 엔지니어</td>
-                    <td>5년</td>
-                    <td>합격</td>
-                    <td>답변완료</td>
-                </tr>
-                <!-- 추가 지원자 내용들 -->
-                </tbody>
-            </table>
+        <div class="profileBox" id="profileForm">
+
+            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-primary">5</span></h2>
+            <div class="row">
+                <div class="col">
+                    <div class="applyBox">
+                        <table class="table" style="margin-top: -10px;">
+                            <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">이력서</th>
+                                <th scope="col">지원 공고</th>
+                                <th scope="col">경력</th>
+                                <th scope="col">상태</th>
+                                <th scope="col">응답</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>홍길동</td>
+                                <td>이력서1.pdf</td>
+                                <td>소프트웨어 엔지니어</td>
+                                <td>5년</td>
+                                <td>합격</td>
+                                <td>답변완료</td>
+                            </tr>
+                            <!-- 추가 지원자 내용들 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 </div>
+
 </body>
 
 </html>
