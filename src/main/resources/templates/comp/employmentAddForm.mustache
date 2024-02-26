@@ -17,42 +17,48 @@
 
 <body>
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="upMenu text-center mb-4">
-                <h1>마이페이지</h1>
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-outline-dark">프로필 관리</button>
-                    <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
-                    <button type="button" class="btn btn-outline-dark">지원 관리</button>
-                    <button type="button" class="btn btn-outline-dark">로그아웃</button>
-                </div>
-                <div class="m-3">
-                    <h2>채용공고 관리</h2>
-                    <table class="table table-bordered" style="width: 100%;">
-                        <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">지원 공고</th>
-                            <th scope="col">지원자 현황</th>
-                        </tr>
-                        </thead>
-                        <tbody id="adTable">
-                        <tr>
-                            <td>1</td>
-                            <td>[카카오모빌리디] 서버(백엔드) 개발자</td>
-                            <td>현재 15명</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-primary">새로운 채용공고 작성하기</button>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="upMenu text-center mb-4">
+                    <h1>마이페이지</h1>
+                    <div class="btn-group btn-group-lg">
+                        <button type="button" class="btn btn-outline-dark">프로필 관리</button>
+                        <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                        <button type="button" class="btn btn-outline-dark">지원 관리</button>
+                        <button type="button" class="btn btn-outline-dark">로그아웃</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="card-body">
+        <div class="m-3">
+            <h2>채용공고 관리</h2>
+            <table class="table table-bordered" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">지원 공고</th>
+                    <th scope="col">지원자 현황</th>
+                </tr>
+                </thead>
+                <tbody id="adTable">
+                <tr>
+                    <td>1</td>
+                    <td>[카카오모빌리디] 서버(백엔드) 개발자</td>
+                    <td>현재 15명</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary">새로운 채용공고 작성하기</button>
+        </div>
+    </div>
 </div>
+
 </body>
 
 </html>

@@ -31,63 +31,68 @@
 
 <body>
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="upMenu text-center mb-4">
-                <h1>마이페이지</h1>
-                <div class="btn-group btn-group-lg">
-                    <button type="button" class="btn btn-outline-dark" id="profileBtn">프로필 관리</button>
-                    <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
-                    <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
-                    <button type="button" class="btn btn-outline-dark">지원자 관리</button>
-                    <button type="button" class="btn btn-outline-dark">로그아웃</button>
-                </div>
-            </div>
-            <div class="profileBox mt-3" id="profileForm">
-                <h2 class="text-center mb-4">프로필 관리</h2>
-                <h5 class="text-left mb-4">담당자 정보</h5>
-                <div class="text-center mb-3">
-                    <img src="\project\image\sample2.png" class="img-fluid rounded-circle profileImage">
-                    <button class="btn btn-primary editButton">수정</button>
-                </div>
-                <div class="line"></div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">이름</label>
-                    <input type="text" class="form-control" id="name" name="name" value="홍길동">
-                </div>
-                <div class="mb-3">
-                    <label for="age" class="form-label">나이</label>
-                    <input type="text" class="form-control" id="age" name="age">
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">전화번호</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">이메일</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
-                </div>
-
-                <h5 class="text-left mb-4">기업 정보</h5>
-                <div class="mb-3">
-                    <label for="companyName" class="form-label">회사명</label>
-                    <input type="text" class="form-control" id="companyName" name="companyName">
-                </div>
-                <div class="mb-3">
-                    <label for="businessNumber" class="form-label">사업자 번호</label>
-                    <input type="text" class="form-control" id="businessNumber" name="businessNumber">
-                </div>
-                <div class="mb-3">
-                    <label for="scale" class="form-label">규모</label>
-                    <input type="text" class="form-control" id="scale" name="scale">
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary btn-lg">저장</button>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="upMenu text-center mb-4">
+                    <h1>마이페이지</h1>
+                    <div class="btn-group btn-group-lg">
+                        <button type="button" class="btn btn-outline-dark" id="profileBtn">프로필 관리</button>
+                        <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                        <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                        <button type="button" class="btn btn-outline-dark">지원자 관리</button>
+                        <button type="button" class="btn btn-outline-dark">로그아웃</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="card-body">
+        <div class="profileBox mt-3" id="profileForm">
+            <h2 class="text-center mb-4">프로필 관리</h2>
+            <h5 class="text-left mb-4">담당자 정보</h5>
+            <div class="text-center mb-3">
+                <img src="\project\image\sample2.png" class="img-fluid rounded-circle profileImage">
+                <button class="btn btn-primary editButton">수정</button>
+            </div>
+            <div class="line"></div>
+            <div class="mb-3">
+                <label for="name" class="form-label">이름</label>
+                <input type="text" class="form-control" id="name" name="name" value="홍길동">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">나이</label>
+                <input type="text" class="form-control" id="age" name="age">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">전화번호</label>
+                <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">이메일</label>
+                <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
+            </div>
+
+            <h5 class="text-left mb-4">기업 정보</h5>
+            <div class="mb-3">
+                <label for="companyName" class="form-label">회사명</label>
+                <input type="text" class="form-control" id="companyName" name="companyName">
+            </div>
+            <div class="mb-3">
+                <label for="businessNumber" class="form-label">사업자 번호</label>
+                <input type="text" class="form-control" id="businessNumber" name="businessNumber">
+            </div>
+            <div class="mb-3">
+                <label for="scale" class="form-label">규모</label>
+                <input type="text" class="form-control" id="scale" name="scale">
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary btn-lg">저장</button>
+            </div>
+        </div>
+    </div>
 </div>
+
 </body>
 </html>
 {{> layout/footer}}
