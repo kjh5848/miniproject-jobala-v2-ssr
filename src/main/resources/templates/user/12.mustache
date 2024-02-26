@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>채용공고</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        footer {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .like-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .like-icon.active {
+            color: red;
+        }
+
+        .fixed-div {
+            position: fixed;
+            top: 50%;
+            right: 3%;
+            transform: translateY(-50%);
+            border: 1px solid black;
+            background-color: lightgray;
+            padding: 10px;
+            width: 10%;
+            height: 66%;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+
+<body class="body margin-0 padding-0">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">사이트이름/로고</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <!-- 로그인안하고 볼 수 있는 헤더 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="">채용공고</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">자유게시판</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">회원가입</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">로그인</a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="🔍" />
+                <button class="btn btn-primary">검색</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<h4 style="text-align: left; margin-left: 20px; margin-top: 20px">
+    총 <span id="totalJobs">00</span>건의 공고
+</h4>
+
+<div class="container" id="container"
+     style="display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 80%; margin: 30px;">
+    <div class="select-box border border-dark solid grey; background-color: lightgrey; padding: 10px;">
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>기술스택</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="JAVA" /> JAVA
+                <input type="checkbox" class="checkbox" value="HTML" /> HTML
+                <input type="checkbox" class="checkbox" value="CSS" /> CSS
+            </div>
+        </div>
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>경력</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="신입" /> 신입
+                <input type="checkbox" class="checkbox" value="경력" /> 경력
+                <input type="checkbox" class="checkbox" value="주니어" /> 주니어
+            </div>
+        </div>
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>지역</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="서울" /> 서울
+                <input type="checkbox" class="checkbox" value="경기" /> 경기
+                <input type="checkbox" class="checkbox" value="인천" /> 인천
+            </div>
+        </div>
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>학력</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="고졸" /> 고졸
+                <input type="checkbox" class="checkbox" value="대졸" /> 대졸
+                <input type="checkbox" class="checkbox" value="석사" /> 석사
+            </div>
+        </div>
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>연봉</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="3,000만원 이하" />
+                3,000만원 이하
+                <input type="checkbox" class="checkbox" value="3,000만원 ~ 5,000만원" />
+                3,000만원 ~ 5,000만원
+                <input type="checkbox" class="checkbox" value="5,000만원 이상" />
+                5,000만원 이상
+            </div>
+        </div>
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>직무</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="개발" /> 개발
+                <input type="checkbox" class="checkbox" value="디자인" /> 디자인
+                <input type="checkbox" class="checkbox" value="마케팅" /> 마케팅
+            </div>
+        </div>
+        <div class="select-package border border-dark bg-warning p-3 m-2">
+            <h4>고용형태</h4>
+            <div class="checkbox-package">
+                <input type="checkbox" class="checkbox" value="정규직" /> 정규직
+                <input type="checkbox" class="checkbox" value="계약직" /> 계약직
+                <input type="checkbox" class="checkbox" value="인턴" /> 인턴
+            </div>
+        </div>
+        <br />
+        <button class="btn btn-primary mx-2 my-3" onclick="applyFilters()">
+            필터 적용하기
+        </button>
+    </div>
+
+    <div class="fixed-div">고정된 div</div>
+
+    <div class="card border-light shadow-sm p-3 mx-1 my-1 rounded-3 position-relative" style="cursor: pointer;"
+         data-tech="JAVA" data-exp="신입" data-location="서울">
+        <h3>회사명</h3>
+        <h4>제목(직무)</h4>
+        <p><small>지역</small> <small>경력</small> <small>학력</small></p>
+        <p><small>마감날짜</small></p>
+        <span class="like-icon" onclick="toggleHeart(this)"><i class="fas fa-heart"></i></span>
+    </div>
+
+    <div class="card border-light shadow-sm p-3 mx-1 my-1 rounded-3 position-relative" style="cursor: pointer;"
+         data-tech="HTML" data-exp="경력" data-location="경기">
+        <h3>회사명</h3>
+        <h4>제목(직무)</h4>
+        <p><small>지역</small> <small>경력</small> <small>학력</small></p>
+        <p><small>마감날짜</small></p>
+        <span class="like-icon position-absolute" onclick="toggleHeart(this)"><i class="fas fa-heart"></i></span>
+    </div>
+
+    <div class="card border-light shadow-sm p-3 mx-1 my-1 rounded-3 position-relative" style="cursor: pointer;"
+         data-tech="CSS" data-exp="주니어" data-location="인천">
+        <h3>회사명</h3>
+        <h4>제목(직무)</h4>
+        <p><small>지역</small> <small>경력</small> <small>학력</small></p>
+        <p><small>마감날짜</small></p>
+        <span class="like-icon" onclick="toggleHeart(this)"><i class="fas fa-heart"></i></span>
+    </div>
+</div>
+
+<footer>
+    <p>footer</p>
+</footer>
+<script>
+    const toggleHeart = (icon) => {
+        icon.classList.toggle("active");
+    };
+
+    const goToDetailPage = (cardNumber) => {
+        console.log("Go to detail page of card " + cardNumber);
+    };
+
+    const getRecentJobs = () => {
+        const recentJobs = localStorage.getItem("recentJobs");
+        if (recentJobs) {
+            document.getElementById("recentJobs").innerHTML = recentJobs;
+        }
+    };
+
+    const applyFilters = () => {
+        const checkboxes = document.querySelectorAll(".checkbox");
+        const selectedFilters = {};
+
+        // 필터링이 선택되었는지 확인하고, 선택된 필터를 저장합니다.
+        checkboxes.forEach((checkbox) => {
+            const category = checkbox.value;
+            selectedFilters[category] = checkbox.checked;
+        });
+
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+            const tech = card.dataset.tech;
+            const exp = card.dataset.exp;
+            const location = card.dataset.location;
+
+            // 선택된 필터가 없는 경우 모든 카드를 보여줍니다.
+            if (Object.values(selectedFilters).every((value) => !value)) {
+                card.style.display = "block";
+            } else {
+                // 선택된 필터와 카드의 데이터 속성을 비교하여 필터링을 적용합니다.
+                const techFilter = !selectedFilters[tech] || selectedFilters[tech];
+                const expFilter = !selectedFilters[exp] || selectedFilters[exp];
+                const locationFilter =
+                        !selectedFilters[location] || selectedFilters[location];
+
+                // 모든 선택된 필터에 해당하는 카드만 보여줍니다.
+                if (techFilter && expFilter && locationFilter) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            }
+        });
+
+        // 총 공고 건수 업데이트
+        updateTotalJobsCount();
+    };
+
+    const updateTotalJobsCount = () => {
+        const totalJobsCount = document.querySelectorAll(".card").length;
+        document.getElementById("totalJobs").textContent = totalJobsCount;
+    };
+
+    window.onload = () => {
+        updateTotalJobsCount();
+        getRecentJobs();
+    };
+</script>
+</body>
+
+</html>

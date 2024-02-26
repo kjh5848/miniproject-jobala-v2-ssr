@@ -6,33 +6,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class compController {
 
+    @GetMapping("/comp/joinForm")
+    public String joinForm() {
+        return "/comp/joinForm";
+    }
+
+    @GetMapping("/comp/searchEmployAd")
+    public String as() {
+        return "/comp/searchEmployAd";
+    }
+
     @GetMapping("/comp/mainForm")
     public String compMain() {
-        return "/comp/mainForm"; // index.mustache 템플릿 파일을 반환
+        return "/comp/mainForm";
     }
 
     @GetMapping("/comp/Mypage")
     public String compMypage() {
-        return "/comp/MypageForm"; // index.mustache 템플릿 파일을 반환
+        return "/comp/MypageForm";
     }
 
     @GetMapping("/comp/supportManagement")
     public String supportManagement() {
-        return "/comp/supportManagement"; // index.mustache 템플릿 파일을 반환
+        return "/comp/supportManagement";
     }
 
-    @GetMapping("/comp/employmentAddForm")
+    @GetMapping("/comp/employmentAd")
     public String employmentAddForm() {
-        return "/comp/employmentAddForm"; // index.mustache 템플릿 파일을 반환
+        return "/comp/employmentAd";
     }
 
     @GetMapping("/comp/boardForm")
     public String boardForm() {
-        return "/comp/boardForm"; // index.mustache 템플릿 파일을 반환
+        return "/comp/boardForm";
     }
 
     @GetMapping("/comp/logout")
     public String logout() {
-        return "index"; // index.mustache 템플릿 파일을 반환
+        return "index";
+    }
+
+    @GetMapping("/comp/employmentAdForm")
+    public String zz() {
+        return "/comp/employmentAdForm";
     }
 }
