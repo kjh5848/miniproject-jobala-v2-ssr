@@ -1,0 +1,125 @@
+{{> layout/header}}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>juNit</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .btn-light:hover {
+            outline: 2px solid #0d6efd;
+        }
+
+        .active:active {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container p-5">
+    <div>
+        <form class="d-flex mb-3">
+            <input class="form-control me-2" type="text" placeholder="🔍">
+            <button class="btn btn-primary">검색</button>
+        </form>
+    </div>
+
+    <!-- 요청을 하면 localhost:8080/login POST로 요청됨
+    username=사용자입력값&password=사용자값 -->
+    <div class="card">
+        <div class="card-header"><b>로그인을 해주세요</b></div>
+        <div class="card-body">
+            <form action="/login" method="post" enctype="application/x-www-form-urlencoded">
+
+                <div class="d-flex justify-content-center mb-3">
+                    <button id="btnActiveUser" type="button" class="btn btn-light form-control">개인</button>
+                    <button id="btnActiveComp" type="button" class="btn btn-light form-control">기업</button>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Enter username" name="username">
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Enter password" name="password">
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-small-12 text-center">
+                        <button id="btnJoin" type="submit" class="btn btn-primary btn-lg">회원가입</button>
+                    </div>
+                    <div class="col-lg-6 col-small-12 text-center">
+                        <button id="btnLogin" type="submit" class="btn btn-primary btn-lg">로그인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#btnActiveUser").click(() => {
+        // 개인 버튼 클릭 시
+        $("#btnActiveUser").addClass("active");
+        $("#btnActiveComp").removeClass("active");// 엑티브 제거
+        $("#btnJoin").html("개인 회원가입"); // 버튼 문구 변경
+        $("#btnLogin").html("개인 로그인"); // 버튼 문구 변경
+    });
+
+    $("#btnActiveComp").click(() => {
+        // 기업 버튼 클릭 시
+        $("#btnActiveComp").addClass("active");
+        $("#btnActiveUser").removeClass("active");//엑티브 제거
+        $("#btnJoin").html("기업 회원가입"); // 버튼 문구 변경
+        $("#btnLogin").html("기업 로그인"); // 버튼 문구 변경
+    });
+
+    // $("#btnActiveUser").click(function () {
+    //     // 현재 버튼 활성화
+    //     $(this).addClass("active");
+    //     // 반대 버튼 비활성화
+    //     $("#btnActiveComp").removeClass("active").attr("disabled", true);
+    // });
+
+    // $("#btnActiveComp").click(function () {
+    //     // 현재 버튼 활성화
+    //     $(this).addClass("active");
+    //     // 반대 버튼 활성화
+    //     $("#btnActiveUser").removeClass("active").removeAttr("disabled");
+    // });
+
+    // $("#btnActiveUser").click(() => {
+    //     $("#btnActiveUser").toggleClass("active");
+    //     $("#btnActiveComp").attr("disabled", true);
+
+    // });
+
+    // $("#btnActiveComp").click(() => {
+    //     $("#btnActiveComp").toggleClass("active");
+    //     $("#btnActiveUser").attr("disabled", true);
+    // });
+
+    // $("#btnActiveUser").click(() => {
+    //     $("#btnActiveUser").addClass("active")
+    //     $("#btnActiveComp").attr("disabled", true);
+
+    // })
+
+    // $("#btnActiveComp").click(() => {
+    //     $("#btnActiveComp").addClass("active")
+    //     $("#btnActiveUser").attr("disabled", true);
+    // })
+
+</script>
+
+</body>
+
+</html>
+
+{{> layout/footer}}

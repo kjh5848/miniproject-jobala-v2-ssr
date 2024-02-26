@@ -10,6 +10,15 @@ public class UserController {
         return "/user/joinForm";
     }
 
+    @GetMapping("/user/loginForm")
+    public String loginForm() {
+        return "/layout/loginForm";
+    }
+    @GetMapping("/user/loginForm2")
+    public String loginForm2() {
+        return "/layout/loginForm2";
+    }
+
     @GetMapping("/")
     public String main() {
         return "index";
@@ -23,6 +32,16 @@ public class UserController {
     @GetMapping("/user/resume")
     public String resume() {
         return "/user/resume";
+    }
+
+    @GetMapping("/user/resumeWrite")
+    public String resumeWrite() {
+        return "/user/resumeWrite";
+    }
+
+    @GetMapping("/user/resume2")
+    public String resume2() {
+        return "/user/resume2";
     }
 
     @GetMapping("/user/supportManagement")

@@ -11,6 +11,21 @@ public class compController {
         return "/comp/joinForm";
     }
 
+    @GetMapping("/comp/noticeManage01")
+    public String noticeManage01() {
+        return "/comp/noticeManage01";
+    }
+
+    @GetMapping("/comp/noticeManage02")
+    public String noticeManage02() {
+        return "/comp/noticeManage02";
+    }
+
+    @GetMapping("/comp/noticeDetail3")
+    public String noticeDetail3() {
+        return "/comp/noticeDetail3";
+    }
+
     @GetMapping("/comp/searchEmployAd")
     public String as() {
         return "/comp/searchEmployAd";
