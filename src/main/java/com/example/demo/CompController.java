@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class compController {
+public class CompController {
 
     @GetMapping("/comp/joinForm")
     public String joinForm() {
@@ -26,9 +26,14 @@ public class compController {
         return "/comp/noticeDetail3";
     }
 
-    @GetMapping("/comp/searchEmployAd")
-    public String as() {
-        return "/comp/searchEmployAd";
+    @GetMapping("/comp/resumeDetail")
+    public String resumeDetail() {
+        return "/comp/resumeDetail";
+    }
+
+    @GetMapping("/comp/resumeDetail2")
+    public String resumeDetail2() {
+        return "/comp/resumeDetail2";
     }
 
     @GetMapping("/comp/mainForm")
@@ -49,11 +54,6 @@ public class compController {
     @GetMapping("/comp/employmentAd")
     public String employmentAddForm() {
         return "/comp/employmentAd";
-    }
-
-    @GetMapping("/comp/boardForm")
-    public String boardForm() {
-        return "/comp/boardForm";
     }
 
     @GetMapping("/comp/logout")

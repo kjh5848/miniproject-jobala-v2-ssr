@@ -14,9 +14,10 @@ public class UserController {
     public String loginForm() {
         return "/layout/loginForm";
     }
-    @GetMapping("/user/loginForm2")
-    public String loginForm2() {
-        return "/layout/loginForm2";
+
+    @GetMapping("/user/searchEmployAd")
+    public String as() {
+        return "/user/searchEmployAd";
     }
 
     @GetMapping("/")
@@ -54,14 +55,8 @@ public class UserController {
         return "/user/clippedCompany";
     }
 
-    @GetMapping("/user/boardForm")
-    public String boardForm() {
-        return "/user/boardForm";
-    }
-
     @GetMapping("/logout")
     public String logout() {
         return "index";
     }
-
 }
