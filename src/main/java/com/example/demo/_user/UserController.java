@@ -1,10 +1,51 @@
-package com.example.demo;
+package com.example.demo._user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CompController {
+public class UserController {
+
+
+    @GetMapping("/user/loginForm")
+    public String loginForm() {
+        return "/layout/loginForm";
+    }
+
+    @GetMapping("/user/searchEmployAd")
+    public String as() {
+        return "/user/searchEmployAd";
+    }
+
+    @GetMapping("/")
+    public String main() {
+        return "index";
+    }
+
+    @GetMapping("/user/mypage")
+    public String userMypage() {
+        return "/user/mypage";
+    }
+
+    @GetMapping("/user/resume")
+    public String resume() {
+        return "/user/resume";
+    }
+
+    @GetMapping("/user/resumeWrite")
+    public String resumeWrite() {
+        return "/user/resumeWrite";
+    }
+
+    @GetMapping("/user/resume2")
+    public String resume2() {
+        return "/user/resume2";
+    }
+
+    @GetMapping("/user/clippedCompany")
+    public String clippedCompany() {
+        return "/user/clippedCompany";
+    }
 
     @GetMapping("/comp/joinForm")
     public String joinForm() {
@@ -53,7 +94,7 @@ public class CompController {
 
     @GetMapping("/comp/employmentAd")
     public String employmentAddForm() {
-        return "/comp/employmentAd";
+        return "compMyPageAd";
     }
 
     @GetMapping("/comp/logout")
@@ -65,4 +106,5 @@ public class CompController {
     public String zz() {
         return "/comp/employmentAdForm";
     }
+
 }
