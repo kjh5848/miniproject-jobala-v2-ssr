@@ -10,43 +10,47 @@
 </head>
 
 <body>
-<div class="container p-5">
+<div class="container ">
     <div>
         <input class="mb-3" type="text" name="" id="" placeholder="이력서 제목"
-               style="font-size: 30px; border-radius: 5px;">
+               style="font-size: 30px; border-radius: 5px; width: 100%;">
     </div>
-
     <div class="card mb-2">
         <div>
-            <h3 class="card-header">인적사항</h3>
+            <h5 class="card-header">인적사항</h5>
         </div>
-
-        <div class="card-body">
-            <div>
+        <div class="card-body row">
+            <div class="col-sm-3">
+                <img src="/images/userImage.jpg" width="150" height="200" style="margin-left: 70px;">
+            </div>
+            <div class="col-sm-9">
                 <table class="table table-bordered">
-                    <tbody style="font-size: 18px;">
+                    <tbody style="font-size: 15px;">
                     <tr>
                         <th>이름</th>
-                        <td>홍길동</td>
+                        <td>김주혁</td>
                     </tr>
                     <tr>
                         <th>나이</th>
-                        <td>만 25세</td>
+                        <td>만 29세</td>
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td>ssar@nate.com</td>
+                        <td>juniorSSAR@nate.com</td>
                     </tr>
                     <tr>
                         <th>전화번호</th>
                         <td>010-1111-2222</td>
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td>부산광역시 금정구 전포동</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
     <div class="card mb-2">
         <div>
             <h5 class="card-header">희망직무</h5>
@@ -61,16 +65,12 @@
                 </div>
             </div>
         </div>
-
     </div>
-
     <div class="card mb-2">
         <div>
             <h5 class="card-header">스킬</h5>
         </div>
-
         <div class="row m-2">
-
             <div class="col-sm-2">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" value="something">
@@ -98,18 +98,17 @@
             <div class="col-sm-2">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" value="something">
-                    <div>JQury</div>
+                    <div>jQuery</div>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" value="something">
-                    <div>JSP</div>
+                    <div>Mysql</div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="card mb-2">
         <div>
             <h5 class="card-header">학력</h5>
@@ -117,10 +116,10 @@
                 <div class="col-sm-4">
                     <select class="form-select">
                         <option>학력 선택</option>
-                        <option>중학교</option>
                         <option>고등학교</option>
                         <option>대학교(2,3년)</option>
                         <option>대학교(4년)</option>
+                        <option>대학교(석사)</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -137,7 +136,6 @@
             </div>
         </div>
     </div>
-
     <div class="card mb-2">
         <div>
             <h5 class="card-header">경력</h5>
@@ -152,30 +150,28 @@
             </div>
         </div>
     </div>
-
     <div class="card mb-2">
         <div class="d-flex justify-content-between card-header">
             <h5>자격증</h5>
             <button class=" btn btn-primary btn-sm " id="btnLicense">추가</button>
         </div>
         <div class="m-2 row" id="licenseList">
+            <div class="col-sm-4 mb-1"><input type="text" placeholder="자격증 이름 입력" class="form-control"></div>
         </div>
     </div>
-
     <div class="card mb-2">
         <div>
             <h5 class="card-header">자기소개서</h5>
             <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
         </div>
     </div>
-
+    <br>
     <div class="d-flex justify-content-center">
         <button class=" btn btn-primary btn-lg">작성완료</button>
     </div>
     <br>
-    <br>
+    <br><br>
 </div>
-
 </body>
 
 <script>
