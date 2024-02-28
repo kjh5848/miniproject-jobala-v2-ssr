@@ -12,70 +12,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">주혁</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <!-- 로그인안하고 볼 수 있는 헤더 -->
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="">채용공고</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">자유게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">회원가입</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">로그인</a>
-                </li>
-            </ul>
-        </div>
-
-        <div>
-            <form class="d-flex">
-                <input class="form-control me-2" type="text" placeholder="🔍">
-                <button class="btn btn-primary">검색</button>
-            </form>
-        </div>
-
-    </div>
-</nav>
 <div class="container p-5">
-    <div class="d-flex justify-content-end" style="text-size-adjust: 20px;">
-        <b>작성자</b> : 홍길동
-    </div>
-    <br>
-    <!-- 수정삭제버튼 -->
-    <div class="d-flex justify-content-end">
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-warning me-1">수정</button>
-            <button class="btn btn-danger">삭제</button>
-        </div>
-    </div>
-
-
-    <!-- 게시글내용 -->
-    <div>
+    <div  style="margin-top: -70px;">
         <h2><b>카카오에게 문의 드립니다.</b></h2>
-        <hr/>
+        <hr>
         <div class="m-4 p-2">
             카카오에 들어가려면 코테를 어떻게 준비해야 되나요?
         </div>
+
+        <div class="d-flex justify-content-end" style="text-size-adjust: 20px; margin-top: -60px;">
+            <b>작성자</b> : 홍길동
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-warning me-1">수정</button>
+                <button class="btn btn-danger">삭제</button>
+            </div>
+        </div>
     </div>
+
+    <br>
+    <!-- 수정삭제버튼 -->
+
+
+
+    <!-- 게시글내용 -->
+
 
     <!-- 댓글 -->
     <div class="card mt-3">
         <!-- 댓글등록 -->
         <div class="card-body">
             <form action="/reply/save" method="post">
-                <input type="hidden" name="boardId" value="{{board.id}}">
+                <input type="hidden" name="boardId" value="1">
                 <textarea class="form-control" rows="2" name="comment"></textarea>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>
@@ -110,6 +80,7 @@
             </div>
         </div>
     </div>
+    <br><br>
 </div>
 
 </body>
