@@ -6,17 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class UserController {
+public class GuestController {
 
 
-    @GetMapping("/")
-    public String main() {
-        return "index";
-    }
-
-    @GetMapping("/loginForm")
+    @GetMapping("/guest/joinForm")
     public String loginForm(){
-        return "/user/loginForm";
+        return "/guest/joinForm";
     }
-
 }
