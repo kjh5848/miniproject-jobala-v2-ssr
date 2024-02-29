@@ -19,7 +19,7 @@ public class ResumeController {
     }
 
     @GetMapping("/resume/detailForm")
-    public String Detailform() {
+    public String detailForm() {
         return "/guest/resume/detailForm";
     }
 }
