@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class UserController {
 
+    @GetMapping("/")
+    public String boardMain() {
+        return "/board/mainForm";
+    }
 
     @GetMapping("/")
     public String main() {

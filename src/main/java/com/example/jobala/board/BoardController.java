@@ -10,11 +10,11 @@ public class BoardController {
 
     @GetMapping("/board")
     public String boardForm() {
-        return "/board/boardForm";
+        return "mainForm";
     }
 
     @GetMapping("/board/boardForm")
     public String boardDetail() {
-        return "/board/boardDetail";
+        return "DetailForm";
     }
 }
