@@ -10,17 +10,11 @@ public class GuestController {
 
 
     @GetMapping("/guest/joinForm")
-    public String loginForm(){
+    public String joinForm(){
         return "/guest/joinForm";
     }
 
-    @GetMapping("/resume/updateForm")
-    public String resumeUpdateForm(){
-        return "/guest/resume/updateForm";
-    }
 
-    @GetMapping("/resume/detailForm")
-    public String resumeDetailForm(){
-        return "/guest/resume/detailForm";
-    }
+
+
 }
