@@ -190,59 +190,7 @@
         </div>
 
         <script>
-            const toggleHeart = (icon) => {
-                icon.classList.toggle("active");
-            };
-            const goToDetailPage = (cardNumber) => {
-                console.log("Go to detail page of card " + cardNumber);
-            };
-            const getRecentJobs = () => {
-                const recentJobs = localStorage.getItem("recentJobs");
-                if (recentJobs) {
-                    document.getElementById("recentJobs").innerHTML = recentJobs;
-                }
-            };
-            const applyFilters = () => {
-                const checkboxes = document.querySelectorAll(".checkbox");
-                const selectedFilters = {};
-                // 필터링이 선택되었는지 확인하고, 선택된 필터를 저장합니다.
-                checkboxes.forEach((checkbox) => {
-                    const category = checkbox.value;
-                    selectedFilters[category] = checkbox.checked;
-                });
-                const cards = document.querySelectorAll(".card");
-                cards.forEach((card) => {
-                    const tech = card.dataset.tech;
-                    const exp = card.dataset.exp;
-                    const location = card.dataset.location;
-                    // 선택된 필터가 없는 경우 모든 카드를 보여줍니다.
-                    if (Object.values(selectedFilters).every((value) => !value)) {
-                        card.style.display = "block";
-                    } else {
-                        // 선택된 필터와 카드의 데이터 속성을 비교하여 필터링을 적용합니다.
-                        const techFilter = !selectedFilters[tech] || selectedFilters[tech];
-                        const expFilter = !selectedFilters[exp] || selectedFilters[exp];
-                        const locationFilter =
-                                !selectedFilters[location] || selectedFilters[location];
-                        // 모든 선택된 필터에 해당하는 카드만 보여줍니다.
-                        if (techFilter && expFilter && locationFilter) {
-                            card.style.display = "block";
-                        } else {
-                            card.style.display = "none";
-                        }
-                    }
-                });
-                // 총 공고 건수 업데이트
-                updateTotalJobsCount();
-            };
-            const updateTotalJobsCount = () => {
-                const totalJobsCount = document.querySelectorAll(".card").length;
-                document.getElementById("totalJobs").textContent = totalJobsCount;
-            };
-            window.onload = () => {
-                updateTotalJobsCount();
-                getRecentJobs();
-            };
+
         </script>
         <br>
 
