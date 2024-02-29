@@ -1,4 +1,4 @@
-package com.example.jobala.scrap;
+package com.example.jobala.jobOpen;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class ScrapRepogitory {
+public class JobOpenRepository {
     private final EntityManager entityManager;
 
     public void findAll() {

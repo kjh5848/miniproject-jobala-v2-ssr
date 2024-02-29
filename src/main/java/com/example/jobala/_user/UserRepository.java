@@ -1,4 +1,4 @@
-package com.example.jobala.skill;
+package com.example.jobala._user;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class SkillRepogitory {
+public class UserRepository {
     private final EntityManager entityManager;
 
     public void findAll() {

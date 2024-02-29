@@ -1,0 +1,190 @@
+{{> layout/header}}
+
+<div class="container  mt-5">
+    <div class="card mb-3">
+        <div class="card-body">
+            <!-- 회사 이미지 및 정보 -->
+            <div class="d-flex ">
+                <div class="p-3">
+                    <img src="https://picsum.photos/800/400" class="float-end" alt="Paris" width="304" height="236">
+                </div>
+                <div class="p-3 align-middle">
+                    <table class="table">
+                        <tbody style="font-size: 15px;">
+                        <tr>
+                            <th>회사명</th>
+                            <td>카카오</td>
+                        </tr>
+                        <tr>
+                            <th>대표자명</th>
+                            <td>박선규</td>
+                        </tr>
+                        <tr>
+                            <th>홈페이지</th>
+                            <td>www.kakao.com</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 공고 제목 -->
+
+    <div class="mt-5">
+        <input type="text" style="height: 60px;" class="input-lg form-control " placeholder="공고제목...">
+    </div>
+
+
+    <!-- 공고에 들어가야 될 내용  -->
+    <div class="card mt-5">
+        <div class="card-body">
+            <div>
+                <h4>학력</h4>
+            </div>
+            <select class="form-select form-select-lg">
+                <option value="">고등학교 졸업</option>
+                <option value="">대학교 졸업</option>
+                <option value="">학력 무관</option>
+            </select>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap mb-0" for="career">경력</label>
+            <div style="margin-left: 45px; width: 168px;">
+                <select class="custom-select d-block w-100" id="career">
+                    <option value="">신입</option>
+                    <option value="">1~3년</option>
+                    <option value="">3~5년</option>
+                    <option value="">5년 이상</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap mb-0" for="career">고용 형태</label>
+            <div style="margin-left: 15px; width: 168px;">
+                <select class="custom-select d-block w-100 " id="career">
+                    <option value="">정규직</option>
+                    <option value="">계약직</option>
+                    <option value="">인턴</option>
+                    <option value="">파견직</option>
+                    <option value="">프리랜서</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap mb-0" for="career">급여</label>
+            <div style="margin-left: 45px; width: 168px;">
+                <select class="custom-select d-block w-100" id="career">
+                    <option value="">협의</option>
+                    <option value="">3000만원 이하</option>
+                    <option value="">3000만원 ~ 5000만원</option>
+                    <option value="">5000만원 이상</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap mb-0" for="hopeDuty">희망 직무</label>
+            <div style="margin-left: 15px; width: 165px;">
+                <select class="custom-select d-block w-100 ml-2" id="hopeDuty">
+                    <option value="">프론트앤드 개발자</option>
+                    <option value="">백앤드 개발자</option>
+                    <option value="">풀스택 개발자</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap mb-0" for="city">근무 지역</label>
+            <div style="margin-left: 15px; width: 165px;">
+                <select class="custom-select d-block w-100" id="city">
+                    <option value="">전체</option>
+                    <option value="">서울</option>
+                    <option value="">경기</option>
+                    <option value="">인천</option>
+                    <option value="">대전</option>
+                    <option value="">광주</option>
+                    <option value="">부산</option>
+                    <option value="">대구</option>
+                    <option value="">울산</option>
+                    <option value="">강원</option>
+                    <option value="">전라</option>
+                    <option value="">경상</option>
+                    <option value="">제주</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap " for="Register">접수방법</label>
+            <div style="margin-left: 20px; width: 165px;">
+                <select class="custom-select d-block w-100" id="Register">
+                    <option value="">사이트 등록</option>
+                    <option value="">이메일</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body d-flex">
+            <label class="text-nowrap mb-0" for="my-date">마감일</label>
+            <div style="margin-left: 35px; width: 165px;">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 프로그램 기술 -->
+    <div class="card mt-5">
+        <div style="margin-left: 20px;">
+            <label>기술 스택</label>
+        </div>
+        <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
+            <div class="custom-control custom-checkbox ">
+                <input type="checkbox" class="custom-control-input pr-3" id="java">
+                <label class="custom-control-label" for="java">Java</label>
+            </div>
+            <div class="custom-control custom-checkbox ml-4">
+                <input type="checkbox" class="custom-control-input" id="javascript">
+                <label class="custom-control-label" for="javascript">JavaScript</label>
+            </div>
+            <div class="custom-control custom-checkbox pr-3">
+                <input type="checkbox" class="custom-control-input" id="spring">
+                <label class="custom-control-label" for="spring">Spring</label>
+            </div>
+            <div class="custom-control custom-checkbox pr-3">
+                <input type="checkbox" class="custom-control-input" id="html">
+                <label class="custom-control-label" for="html">HTML</label>
+            </div>
+            <div class="custom-control custom-checkbox pr-3">
+                <input type="checkbox" class="custom-control-input" id="jquery">
+                <label class="custom-control-label" for="jquery">jQuery</label>
+            </div>
+            <div class="custom-control custom-checkbox pr-3">
+                <input type="checkbox" class="custom-control-input" id="Mysql">
+                <label class="custom-control-label" for="jquery">Mysql</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공고 상세 내용 -->
+    <div style="padding-top:50px;">
+        <textarea name="" id="myEditor" class="form-control" cols="30" rows="10"></textarea>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="">
+            <button type="submit" class="btn btn-primary">저장 하기</button>
+        </div>
+    </div>
+    <br><br><br>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#myEditor').summernote({
+            lang: 'ko-KR',
+            height: 300,
+        });
+    });
+</script>
+
+{{> layout/footer}}

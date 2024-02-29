@@ -1,4 +1,4 @@
-package com.example.jobala.jobOpen;
+package com.example.jobala.apply;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class JobOpenRepogitory {
+public class ApplyRepository {
     private final EntityManager entityManager;
 
     public void findAll() {
@@ -33,3 +33,5 @@ public class JobOpenRepogitory {
         return;
     }
 }
+
+
