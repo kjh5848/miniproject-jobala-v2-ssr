@@ -13,4 +13,14 @@ public class GuestController {
     public String loginForm(){
         return "/guest/joinForm";
     }
+
+    @GetMapping("/resume/updateForm")
+    public String resumeUpdateForm(){
+        return "/guest/resume/updateForm";
+    }
+
+    @GetMapping("/resume/detailForm")
+    public String resumeDetailForm(){
+        return "/guest/resume/detailForm";
+    }
 }

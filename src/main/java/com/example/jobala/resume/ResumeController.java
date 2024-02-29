@@ -12,4 +12,14 @@ public class ResumeController {
     public String writeForm() {
         return "/guest/resume/writeForm";
     }
+
+    @GetMapping("/resume/UpdateForm")
+    public String updateForm() {
+        return "/guest/resume/updateForm";
+    }
+
+    @GetMapping("/resume/writeForm")
+    public String detailform() {
+        return "/guest/resume/detailForm";
+    }
 }
