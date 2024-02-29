@@ -1,147 +1,266 @@
 {{> layout/header}}
 
+<!--채용공고 상세페이지-->
 
-<div class="container mt-3 ">
-
-    <div class="card mb-20">
+<div class="container mt-5 p-5">
+    <h1>채용공고</h1>
+    <hr>
+    <div class="card mb-3">
         <div class="card-body">
-            <h1 class="card-title">기업정보</h1>
-            <p class="">000 인사담당자님</p>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
+                    <p class="card-title">회사명</p>
+                    <h2>열정적인 인재를 원합니다</h2>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#applyModal">
+                        입사지원
+                    </button>
+
+                    <!-- Modal -->
+
+                </div>
+            </div>
+
+
+            <table class="table table-bordered">
+                <tbody style="font-size: 10px;">
+                <tr>
+                    <th>경력</th>
+                    <td>무관</td>
+                </tr>
+                <tr>
+                    <th>학력</th>
+                    <td>학력 무관</td>
+                </tr>
+                <tr>
+                    <th>고용 형태</th>
+                    <td>정규직</td>
+                </tr>
+                <tr>
+                    <th>연봉</th>
+                    <td>협의</td>
+                </tr>
+                <tr>
+                    <th>지역</th>
+                    <td>서울</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+    <!-- 회사 기본정보 -->
 
-    <div class="d-flex justify-content-between mt-5">
-        <h2>내가 올린 공고</h2>
-        <div>
-            <button class="btn btn-primary">공고만들기</button>
-        </div>
-    </div>
 
-    <!-- 모달 -->
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">
-        지원자 현황 <span class="badge bg-danger">4</span>
-    </button>
-
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- 입사지원 클릭시 창띄우기 -->
+    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">지원자 현황</h5>
+                    <h5 class="modal-title" id="applyModalLabel">이력서 목록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="card row">
+                        <div class="card-header">
+                            이력서1
+                        </div>
+                        <div class="card-body  shadow-5 ">
+                            <div class="col-md-8 align-items-center">
+                                저는 열정적인 사람입니다.
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="mt-3">
+                                    <p style="font-size: 15px;">신입 / 고졸 / 1년</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary text-nowrap ">선택</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary">저장</button>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
+    <!-- 입사지원 클릭시 창띄우기 -->
+
+
+    <!-- 회사 공고 이미지 -->
     <div class="card mb-3">
-        <div class="card-body d-flex justify-content-between">
-            <div class="card form-control">
-                <div class="card-body">
-                    <p class="card-title">회사</p>
-                    <a href="#">
-                        <div class="card-text mb-5">
-                            열정적인 인재를 원합니다... (더 많은 내용)
-                        </div>
-                    </a>
-                    <div class="d-flex justify-content-between">
-                        <div class="align-self-center">
-                            <button class="btn btn-danger">삭제</button>
-                            <button class="btn btn-primary">수정</button>
-                        </div>
-                        <div class="align-self-center">
-                            <button type="button" class="btn btn-primary">
-                                지원자 현황 <span class="badge bg-danger">4</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <h2 class="card-header">채용공고 상세보기</h2>
+        <img src="https://picsum.photos/800/400" class="img-fluid">
+        <div class="card-body">
+            <div class="card-header">모집 분야
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>직무</th>
+                        <th>인원</th>
+                        <th>담당업무 및 자격요건</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>백엔드</td>
+                        <td>0명</td>
+                        <td>
+                            <h6>우대사항</h6>
+                            <ul>
+                                <li> 소프트웨어 개발</li>
+                            </ul>
+                            <h6>자격 요건</h6>
+                            <ul>
+                                <li> 정보처리기사 자격증</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>프론트엔드</td>
+                        <td>0명</td>
+                        <td>
+                            <h6>우대사항</h6>
+                            <ul>
+                                <li>사용자 중심 ux/ui 디자인</li>
+                            </ul>
+                            <h6>자격 요건</h6>
+                            <ul>
+                                <li> 정보처리기사 자격증</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
 
-    <div class="card mb-3 ">
-        <div class="card-body">
-            <div class="card-body d-flex justify-content-between">
-                <div>
-                    <p class="card-title">회사</p>
-                    <div class="card-text">
-                        열정적인 인재를 원합니aaaaaadddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa다
-                    </div>
-                    <div>
-                        <div>
-                            <button class="btn btn-danger mb-3 mt-3">삭제</button>
-                            <button class="btn btn-primary">수정</button>
-                        </div>
-                    </div>
-                </div>
+    <!-- 회사 공고 이미지 -->
 
+
+    <!-- 지원하기 버튼 -->
+    <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
+        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">
+            홈페이지 지원하기
+        </button>
+    </div>
+    <!-- 지원하기 버튼 -->
+
+
+    <!-- 이력서 접수 방법 -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5 class="card-title">접수 방법</h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item"><b>온라인 접수</b>: 회사 홈페이지 접속 후 지원</li>
+                <li class="list-group-item"><b>이메일 접수</b> : resume@company.com 으로 이력서 첨부</li>
+                <li class="list-group-item"><b>방문 접수</b>: 회사 본사 방문 후 접수</li>
+            </ul>
+        </div>
+    </div>
+    <!-- 이력서 접수 방법 -->
+
+
+    <!-- 맞춤형 공고 -->
+
+    <h2>맞춤 공고</h2>
+    <div class="d-flex justify-content-between mb-5 gap-2">
+        <div class="card flex-wrap: wrap " style="width:200px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">회사</h4>
+                <p class="card-text">공고 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
+            </div>
+        </div>
+        <div class="card flex-wrap: wrap " style="width:200px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">회사</h4>
+                <p class="card-text">공고 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
+            </div>
+        </div>
+
+        <div class="card" style="width:200px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">회사</h4>
+                <p class="card-text">공고 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
+            </div>
+        </div>
+
+        <div class="card" style="width:200px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">회사</h4>
+                <p class="card-text">공고 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 맞춤형 공고 -->
+
+
+    <!-- 버튼으로 넘겨서 보기 -->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <div class="card-title"> 지원자 현황 </div>
-                        <a href="#" class="card-link">10 명</a>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="https://picsum.photos/200" alt="회사 이미지"
+                                     class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-9">
+                                <p class="card-title">회사명</p>
+                                <h2>열정적인 인재를 원합니다</h2>
+                                <p class="card-text">
+                                    회사 소개 및 채용 정보
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button class="btn btn-primary">입사지원</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="card mb-3 ">
-        <div class="card-body">
-            <div class="card-body d-flex justify-content-between">
-                <div>
-                    <p>회사</p>
-                    <p>열정적인 인재를 원합니다</p>
-                </div>
-
-                <div>
-                    <div>
-                        <button class="btn btn-danger mb-3 mt-3">삭제</button>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">수정</button>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p> 지원자 현황 </p>
-                        <p>10명</p>
-                    </div>
-                </div>
+            <div class="carousel-item">
             </div>
         </div>
-    </div>
+        <div>
 
-    <div class="card mb-3 ">
-        <div class="card-body">
-            <div class="card-body d-flex justify-content-between">
-                <div>
-                    <p>회사</p>
-                    <p>열정적인 인재를 원합니다</p>
-                </div>
-
-                <div>
-                    <div>
-                        <button class="btn btn-danger mb-3 mt-3">삭제</button>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary">수정</button>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p> 지원자 현황 </p>
-                        <p>10명</p>
-                    </div>
-                </div>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
+    <!-- 버튼으로 넘겨서 보기 -->
 </div>
+
 </body>
 
 </html>
