@@ -10,7 +10,11 @@ public class GuestController {
 
 
     @GetMapping("/guest/joinForm")
-    public String loginForm(){
+    public String joinForm(){
         return "/guest/joinForm";
     }
+
+
+
+
 }
