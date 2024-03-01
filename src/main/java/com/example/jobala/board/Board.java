@@ -10,10 +10,10 @@ import lombok.Data;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String title;
     private String content;
-
-    private int userId;
+    private Integer role; // 0 -> guest, 1 -> comp
+    private Integer userId;
 }

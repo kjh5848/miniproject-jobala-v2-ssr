@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int jobOpenId;
-    private int resumeId;
-    private Boolean role;
+    private Integer jobOpenId;
+    private Integer resumeId;
+    private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createAt;
 }

@@ -1,4 +1,4 @@
-package com.example.jobala.jobOpen;
+package com.example.jobala.jobopen;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "job_open_tb")
-public class JobOpen {
+@Table(name = "jobopen_tb")
+public class Jobopen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int userId;
+    private Integer userId;
     private String title;
     private String content;
     private String career;
@@ -22,4 +22,5 @@ public class JobOpen {
     private String compLocation;
     private LocalDateTime endTime;
     private LocalDateTime createdAt;
+    private Integer role; // 0 -> guest, 1 -> comp
 }

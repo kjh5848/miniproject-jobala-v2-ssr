@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(unique = true, length = 15)
     private String username; // 아아디
-    
+
     private String email;
     private String compNum;
     private String password;
@@ -24,7 +24,7 @@ public class User {
     private String phone;
     private String ceo;
     private String address;
-    private Boolean role; // true -> guest, false -> comp
+    private Integer role; // 0 -> guest, 1 -> comp
     private String photo;
     private LocalDateTime createdAt;
 

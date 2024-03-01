@@ -16,5 +16,6 @@ public class Apply {
     private Integer resumeId;
     private Integer userId;
     private Integer state;
+    private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createdAt;
 }

@@ -8,18 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class ResumeController {
 
-    @GetMapping("/resume/writeForm")
+    @GetMapping("/guest/writeForm")
     public String writeForm() {
         return "/guest/resume/writeForm";
     }
 
-    @GetMapping("/resume/UpdateForm")
+    @GetMapping("/guest/UpdateForm")
     public String updateForm() {
         return "/guest/resume/updateForm";
     }
 
-    @GetMapping("/resume/detailForm")
+    @GetMapping("/guest/detailForm")
     public String detailForm() {
         return "/guest/resume/detailForm";
     }
+
+
 }

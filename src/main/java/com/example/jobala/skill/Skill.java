@@ -9,10 +9,11 @@ import lombok.Data;
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int resumeId;
-    private int jobOpenId;
+    private Integer role; // 0 -> guest, 1 -> comp
+    private Integer resumeId;
+    private Integer jobOpenId;
     private Boolean java;
     private Boolean Javascript;
     private Boolean spring;
