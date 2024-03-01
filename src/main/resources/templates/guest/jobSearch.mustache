@@ -13,28 +13,22 @@
         color: red;
     }
 
-    @import url("https://fonts.googleapis.com/earlyaccess/hanna.css");
-    .navbar-nav, .container, body {
-        font-family: "Hanna", serif;
-        font-size: 20px;
-    }
 </style>
 
-<div class="comtainer d-flex justify-content-center">
+<div class="container d-flex justify-content-center">
     <div style="margin-top: -50px; width: 50%;">
         <div class="card-body">
             <h2 style=" text-align: left; margin-left: 11%;">
                 <br>
                 총 <span id="totalJobs">00</span>건의 공고
             </h2>
-            <div class="comtainer d-flex justify-content-center" style="margin-top: -10px">
+            <div class="container d-flex justify-content-center"
+            style="margin-top: -10px">
 
                 <div class="container" id="container"
                      style="display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 80%; margin: 30px;">
                     <div class="card-body select-box border border-dark solid grey; background-color: lightgrey; padding: 10px;">
-                        <div
-                                class="select-box rounded-3 border border-info solid grey; bg-light; padding: 10px;"
-                        >
+                        <div class="select-box rounded-3 border border-info solid grey; bg-light; padding: 10px;">
                             <div class="select-package bg-info p-3 m-2 rounded-3">
                                 <h4>기술스택</h4>
                                 <div class="checkbox-package">
@@ -112,7 +106,7 @@
                                 class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
                                 style="cursor: pointer"
                                 data-tech="JAVA"
-                                data-exp="신입"
+                                data-exp="정규직"
                                 data-location="서울"
                         >
                             <h3>회사명</h3>
@@ -146,8 +140,8 @@
                                 class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
                                 style="cursor: pointer"
                                 data-tech="CSS"
-                                data-exp="주니어"
-                                data-location="인천"
+                                data-exp="계약직"
+                                data-location="부산"
                         >
                             <h3>회사명</h3>
                             <h4>제목(직무)</h4>
@@ -185,9 +179,7 @@
                 </div>
             </div>
         </div>
-
         <br>
-
     </div>
 </div>
 
