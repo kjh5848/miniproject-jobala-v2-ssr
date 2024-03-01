@@ -1,12 +1,25 @@
 {{> layout/header}}
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- 스타일관련 -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+<!-- 자바스크립트관련 -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+<!-- 한글관련 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/lang/summernote-ko-KR.min.js"></script>
+
+
 <div class="container  mt-5">
     <div class="card mb-3">
         <div class="card-body">
             <!-- 회사 이미지 및 정보 -->
             <div class="d-flex ">
                 <div class="p-3">
-                    <img src="https://picsum.photos/800/400" class="float-end" alt="Paris" width="304" height="236">
+                    <img src="/image/kakaologo" class="float-end" alt="Paris" width="304" height="236">
                 </div>
                 <div class="p-3 align-middle">
                     <table class="table">
@@ -32,17 +45,18 @@
 
 
     <!-- 공고 제목 -->
-
-    <div class="mt-5">
-        <input type="text" style="height: 60px;" class="input-lg form-control " placeholder="공고제목...">
+    <div class="card mt-5">
+        <div class="card-body d-flex justify-content-center">
+            <div class="text-nowrap h4">공고 제목</div>
+            <input type="text" class="form-control">
+        </div>
     </div>
-
 
     <!-- 공고에 들어가야 될 내용  -->
     <div class="card mt-5">
         <div class="card-body">
             <div>
-                <h4>학력</h4>
+                <p><b>학력</b></p>
             </div>
             <select class="form-select form-select-lg">
                 <option value="">고등학교 졸업</option>
@@ -50,82 +64,60 @@
                 <option value="">학력 무관</option>
             </select>
         </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap mb-0" for="career">경력</label>
-            <div style="margin-left: 45px; width: 168px;">
-                <select class="custom-select d-block w-100" id="career">
-                    <option value="">신입</option>
-                    <option value="">1~3년</option>
-                    <option value="">3~5년</option>
-                    <option value="">5년 이상</option>
-                </select>
+        <div class="card-body ">
+            <div>
+                <p><b>경력</b></p>
             </div>
+            <select class="form-select form-select-lg">
+                <option value="">신입</option>
+                <option value="">경력</option>
+            </select>
         </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap mb-0" for="career">고용 형태</label>
-            <div style="margin-left: 15px; width: 168px;">
-                <select class="custom-select d-block w-100 " id="career">
-                    <option value="">정규직</option>
-                    <option value="">계약직</option>
-                    <option value="">인턴</option>
-                    <option value="">파견직</option>
-                    <option value="">프리랜서</option>
-                </select>
+        <div class="card-body">
+            <div>
+                <p><b>고용형태</b></p>
             </div>
+            <select class="form-select form-select-lg">
+                <option value="">정규직</option>
+                <option value="">계약직</option>
+                <option value="">인턴</option>
+            </select>
         </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap mb-0" for="career">급여</label>
-            <div style="margin-left: 45px; width: 168px;">
-                <select class="custom-select d-block w-100" id="career">
-                    <option value="">협의</option>
-                    <option value="">3000만원 이하</option>
-                    <option value="">3000만원 ~ 5000만원</option>
-                    <option value="">5000만원 이상</option>
-                </select>
+        <div class="card-body">
+            <div>
+                <p><b>급여</b></p>
             </div>
+            <select class="form-select form-select-lg">
+                <option value="">협의</option>
+                <option value="">3000만원 이상</option>
+                <option value="">5000만원 이상</option>
+            </select>
         </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap mb-0" for="hopeDuty">희망 직무</label>
-            <div style="margin-left: 15px; width: 165px;">
-                <select class="custom-select d-block w-100 ml-2" id="hopeDuty">
-                    <option value="">프론트앤드 개발자</option>
-                    <option value="">백앤드 개발자</option>
-                    <option value="">풀스택 개발자</option>
-                </select>
+        <div class="card-body">
+            <div>
+                <p><b>희망직무</b></p>
             </div>
+            <select class="form-select form-select-lg">
+                <option value="">프론트엔드</option>
+                <option value="">백엔드</option>
+                <option value="">풀스택</option>
+            </select>
         </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap mb-0" for="city">근무 지역</label>
-            <div style="margin-left: 15px; width: 165px;">
-                <select class="custom-select d-block w-100" id="city">
-                    <option value="">전체</option>
-                    <option value="">서울</option>
-                    <option value="">경기</option>
-                    <option value="">인천</option>
-                    <option value="">대전</option>
-                    <option value="">광주</option>
-                    <option value="">부산</option>
-                    <option value="">대구</option>
-                    <option value="">울산</option>
-                    <option value="">강원</option>
-                    <option value="">전라</option>
-                    <option value="">경상</option>
-                    <option value="">제주</option>
-                </select>
+        <div class="card-body">
+            <div>
+                <p><b>근무지역</b></p>
             </div>
+            <select class="form-select form-select-lg">
+                <option value="">전체</option>
+                <option value="">서울</option>
+                <option value="">5000만원 이상</option>
+            </select>
         </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap " for="Register">접수방법</label>
-            <div style="margin-left: 20px; width: 165px;">
-                <select class="custom-select d-block w-100" id="Register">
-                    <option value="">사이트 등록</option>
-                    <option value="">이메일</option>
-                </select>
+        <div class="card-body">
+            <div>
+                <p><b>마감일</b></p>
             </div>
-        </div>
-        <div class="card-body d-flex">
-            <label class="text-nowrap mb-0" for="my-date">마감일</label>
-            <div style="margin-left: 35px; width: 165px;">
+            <div style="margin-left: 2px; width: 165px;">
                 <input type="text" class="form-control">
             </div>
         </div>
@@ -164,20 +156,12 @@
             </div>
         </div>
     </div>
-
-    <!-- 공고 상세 내용 -->
-    <div style="padding-top:50px;">
-        <textarea name="" id="myEditor" class="form-control" cols="30" rows="10"></textarea>
-    </div>
-
-    <div class="d-flex justify-content-center mt-5">
-        <div class="">
-            <button type="submit" class="btn btn-primary">저장 하기</button>
-        </div>
-    </div>
-    <br><br><br>
 </div>
 
+<!-- 공고 상세 내용 -->
+<div class="container" style="padding-top:50px;">
+    <textarea name="" id="myEditor" class="form-control" cols="30" rows="10"></textarea>
+</div>
 <script>
     $(document).ready(function () {
         $('#myEditor').summernote({
@@ -186,5 +170,17 @@
         });
     });
 </script>
+
+</div>
+</div>
+<div class="d-flex justify-content-center mt-5">
+    <div class="">
+        <button type="submit" class="btn btn-primary">저장 하기</button>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 {{> layout/footer}}
