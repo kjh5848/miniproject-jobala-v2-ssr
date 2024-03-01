@@ -10,12 +10,12 @@ public class CompController {
 
 
     @GetMapping("/comp/joinForm")
-    public String loginForm(){
+    public String loginForm() {
         return "/comp/joinForm";
     }
 
     @GetMapping("/comp/scoutList")
-    public String scoutList(){
+    public String scoutList() {
         return "/comp/scoutList";
     }
 }
