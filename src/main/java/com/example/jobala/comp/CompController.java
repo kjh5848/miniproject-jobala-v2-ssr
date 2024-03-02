@@ -15,12 +15,12 @@ public class CompController {
 
     @GetMapping("/comp/mngForm")
     public String mngForm() {
-        return "/comp/jobopen/myPage/mngForm";
+        return "/comp/_myPage/mngForm";
     }
 
     @GetMapping("/comp/profileForm")
     public String profileForm() {
-        return "/comp/jobopen/myPage/profileForm";
+        return "/comp/_myPage/profileForm";
     }
 
 }
