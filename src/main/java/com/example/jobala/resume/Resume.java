@@ -15,7 +15,7 @@ public class Resume {
     private Integer id;
 
     private Integer userId;
-    private String title;
+    private String resumeTitle;
     private String hopeJob;
     private String career;
     private String license;

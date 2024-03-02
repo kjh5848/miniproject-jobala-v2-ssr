@@ -2,6 +2,7 @@ package com.example.jobala.jobopen;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ public class Jobopen {
     private Integer id;
 
     private Integer userId;
-    private String title;
+    private String jobopenTitle;
     private String content;
     private String career;
     private String edu;
@@ -22,5 +23,6 @@ public class Jobopen {
     private String compLocation;
     private LocalDateTime endTime;
     private LocalDateTime createdAt;
+    @ColumnDefault("1")
     private Integer role; // 0 -> guest, 1 -> comp
 }
