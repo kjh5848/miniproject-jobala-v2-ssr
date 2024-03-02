@@ -2,6 +2,7 @@ package com.example.jobala.resume;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -20,5 +21,6 @@ public class Resume {
     private String license;
     private String content;
     private LocalDateTime createdAt;
-    private Integer role; // 0 -> guest, 1 -> comp
+    @ColumnDefault("0")
+    private Integer ROLE; // 0 -> guest, 1 -> comp
 }
