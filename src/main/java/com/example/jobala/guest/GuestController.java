@@ -15,7 +15,7 @@ public class GuestController {
 
     @GetMapping("/guest/mngForm")
     public String mngForm() {
-        return "/guest/resume/myPage/mngForm";
+        return "/guest/_myPage/mngForm";
     }
 
     @GetMapping("/guest/profileForm")
