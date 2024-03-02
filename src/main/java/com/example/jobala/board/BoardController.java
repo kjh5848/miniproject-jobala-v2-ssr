@@ -8,13 +8,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class BoardController {
 
-    @GetMapping("/board")
+
+    @GetMapping("/board/mainForm")
     public String boardForm() {
-        return "mainForm";
+        return "/board/mainForm";
     }
 
-    @GetMapping("/board/boardForm")
+    @GetMapping("/board/DetailForm")
     public String boardDetail() {
-        return "DetailForm";
+        return "/board/DetailForm";
+    }
+
+    @GetMapping("/board/updateForm")
+    public String updateForm() {
+        return "/board/updateForm";
+    }
+
+    @GetMapping("/board/saveForm")
+    public String saveForm() {
+        return "/board/saveForm";
     }
 }

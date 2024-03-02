@@ -11,13 +11,14 @@ import java.time.LocalDateTime;
 public class Resume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int userId;
+    private Integer userId;
     private String title;
     private String hopeJob;
     private String career;
     private String license;
     private String content;
     private LocalDateTime createdAt;
+    private Integer role; // 0 -> guest, 1 -> comp
 }
