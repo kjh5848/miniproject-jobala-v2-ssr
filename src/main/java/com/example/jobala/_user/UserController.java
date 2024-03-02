@@ -15,7 +15,8 @@ public class UserController {
     }
 
     @GetMapping("/joinForm")
-    public String joinForm() {
+    public String joinForm(UserRequst.joinDTO req) {
+        System.out.println(req);
         return "/user/joinForm";
     }
 
