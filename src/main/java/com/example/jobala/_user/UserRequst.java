@@ -18,7 +18,11 @@ public class UserRequst {
         private String phone;
         private Integer role; // 0 -> guest, 1 -> comp
         private LocalDateTime createdAt;
+    }
 
-
+    @Data
+    public static class loginDTO{
+        private String username;
+        private String password;
     }
 }

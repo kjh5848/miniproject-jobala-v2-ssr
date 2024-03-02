@@ -46,6 +46,15 @@ public class UserRepository {
         query.executeUpdate();
     }
 
+    public User findByUsernameAndPassword(UserRequst.loginDTO reqDTO) {
+        Query query = entityManager.createNativeQuery("select * from user_tb where username=? and password=?", User.class);
+        query.setParameter(1, reqDTO.getUsername());
+        query.setParameter(2, reqDTO.getPassword());
+
+        User user = (User) query.getSingleResult();
+        return user;
+    }
+
     @Transactional
     public void upDate() {
         return;
@@ -55,4 +64,17 @@ public class UserRepository {
     public void delete() {
         return;
     }
+
+    public User findByUsername(String username) {
+        Query query = entityManager.createNativeQuery("select * from user_tb where username=?", User.class);
+        query.setParameter(1, username);
+        try {
+            User user = (User) query.getSingleResult();
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
 }

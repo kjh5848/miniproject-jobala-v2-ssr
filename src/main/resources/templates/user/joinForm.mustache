@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="btn-group d-flex justify-content-center mb-3">
                 <!--                개인이 로그인을 할때 사용-->
-                <form action="/compJoin" method="post" enctype="application/x-www-form-urlencoded">
+                <form action="/compJoin" method="post" onsubmit="return valid()">
                     <input type="hidden" name="role" value="0">
                     <button id="btnActiveUser" type="button" class="btn btn-light form-control"
                             data-bs-toggle="collapse" data-bs-target="#demo">기업
@@ -14,7 +14,7 @@
                 </form>
 
                 <!--                기업이 로그인을 할때 사용-->
-                <form action="/guestJoin" method="post" enctype="application/x-www-form-urlencoded">
+                <form action="/guestJoin" method="post" onsubmit="return valid()">
                     <input type="hidden" name="role" value="1">
                     <button id="btnActiveComp" type="button" class="btn btn-light form-control"
                             data-bs-toggle="collapse" data-bs-target="#demo2">개인
@@ -64,8 +64,8 @@
                                             <p>이메일 주소</p>
                                             <div class="d-flex text-nowrap">
                                                 <input type="email" class="form-control" id="username" name="username"
-                                                       placeholder="ENTER email" value="ssar@nate.com" required>
-                                                <button type="submit" class="btn btn-primary btn-block">이메일 중복
+                                                       placeholder="ENTER username" value="ssar@nate.com" required>
+                                                <button type="button" onclick="usernameSameCheck()" class="btn btn-primary btn-block">이메일 중복
                                                     체크
                                                 </button>
                                             </div>
@@ -164,9 +164,35 @@
     </div>
 </div>
 
-</body>
 <script>
-    $(function () {
+<!--  아이디 중복체크  -->
+let isSameCheck = false;
+function valid(){
+    if(isSameCheck == false){
+        alert("아이디 중복체크를 해야 합니다");
+    }
+    return isSameCheck;
+}
+function usernameSameCheck(){
+    let username = $("#username").val();
+    $.ajax({
+        url: "/api/username-same-check?username="+username,
+        type: "get"
+    }).done((res)=>{
+        console.log(res);
+        if(res.body == true){
+            isSameCheck = true;
+            alert("아이디 중복 체크 완료");
+        }else{
+            isSameCheck = false;
+            alert("동일한 아이디가 존재합니다");
+        }
+    }).fail((res)=>{
+        alert(res.responseJSON.msg);
+    });
+}
+
+$(function () {
         // 개인/기업 버튼 클릭 이벤트 처리
         $(".btn-light").click(function () {
             // 현재 클릭된 버튼의 ID 가져오기

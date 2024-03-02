@@ -8,17 +8,17 @@
     <div class="card row col-sm-3 col-10">
         <div class="card-header"><b>로그인을 해주세요</b></div>
         <div class="card-body">
-            <form action="/loginForm" method="post" class="was-validated">
+            <form action="/login" method="post" enctype="application/x-www-form-urlencoded" class="was-validated">
                 <div class="mb-3 mt-3">
-                    <label for="uname" class="form-label">아이디</label>
-                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
+                    <label for="username" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username"
                            required>
                     <div class="valid-feedback">확인</div>
                     <div class="invalid-feedback">아이디를 적어주세요.</div>
                 </div>
                 <div class="mb-3">
                     <label for="pwd" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"
                            required>
                     <div class="valid-feedback">확인</div>
                     <div class="invalid-feedback">비밀번호를 적어주세요.</div>
