@@ -2,54 +2,62 @@
 
 <!--기업 스크랩 페이지-->
 <div class="container">
+
+
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="upMenu text-center mb-4">
                     <h1>마이페이지</h1>
                     <div class="btn-group btn-group-lg">
-                        <button type="button" class="btn btn-outline-dark" id="profileBtn">프로필 관리</button>
-                        <button type="button" class="btn btn-outline-dark">이력서 관리</button>
-                        <button type="button" class="btn btn-outline-dark">지원 관리</button>
-                        <button type="button" class="btn btn-outline-dark">스크랩한 기업</button>
-                        <button type="button" class="btn btn-outline-dark">로그아웃</button>
+                        <a href="/comp/profileForm">
+                            <button type="button" class="btn btn-outline-dark">프로필 관리</button>
+                        </a>
+                        <a href="/comp/mngForm">
+                            <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                        </a>
+                        <a href="/applyPositionForm">
+                            <button type="button" class="btn btn-outline-dark">지원자 관리</button>
+                        </a>
+                        <a href="/comp/scrapForm">
+                            <button type="button" class="btn btn-outline-dark">스크랩</button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="applyBox">
-                <h2 class="text-left">스크랩한 기업</h2>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">기업 이름</th>
-                        <th scope="col">공고</th>
-                        <th scope="col">마감날짜</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>기업 A</td>
-                        <td>프론트엔드 개발자 채용</td>
-                        <td>2024-03-01</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col">
+                <div class="applyBox">
+                    <h2 class="text-left">스크랩한 기업</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">기업 이름</th>
+                            <th scope="col">공고</th>
+                            <th scope="col">마감날짜</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>기업 A</td>
+                            <td>프론트엔드 개발자 채용</td>
+                            <td>2024-03-01</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
+        </div>
+        <br>
+        <br>
+        <br>
     </div>
-    <br>
-    <br>
-    <br>
-</div>
-<!-- Footer content goes here -->
+    <!-- Footer content goes here -->
 
 
 {{> layout/footer}}

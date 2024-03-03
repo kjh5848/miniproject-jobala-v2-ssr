@@ -53,14 +53,15 @@ public class ApplyController {
         return "resumeDetail";
     }
 
-    @GetMapping("/guest/applyStatusForm")
+    @GetMapping("/applyStatusForm")
     public String applyStatusForm() {
         return "/guest/_myPage/applyStatusForm";
     }
 
-    @GetMapping("/comp/applyPositionForm")
+    @GetMapping("/applyPositionForm")
     public String applyPositionForm() {
         return "/comp/_myPage/applyPositionForm";
+
     }
 
     @RestController
@@ -78,5 +79,6 @@ public class ApplyController {
             List<Apply> applicants = applyRepository.findByJobOpenId(jobOpenId);
             return ResponseEntity.ok(new ApiUtil<>(applicants));
         }
+
     }
 }
