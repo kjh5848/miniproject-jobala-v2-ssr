@@ -22,20 +22,24 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loign(UserRequst.loginDTO reqDTO){
+    public String login(UserRequst.loginDTO reqDTO){
         System.out.println(reqDTO);
 
-        if (reqDTO.getUsername().length() < 15){
-            return "/";
+        //유효성 검사(아이디가 15자 이상일때)       `
+        if (reqDTO.getUsername().length() > 15){
+            System.out.println(1);
+            return "/user/joinForm";
         }
 
         User user = userRepository.findByUsernameAndPassword(reqDTO);
 
-        if (user == null){
-            return "/";
-        }else{
-            session.setAttribute("sessionUser", user);
+        //유효성 검사(user=null 경우)
+        if (user == null) {
+
+            return "/user/joinForm";
         }
+
+            session.setAttribute("sessionUser", user);
 
         return "redirect:/";
     }

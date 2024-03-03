@@ -51,8 +51,14 @@ public class UserRepository {
         query.setParameter(1, reqDTO.getUsername());
         query.setParameter(2, reqDTO.getPassword());
 
-        User user = (User) query.getSingleResult();
-        return user;
+
+        try {
+           User user = (User) query.getSingleResult();
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     @Transactional
