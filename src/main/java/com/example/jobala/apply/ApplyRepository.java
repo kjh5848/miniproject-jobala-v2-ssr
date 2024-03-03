@@ -7,35 +7,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class ApplyRepository {
+
     private final EntityManager em;
-
-    public void findAll() {
-        return;
-    }
-
-    public void findById() {
-        return;
-    }
-
-    @Transactional
-    public void save() {
-        return;
-    }
-
-    @Transactional
-    public void upDate() {
-        return;
-    }
-
-    @Transactional
-    public void delete() {
-        return;
-    }
 
     public List<Apply> findByJobOpenId(Integer jobOpenId) {
         Query query = em.createNativeQuery("SELECT * FROM apply_tb WHERE jobopen_id = ?1", Apply.class);
@@ -66,8 +45,49 @@ public class ApplyRepository {
     public List<Integer> findJobOpenIdsByUserId(Integer userId) {
         Query query = em.createNativeQuery("SELECT DISTINCT jobopen_id FROM apply_tb WHERE user_id = ?1");
         query.setParameter(1, userId);
-        return query.getResultList();
+        List<Integer> jobOpenIds = query.getResultList();
+
+        // 사용자가 실제로 지원한 공고만 필터링
+        List<Integer> appliedJobOpenIds = new ArrayList<>();
+        for (Integer jobOpenId : jobOpenIds) {
+            if (userAppliedToJobOpen(userId, jobOpenId)) {
+                appliedJobOpenIds.add(jobOpenId);
+            }
+        }
+        return appliedJobOpenIds;
     }
+
+    private boolean userAppliedToJobOpen(Integer userId, Integer jobOpenId) {
+        Query query = em.createNativeQuery("SELECT COUNT(*) FROM apply_tb WHERE user_id = ?1 AND jobopen_id = ?2");
+        query.setParameter(1, userId);
+        query.setParameter(2, jobOpenId);
+        int count = ((Number) query.getSingleResult()).intValue();
+        return count > 0;
+    }
+
+    public void findAll() {
+        return;
+    }
+
+    public void findById() {
+        return;
+    }
+
+    @Transactional
+    public void save() {
+        return;
+    }
+
+    @Transactional
+    public void upDate() {
+        return;
+    }
+
+    @Transactional
+    public void delete() {
+        return;
+    }
+
 }
 
 
