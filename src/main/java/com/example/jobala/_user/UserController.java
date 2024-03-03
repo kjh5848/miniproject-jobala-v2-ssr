@@ -63,7 +63,7 @@ public class UserController {
     public String join(UserRequst.joinDTO reqDTO) {
         System.out.println(reqDTO);
 
-//     개인 회원가입
+        //     개인 회원가입
         Integer isCheck;
         if (reqDTO.getCompname() == null) {
             isCheck = 0;
@@ -74,7 +74,7 @@ public class UserController {
             return "/user/loginForm";
         }
 
-//      기업 회원가입
+        //      기업 회원가입
         isCheck = 1;
         Integer role = isCheck;
         reqDTO.setRole(role);
