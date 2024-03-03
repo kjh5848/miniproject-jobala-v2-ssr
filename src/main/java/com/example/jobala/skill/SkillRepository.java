@@ -1,6 +1,7 @@
 package com.example.jobala.skill;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @RequiredArgsConstructor
 public class SkillRepository {
-    private final EntityManager entityManager;
+    private final EntityManager em;
 
     public void findAll() {
         return;
@@ -19,8 +20,17 @@ public class SkillRepository {
     }
 
     @Transactional
-    public void save() {
-        return;
+    public void save(SkillRequest.CompSkillDTO reqDTO) {
+        String a = """
+                insert into skill_tb(role, resume_id, jobopen_id, skills) values (?,?,?,?)
+                """;
+
+        Query query = em.createNativeQuery(a, Skill.class);
+        query.setParameter(1, reqDTO.getRole());
+        query.setParameter(2, reqDTO.getResumeId());
+        query.setParameter(3, reqDTO.getJobOpenId());
+        query.setParameter(4, reqDTO.getSkills());
+        query.executeUpdate();
     }
 
     @Transactional
