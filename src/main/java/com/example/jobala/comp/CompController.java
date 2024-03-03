@@ -20,9 +20,8 @@ public class CompController {
 
     @GetMapping("/comp/profileForm")
     public String profileForm() {
-        return "/comp/jobopen/myPage/profileForm";
+        return "/comp/_myPage/profileForm";
     }
-
 
 
 }

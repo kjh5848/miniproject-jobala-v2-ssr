@@ -22,25 +22,40 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserRequst.loginDTO reqDTO){
+    public String login(UserRequst.loginDTO reqDTO) {
         System.out.println(reqDTO);
 
         //유효성 검사(아이디가 15자 이상일때)       `
-        if (reqDTO.getUsername().length() > 15){
+        if (reqDTO.getUsername().length() > 15) {
             System.out.println(1);
             return "/user/joinForm";
         }
+        System.out.println(1);
 
         User user = userRepository.findByUsernameAndPassword(reqDTO);
+        System.out.println(2);
 
+        System.out.println(3);
         //유효성 검사(user=null 경우)
         if (user == null) {
 
             return "/user/joinForm";
         }
 
+        Boolean isCheck = false;
+        if (user.getRole() == 0) {
+            System.out.println(4);
+            isCheck = true;
+            System.out.println(5);
+            session.setAttribute("isCheck", isCheck);
             session.setAttribute("sessionUser", user);
+            return "redirect:/";
+        }
+        System.out.println(6);
 
+        session.setAttribute("isCheck", isCheck);
+        session.setAttribute("sessionUser", user);
+        System.out.println(7);
         return "redirect:/";
     }
 
@@ -54,15 +69,15 @@ public class UserController {
         System.out.println(reqDTO);
 
 //     개인 회원가입
-       Integer isCheck;
-       if (reqDTO.getCompname() == null){
-           isCheck = 0;
-           Integer role = isCheck;
-           reqDTO.setRole(role);
-           userRepository.userSave(reqDTO);
+        Integer isCheck;
+        if (reqDTO.getCompname() == null) {
+            isCheck = 0;
+            Integer role = isCheck;
+            reqDTO.setRole(role);
+            userRepository.userSave(reqDTO);
 
-           return "/user/loginForm";
-       }
+            return "/user/loginForm";
+        }
 
 //      기업 회원가입
         isCheck = 1;
@@ -75,11 +90,11 @@ public class UserController {
     }
 
     @GetMapping("/api/username-same-check")
-    public @ResponseBody ApiUtil<?> usernameSameCheck(String username){
+    public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
         User user = userRepository.findByUsername(username);
-        if(user == null){ // 회원가입 해도 된다.
+        if (user == null) { // 회원가입 해도 된다.
             return new ApiUtil<>(true);
-        }else{ // 회원가입 하면 안된다.
+        } else { // 회원가입 하면 안된다.
             return new ApiUtil<>(false);
         }
     }

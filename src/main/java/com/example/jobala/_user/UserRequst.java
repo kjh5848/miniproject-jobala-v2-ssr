@@ -21,8 +21,9 @@ public class UserRequst {
     }
 
     @Data
-    public static class loginDTO{
+    public static class loginDTO {
         private String username;
         private String password;
+        private Integer role;
     }
 }

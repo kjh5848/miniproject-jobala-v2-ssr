@@ -74,25 +74,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 {{#sessionUser}}
-                    {{#sessionUser.role}}
-                        <!-- 기업 로그인시 볼 수 있는 헤더 -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="/comp/_myPage/mngForm"><h2>채용공고</h2></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/comp/scoutList"><h2>인재채용</h2></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/board/mainForm"><h2>자유게시판</h2></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/comp/profileForm"><h2>마이페이지</h2></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout"><h2>로그아웃</h2></a>
-                        </li>
-                    {{/sessionUser.role}}
-                    {{^sessionUser.role}}
+                    {{#isCheck}}
                         <!-- 개인 로그인시 볼 수 있는 헤더 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/guest/jobSearch"><h2>채용공고</h2></a>
@@ -106,7 +88,27 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/logout"><h2>로그아웃</h2></a>
                         </li>
-                    {{/sessionUser.role}}
+
+                    {{/isCheck}}
+                    {{^isCheck}}
+                        <!-- 기업 로그인시 볼 수 있는 헤더 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/comp/mngForm"><h2>채용공고</h2></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/comp/scoutList"><h2>인재채용</h2></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/board/mainForm"><h2>자유게시판</h2></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/comp/profileForm"><h2>마이페이지</h2></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout"><h2>로그아웃</h2></a>
+                        </li>
+
+                    {{/isCheck}}
                 {{/sessionUser}}
                 {{^sessionUser}}
                     <!--        비로그인시 볼 수 있는 헤더            -->
