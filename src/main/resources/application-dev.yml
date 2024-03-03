@@ -22,6 +22,8 @@ spring:
       enabled: true
   sql:
     init:
+      data-locations:
+        - classpath:db/data.sql
       data-locations: classpath:db/data.sql
   jpa:
     hibernate:

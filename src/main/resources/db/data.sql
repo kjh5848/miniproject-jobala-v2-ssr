@@ -1,3 +1,12 @@
+
+-- 회원가입 더미
+insert into user_tb(name, username, password, address, phone, role, created_at)
+values('cos', 'cos@nate.com', '1234', '부산광역시 금정구', '01012345678', 0, now());
+insert into user_tb(comp_num, ceo, compname, address, username, password, name, phone, role, created_at)
+values('5678', '박선규', '선규넷',  '부산광역시 전포', 'ssar@nate.com', '1234', 'ssar', '01011112222', 1, now());
+
+
+
 -- 이력서 더미
 insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at)
 values (1, '이력서 제목1-1', '프론트엔드', '신입', '', '1번 유저의 자기소개서 1..... ..... ..... .....', '대학교 졸업', now());
@@ -21,5 +30,4 @@ values (1, '(주)자바라', '플랫폼 백엔드 개발자 모집', 'Node.js, E
        (1, '(주)웹프로그래밍', '플랫폼 백엔드 개발자 모집', 'Node.js, Express.js, MySQL 경험…', '경력 3년 이상', '신입', '백엔드 개발', '서울특별시 강남구',
         NOW(),
         NOW(), 1);
-
-
+        

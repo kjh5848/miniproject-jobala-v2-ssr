@@ -15,8 +15,6 @@ public class User {
 
     @Column(unique = true, length = 15)
     private String username; // 아아디
-
-    private String email;
     private String compNum;
     private String password;
     private String name;
@@ -25,7 +23,6 @@ public class User {
     private String ceo;
     private String address;
     private Integer role; // 0 -> guest, 1 -> comp
-    private String photo;
     private LocalDateTime createdAt;
 
 }
