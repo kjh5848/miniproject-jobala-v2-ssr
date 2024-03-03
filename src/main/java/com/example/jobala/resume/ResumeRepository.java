@@ -26,8 +26,12 @@ public class ResumeRepository {
         return;
     }
 
-    public void findById() {
-        return;
+    public Resume findById(Integer id) {
+        Query query = em.createNativeQuery("select * from resume_tb where id = ?", Resume.class);
+        query.setParameter(1, id);
+
+        Resume resume = (Resume) query.getSingleResult();
+        return resume;
     }
 
     @Transactional
@@ -46,8 +50,16 @@ public class ResumeRepository {
     }
 
     @Transactional
-    public void upDate() {
-        return;
+    public void update(int resumeId, ResumeRequest.UpdateDTO requestDTO) {
+        Query query = em.createNativeQuery("update resume_tb set resume_title=?, hope_job=?, career=?, license=?, content=?, edu=? where id=?");
+        query.setParameter(1, requestDTO.getResumeTitle());
+        query.setParameter(2, requestDTO.getHopeJob());
+        query.setParameter(3, requestDTO.getCareer());
+        query.setParameter(4, requestDTO.getLicense());
+        query.setParameter(5, requestDTO.getContent());
+        query.setParameter(6, requestDTO.getEdu());
+        query.setParameter(7, resumeId);
+        query.executeUpdate();
     }
 
     @Transactional

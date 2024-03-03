@@ -21,4 +21,15 @@ public class ResumeRequest {
     public static class DeleteDTO {
         private int id;
     }
+
+    @AllArgsConstructor
+    @Data
+    public static class UpdateDTO {
+        private String resumeTitle;
+        private String hopeJob;
+        private String career;
+        private String license;
+        private String content;
+        private String edu;
+    }
 }

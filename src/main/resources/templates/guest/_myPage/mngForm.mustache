@@ -36,8 +36,8 @@
                                 <td>
                                     <a class="page-link" href="/guest/detailForm/{{id}}">{{resumeTitle}}</a>
                                 </td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">수정</button>
+                                <td class="d-flex">
+                                    <a href="/guest/resume/{{id}}/updateForm" class="btn btn-primary btn-sm">수정</a>
                                     <form action="/resume/{{id}}/delete" method="post">
                                         <button class="btn btn-danger btn-sm">삭제</button>
                                     </form>
