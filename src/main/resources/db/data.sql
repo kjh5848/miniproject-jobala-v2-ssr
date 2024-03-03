@@ -7,4 +7,4 @@ values (2, '이력서 제목2-1', '프론트엔드', '신입', '', '2번 유저�
 insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at)
 values (2, '이력서 제목2-2', '백엔드', '신입', 'SQLD', '2번 유저의 자기소개서 2..... ..... ..... .....', '대학교 졸업', now());
 
--- INSERT INTO skill_tb (role, resume_id, skills) VALUES (1, 1, java);
+
