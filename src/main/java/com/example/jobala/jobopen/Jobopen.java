@@ -2,7 +2,10 @@ package com.example.jobala.jobopen;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,14 +16,22 @@ public class Jobopen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer skillId;
     private Integer userId;
-    private String title;
+    private String compname;
+    private String jobopenTitle;
     private String content;
     private String career;
     private String edu;
     private String hopeJob;
     private String compLocation;
-    private LocalDateTime endTime;
+    private String jobType; // 고용형태
+    private String salary; //연봉
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;
+
     private LocalDateTime createdAt;
+    @ColumnDefault("1")
     private Integer role; // 0 -> guest, 1 -> comp
 }

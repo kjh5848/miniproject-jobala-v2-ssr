@@ -8,26 +8,28 @@
 
             <div class="d-flex ">
                 <div class="p-3">
-                    <img src="/image/kakaologo" class="float-end" alt="Paris" width="304" height="236">
+                    <img src="/image/kakaologoq.png" class="float-end" alt="Paris" width="304" height="236">
                 </div>
-                <div class="p-3 align-middle">
-                    <table class="table">
-                        <tbody style="font-size: 15px;">
-                        <tr>
-                            <th>회사명</th>
-                            <td>카카오</td>
-                        </tr>
-                        <tr>
-                            <th>대표자명</th>
-                            <td>박선규</td>
-                        </tr>
-                        <tr>
-                            <th>홈페이지</th>
-                            <td>www.kakao.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {{#sessionUser}}
+                    <div class="p-3 align-middle">
+                        <table class="table">
+                            <tbody style="font-size: 15px;">
+                            <tr>
+                                <th>회사명</th>
+                                <td>카카오</td>
+                            </tr>
+                            <tr>
+                                <th>대표자명</th>
+                                <td>박선규</td>
+                            </tr>
+                            <tr>
+                                <th>홈페이지</th>
+                                <td>www.kakao.com</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                {{/sessionUser}}
             </div>
         </div>
     </div>
@@ -39,7 +41,7 @@
         <div class="card mt-5">
             <div class="card-body d-flex justify-content-center">
                 <div class="text-nowrap h4">공고 제목</div>
-                <input type="text" class="form-control">
+                <input type="text" name="jbopenTitle" class="form-control">
             </div>
         </div>
 
@@ -49,69 +51,22 @@
                 <div>
                     <p><b>학력</b></p>
                 </div>
-                <select class="form-select form-select-lg">
-                    <option value="">고등학교 졸업</option>
-                    <option value="">대학교 졸업</option>
-                    <option value="">학력 무관</option>
+                <select class="form-select form-select-lg" name="edu">
+                    <option value="고등학교 졸업">고등학교 졸업</option>
+                    <option value="대학교 졸업">대학교 졸업</option>
+                    <option value="학력 무관">학력 무관</option>
                 </select>
             </div>
             <div class="card-body ">
                 <div>
                     <p><b>경력</b></p>
                 </div>
-                <select class="form-select form-select-lg">
-                    <option value="">신입</option>
-                    <option value="">경력</option>
+                <select class="form-select form-select-lg" name="career">
+                    <option value="신입">신입</option>
+                    <option value="경력">경력</option>
                 </select>
             </div>
-            <div class="card-body">
-                <div>
-                    <p><b>고용형태</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="">정규직</option>
-                    <option value="">계약직</option>
-                    <option value="">인턴</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>급여</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="">협의</option>
-                    <option value="">3000만원 이상</option>
-                    <option value="">5000만원 이상</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>희망직무</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="">프론트엔드</option>
-                    <option value="">백엔드</option>
-                    <option value="">풀스택</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>근무지역</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="">전체</option>
-                    <option value="">서울</option>
-                    <option value="">5000만원 이상</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>마감일</b></p>
-                </div>
-                <div style="margin-left: 2px; width: 165px;">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
+
         </div>
 
 
@@ -120,32 +75,15 @@
             <div style="margin-left: 20px;">
                 <label>기술 스택</label>
             </div>
-            <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
-                <div class="custom-control custom-checkbox ">
-                    <input type="checkbox" class="custom-control-input pr-3" id="java">
-                    <label class="custom-control-label" for="java">Java</label>
+            <form action="/comp/skill" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
+                    <div class="custom-control custom-checkbox ">
+                        <input type="checkbox" class="custom-control-input pr-3" id="java" name="skills[]" value="Java">
+                        <label class="custom-control-label" for="java">Java</label>
+                    </div>
+
                 </div>
-                <div class="custom-control custom-checkbox ml-4">
-                    <input type="checkbox" class="custom-control-input" id="javascript">
-                    <label class="custom-control-label" for="javascript">JavaScript</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="spring">
-                    <label class="custom-control-label" for="spring">Spring</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="html">
-                    <label class="custom-control-label" for="html">HTML</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="jquery">
-                    <label class="custom-control-label" for="jquery">jQuery</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="Mysql">
-                    <label class="custom-control-label" for="jquery">Mysql</label>
-                </div>
-            </div>
+            </form>
         </div>
         <div class="container" style="padding-top:50px;">
             <textarea name="" id="myEditor" class="form-control" cols="30" rows="10"></textarea>

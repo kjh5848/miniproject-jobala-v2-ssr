@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class JobopenController {
 
     @GetMapping("/comp/writeForm")
-    public String scoutList() {
+    public String writeForm() {
         return "/comp/jobOpen/writeForm";
     }
 

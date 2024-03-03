@@ -24,6 +24,7 @@ spring:
     init:
       data-locations:
         - classpath:db/data.sql
+      data-locations: classpath:db/data.sql
   jpa:
     hibernate:
       ddl-auto: create
