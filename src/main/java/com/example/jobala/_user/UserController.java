@@ -3,7 +3,6 @@ package com.example.jobala._user;
 import com.example.jobala._core.util.ApiUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -97,6 +96,8 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
+        session.invalidate();
+
         return "redirect:/";
     }
 

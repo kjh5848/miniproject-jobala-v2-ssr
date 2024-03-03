@@ -14,6 +14,7 @@ public class CompController {
 
     private final CompRepository compRepository;
 
+
     @GetMapping("/comp/scoutList")
     public String scoutList() {
         return "/comp/scoutList";

@@ -11,11 +11,11 @@ public class ScrapController {
 
     @GetMapping("/comp/scrapForm")
     public String compScrapForm() {
-        return "/comp/jobopen/myPage/scrapForm";
+        return "/comp/_myPage/scrapForm";
     }
 
     @GetMapping("/guest/scrapForm")
     public String guestScrapForm() {
-        return "/guest/resume/myPage/scrapForm";
+        return "/guest/_myPage/scrapForm";
     }
 }

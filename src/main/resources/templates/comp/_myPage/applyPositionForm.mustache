@@ -23,90 +23,97 @@
 </style>
 
 <div class="container">
-    <div class="container">
-        <div class="card-body">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="upMenu text-center mb-4">
-                        <h1>마이페이지</h1>
-                        <div class="btn-group btn-group-lg">
-                            <a href="/comp/profileForm" type="button" class="btn btn-outline-dark">프로필 관리</a>
-                            <a href="/comp/mngForm" type="button" class="btn btn-outline-dark">채용공고 관리</a>
-                            <a href="/comp/applyPositionForm" type="button" class="btn btn-outline-dark">지원자 관리</a>
-                        </div>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="upMenu text-center mb-4">
+                    <h1>마이페이지</h1>
+                    <div class="btn-group btn-group-lg">
+                        <a href="/comp/profileForm">
+                            <button type="button" class="btn btn-outline-dark">프로필 관리</button>
+                        </a>
+                        <a href="/comp/mngForm">
+                            <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                        </a>
+                        <a href="/applyPositionForm">
+                            <button type="button" class="btn btn-outline-dark">지원자 관리</button>
+                        </a>
+                        <a href="/comp/scrapForm">
+                            <button type="button" class="btn btn-outline-dark">스크랩</button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card border-0">
-            <div class="profileBox" id="profileForm">
+    </div>
+    <div class="card border-0">
+        <div class="profileBox" id="profileForm">
 
-                <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-primary">5</span></h2>
-                <div class="row">
-                    <div class="col">
-                        <div class="applyBox">
-                            <table class="table" style="margin-top: -10px; max-width: 100%;">
-                                <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">이력서</th>
-                                    <th scope="col">공고명</th>
-                                    <th scope="col">상태</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>홍길동</td>
-                                    <td>이력서1.pdf</td>
-                                    <td>소프트웨어 엔지니어</td>
-                                    <td>제안중</td>
-                                </tr>
-                                <!-- 추가 제안 내용들 -->
-                                </tbody>
-                            </table>
-                        </div>
+            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-primary">5</span></h2>
+            <div class="row">
+                <div class="col">
+                    <div class="applyBox">
+                        <table class="table" style="margin-top: -10px; max-width: 100%;">
+                            <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">이력서</th>
+                                <th scope="col">공고명</th>
+                                <th scope="col">상태</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>홍길동</td>
+                                <td>이력서1.pdf</td>
+                                <td>소프트웨어 엔지니어</td>
+                                <td>제안중</td>
+                            </tr>
+                            <!-- 추가 제안 내용들 -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div class="card border-0">
-                <div class="card-body">
+        <div class="card border-0">
+            <div class="card-body">
 
+            </div>
+
+            <div class="card-body">
+                <div class="text-left ml-3">
+                    <h2>지원자 <span class="badge bg-primary">3</span></h2>
                 </div>
-
-                <div class="card-body">
-                    <div class="text-left ml-3">
-                        <h2>지원자 <span class="badge bg-primary">3</span></h2>
-                    </div>
-                    <div class="row g-3 justify-content-center col-12 p-5" id="container" style="max-width: 100%">
-                    </div>
+                <div class="row g-3 justify-content-center col-12 p-5" id="container" style="max-width: 100%">
                 </div>
+            </div>
 
-                <div class="container mt-3">
-                    <ul
-                            class="pagination justify-content-center"
-                            style="margin-bottom: 50px; "
-                    >
-                        <li class="page-item disabled text-info bg-light border-dark">
-                            <a class="page-link text-info bg-light" href="#">Previous</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link text-info bg-light" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link text-info bg-light" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link text-info bg-light" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link text-info bg-light" href="#">Next</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="container mt-3">
+                <ul
+                        class="pagination justify-content-center"
+                        style="margin-bottom: 50px; "
+                >
+                    <li class="page-item disabled text-info bg-light border-dark">
+                        <a class="page-link text-info bg-light" href="#">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">Next</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

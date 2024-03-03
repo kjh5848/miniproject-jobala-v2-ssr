@@ -32,13 +32,13 @@ public class ApplyController {
         return "resumeDetail";
     }
 
-    @GetMapping("/guest/applyStatusForm")
+    @GetMapping("/applyStatusForm")
     public String applyStatusForm() {
-        return "/guest/resume/myPage/applyStatusForm";
+        return "/guest/_myPage/applyStatusForm";
     }
 
-    @GetMapping("/comp/applyPositionForm")
+    @GetMapping("/applyPositionForm")
     public String applyPositionForm() {
-        return "/comp/jobopen/myPage/applyPositionForm";
+        return "/comp/_myPage/applyPositionForm";
     }
 }
