@@ -1,102 +1,103 @@
 {{> layout/header}}
 
-<!--개인 이력서 수정페이지-->
+
+<!--이력서 수정페이지-->
 <div class="container ">
-    <div>
-        <input class="mb-3" type="text" name="" id="" placeholder="이력서 제목"
-               style="font-size: 30px; border-radius: 5px; width: 100%;">
-    </div>
-    <div class="card mb-2">
+    <form action="/guest/resume/{{resume.id}}/update" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <h5 class="card-header">인적사항</h5>
+            <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목" value="{{resume.resumeTitle}}"
+                   style="font-size: 30px; border-radius: 5px; width: 100%;">
         </div>
-        <div class="card-body row">
-            <div class="col-sm-3">
-                <img src="/images/userImage.jpg" width="150" height="200" style="margin-left: 70px;">
+        <div class="card mb-2">
+            <div>
+                <h5 class="card-header">인적사항</h5>
             </div>
-            <div class="col-sm-9">
-                <table class="table table-bordered">
-                    <tbody style="font-size: 15px;">
-                    <tr>
-                        <th>이름</th>
-                        <td>김주혁</td>
-                    </tr>
-                    <tr>
-                        <th>나이</th>
-                        <td>만 29세</td>
-                    </tr>
-                    <tr>
-                        <th>이메일</th>
-                        <td>juniorSSAR@nate.com</td>
-                    </tr>
-                    <tr>
-                        <th>전화번호</th>
-                        <td>010-1111-2222</td>
-                    </tr>
-                    <tr>
-                        <th>주소</th>
-                        <td>부산광역시 금정구 전포동</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="card-body row">
+                <div class="col-sm-3">
+                    <img src="/images/userImage.jpg" width="150" height="200" style="margin-left: 70px;">
+                </div>
+                <div class="col-sm-9">
+                    <table class="table table-bordered">
+                        <tbody style="font-size: 15px;">
+                        <tr>
+                            <th>이름</th>
+                            <td>김주혁</td>
+                        </tr>
+                        <tr>
+                            <th>나이</th>
+                            <td>만 29세</td>
+                        </tr>
+                        <tr>
+                            <th>이메일</th>
+                            <td>juniorSSAR@nate.com</td>
+                        </tr>
+                        <tr>
+                            <th>전화번호</th>
+                            <td>010-1111-2222</td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td>부산광역시 금정구 전포동</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <form action="/guest/resume/update" method="post" enctype="application/x-www-form-urlencoded">
         <div class="card mb-2">
             <div>
                 <h5 class="card-header">희망직무</h5>
                 <div class="container m-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="something" name="hopeJob">
+                        <input type="checkbox" class="form-check-input" value="프론트엔드">
                         <div>프론트엔드</div>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" value="something" name="hopeJob">
+                        <input type="checkbox" class="form-check-input" value="백엔드">
                         <div>백엔드</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class=" card mb-2">
+        <div class="card mb-2">
             <div>
                 <h5 class="card-header">스킬</h5>
             </div>
             <div class="row m-2">
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="skill">
+                        <input type="checkbox" name="skills[]" class="form-check-input" value="java">
                         <div>Java</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="skill">
+                        <input type="checkbox" name="skills[]" class="form-check-input" value="javascript">
                         <div>JavaScript</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="skill">
+                        <input type="checkbox" name="skills[]" class="form-check-input" value="spring">
                         <div>Spring</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="skill">
+                        <input type="checkbox" name="skills[]" class="form-check-input" value="html">
                         <div>HTML</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="skill">
+                        <input type="checkbox" name="skills[]" class="form-check-input" value="jquery">
                         <div>jQuery</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="skill">
-                        <div>Mysql</div>
+                        <input type="checkbox" name="skills[]" class="form-check-input" value="mysql">
+                        <div>MySQL</div>
                     </div>
                 </div>
             </div>
@@ -107,22 +108,8 @@
                 <div class="d-flex m-2">
                     <div class="col-sm-4">
                         <select class="form-select" name="edu">
-                            <option>학력 선택</option>
-                            <option>고등학교</option>
-                            <option>대학교(2,3년)</option>
-                            <option>대학교(4년)</option>
-                            <option>대학교(석사)</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" name="" id="" placeholder="학교를 입력하세요">
-                    </div>
-                    <div class="col-sm-4">
-                        <select class="form-select">
-                            <option>졸업 여부</option>
-                            <option>재학</option>
-                            <option>중퇴</option>
-                            <option>졸업</option>
+                            <option>고등학교 졸업</option>
+                            <option>대학교 졸업</option>
                         </select>
                     </div>
                 </div>
@@ -132,12 +119,10 @@
             <div>
                 <h5 class="card-header">경력</h5>
                 <div class="col-sm-4 m-2">
-                    <select class="form-select">
+                    <select class="form-select" name="career">
                         <option value="">선택</option>
-                        <option value="1">신입</option>
-                        <option value="2">1~3년</option>
-                        <option value="3">3~5년</option>
-                        <option value="4">5년 이상</option>
+                        <option value="신입">신입</option>
+                        <option value="경력">경력</option>
                     </select>
                 </div>
             </div>
@@ -145,35 +130,32 @@
         <div class="card mb-2">
             <div class="d-flex justify-content-between card-header">
                 <h5>자격증</h5>
-                <button class=" btn btn-primary btn-sm " id="btnLicense">추가</button>
             </div>
-            <div class="m-2 row" id="licenseList">
-                <div class="col-sm-4 mb-1"><input type="text" placeholder="자격증 이름 입력" class="form-control">
-                </div>
+            <div class="col-sm-4 m-2">
+                <select class="form-select" name="license">
+                    <option value="">선택</option>
+                    <option value="정보처리기사">정보처리기사</option>
+                    <option value="sqld">SQLD</option>
+                </select>
             </div>
         </div>
         <div class="card mb-2">
             <div>
                 <h5 class="card-header">자기소개서</h5>
-                <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                <textarea class="form-control" rows="5" id="comment" name="content">{{resume.content}}</textarea>
             </div>
         </div>
         <br>
         <div class="d-flex justify-content-center">
-            <button type="submit" class=" btn btn-primary btn-lg">작성완료</button>
+            <button type="submit" class=" btn btn-primary btn-lg">수정완료</button>
         </div>
     </form>
 
     <br>
     <br><br>
 </div>
-
-<script>
-    $("#btnLicense").click(() => $("#licenseList").append(`<select class="form-select">
-                <option value="">정보처리기사</option>
-                <option value="1">SQLD</option>
-                <option value="2">기타..</option>
-            </select>`));
-</script>
+<br>
+<br><br>
+</div>
 
 {{> layout/footer}}

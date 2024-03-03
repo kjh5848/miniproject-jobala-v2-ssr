@@ -16,6 +16,7 @@ insert into resume_tb(user_id, resume_title, hope_job, career, license, content,
 values (2, '이력서 제목2-2', '백엔드', '신입', 'SQLD', '2번 유저의 자기소개서 2..... ..... ..... .....', '대학교 졸업', now());
 
 
+
 --채용공고 더미
 -- insert into jobopen_tb(user_id, jobopen_title, content, career, edu, hope_job, comp_location, end_time,
 --                        created_at, role)
@@ -28,3 +29,5 @@ values (2, '이력서 제목2-2', '백엔드', '신입', 'SQLD', '2번 유저의
 --         NOW(),
 --         NOW(), 1);
         
+
+
