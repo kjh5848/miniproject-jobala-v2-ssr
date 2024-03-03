@@ -16,6 +16,7 @@ public class Jobopen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private Integer skillId;
     private Integer userId;
     private String compname;
     private String jobopenTitle;
@@ -24,7 +25,8 @@ public class Jobopen {
     private String edu;
     private String hopeJob;
     private String compLocation;
-    private String jobType;
+    private String jobType; // 고용형태
+    private String salary; //연봉
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;

@@ -66,53 +66,7 @@
                     <option value="경력">경력</option>
                 </select>
             </div>
-            <div class="card-body">
-                <div>
-                    <p><b>고용형태</b></p>
-                </div>
-                <select class="form-select form-select-lg" name="">
-                    <option value="정규직">정규직</option>
-                    <option value="계약직">계약직</option>
-                    <option value="인턴">인턴</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>급여</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="협의">협의</option>
-                    <option value="3000만원 이상">3000만원 이상</option>
-                    <option value="5000만원 이상">5000만원 이상</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>희망직무</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="프론트엔드">프론트엔드</option>
-                    <option value="백엔드">백엔드</option>
-                    <option value="풀스택">풀스택</option>
-                </select>
-            </div>
 
-            <div class="card-body">
-                <div>
-                    <p><b>근무지역</b></p>
-                </div>
-                <select class="form-select form-select-lg">
-                    <option value="전체">전체</option>
-                    <option value="서울">서울</option>
-                    <option value="5000만원 이상">5000만원 이상</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <p for="end_time">마감일</p>
-                    <input type="date" class="form-control" id="end_time" name="end_time">
-                </div>
-            </div>
         </div>
 
 
@@ -121,32 +75,15 @@
             <div style="margin-left: 20px;">
                 <label>기술 스택</label>
             </div>
-            <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
-                <div class="custom-control custom-checkbox ">
-                    <input type="checkbox" class="custom-control-input pr-3" id="java">
-                    <label class="custom-control-label" for="java">Java</label>
+            <form action="/comp/skill" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
+                    <div class="custom-control custom-checkbox ">
+                        <input type="checkbox" class="custom-control-input pr-3" id="java" name="skills[]" value="Java">
+                        <label class="custom-control-label" for="java">Java</label>
+                    </div>
+
                 </div>
-                <div class="custom-control custom-checkbox ml-4">
-                    <input type="checkbox" class="custom-control-input" id="javascript">
-                    <label class="custom-control-label" for="javascript">JavaScript</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="spring">
-                    <label class="custom-control-label" for="spring">Spring</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="html">
-                    <label class="custom-control-label" for="html">HTML</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="jquery">
-                    <label class="custom-control-label" for="jquery">jQuery</label>
-                </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="Mysql">
-                    <label class="custom-control-label" for="jquery">Mysql</label>
-                </div>
-            </div>
+            </form>
         </div>
         <div class="container" style="padding-top:50px;">
             <textarea name="" id="myEditor" class="form-control" cols="30" rows="10"></textarea>
