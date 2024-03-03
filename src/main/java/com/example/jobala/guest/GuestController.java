@@ -30,7 +30,7 @@ public class GuestController {
 
     @GetMapping("/guest/profileForm")
     public String profileForm() {
-        return "/guest/resume/myPage/profileForm";
+        return "/guest/_myPage/profileForm";
     }
 
 }

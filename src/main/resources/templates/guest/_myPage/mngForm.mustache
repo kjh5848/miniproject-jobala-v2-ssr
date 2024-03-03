@@ -33,7 +33,9 @@
                         {{#resumeList}}
                             <tr>
                                 <td>{{id}}</td>
-                                <td>{{resumeTitle}}</td>
+                                <td>
+                                    <a class="page-link" href="/guest/detailForm/{{id}}">{{resumeTitle}}</a>
+                                </td>
                                 <td>
                                     <button class="btn btn-primary btn-sm">수정</button>
                                     <button class="btn btn-danger btn-sm">삭제</button>
@@ -43,7 +45,8 @@
                         </tbody>
                     </table>
                     <div class="text-center"> <!-- Center the button -->
-                        <button class="btn btn-primary">새로운 이력서 작성하기</button> <!-- Styled in blue color -->
+                        <a href="/guest/resume/writeForm" class="btn btn-primary">새로운 이력서 작성하기</a>
+                        <!-- Styled in blue color -->
                     </div>
                 </div>
             </div>
