@@ -42,130 +42,138 @@
             </div>
         </div>
     </div>
-    <div class="card mb-2">
-        <div>
-            <h5 class="card-header">희망직무</h5>
-            <div class="container m-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>프론트엔드</div>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>백엔드</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card mb-2">
-        <div>
-            <h5 class="card-header">스킬</h5>
-        </div>
-        <div class="row m-2">
-            <div class="col-sm-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>Java</div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>JavaScript</div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>Spring</div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>HTML</div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>jQuery</div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="something">
-                    <div>Mysql</div>
+    <form action="/guest/resume/update" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="card mb-2">
+            <div>
+                <h5 class="card-header">희망직무</h5>
+                <div class="container m-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" value="something" name="hopeJob">
+                        <div>프론트엔드</div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" value="something" name="hopeJob">
+                        <div>백엔드</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card mb-2">
-        <div>
-            <h5 class="card-header">학력</h5>
-            <div class="d-flex m-2">
-                <div class="col-sm-4">
+        <div class=" card mb-2">
+            <div>
+                <h5 class="card-header">스킬</h5>
+            </div>
+            <div class="row m-2">
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="skill">
+                        <div>Java</div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="skill">
+                        <div>JavaScript</div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="skill">
+                        <div>Spring</div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="skill">
+                        <div>HTML</div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="skill">
+                        <div>jQuery</div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="skill">
+                        <div>Mysql</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-2">
+            <div>
+                <h5 class="card-header">학력</h5>
+                <div class="d-flex m-2">
+                    <div class="col-sm-4">
+                        <select class="form-select" name="edu">
+                            <option>학력 선택</option>
+                            <option>고등학교</option>
+                            <option>대학교(2,3년)</option>
+                            <option>대학교(4년)</option>
+                            <option>대학교(석사)</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="" id="" placeholder="학교를 입력하세요">
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select">
+                            <option>졸업 여부</option>
+                            <option>재학</option>
+                            <option>중퇴</option>
+                            <option>졸업</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-2">
+            <div>
+                <h5 class="card-header">경력</h5>
+                <div class="col-sm-4 m-2">
                     <select class="form-select">
-                        <option>학력 선택</option>
-                        <option>고등학교</option>
-                        <option>대학교(2,3년)</option>
-                        <option>대학교(4년)</option>
-                        <option>대학교(석사)</option>
+                        <option value="">선택</option>
+                        <option value="1">신입</option>
+                        <option value="2">1~3년</option>
+                        <option value="3">3~5년</option>
+                        <option value="4">5년 이상</option>
                     </select>
                 </div>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" name="" id="" placeholder="학교를 입력하세요">
-                </div>
-                <div class="col-sm-4">
-                    <select class="form-select">
-                        <option>졸업 여부</option>
-                        <option>재학</option>
-                        <option>중퇴</option>
-                        <option>졸업</option>
-                    </select>
+            </div>
+        </div>
+        <div class="card mb-2">
+            <div class="d-flex justify-content-between card-header">
+                <h5>자격증</h5>
+                <button class=" btn btn-primary btn-sm " id="btnLicense">추가</button>
+            </div>
+            <div class="m-2 row" id="licenseList">
+                <div class="col-sm-4 mb-1"><input type="text" placeholder="자격증 이름 입력" class="form-control">
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card mb-2">
-        <div>
-            <h5 class="card-header">경력</h5>
-            <div class="col-sm-4 m-2">
-                <select class="form-select">
-                    <option value="">선택</option>
-                    <option value="1">신입</option>
-                    <option value="2">1~3년</option>
-                    <option value="3">3~5년</option>
-                    <option value="4">5년 이상</option>
-                </select>
+        <div class="card mb-2">
+            <div>
+                <h5 class="card-header">자기소개서</h5>
+                <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
             </div>
         </div>
-    </div>
-    <div class="card mb-2">
-        <div class="d-flex justify-content-between card-header">
-            <h5>자격증</h5>
-            <button class=" btn btn-primary btn-sm " id="btnLicense">추가</button>
+        <br>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class=" btn btn-primary btn-lg">작성완료</button>
         </div>
-        <div class="m-2 row" id="licenseList">
-            <div class="col-sm-4 mb-1"><input type="text" placeholder="자격증 이름 입력" class="form-control"></div>
-        </div>
-    </div>
-    <div class="card mb-2">
-        <div>
-            <h5 class="card-header">자기소개서</h5>
-            <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
-        </div>
-    </div>
-    <br>
-    <div class="d-flex justify-content-center">
-        <button class=" btn btn-primary btn-lg">작성완료</button>
-    </div>
+    </form>
+
     <br>
     <br><br>
 </div>
 
 <script>
-    $("#btnLicense").click(() => $("#licenseList").append(`<div class="col-sm-4 mb-1"><input type="text" placeholder="자격증 이름 입력" class="form-control"></div>`));
+    $("#btnLicense").click(() => $("#licenseList").append(`<select class="form-select">
+                <option value="">정보처리기사</option>
+                <option value="1">SQLD</option>
+                <option value="2">기타..</option>
+            </select>`));
 </script>
 
 {{> layout/footer}}
