@@ -37,10 +37,10 @@ public class ResumeController {
     }
 
     @GetMapping("/guest/resume/{id}")
-    public String detailForm(@PathVariable int id) {
-
-
-        return "/guest/resume/detailForm/";
+    public String detailForm(@PathVariable Integer id, HttpServletRequest request) {
+        Resume resume = resumeRepository.findById(id);
+        request.setAttribute("resume", resume);
+        return "/guest/resume/detailForm";
     }
 
     @PostMapping("/guest/resume/write")
