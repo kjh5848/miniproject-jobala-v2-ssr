@@ -51,7 +51,9 @@ public class ResumeRepository {
     }
 
     @Transactional
-    public void delete() {
-        return;
+    public void delete(int resumeId) {
+        Query query = em.createNativeQuery("delete from resume_tb where id = ?");
+        query.setParameter(1, resumeId);
+        query.executeUpdate();
     }
 }

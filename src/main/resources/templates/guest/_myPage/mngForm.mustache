@@ -38,7 +38,9 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-primary btn-sm">수정</button>
-                                    <button class="btn btn-danger btn-sm">삭제</button>
+                                    <form action="/resume/{{id}}/delete" method="post">
+                                        <button class="btn btn-danger btn-sm">삭제</button>
+                                    </form>
                                 </td>
                             </tr>
                         {{/resumeList}}

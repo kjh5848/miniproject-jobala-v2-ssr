@@ -38,5 +38,11 @@ public class ResumeController {
         return "redirect:/guest/mngForm";
     }
 
+    @PostMapping("/resume/{id}/delete")
+    public String delete(ResumeRequest.DeleteDTO deleteDTO) {
+        resumeRepository.delete(deleteDTO.getId());
+        return "redirect:/guest/mngForm";
+    }
+
 
 }

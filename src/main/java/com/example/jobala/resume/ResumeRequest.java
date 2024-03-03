@@ -15,4 +15,10 @@ public class ResumeRequest {
         private String content;
         private String edu;
     }
+
+    @AllArgsConstructor
+    @Data
+    public static class DeleteDTO {
+        private int id;
+    }
 }
