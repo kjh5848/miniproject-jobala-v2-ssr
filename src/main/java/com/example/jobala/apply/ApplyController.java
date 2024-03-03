@@ -34,11 +34,11 @@ public class ApplyController {
 
     @GetMapping("/guest/applyStatusForm")
     public String applyStatusForm() {
-        return "/guest/resume/myPage/applyStatusForm";
+        return "/guest/_myPage/applyStatusForm";
     }
 
     @GetMapping("/comp/applyPositionForm")
     public String applyPositionForm() {
-        return "/comp/jobopen/myPage/applyPositionForm";
+        return "/comp/_myPage/applyPositionForm";
     }
 }
