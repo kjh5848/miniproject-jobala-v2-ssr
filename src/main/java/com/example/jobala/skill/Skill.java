@@ -13,11 +13,6 @@ public class Skill {
 
     private Integer role; // 0 -> guest, 1 -> comp
     private Integer resumeId;
-    private Integer jobOpenId;
-    private Boolean java;
-    private Boolean Javascript;
-    private Boolean spring;
-    private Boolean html;
-    private Boolean jquery;
-    private Boolean mysql;
+    private Integer jobopenId;
+    private String skills;
 }
