@@ -1,12 +1,18 @@
 package com.example.jobala.comp;
 
+import com.example.jobala.jobopen.Jobopen;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class CompController {
+
+    private final CompRepository compRepository;
 
     @GetMapping("/comp/scoutList")
     public String scoutList() {
@@ -14,13 +20,15 @@ public class CompController {
     }
 
     @GetMapping("/comp/mngForm")
-    public String mngForm() {
-        return "/comp/jobopen/myPage/mngForm";
+    public String mngForm(HttpServletRequest req) {
+        List<Jobopen> jobopenList = compRepository.findAll();
+        req.setAttribute("jobopenList", jobopenList);
+        return "/comp/_myPage/mngForm";
     }
 
     @GetMapping("/comp/profileForm")
     public String profileForm() {
-        return "/comp/jobopen/myPage/profileForm";
+        return "/comp/_myPage/profileForm";
     }
 
 }

@@ -2,185 +2,335 @@
 
 
 <!--공고 검색페이지-->
-<style>
-    .like-icon {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        color: #555;
-        cursor: pointer;
-    }
 
-    .like-icon.active {
-        color: red;
-    }
-</style>
 
+<!--리펙토링 코드-->
 <div class="container d-flex justify-content-center">
-    <div style="margin-top: -50px; width: 50%;">
-        <div class="card-body">
-            <h2 style=" text-align: left; margin-left: 11%;">
-                <br>
-                총 <span id="totalJobs">00</span>건의 공고
-            </h2>
-            <div class="container d-flex justify-content-center"
-                 style="margin-top: -10px">
-                <div class="container" id="container"
-                     style="display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 80%; margin: 30px;">
-                    <div class="card-body select-box border border-dark solid grey; background-color: lightgrey; padding: 10px;">
-                        <div class="select-box rounded-3 border border-info solid grey; bg-light; padding: 10px;">
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>기술스택</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="Java"/> Java
-                                    <input type="checkbox" class="checkbox" value="JavaScript"/>
-                                    JavaScript
-                                    <input type="checkbox" class="checkbox" value="Spring"/> Spring
-                                    <input type="checkbox" class="checkbox" value="HTML"/> HTML
-                                    <input type="checkbox" class="checkbox" value="jQuery"/> jQuery
-                                    <input type="checkbox" class="checkbox" value="MySQL"/> MySQL
-                                </div>
-                            </div>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>경력</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="신입"/> 신입
-                                    <input type="checkbox" class="checkbox" value="경력"/> 경력
-                                </div>
-                            </div>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>지역</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="전체"/> 전체
-                                    <input type="checkbox" class="checkbox" value="서울"/> 서울
-                                    <input type="checkbox" class="checkbox" value="경기"/> 대전
-                                    <input type="checkbox" class="checkbox" value="광주"/> 대구
-                                    <input type="checkbox" class="checkbox" value="부산"/> 부산
-
-                                </div>
-                            </div>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>학력</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="고졸"/> 고졸
-                                    <input type="checkbox" class="checkbox" value="대졸"/> 대졸
-                                    <input type="checkbox" class="checkbox" value="학력무관"/> 학력무관
-                                </div>
-                            </div>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>연봉</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="협의"/>
-                                    협의
-                                    <input type="checkbox" class="checkbox" value="3,000만원 이하"/>
-                                    3,000만원 이상
-                                    <input type="checkbox" class="checkbox" value="5,000만원 이상"/>
-                                    5,000만원 이상
-                                </div>
-                            </div>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>희망 직무</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="프론트엔드"/>
-                                    프론트엔드
-                                    <input type="checkbox" class="checkbox" value="백엔드"/> 백엔드
-
-                                    <input type="checkbox" class="checkbox" value="풀스택"/> 풀스택
-                                </div>
-                            </div>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>고용형태</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="정규직"/> 정규직
-                                    <input type="checkbox" class="checkbox" value="계약직"/> 계약직
-                                    <input type="checkbox" class="checkbox" value="인턴"/> 인턴
-                                </div>
-                            </div>
-                            <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
-                                <button class="btn btn-primary mx-2" onclick="applyFilters()"> <!-- 좌우 여백만 추가 -->
-                                    필터 적용하기
-                                </button>
-                            </div>
-                        </div>
-                        <div
-                                class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
-                                style="cursor: pointer"
-                                data-tech="JAVA"
-                                data-exp="정규직"
-                                data-location="서울"
-                        >
-                            <h3>회사명</h3>
-                            <h4>제목(직무)</h4>
-                            <p><small>지역</small> <small>경력</small> <small>학력</small></p>
-                            <p><small>마감날짜</small></p>
-                            <span
-                                    class="like-icon position-absolute top-0 end-0 p-3"
-                                    onclick="toggleHeart(this)"
-                            ><i class="fas fa-heart"></i
-                            ></span>
-                        </div>
-                        <div
-                                class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
-                                style="cursor: pointer"
-                                data-tech="HTML"
-                                data-exp="경력"
-                                data-location="경기"
-                        >
-                            <h3>회사명</h3>
-                            <h4>제목(직무)</h4>
-                            <p><small>지역</small> <small>경력</small> <small>학력</small></p>
-                            <p><small>마감날짜</small></p>
-                            <span
-                                    class="like-icon position-absolute top-0 end-0 p-3"
-                                    onclick="toggleHeart(this)"
-                            ><i class="fas fa-heart"></i
-                            ></span>
-                        </div>
-                        <div
-                                class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
-                                style="cursor: pointer"
-                                data-tech="CSS"
-                                data-exp="계약직"
-                                data-location="부산"
-                        >
-                            <h3>회사명</h3>
-                            <h4>제목(직무)</h4>
-                            <p><small>지역</small> <small>경력</small> <small>학력</small></p>
-                            <p><small>마감날짜</small></p>
-                            <span
-                                    class="like-icon position-absolute top-0 end-0 p-3"
-                                    onclick="toggleHeart(this)"
-                            ><i class="fas fa-heart"></i
-                            ></span>
+    <div class="card-body">
+        <h2>
+            총 <span id="totalJobs">00</span>건의 공고
+        </h2>
+        <div>
+            <!-- 구직자 기술스택 매칭리스트 목록 -->
+            <div class="card-body select-box border border-2 mb-5 rounded-3">
+                <div class="select-box ">
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>기술스택</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="Java"/> Java
+                            <input type="checkbox" class="checkbox" value="JavaScript"/>
+                            JavaScript
+                            <input type="checkbox" class="checkbox" value="Spring"/> Spring
+                            <input type="checkbox" class="checkbox" value="HTML"/> HTML
+                            <input type="checkbox" class="checkbox" value="jQuery"/> jQuery
+                            <input type="checkbox" class="checkbox" value="MySQL"/> MySQL
                         </div>
                     </div>
-                    <div class="container mt-3">
-                        <ul
-                                class="pagination justify-content-center"
-                                style="margin-bottom: 50px; 0"
-                        >
-                            <li class="page-item disabled text-info bg-light border-dark">
-                                <a class="page-link text-info bg-light" href="#">Previous</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">Next</a>
-                            </li>
-                        </ul>
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>경력</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="신입"/> 신입
+                            <input type="checkbox" class="checkbox" value="경력"/> 경력
+                        </div>
+                    </div>
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>지역</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="전체"/> 전체
+                            <input type="checkbox" class="checkbox" value="서울"/> 서울
+                            <input type="checkbox" class="checkbox" value="경기"/> 대전
+                            <input type="checkbox" class="checkbox" value="광주"/> 대구
+                            <input type="checkbox" class="checkbox" value="부산"/> 부산
+
+                        </div>
+                    </div>
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>학력</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="고졸"/> 고졸
+                            <input type="checkbox" class="checkbox" value="대졸"/> 대졸
+                            <input type="checkbox" class="checkbox" value="학력무관"/> 학력무관
+                        </div>
+                    </div>
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>연봉</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="협의"/>
+                            협의
+                            <input type="checkbox" class="checkbox" value="3,000만원 이하"/>
+                            3,000만원 이상
+                            <input type="checkbox" class="checkbox" value="5,000만원 이상"/>
+                            5,000만원 이상
+                        </div>
+                    </div>
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>희망 직무</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="프론트엔드"/>
+                            프론트엔드
+                            <input type="checkbox" class="checkbox" value="백엔드"/> 백엔드
+
+                            <input type="checkbox" class="checkbox" value="풀스택"/> 풀스택
+                        </div>
+                    </div>
+                    <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <h4>고용형태</h4>
+                        <div class="checkbox-package">
+                            <input type="checkbox" class="checkbox" value="정규직"/> 정규직
+                            <input type="checkbox" class="checkbox" value="계약직"/> 계약직
+                            <input type="checkbox" class="checkbox" value="인턴"/> 인턴
+                        </div>
+                    </div>
+                    <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
+                        <button class="btn btn-primary mx-2" onclick="applyFilters()"> <!-- 좌우 여백만 추가 -->
+                            필터 적용하기
+                        </button>
                     </div>
                 </div>
             </div>
+            <!-- 구직자 기술스택 매칭리스트 목록 -->
+
+            <!-- 채용공고 목록 -->
+            <div>
+                <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3" style="cursor: pointer"
+                     data-tech="JAVA" data-exp="정규직" data-location="서울">
+                    <h3>회사명</h3>
+                    <h4>제목(직무)</h4>
+                    <p><small>지역</small> <small>경력</small> <small>학력</small></p>
+                    <p><small>마감날짜</small></p>
+                    <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
+                            class="fas fa-heart"></i></span>
+                </div>
+                <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
+                     style="cursor: pointer" data-tech="HTML" data-exp="경력" data-location="경기">
+                    <h3>회사명</h3>
+                    <h4>제목(직무)</h4>
+                    <p><small>지역</small> <small>경력</small> <small>학력</small></p>
+                    <p><small>마감날짜</small></p>
+                    <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
+                            class="fas fa-heart"></i></span>
+                </div>
+                <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
+                     style="cursor: pointer" data-tech="CSS" data-exp="계약직" data-location="부산">
+                    <h3>회사명</h3>
+                    <h4>제목(직무)</h4>
+                    <p><small>지역</small> <small>경력</small> <small>학력</small></p>
+                    <p><small>마감날짜</small></p>
+                    <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
+                            class="fas fa-heart"></i></span>
+                </div>
+            </div>
+            <!-- 채용공고 목록 -->
+
+
+            <!-- 페이징 -->
+            <div class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled text-info bg-light border-dark">
+                        <a class="page-link text-info bg-light" href="#">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 페이징 -->
+
         </div>
-        <br>
     </div>
 </div>
 
 {{> layout/footer}}
+
+
+<!--기존 코드-->
+<!--<style>-->
+<!--    .like-icon {-->
+<!--        position: absolute;-->
+<!--        top: 10px;-->
+<!--        right: 10px;-->
+<!--        color: #555;-->
+<!--        cursor: pointer;-->
+<!--    }-->
+
+<!--    .like-icon.active {-->
+<!--        color: red;-->
+<!--    }-->
+<!--</style>-->
+
+<!--<div class="container d-flex justify-content-center">-->
+<!--    <div style="margin-top: -50px; width: 50%;">-->
+<!--        <div class="card-body">-->
+<!--            <h2 style=" text-align: left; margin-left: 11%;">-->
+<!--                <br>-->
+<!--                총 <span id="totalJobs">00</span>건의 공고-->
+<!--            </h2>-->
+<!--            <div class="container d-flex justify-content-center"-->
+<!--                 style="margin-top: -10px">-->
+<!--                <div class="container" id="container"-->
+<!--                     style="display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 80%; margin: 30px;">-->
+<!--                    <div class="card-body select-box border border-dark solid grey; background-color: lightgrey; padding: 10px;">-->
+<!--                        <div class="select-box rounded-3 border border-info solid grey; bg-light; padding: 10px;">-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>기술스택</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="Java"/> Java-->
+<!--                                    <input type="checkbox" class="checkbox" value="JavaScript"/>-->
+<!--                                    JavaScript-->
+<!--                                    <input type="checkbox" class="checkbox" value="Spring"/> Spring-->
+<!--                                    <input type="checkbox" class="checkbox" value="HTML"/> HTML-->
+<!--                                    <input type="checkbox" class="checkbox" value="jQuery"/> jQuery-->
+<!--                                    <input type="checkbox" class="checkbox" value="MySQL"/> MySQL-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>경력</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="신입"/> 신입-->
+<!--                                    <input type="checkbox" class="checkbox" value="경력"/> 경력-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>지역</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="전체"/> 전체-->
+<!--                                    <input type="checkbox" class="checkbox" value="서울"/> 서울-->
+<!--                                    <input type="checkbox" class="checkbox" value="경기"/> 대전-->
+<!--                                    <input type="checkbox" class="checkbox" value="광주"/> 대구-->
+<!--                                    <input type="checkbox" class="checkbox" value="부산"/> 부산-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>학력</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="고졸"/> 고졸-->
+<!--                                    <input type="checkbox" class="checkbox" value="대졸"/> 대졸-->
+<!--                                    <input type="checkbox" class="checkbox" value="학력무관"/> 학력무관-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>연봉</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="협의"/>-->
+<!--                                    협의-->
+<!--                                    <input type="checkbox" class="checkbox" value="3,000만원 이하"/>-->
+<!--                                    3,000만원 이상-->
+<!--                                    <input type="checkbox" class="checkbox" value="5,000만원 이상"/>-->
+<!--                                    5,000만원 이상-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>희망 직무</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="프론트엔드"/>-->
+<!--                                    프론트엔드-->
+<!--                                    <input type="checkbox" class="checkbox" value="백엔드"/> 백엔드-->
+
+<!--                                    <input type="checkbox" class="checkbox" value="풀스택"/> 풀스택-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
+<!--                                <h4>고용형태</h4>-->
+<!--                                <div class="checkbox-package">-->
+<!--                                    <input type="checkbox" class="checkbox" value="정규직"/> 정규직-->
+<!--                                    <input type="checkbox" class="checkbox" value="계약직"/> 계약직-->
+<!--                                    <input type="checkbox" class="checkbox" value="인턴"/> 인턴-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="text-center my-3"> &lt;!&ndash; 가운데 정렬 및 위아래 여백 추가 &ndash;&gt;-->
+<!--                                <button class="btn btn-primary mx-2" onclick="applyFilters()"> &lt;!&ndash; 좌우 여백만 추가 &ndash;&gt;-->
+<!--                                    필터 적용하기-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div-->
+<!--                                class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"-->
+<!--                                style="cursor: pointer"-->
+<!--                                data-tech="JAVA"-->
+<!--                                data-exp="정규직"-->
+<!--                                data-location="서울"-->
+<!--                        >-->
+<!--                            <h3>회사명</h3>-->
+<!--                            <h4>제목(직무)</h4>-->
+<!--                            <p><small>지역</small> <small>경력</small> <small>학력</small></p>-->
+<!--                            <p><small>마감날짜</small></p>-->
+<!--                            <span-->
+<!--                                    class="like-icon position-absolute top-0 end-0 p-3"-->
+<!--                                    onclick="toggleHeart(this)"-->
+<!--                            ><i class="fas fa-heart"></i-->
+<!--                            ></span>-->
+<!--                        </div>-->
+<!--                        <div-->
+<!--                                class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"-->
+<!--                                style="cursor: pointer"-->
+<!--                                data-tech="HTML"-->
+<!--                                data-exp="경력"-->
+<!--                                data-location="경기"-->
+<!--                        >-->
+<!--                            <h3>회사명</h3>-->
+<!--                            <h4>제목(직무)</h4>-->
+<!--                            <p><small>지역</small> <small>경력</small> <small>학력</small></p>-->
+<!--                            <p><small>마감날짜</small></p>-->
+<!--                            <span-->
+<!--                                    class="like-icon position-absolute top-0 end-0 p-3"-->
+<!--                                    onclick="toggleHeart(this)"-->
+<!--                            ><i class="fas fa-heart"></i-->
+<!--                            ></span>-->
+<!--                        </div>-->
+<!--                        <div-->
+<!--                                class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"-->
+<!--                                style="cursor: pointer"-->
+<!--                                data-tech="CSS"-->
+<!--                                data-exp="계약직"-->
+<!--                                data-location="부산"-->
+<!--                        >-->
+<!--                            <h3>회사명</h3>-->
+<!--                            <h4>제목(직무)</h4>-->
+<!--                            <p><small>지역</small> <small>경력</small> <small>학력</small></p>-->
+<!--                            <p><small>마감날짜</small></p>-->
+<!--                            <span-->
+<!--                                    class="like-icon position-absolute top-0 end-0 p-3"-->
+<!--                                    onclick="toggleHeart(this)"-->
+<!--                            ><i class="fas fa-heart"></i-->
+<!--                            ></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="container mt-3">-->
+<!--                        <ul-->
+<!--                                class="pagination justify-content-center"-->
+<!--                                style="margin-bottom: 50px; 0"-->
+<!--                        >-->
+<!--                            <li class="page-item disabled text-info bg-light border-dark">-->
+<!--                                <a class="page-link text-info bg-light" href="#">Previous</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link text-info bg-light" href="#">1</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link text-info bg-light" href="#">2</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link text-info bg-light" href="#">3</a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link text-info bg-light" href="#">Next</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--    </div>-->
+<!--</div>-->
+<!--기존 코드-->

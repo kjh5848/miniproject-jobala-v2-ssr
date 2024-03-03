@@ -14,7 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         registry
                 .addResourceHandler("/image/**")
-                .addResourceLocations("file:./image")
+                .addResourceLocations("file:./image/")
                 .setCachePeriod(60 * 60) // 초 단위 => 한시간
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
