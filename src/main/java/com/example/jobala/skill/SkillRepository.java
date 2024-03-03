@@ -26,10 +26,9 @@ public class SkillRepository {
                 """;
 
         Query query = em.createNativeQuery(a, Skill.class);
-        query.setParameter(1, reqDTO.getRole());
-        query.setParameter(2, reqDTO.getResumeId());
-        query.setParameter(3, reqDTO.getJobOpenId());
-        query.setParameter(4, reqDTO.getSkills());
+        query.setParameter(1, reqDTO.getResumeId());
+        query.setParameter(2, reqDTO.getJobOpenId());
+        query.setParameter(3, reqDTO.getSkills());
         query.executeUpdate();
     }
 

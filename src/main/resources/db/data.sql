@@ -1,10 +1,8 @@
-
 -- 회원가입 더미
-insert into user_tb(name, username, password, address, phone, role, created_at)
-values('cos', 'cos@nate.com', '1234', '부산광역시 금정구', '01012345678', 0, now());
-insert into user_tb(comp_num, ceo, compname, address, username, password, name, phone, role, created_at)
-values('5678', '박선규', '선규넷',  '부산광역시 전포', 'ssar@nate.com', '1234', 'ssar', '01011112222', 1, now());
-
+insert into user_tb(name, username, email, password, address, phone, role, created_at)
+values ('박선규', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '01012345678', 0, now());
+insert into user_tb(username, comp_num, ceo, compname, address, email, password, name, phone, role, created_at)
+values ('ssar', '5678', '박선규', '선규넷', '부산광역시 전포', 'ssar@nate.com', '1234', 'ssar', '01011112222', 1, now());
 
 
 -- 이력서 더미
@@ -16,7 +14,6 @@ insert into resume_tb(user_id, resume_title, hope_job, career, license, content,
 values (2, '이력서 제목2-1', '프론트엔드', '신입', '', '2번 유저의 자기소개서 1..... ..... ..... .....', '고등학교 졸업', now());
 insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at)
 values (2, '이력서 제목2-2', '백엔드', '신입', 'SQLD', '2번 유저의 자기소개서 2..... ..... ..... .....', '대학교 졸업', now());
-
 
 
 -- 채용공고 더미

@@ -35,8 +35,9 @@
                                     <div class="mb-3">
                                         <div class="mt-3">
                                             <p>사업자번호</p>
-                                        <input type="text" class="form-control" id="compNum"
-                                               name="compNum" placeholder="ENTER companyNumber" value="1234" required>
+                                            <input type="text" class="form-control" id="compNum"
+                                                   name="compNum" placeholder="ENTER companyNumber" value="1234"
+                                                   required>
                                         </div>
                                     </div>
 
@@ -55,19 +56,29 @@
                                     <div class="mb-3">
                                         <p>회사 주소</p>
                                         <input type="text" class="form-control" id="address"
-                                               name="address" placeholder="ENTER companyAddress" value="부산광역시 전포" required>
+                                               name="address" placeholder="ENTER companyAddress" value="부산광역시 전포"
+                                               required>
                                     </div>
 
                                     <!-- 인사 담당자 정보 -->
                                     <div class="mb-3">
                                         <div class="mb-3">
-                                            <p>이메일 주소</p>
+                                            <p>아이디</p>
                                             <div class="d-flex text-nowrap">
-                                                <input type="email" class="form-control" id="username" name="username"
-                                                       placeholder="ENTER username" value="ssar@nate.com" required>
-                                                <button type="button" onclick="usernameSameCheck()" class="btn btn-primary btn-block">이메일 중복
+                                                <input type="text" class="form-control" id="username" name="username"
+                                                       placeholder="ENTER username" value="ssar" required>
+                                                <button type="button" onclick="usernameSameCheck()"
+                                                        class="btn btn-primary btn-block">중복
                                                     체크
                                                 </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <p>이메일</p>
+                                            <div class="d-flex text-nowrap">
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                       placeholder="ENTER email" value="ssar@nate.com" required>
                                             </div>
                                         </div>
 
@@ -80,7 +91,8 @@
 
                                     <div class="mb-3">
                                         <p>비밀번호체크</p>
-                                        <input type="password" class="form-control" id="passwordCheck" name="passwordCheck"
+                                        <input type="password" class="form-control" id="passwordCheck"
+                                               name="passwordCheck"
                                                placeholder="Enter passwordCheck" value="1234" required>
                                     </div>
 
@@ -121,16 +133,26 @@
                                         <input type="text" class="form-control" id="name" name="name"
                                                placeholder="Enter userName" value="박선규" required>
                                     </div>
-                                    <div class="mb-3 text-nowrap">
-                                        <p>이메일 주소</p>
-                                        <div class=" d-flex">
-                                            <input type="email" class="form-control" id="username" name="username"
-                                                   placeholder="ENTER username" value="ssar@nate.com" required>
-                                            <button type="submit" class="btn btn-primary btn-block">이메일 중복
+                                    <div class="mb-3">
+                                        <p>아이디</p>
+                                        <div class="d-flex text-nowrap">
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                   placeholder="ENTER username" value="ssar" required>
+                                            <button type="button" onclick="usernameSameCheck()"
+                                                    class="btn btn-primary btn-block">중복
                                                 체크
                                             </button>
                                         </div>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <p>이메일</p>
+                                        <div class="d-flex text-nowrap">
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                   placeholder="ENTER email" value="ssar@nate.com" required>
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3">
                                         <p>비밀번호</p>
                                         <input type="password" class="form-control" id="password" name="password"
@@ -165,34 +187,36 @@
 </div>
 
 <script>
-<!--  아이디 중복체크  -->
-let isSameCheck = false;
-function valid(){
-    if(isSameCheck == false){
-        alert("아이디 중복체크를 해야 합니다");
-    }
-    return isSameCheck;
-}
-function usernameSameCheck(){
-    let username = $("#username").val();
-    $.ajax({
-        url: "/api/username-same-check?username="+username,
-        type: "get"
-    }).done((res)=>{
-        console.log(res);
-        if(res.body == true){
-            isSameCheck = true;
-            alert("아이디 중복 체크 완료");
-        }else{
-            isSameCheck = false;
-            alert("동일한 아이디가 존재합니다");
-        }
-    }).fail((res)=>{
-        alert(res.responseJSON.msg);
-    });
-}
+    <!--  아이디 중복체크  -->
+    let isSameCheck = false;
 
-$(function () {
+    function valid() {
+        if (isSameCheck == false) {
+            alert("아이디 중복체크를 해야 합니다");
+        }
+        return isSameCheck;
+    }
+
+    function usernameSameCheck() {
+        let username = $("#username").val();
+        $.ajax({
+            url: "/api/username-same-check?username=" + username,
+            type: "get"
+        }).done((res) => {
+            console.log(res);
+            if (res.body == true) {
+                isSameCheck = true;
+                alert("아이디 중복 체크 완료");
+            } else {
+                isSameCheck = false;
+                alert("동일한 아이디가 존재합니다");
+            }
+        }).fail((res) => {
+            alert(res.responseJSON.msg);
+        });
+    }
+
+    $(function () {
         // 개인/기업 버튼 클릭 이벤트 처리
         $(".btn-light").click(function () {
             // 현재 클릭된 버튼의 ID 가져오기

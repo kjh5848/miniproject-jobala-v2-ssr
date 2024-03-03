@@ -14,11 +14,12 @@ public class User {
     private Integer id;
 
     @Column(unique = true, length = 15)
-    private String username; // 아아디
+    private String username; // 아이디
     private String compNum;
     private String password;
     private String name;
     private String compname;
+    private String email;
     private String phone;
     private String ceo;
     private String address;
