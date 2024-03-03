@@ -30,32 +30,27 @@ public class UserController {
             System.out.println(1);
             return "/user/joinForm";
         }
-        System.out.println(1);
+
 
         User user = userRepository.findByUsernameAndPassword(reqDTO);
-        System.out.println(2);
 
-        System.out.println(3);
-        //유효성 검사(user=null 경우)
+        //권한체크(user=null 경우)
         if (user == null) {
-
             return "/user/joinForm";
         }
 
+        //권한체크(개인 로그인 했을때, 기업 로그인 했을 때 nav바 다르게 노출)
         Boolean isCheck = false;
         if (user.getRole() == 0) {
-            System.out.println(4);
             isCheck = true;
-            System.out.println(5);
+
             session.setAttribute("isCheck", isCheck);
             session.setAttribute("sessionUser", user);
             return "redirect:/";
         }
-        System.out.println(6);
 
         session.setAttribute("isCheck", isCheck);
         session.setAttribute("sessionUser", user);
-        System.out.println(7);
         return "redirect:/";
     }
 
