@@ -15,8 +15,9 @@ import java.util.List;
 public class GuestRepository {
     private final EntityManager em;
 
-    public List<Resume> findResumeAll() {
-        Query query = em.createNativeQuery("select * from resume_tb order by id desc", Resume.class);
+    public List<Resume> findResumeById(int userId) {
+        Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
+        query.setParameter(1, userId);
 
         List<Resume> resumeList = query.getResultList();
         return resumeList;
@@ -54,14 +55,14 @@ public class GuestRepository {
                 select * from jobopen_tb where id =?
                 """;
 
-        Query query = em.createNativeQuery(a,Jobopen.class);
+        Query query = em.createNativeQuery(a, Jobopen.class);
         query.setParameter(1, id);
 
         try {
-            Jobopen jobopen  = (Jobopen) query.getSingleResult();
+            Jobopen jobopen = (Jobopen) query.getSingleResult();
             return jobopen;
         } catch (Exception e) {
-            return  null;
+            return null;
         }
     }
 }
