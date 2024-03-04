@@ -14,6 +14,15 @@ import java.util.List;
 public class CompRepository {
     private final EntityManager entityManager;
 
+    public CompRequest.scoutListDTO scoutList(){
+        String q = """
+                SELECT ut.name, rt.resume_title, ut.age, ut.address, rt.career
+                FROM resume_tb rt
+                INNER JOIN user_tb ut ON rt.user_id = ut.id
+                """;
+        return null;
+    }
+
     public List<Jobopen> findAll() {
         String q = """
                 select * from jobopen_tb order by id desc;              
