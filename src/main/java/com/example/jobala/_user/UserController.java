@@ -1,22 +1,46 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.util.ApiUtil;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.swing.plaf.PanelUI;
+import java.awt.desktop.OpenURIEvent;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
+    private final JobopenRepository jobopenRepository;
+
     private final HttpSession session;
 
+    @GetMapping("/")
+    public String mainForm(HttpServletRequest req) {
+        List<Jobopen> jobopenList = userRepository.findAll();
+        req.setAttribute("jobopenList", jobopenList);
+        return "index";
+    }
+
+    @GetMapping("/{id}")
+    public String mainForm(@PathVariable int id, HttpServletRequest req) {
+        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+        req.setAttribute("jobopen", jobopen);
+        return "redirect:/comp/{id}";
+    }
 
     @GetMapping("/loginForm")
     public String loginForm() {
+
         return "/user/loginForm";
     }
 

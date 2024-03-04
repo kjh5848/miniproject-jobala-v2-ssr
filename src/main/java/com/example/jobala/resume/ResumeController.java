@@ -1,6 +1,8 @@
 package com.example.jobala.resume;
 
+import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ResumeController {
 
     private final ResumeRepository resumeRepository;
+    private final HttpSession session;
 
     @GetMapping("/guest/resume/writeForm")
-    public String writeForm() {
+    public String writeForm(HttpServletRequest request) {
+        User user = (User) session.getAttribute("sessionUser");
+        request.setAttribute("user", user);
         return "/guest/resume/writeForm";
     }
 
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO requestDTO) {
-
         Resume resume = resumeRepository.findById(id);
         System.out.println("id = " + id);
         System.out.println("resume.getId() = " + resume.getId());
@@ -31,14 +35,19 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
         Resume resume = resumeRepository.findById(id);
+        User user = (User) session.getAttribute("sessionUser");
+        request.setAttribute("user", user);
         request.setAttribute("resume", resume);
-
         return "/guest/resume/updateForm";
     }
 
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest request) {
         Resume resume = resumeRepository.findById(id);
+        User user = (User) session.getAttribute("sessionUser");
+        System.out.println("sessionUser = " + user);
+
+        request.setAttribute("user", user);
         request.setAttribute("resume", resume);
         return "/guest/resume/detailForm";
     }
