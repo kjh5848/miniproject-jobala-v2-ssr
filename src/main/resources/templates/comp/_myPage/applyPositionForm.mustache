@@ -121,12 +121,13 @@
 
 <script>
     // 서버로부터 지원자 목록을 받아와서 화면에 표시하는 함수
-    async function displayApplicants(jobOpenId) {
+    async function displayApplicants(jobopenId) {
         try {
-            const response = await fetch(`/api/applicants/${jobOpenId}`);
+            const response = await fetch(`/api/applicants/${jobopenId}`);
             if (response.ok) {
                 const applicants = await response.json();
                 const container = document.getElementById("container");
+
 
                 // 기존에 있던 카드 삭제
                 container.innerHTML = "";
@@ -153,10 +154,12 @@
         card.innerHTML = `
         <div class="card-body">
             <h5 class="card-title">지원자 이름: ${applicant.name}</h5>
-            <p class="card-text">공고 제목: ${applicant.jobTitle}</p>
-            <p class="card-text">이력서 제목: ${applicant.resumeTitle}</p>
+            <p class="card-text">공고 제목: ${applicant.jobopenTitle}</p>
+            <p class="card-text">이력서 제목: ${applicant.title}</p>
             <p class="card-text">학력: ${applicant.edu}</p>
             <p class="card-text">주소: ${applicant.address}</p>
+            <p class="card-text">상태: ${applicant.state}</p>
+            <p class="card-text">지원일시: ${applicant.createdAt}</p>
         </div>
     `;
         return card;

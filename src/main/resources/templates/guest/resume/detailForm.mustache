@@ -11,7 +11,7 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <i class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
-                    <h2 class="card-title">저는 열정적인 사람입니다.</h2>
+                    <h2 class="card-title">{{resume.resumeTitle}}</h2>
                 </div>
             </div>
             <div class="card border-0">
@@ -24,21 +24,21 @@
                             <tbody style="font-size: 15px;">
                             <tr>
                                 <th>이름</th>
-                                <td>김주혁</td>
+                                <td>{{user.name}}</td>
                                 <th>나이</th>
-                                <td>만 30세</td>
+                                <td>{{user.age}}</td>
                             </tr>
                             <tr>
                                 <th>학력</th>
-                                <td>대졸</td>
+                                <td>{{resume.edu}}</td>
                                 <th>핸드폰</th>
-                                <td>010-1111-2222</td>
+                                <td>{{user.phone}}</td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
-                                <td>kjh5848@gmail.com</td>
+                                <td>{{user.email}}</td>
                                 <th>주소</th>
-                                <td>부산 금정구 구서동</td>
+                                <td>{{user.address}}</td>
                             </tr>
                             <tr>
 

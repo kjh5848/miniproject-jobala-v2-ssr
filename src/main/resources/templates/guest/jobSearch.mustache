@@ -91,35 +91,18 @@
             <!-- 구직자 기술스택 매칭리스트 목록 -->
 
             <!-- 채용공고 목록 -->
-            <div>
-                <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3" style="cursor: pointer"
-                     data-tech="JAVA" data-exp="정규직" data-location="서울">
-                    <h3>회사명</h3>
-                    <h4>제목(직무)</h4>
-                    <p><small>지역</small> <small>경력</small> <small>학력</small></p>
-                    <p><small>마감날짜</small></p>
-                    <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
-                            class="fas fa-heart"></i></span>
-                </div>
-                <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
-                     style="cursor: pointer" data-tech="HTML" data-exp="경력" data-location="경기">
-                    <h3>회사명</h3>
-                    <h4>제목(직무)</h4>
-                    <p><small>지역</small> <small>경력</small> <small>학력</small></p>
-                    <p><small>마감날짜</small></p>
-                    <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
-                            class="fas fa-heart"></i></span>
-                </div>
-                <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3 position-relative"
-                     style="cursor: pointer" data-tech="CSS" data-exp="계약직" data-location="부산">
-                    <h3>회사명</h3>
-                    <h4>제목(직무)</h4>
-                    <p><small>지역</small> <small>경력</small> <small>학력</small></p>
-                    <p><small>마감날짜</small></p>
-                    <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
-                            class="fas fa-heart"></i></span>
-                </div>
-            </div>
+            {{#jobopenList}}
+                <a href="/guest/jobSearch/{{id}}">
+                    <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3" style="cursor: pointer"
+                         data-tech="JAVA" data-exp="정규직" data-location="서울">
+                        <h4>{{jobopenTitle}}</h4>
+                        <p><small>{{compLocation}}</small><small>{{career}}</small> <small>{{edu}}</small></p>
+                        <p><small>{{endTime}}</small></p>
+                        <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
+                                class="fas fa-heart"></i></span>
+                    </div>
+                </a>
+            {{/jobopenList}}
             <!-- 채용공고 목록 -->
 
 

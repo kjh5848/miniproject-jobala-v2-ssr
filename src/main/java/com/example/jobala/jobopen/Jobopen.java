@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -14,8 +15,7 @@ public class Jobopen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private Integer userId; //
+    private Integer userId;
     private String compname; //회사명
     private String jobopenTitle; //공고제목
     private String content; //내용
@@ -25,8 +25,8 @@ public class Jobopen {
     private String compLocation; //근무지역
     private String jobType; // 고용형태
     private String salary; //연봉
-    private String skills;
     private Date endTime; // 마감일
+    private String skills; // 마감일
 
     private LocalDateTime createdAt; //생성일
 

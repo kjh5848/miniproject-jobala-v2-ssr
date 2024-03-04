@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class CompRepository {
-    private final EntityManager entityManager;
+    private final EntityManager em;
 
     public CompRequest.scoutListDTO scoutList(){
         String q = """
@@ -27,7 +27,7 @@ public class CompRepository {
         String q = """
                 select * from jobopen_tb order by id desc;              
                 """;
-        Query query = entityManager.createNativeQuery(q, Jobopen.class);
+        Query query = em.createNativeQuery(q, Jobopen.class);
         return query.getResultList();
     }
 
