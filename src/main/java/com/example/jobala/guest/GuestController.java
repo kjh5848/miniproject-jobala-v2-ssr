@@ -1,5 +1,6 @@
 package com.example.jobala.guest;
 
+import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +38,10 @@ public class GuestController {
 
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest request) {
-        List<Resume> resumeList = guestRepository.findResumeAll();
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        int userId = sessionUser.getId();
+        System.out.println(userId);
+        List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
         request.setAttribute("resumeList", resumeList);
         return "/guest/_myPage/mngForm";
     }
