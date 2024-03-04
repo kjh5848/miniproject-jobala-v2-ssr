@@ -1,7 +1,10 @@
 package com.example.jobala.apply;
 
+import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +19,9 @@ public class ApplyRepository {
 
     private final EntityManager em;
 
-    public List<Apply> findByJobOpenId(Integer jobOpenId) {
+    public List<Apply> findByJobOpenId(Integer jobopenId) {
         Query query = em.createNativeQuery("SELECT * FROM apply_tb WHERE jobopen_id = ?1", Apply.class);
-        query.setParameter(1, jobOpenId);
+        query.setParameter(1, jobopenId);
         return query.getResultList();
     }
 
