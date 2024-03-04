@@ -26,7 +26,7 @@ public class ApplyController {
     private final ApplyRepository applyRepository;
     private final ResumeRepository resumeRepository;
 
-    // 이력서 상세페이지에서 지원자 목록을 가져와서 카드 생성
+//     이력서 상세페이지에서 지원자 목록을 가져와서 카드 생성
 //@RestController
 //@Controller
 //@RequiredArgsConstructor
