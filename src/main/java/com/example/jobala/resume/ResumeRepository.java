@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResumeRepository {
     private final EntityManager em;
 
+
     public void findByUsernameAge(){
          String q = """
                  select 
@@ -28,6 +29,7 @@ public class ResumeRepository {
                 .setParameter("userId", userId)
                 .getSingleResult();
     }
+
 
     public void findAll() {
         return;
@@ -75,4 +77,16 @@ public class ResumeRepository {
         query.setParameter(1, resumeId);
         query.executeUpdate();
     }
+
+    public Resume findByResumeId(Integer id) {
+        Query query = em.createNativeQuery("select * from resume_tb where id = ?", Resume.class);
+        query.setParameter(1, id);
+
+        try {
+            return (Resume) query.getSingleResult();
+        } catch (Exception e) {
+            return null; // 해당 id에 대한 이력서가 없는 경우
+        }
+    }
 }
+
