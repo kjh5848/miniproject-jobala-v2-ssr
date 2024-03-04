@@ -1,5 +1,7 @@
 package com.example.jobala.apply;
 
+import com.example.jobala.resume.Resume;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
