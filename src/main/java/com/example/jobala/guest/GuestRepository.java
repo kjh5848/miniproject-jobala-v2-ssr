@@ -1,5 +1,6 @@
 package com.example.jobala.guest;
 
+import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -12,17 +13,21 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class GuestRepository {
-    private final EntityManager entityManager;
+    private final EntityManager em;
 
     public List<Resume> findResumeAll() {
-        Query query = entityManager.createNativeQuery("select * from resume_tb order by id desc", Resume.class);
+        Query query = em.createNativeQuery("select * from resume_tb order by id desc", Resume.class);
 
         List<Resume> resumeList = query.getResultList();
         return resumeList;
     }
 
-    public void findAll() {
-        return;
+    public List<Jobopen> findAll() {
+        String q = """
+                select * from jobopen_tb order by id desc;
+                """;
+        Query query = em.createNativeQuery(q, Jobopen.class);
+        return query.getResultList();
     }
 
     public void findById() {
@@ -42,5 +47,21 @@ public class GuestRepository {
     @Transactional
     public void delete() {
         return;
+    }
+
+    public Jobopen findByIdWithUser(int id) {
+        String a = """
+                select * from jobopen_tb where id =?
+                """;
+
+        Query query = em.createNativeQuery(a,Jobopen.class);
+        query.setParameter(1, id);
+
+        try {
+            Jobopen jobopen  = (Jobopen) query.getSingleResult();
+            return jobopen;
+        } catch (Exception e) {
+            return  null;
+        }
     }
 }

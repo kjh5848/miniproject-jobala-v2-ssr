@@ -11,7 +11,7 @@
                 <div>
                     <i class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
                     <p class="card-title">회사명</p>
-                    <h2>열정적인 인재를 원합니다</h2>
+                    <h2>{{jobopen.jobopenTitle}}</h2>
                 </div>
                 <div>
                     <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
@@ -27,23 +27,23 @@
                 <tbody>
                 <tr>
                     <th scope="row">경력</th>
-                    <td>무관</td>
+                    <td>{{jobopen.career}}</td>
                 </tr>
                 <tr>
                     <th scope="row">학력</th>
-                    <td>학력 무관</td>
+                    <td>{{jobopen.edu}}</td>
                 </tr>
                 <tr>
                     <th>고용 형태</th>
-                    <td>정규직</td>
+                    <td>{{jobopen.jobType}}</td>
                 </tr>
                 <tr>
                     <th>연봉</th>
-                    <td>협의</td>
+                    <td>{{jobopen.salary}}</td>
                 </tr>
                 <tr>
                     <th>지역</th>
-                    <td>서울</td>
+                    <td>{{jobopen.compLocation}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -109,23 +109,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>백엔드</td>
+                    <td>{{jobopen.hopeJob}}</td>
                     <td>0명</td>
                     <td>
                         <ul>
-                            <li>Java</li>
-                            <li>MySQL</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>프론트엔드</td>
-                    <td>0명</td>
-                    <td>
-                        <ul>
-                            <li>HTML</li>
-                            <li>JavaScript</li>
+                            <li>{{jobopen.skills}}</li>
                         </ul>
                     </td>
                 </tr>
