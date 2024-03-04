@@ -2,10 +2,12 @@ package com.example.jobala.apply;
 
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,33 +18,27 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ApplyRepository {
-
+    @Autowired
     private final EntityManager em;
 
-    public List<Apply> findByJobOpenId(Integer jobopenId) {
-        Query query = em.createNativeQuery("SELECT * FROM apply_tb WHERE jobopen_id = ?", Apply.class);
-        query.setParameter(1, jobopenId);
-        return query.getResultList();
-    }
-
-    public ApplyResponse.CardDetailDTO findByIdWithUser(int id) {
-        Query query = em.createNativeQuery("SELECT u.address, u.name, r.title, r.edu, a.status " +
-                "FROM user_tb AS u " +
-                "INNER JOIN resume_tb AS r ON u.id = r.user_id " +
-                "INNER JOIN apply_tb AS a ON u.id = a.user_id " +
-                "WHERE a.jobopen_id = ? " +
-                "ORDER BY u.id ASC");
-        query.setParameter(1, id);
-        Object[] row = (Object[]) query.getSingleResult();
-
-        ApplyResponse.CardDetailDTO cardDetailDTO = new ApplyResponse.CardDetailDTO();
-        cardDetailDTO.setName((String) row[0]);
-        cardDetailDTO.setResumeTitle((String) row[1]);
-        cardDetailDTO.setEdu((String) row[2]);
-        cardDetailDTO.setState((String) row[3]);
-
-        return cardDetailDTO;
-    }
+//        public ApplyResponse.CardDetailDTO findByIdWithUser(int id) {
+//        Query query = em.createNativeQuery("SELECT u.address, u.name, r.title, r.edu, a.status " +
+//                "FROM user_tb AS u " +
+//                "INNER JOIN resume_tb AS r ON u.id = r.user_id " +
+//                "INNER JOIN apply_tb AS a ON u.id = a.user_id " +
+//                "WHERE a.jobopen_id = ? " +
+//                "ORDER BY u.id ASC");
+//        query.setParameter(1, id);
+//        Object[] row = (Object[]) query.getSingleResult();
+//
+//        ApplyResponse.CardDetailDTO cardDetailDTO = new ApplyResponse.CardDetailDTO();
+//        cardDetailDTO.setName((String) row[0]);
+//        cardDetailDTO.setResumeTitle((String) row[1]);
+//        cardDetailDTO.setEdu((String) row[2]);
+//        cardDetailDTO.setState((String) row[3]);
+//
+//        return cardDetailDTO;
+//    }
 
     public List<Integer> findJobOpenIdsByUserId(Integer userId) {
         Query query = em.createNativeQuery("SELECT DISTINCT jobopen_id FROM apply_tb WHERE user_id = ?1");
@@ -71,8 +67,13 @@ public class ApplyRepository {
         return;
     }
 
-    public void findById() {
-        return;
+    @Transactional
+    public Apply findById(Long id) {
+        Query query = em.createNativeQuery("select * from apply_tb where id = ?", Apply.class);
+        query.setParameter(1, id);
+
+        Apply apply = (Apply) query.getSingleResult();
+        return apply;
     }
 
     @Transactional
