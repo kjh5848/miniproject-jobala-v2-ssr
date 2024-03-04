@@ -11,6 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResumeRepository {
     private final EntityManager em;
 
+    public void findByUsernameAge(){
+         String q = """
+                 select 
+                 """ ;
+        return ;
+    }
+
     public Resume findByUserId(Integer userId) {
         String q = """
                 SELECT r FROM Resume r WHERE r.id = (
