@@ -1,8 +1,8 @@
 -- 회원가입 더미
 insert into user_tb(name, username, email, password, address, phone, role, created_at)
 values ('박선규', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '01012345678', 0, now());
-insert into user_tb(username, comp_num, ceo, compname, address, email, password, name, phone, role, created_at)
-values ('ssar', '5678', '박선규', '선규넷', '부산광역시 전포', 'ssar@nate.com', '1234', 'ssar', '01011112222', 1, now());
+insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
+values ( '5678', '홍길동', '활빈당컴', '부산광역시 전포', 'love', 'love@nate.com', '1234', '홍길동', '01011112222', 1, now());
 
 
 -- 이력서 더미
