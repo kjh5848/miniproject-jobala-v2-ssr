@@ -51,8 +51,12 @@
                             </button>
                         </div>
                         <div>
-                            <button class="btn btn-info">수정</button>
-                            <button class="btn btn-secondary">삭제</button>
+                            <a href="/comp/jobopen/{{id}}/updateForm">
+                                <button class="btn btn-info">수정</button>
+                            </a>
+                            <form action="/comp/jobopen/{{id}}/detete" method="post">
+                                <button class="btn btn-secondary">삭제</button>
+                            </form>
                         </div>
                     </div>
                 </div>

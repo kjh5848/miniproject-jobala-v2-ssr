@@ -20,7 +20,6 @@ public class ResumeController {
 
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO requestDTO) {
-
         Resume resume = resumeRepository.findById(id);
         System.out.println("id = " + id);
         System.out.println("resume.getId() = " + resume.getId());
@@ -32,7 +31,6 @@ public class ResumeController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
         Resume resume = resumeRepository.findById(id);
         request.setAttribute("resume", resume);
-
         return "/guest/resume/updateForm";
     }
 
