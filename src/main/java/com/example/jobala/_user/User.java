@@ -3,6 +3,7 @@ package com.example.jobala._user;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +24,7 @@ public class User {
     private String phone;
     private String ceo;
     private String address;
+    private Date age;
     private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createdAt;
 
