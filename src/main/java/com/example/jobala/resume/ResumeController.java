@@ -17,7 +17,9 @@ public class ResumeController {
     private final HttpSession session;
 
     @GetMapping("/guest/resume/writeForm")
-    public String writeForm() {
+    public String writeForm(HttpServletRequest request) {
+        User user = (User) session.getAttribute("sessionUser");
+        request.setAttribute("user", user);
         return "/guest/resume/writeForm";
     }
 
@@ -33,6 +35,8 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
         Resume resume = resumeRepository.findById(id);
+        User user = (User) session.getAttribute("sessionUser");
+        request.setAttribute("user", user);
         request.setAttribute("resume", resume);
         return "/guest/resume/updateForm";
     }
@@ -42,7 +46,7 @@ public class ResumeController {
         Resume resume = resumeRepository.findById(id);
         User user = (User) session.getAttribute("sessionUser");
         System.out.println("sessionUser = " + user);
-        
+
         request.setAttribute("user", user);
         request.setAttribute("resume", resume);
         return "/guest/resume/detailForm";
