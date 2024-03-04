@@ -3,6 +3,7 @@
 
 <!--채용공고 수정페이지-->
 <div class="container  mt-5">
+    <form action="/comp/jobopen/{{jobopen.id}}/update" method="post" enctype="multipart/form-data">
     <div class="card mb-3">
         <div class="card-body">
             <!-- 회사 이미지 및 정보 -->
@@ -36,8 +37,7 @@
     <!-- 공고 제목 -->
     <div class="card mt-5">
         <div class="card-body d-flex justify-content-center">
-            <div class="text-nowrap h4">공고 제목</div>
-            <input type="text" class="form-control">
+            <input value="{{jobopen.jobopenTitle}}" type="text" name="jobopenTitle" class="form-control" placeholder="공고제목">
         </div>
     </div>
 
@@ -103,11 +103,9 @@
             </select>
         </div>
         <div class="card-body">
-            <div>
-                <p><b>마감일</b></p>
-            </div>
-            <div style="margin-left: 2px; width: 165px;">
-                <input type="text" class="form-control">
+            <p><b>마감일</b></p>
+            <div class="form-group">
+                <input value="{{jobopen.endTime}}" type="date" class="form-control" name="endTime">
             </div>
         </div>
     </div>
@@ -149,7 +147,7 @@
 
 <!-- 공고 상세 내용 -->
 <div class="container" style="padding-top:50px;">
-    <textarea name="" id="myEditor" class="form-control" cols="30" rows="10"></textarea>
+    <textarea id="myEditor" class="form-control" cols="30" rows="10">{{jobopen.content}}</textarea>
 </div>
 <script>
     $(document).ready(function () {

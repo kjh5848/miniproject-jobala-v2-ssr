@@ -20,6 +20,7 @@ public class CompController {
         return "/comp/scoutList";
     }
 
+
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
         List<Jobopen> jobopenList = compRepository.findAll();
