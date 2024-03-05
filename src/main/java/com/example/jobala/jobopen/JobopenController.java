@@ -55,9 +55,10 @@ public class JobopenController {
 
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
-        req.setAttribute("jobopen", jobopen);
-
+//        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+//        req.setAttribute("jobopen", jobopen);
+        JobopenResponse.DetailDTO detailDTO = jobopenRepository.findByWithJobopen(id);
+        req.setAttribute("jobopen", detailDTO);
 
         return "/comp/jobopen/detailForm";
     }

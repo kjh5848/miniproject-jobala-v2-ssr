@@ -2,15 +2,18 @@ package com.example.jobala.jobopen;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobopenResponse {
-    
+
     @AllArgsConstructor
+    @NoArgsConstructor
     @Data
     public static class DetailDTO {
+        private String name;
         private String compname; //대표명
         private String jobopenTitle; //공고제목
         private String career;// 경력
@@ -21,13 +24,29 @@ public class JobopenResponse {
         private String content; //내용
         private List<String> skills = new ArrayList<>(); //내용
 
-        //사진
-        //맞춤 공고
-        // 사진
-        // 회사명
-        // 공고타이틀
+        public DetailDTO(String name, List<String> skills) {
+            this.name = name;
+            this.skills = skills;
+        }
+    }
+
+
+    @Data
+    public static class SkillsDTO {
+        String name;
+        List<String> skills;
+
 
     }
 
 
+    //사진
+    //맞춤 공고
+    // 사진
+    // 회사명
+    // 공고타이틀
+
 }
+
+
+
