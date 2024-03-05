@@ -26,7 +26,6 @@ public class Jobopen {
     private String jobType; // 고용형태
     private String salary; //연봉
     private Date endTime; // 마감일
-    //private String skills; // 스킬들
 
     private LocalDateTime createdAt; //생성일
 

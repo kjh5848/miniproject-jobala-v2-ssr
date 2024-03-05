@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import java.lang.reflect.Type;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -25,8 +25,8 @@ public class ResumeController {
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
 
-    @GetMapping("/guest/resume/writeForm")
-    public String writeForm(HttpServletRequest req) {
+    @GetMapping("/guest/resume/saveForm")
+    public String saveForm(HttpServletRequest req) {
         User user = (User) session.getAttribute("sessionUser");
         req.setAttribute("user", user);
         return "/guest/resume/saveForm";
@@ -61,20 +61,21 @@ public class ResumeController {
         String json = skills.getName();
         // JSON -> List
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
         List<String> skillsList = gson.fromJson(json, type);
         System.out.println("다시 바꾼 결과 = " + skillsList);
-        request.setAttribute("skillsList",skillsList);
+        request.setAttribute("skillsList", skillsList);
 
         request.setAttribute("user", user);
         request.setAttribute("resume", resume);
         return "/guest/resume/detailForm";
     }
 
-    @PostMapping("/guest/resume/write")
-    public String write(ResumeRequest.SaveDTO resumeSaveDTO) {
+    @PostMapping("/guest/resume/save")
+    public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
         User user = (User) session.getAttribute("sessionUser");
-        System.out.println("리스트 = "+resumeSaveDTO.getSkills());
+        System.out.println("리스트 = " + resumeSaveDTO.getSkills());
         resumeRepository.save(resumeSaveDTO, user);
         return "redirect:/guest/mngForm";
     }

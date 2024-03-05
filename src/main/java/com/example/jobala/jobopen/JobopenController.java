@@ -1,8 +1,6 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
-import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,8 +37,8 @@ public class JobopenController {
         return "/comp/jobopen/updateForm";
     }
 
-    @PostMapping("/comp/jobopen/write")
-    public String jobopenWrite( HttpServletRequest req, JobopenRequest.JobopenSaveDTO reqDTO) {
+    @PostMapping("/comp/jobopen/save")
+    public String jobopenSave(JobopenRequest.JobopenSaveDTO reqDTO) {
         System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
         jobopenRepository.save(reqDTO, sessionUser);
@@ -50,9 +46,11 @@ public class JobopenController {
         return "redirect:/comp/mngForm";
     }
 
-    @GetMapping("/comp/writeForm")
-    public String writeForm() {
-        return "/comp/jobOpen/writeForm";
+    @GetMapping("/comp/jobopen/saveForm")
+    public String saveForm(HttpServletRequest req) {
+        User user = (User) session.getAttribute("sessionUser");
+        req.setAttribute("user", user);
+        return "/comp/jobOpen/saveForm";
     }
 
     @GetMapping("/comp/jobopen/{id}")
@@ -61,11 +59,8 @@ public class JobopenController {
         req.setAttribute("jobopen", jobopen);
 
 
-
-
         return "/comp/jobopen/detailForm";
     }
-
 
 
 }
