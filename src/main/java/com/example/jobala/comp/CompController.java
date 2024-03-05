@@ -2,6 +2,7 @@ package com.example.jobala.comp;
 
 import com.example.jobala.jobopen.Jobopen;
 import jakarta.servlet.http.HttpServletRequest;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ public class CompController {
 
     @GetMapping("/comp/scoutList")
     public String scoutList() {
+        System.out.println(compRepository.scoutList());
         return "/comp/scoutList";
     }
 
