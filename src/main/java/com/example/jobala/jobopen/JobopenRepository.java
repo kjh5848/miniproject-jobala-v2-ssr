@@ -9,17 +9,34 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class JobopenRepository {
     private final EntityManager em;
 
+    public void findBySkillId() {
+        String q = """
+                select name from skill_tb 
+                """;
+        Query query = em.createNativeQuery(q, Skill.class);
+        List<Object[]> skills = (List<Object[]>) query.getResultList();
+//
+//        for (Object skill : skills) {
+//            String name = (String) skill[0];
+//
+//            return ;
+//        }
+    }
+
     public Jobopen findByJobOpenId(int id) {
-        String a = """
+        String q = """
                 select * from jobopen_tb where id =?
                 """;
 
-        Query query = em.createNativeQuery(a);
+        Query query = em.createNativeQuery(q);
         query.setParameter(1, id);
         Jobopen jobopen = (Jobopen) query.getSingleResult();
         return jobopen;
