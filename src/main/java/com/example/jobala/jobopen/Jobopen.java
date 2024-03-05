@@ -14,6 +14,7 @@ public class Jobopen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Integer userId;
     private String compname; //회사명
     private String jobopenTitle; //공고제목

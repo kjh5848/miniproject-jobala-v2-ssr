@@ -47,7 +47,8 @@ public class ResumeRepository {
         query.setParameter(5, resumeSaveDTO.getLicense());
         query.setParameter(6, resumeSaveDTO.getContent());
         query.setParameter(7, resumeSaveDTO.getEdu());
-        query.setParameter(8, resumeSaveDTO.getEdu());
+        query.setParameter(8, user.getName());
+        query.executeUpdate();
 
         Query query2 = em. createNativeQuery("select max(id) from resume_tb");
         Integer resumeId = (Integer) query2.getSingleResult();
@@ -57,8 +58,6 @@ public class ResumeRepository {
         query3.setParameter(2,user.getRole());
         query3.setParameter(3,resumeId);
         query3.setParameter(4,resumeSaveDTO.getSkills());
-
-        query.executeUpdate();
         query3.executeUpdate();
     }
 

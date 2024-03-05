@@ -29,15 +29,14 @@ public class JobopenRequest {
         private String salary; //연봉
         private String compLocation; //근무지역
         private String content; //내용
-        private String[] skills; //내용
+        private List<String> skills = new ArrayList<>(); //내용
+
     }
 
 
     @AllArgsConstructor
     @Data
-    public static class SaveDTO {
-        private Integer role;
-        private Integer userId;
+    public static class JobopenSaveDTO {
         private String edu;
         private String jobopenTitle;
         private String career;
@@ -47,7 +46,6 @@ public class JobopenRequest {
         private String compLocation;
         private String content;
         private Date endTime;
-        private LocalDateTime createdAt;
         private List<String> skills = new ArrayList<>(); //내용
     }
 

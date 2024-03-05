@@ -20,21 +20,16 @@ public class JobopenController {
     private final JobopenRepository jobopenRepository;
     private final HttpSession session;
 
-
     @PostMapping("/comp/jobopen/{id}/detete")
     public String delete(@PathVariable int id) {
         jobopenRepository.delete(id);
         return "redirect:/comp/mngForm";
     }
 
-
     @PostMapping("/comp/jobopen/{id}/update")
-    public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
-
+    public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         Jobopen jobopen = jobopenRepository.findById(id);
-        System.out.println("id = " + id);
-
-        jobopenRepository.update(jobopen.getId(), reqDTO);
+        jobopenRepository.update(jobopen, reqDTO);
         return "redirect:/comp/mngForm";
     }
 
@@ -42,16 +37,16 @@ public class JobopenController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
         Jobopen jobopen = jobopenRepository.findById(id);
         request.setAttribute("jobopen", jobopen);
+
         return "/comp/jobopen/updateForm";
     }
 
-
     @PostMapping("/comp/jobopen/write")
-    public String jobopenWrite(@PathVariable int id, HttpServletRequest req, JobopenRequest.SaveDTO reqDTO,JobopenRequest.JobopenSkillDTO reqDTO2) {
-        System.out.println("id = " + id);
+    public String jobopenWrite( HttpServletRequest req, JobopenRequest.JobopenSaveDTO reqDTO) {
         System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenRepository.save(reqDTO, sessionUser.getId(), sessionUser.getRole(),reqDTO2);
+        jobopenRepository.save(reqDTO, sessionUser);
+
         return "redirect:/comp/mngForm";
     }
 
@@ -64,6 +59,10 @@ public class JobopenController {
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
         req.setAttribute("jobopen", jobopen);
+
+
+
+
         return "/comp/jobopen/detailForm";
     }
 
