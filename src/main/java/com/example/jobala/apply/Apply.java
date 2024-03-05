@@ -1,5 +1,7 @@
 package com.example.jobala.apply;
 
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,4 +21,15 @@ public class Apply {
     private String state;
     private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "jobopen_id")
+    private Jobopen jobopen;
+
+    public void ifPresent(Object o) {
+    }
 }
