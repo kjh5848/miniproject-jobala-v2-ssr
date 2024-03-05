@@ -17,15 +17,17 @@ public class CompController {
 
 
     @GetMapping("/comp/scoutList")
-    public String scoutList(){
+    public String scoutList(HttpServletRequest req){
         List<CompResponse.ScoutListDTO> scoutList = compRepository.scoutList();
-      //  req.setAttribute("jobopenList", jobopenList);
-
-
+        req.setAttribute("scoutList", scoutList);
 
         return "/comp/scoutList";
     }
 
+    @GetMapping("/comp/scoutList/{id}")
+    public String aa(){
+        return "null";
+    }
 
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
