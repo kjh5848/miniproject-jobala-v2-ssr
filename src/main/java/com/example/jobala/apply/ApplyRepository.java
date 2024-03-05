@@ -26,10 +26,11 @@ public class ApplyRepository {
 
     public List<ApplyResponse.ApplyDTO> findAllByUserId(int compId){ // 로그인한 기업 ID
         String q = """
-                select at.id, jot.jobopen_title, rt.resume_title, rt.name 
-                from apply_tb at inner join jobopen_tb jot on at.jobopen_id = jot.id 
-                inner join resume_tb rt on rt.id = at.resume_id 
-                where at.user_id = ?;
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state
+                FROM apply_tb at
+                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                INNER JOIN resume_tb rt ON rt.id = at.resume_id
+                WHERE at.user_id = ?;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
@@ -38,6 +39,23 @@ public class ApplyRepository {
         JpaResultMapper mapper = new JpaResultMapper();
         List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
         return responseDTO;
+    }
+
+    public List<ApplyResponse.HireDTO> hfindAllByUserId(int compId){ // 로그인한 기업 ID
+        String q = """
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, at.state
+                FROM apply_tb at
+                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                INNER JOIN resume_tb rt ON rt.id = at.resume_id
+                WHERE at.user_id = ?;
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, compId);
+
+        // qlrm 사용하기
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<ApplyResponse.HireDTO> responseDTO2 = mapper.list(query, ApplyResponse.HireDTO.class);
+        return responseDTO2;
     }
 
     public void findAll() {
