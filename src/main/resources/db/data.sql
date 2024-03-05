@@ -3,6 +3,8 @@ insert into user_tb(name, username, email, password, address, age, phone, role, 
 values ('서강준', 'ssar', 'ssar@nate.com', '1234', '서울시 강남구', '1998-02-02','01022223333', 0, now());
 insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
 values ('박선규', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25','01012345678', 0, now());
+insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
+values ('서강준', 'ssar', 'ssar@nate.com', '1234', '서울시 강남구', '1998-02-02','01022223333', 0, now());
 insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
 values ( '5678', '홍길동', '네이버', '부산광역시 전포', 'com1', 'com1@nate.com', '1234', '담당자1', '01011112222', 1, now());
 insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)

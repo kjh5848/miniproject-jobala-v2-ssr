@@ -19,7 +19,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ApplyRepository {
-    @Autowired
+
     private final EntityManager em;
 
 
