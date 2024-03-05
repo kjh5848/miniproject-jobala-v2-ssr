@@ -1,7 +1,6 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
-import com.example.jobala.resume.ResumeRequest;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -9,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -69,7 +67,7 @@ public class JobopenRepository {
         Query query2 = em.createNativeQuery(q2);
         Integer jobopenId = (Integer) query2.getSingleResult();
 
-        //스킬 인서트
+        //스킬 insert
         String q3 = """
                 insert into skill_tb(user_id, resume_id, jobopen_id, name, role) values (?,?,?,?,?)
                 """;
@@ -101,13 +99,13 @@ public class JobopenRepository {
         String a = """
                 select * from jobopen_tb where id =?
                 """;
-        Query query = em.createNativeQuery(a,Jobopen.class);
+        Query query = em.createNativeQuery(a, Jobopen.class);
         query.setParameter(1, id);
         try {
-            Jobopen jobopen  = (Jobopen) query.getSingleResult();
+            Jobopen jobopen = (Jobopen) query.getSingleResult();
             return jobopen;
         } catch (Exception e) {
-            return  null;
+            return null;
         }
     }
 

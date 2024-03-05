@@ -6,18 +6,18 @@
         <div class="card-body">
             <div class="btn-group d-flex justify-content-center mb-3">
                 <!--                개인이 로그인을 할때 사용-->
-                <form action="/compJoin" method="post" onsubmit="return valid()">
-                    <input type="hidden" name="role" value="0">
-                    <button id="btnActiveUser" type="button" class="btn btn-light form-control"
-                            data-bs-toggle="collapse" data-bs-target="#demo">기업
-                    </button>
-                </form>
-
-                <!--                기업이 로그인을 할때 사용-->
                 <form action="/guestJoin" method="post" onsubmit="return valid()">
                     <input type="hidden" name="role" value="1">
                     <button id="btnActiveComp" type="button" class="btn btn-light form-control"
                             data-bs-toggle="collapse" data-bs-target="#demo2">개인
+                    </button>
+                </form>
+
+                <!--                기업이 로그인을 할때 사용-->
+                <form action="/compJoin" method="post" onsubmit="return valid()">
+                    <input type="hidden" name="role" value="0">
+                    <button id="btnActiveUser" type="button" class="btn btn-light form-control"
+                            data-bs-toggle="collapse" data-bs-target="#demo">기업
                     </button>
                 </form>
             </div>
