@@ -52,7 +52,6 @@ public class ApplyController {
 
         // 2. 조회
         List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findAllByUserId(sessionUserId);
-
         return responseDTO;
     }
 
@@ -60,7 +59,6 @@ public class ApplyController {
     @GetMapping("/applys/{applyId}")
     public @ResponseBody List<ApplyRequest> getApplicantProfile(@PathVariable Integer applyId) {
         List<ApplyRequest> applicantProfiles = new ArrayList<>();
-
         return applicantProfiles;
     }
 }
