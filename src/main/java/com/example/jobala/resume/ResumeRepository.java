@@ -12,6 +12,7 @@ public class ResumeRepository {
     private final EntityManager em;
 
     public Resume findByUserId(Integer userId) {
+        // qlrm -> nativeQuery 수정
         String q = """
                 SELECT r FROM Resume r WHERE r.id = (
                     SELECT a.resumeId FROM Apply a WHERE a.userId = :userId

@@ -13,7 +13,7 @@ public class Scrap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer jobOpenId;
+    private Integer jobopenId;
     private Integer resumeId;
     private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createAt;

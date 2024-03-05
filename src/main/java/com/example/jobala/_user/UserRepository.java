@@ -12,13 +12,13 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class UserRepository {
-    private final EntityManager entityManager;
+    private final EntityManager em;
 
     public List<Jobopen> findAll() {
         String q = """
                 select * from jobopen_tb order by id desc;              
                 """;
-        Query query = entityManager.createNativeQuery(q, Jobopen.class);
+        Query query = em.createNativeQuery(q, Jobopen.class);
         return query.getResultList();
     }
 
@@ -28,7 +28,7 @@ public class UserRepository {
 
     @Transactional
     public void userSave(UserRequst.joinDTO reqDTO) {
-        Query query = entityManager.createNativeQuery("insert into  user_tb(name, username, password, address, phone, role, created_at) values(?, ?, ?, ?, ?, ?, now()) ");
+        Query query = em.createNativeQuery("insert into  user_tb(name, username, password, address, phone, role, created_at) values(?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getName());
         query.setParameter(2,reqDTO.getUsername());
         query.setParameter(3,reqDTO.getPassword());
@@ -40,7 +40,7 @@ public class UserRepository {
 
     @Transactional
     public void compSave(UserRequst.joinDTO reqDTO) {
-        Query query = entityManager.createNativeQuery("insert into  user_tb(comp_num, ceo, compname, address, username, password, name, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ");
+        Query query = em.createNativeQuery("insert into  user_tb(comp_num, ceo, compname, address, username, password, name, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getCompNum());
         query.setParameter(2,reqDTO.getCeo());
         query.setParameter(3,reqDTO.getCompname());
@@ -54,7 +54,7 @@ public class UserRepository {
     }
 
     public User findByUsernameAndPassword(UserRequst.loginDTO reqDTO) {
-        Query query = entityManager.createNativeQuery("select * from user_tb where username=? and password=?", User.class);
+        Query query = em.createNativeQuery("select * from user_tb where username=? and password=?", User.class);
         query.setParameter(1, reqDTO.getUsername());
         query.setParameter(2, reqDTO.getPassword());
 
@@ -65,11 +65,10 @@ public class UserRepository {
         } catch (Exception e) {
             return null;
         }
-
     }
 
     @Transactional
-    public void upDate() {
+    public void update() {
         return;
     }
 
@@ -79,7 +78,7 @@ public class UserRepository {
     }
 
     public User findByUsername(String username) {
-        Query query = entityManager.createNativeQuery("select * from user_tb where username=?", User.class);
+        Query query = em.createNativeQuery("select * from user_tb where username=?", User.class);
         query.setParameter(1, username);
         try {
             User user = (User) query.getSingleResult();

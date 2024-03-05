@@ -31,12 +31,7 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/{id}")
-    public String mainForm(@PathVariable int id, HttpServletRequest req) {
-        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
-        req.setAttribute("jobopen", jobopen);
-        return "redirect:/comp/{id}";
-    }
+    // DEL: mainForm 삭제
 
     @GetMapping("/loginForm")
     public String loginForm() {

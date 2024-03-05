@@ -3,6 +3,9 @@ package com.example.jobala.jobopen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JobopenResponse {
     
     @AllArgsConstructor
@@ -16,7 +19,7 @@ public class JobopenResponse {
         private String salary; //연봉
         private String compLocation; //근무지역
         private String content; //내용
-        private String[] skills; //내용
+        private List<String> skills = new ArrayList<>(); //내용
 
         //사진
         //맞춤 공고
