@@ -23,14 +23,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApplyController {
 
-    private final ApplicantService applicantService;
 
 
-    @GetMapping("/{applyId}")
-    public ResponseEntity<List<ApplyRequest>> getApplicantProfile(@PathVariable Integer applyId) {
-        List<ApplyRequest> applicantProfiles = applicantService.getApplicantProfile(applyId);
-        return ResponseEntity.ok().body(applicantProfiles);
-    }
+
+
 
 
 //@Controller
