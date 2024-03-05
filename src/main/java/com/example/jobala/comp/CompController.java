@@ -17,8 +17,12 @@ public class CompController {
 
 
     @GetMapping("/comp/scoutList")
-    public String scoutList() {
-        System.out.println(compRepository.scoutList());
+    public String scoutList(){
+        List<CompResponse.ScoutListDTO> scoutList = compRepository.scoutList();
+      //  req.setAttribute("jobopenList", jobopenList);
+
+
+
         return "/comp/scoutList";
     }
 

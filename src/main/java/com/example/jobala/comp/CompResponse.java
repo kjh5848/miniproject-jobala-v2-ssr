@@ -9,7 +9,8 @@ import java.sql.Date;
 public class CompResponse {
 
     @Data
-    public static class scoutListDTO{
+    @AllArgsConstructor
+    public static class ScoutListDTO{
         private String name;
         private String resumeTitle;
         private Date age;

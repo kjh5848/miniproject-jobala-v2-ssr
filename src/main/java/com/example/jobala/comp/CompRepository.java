@@ -16,7 +16,7 @@ public class CompRepository {
     private final EntityManager em;
 
 
-    public List<CompResponse.scoutListDTO> scoutList(){
+    public List<CompResponse.ScoutListDTO> scoutList(){
         String q = """
                 SELECT rt.name, rt.resume_title, ut.age, ut.address, rt.career
                 FROM user_tb ut
@@ -33,7 +33,8 @@ public class CompRepository {
 
         Query query = em.createNativeQuery(q);
        JpaResultMapper rm = new JpaResultMapper();
-       List<CompResponse.scoutListDTO> results = rm.list(query, CompResponse.scoutListDTO.class);
+       List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
+        System.out.println(results);
 
 
         return results;
