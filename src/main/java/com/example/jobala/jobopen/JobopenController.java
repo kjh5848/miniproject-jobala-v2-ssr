@@ -54,13 +54,13 @@ public class JobopenController {
     }
 
     @PostMapping("/comp/jobopen/write")
-    public String jobopenWrite(@PathVariable int id,HttpServletRequest req, JobopenRequest.WriteDTO writeDTO, JobopenRequest.SkillDTO skillDTO) {
+    public String jobopenWrite(@PathVariable int id, HttpServletRequest req, JobopenRequest.WriteDTO writeDTO, JobopenRequest.SkillDTO skillDTO) {
         System.out.println("id = " + id);
         System.out.println("reqDTO = " + writeDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        jobopenRepository.save(writeDTO, id, sessionUser.getId(), sessionUser.getRole());
-//        jobopenRepository.skillSave(skillDTO, id, sessionUser.getId(), sessionUser.getRole());
+        jobopenRepository.save(writeDTO, sessionUser.getId(), sessionUser.getRole());
+
         return "redirect:/comp/mngForm";
     }
 

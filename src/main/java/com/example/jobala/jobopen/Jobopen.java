@@ -1,7 +1,6 @@
 package com.example.jobala.jobopen;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -26,7 +25,7 @@ public class Jobopen {
     private String jobType; // 고용형태
     private String salary; //연봉
     private Date endTime; // 마감일
-    private String skills; // 마감일
+    //private String skills; // 스킬들
 
     private LocalDateTime createdAt; //생성일
 

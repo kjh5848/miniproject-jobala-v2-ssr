@@ -29,13 +29,13 @@ public class JobopenRepository {
     }
 
     @Transactional
-    public void save(JobopenRequest.WriteDTO reqDTO, int userId, Integer role, Integer skillId) {
+    public void save(JobopenRequest.WriteDTO reqDTO, int userId, Integer role) {
 
         System.out.println("reqDTO = " + reqDTO);
-        String a = """
-                insert into jobopen_tb(user_id, edu, career, job_type, salary, hope_job ,comp_location ,content , end_time , jobopen_title, created_at, role, skills) values (?,?,?,?,?,?,?,?,?,?,now(),?,?)
+        String q = """
+                insert into jobopen_tb(user_id, edu, career, job_type, salary, hope_job ,comp_location ,content , end_time , jobopen_title, created_at, role) values (?,?,?,?,?,?,?,?,?,?,now(),?)
                 """;
-        Query query = em.createNativeQuery(a, Jobopen.class);
+        Query query = em.createNativeQuery(q, Jobopen.class);
         query.setParameter(1, userId);
         query.setParameter(2, reqDTO.getEdu());
         query.setParameter(3, reqDTO.getCareer());
@@ -47,9 +47,25 @@ public class JobopenRepository {
         query.setParameter(9, reqDTO.getEndTime());
         query.setParameter(10, reqDTO.getJobopenTitle());
         query.setParameter(11, role);
-        query.setParameter(12, reqDTO.getSkills());
 
         query.executeUpdate();
+
+        String q2 = """
+                select max(id) from jobopen_tb
+                """;
+        // jobopen id 받기
+
+//        String q3 = """
+//                insert into skill_tb(user_id, resume_id, jobopen_id, skills, role) values (?,?,?,?,?)
+//                """;
+//        Query query2 = em.createNativeQuery(q3, Skill.class);
+//        query2.setParameter(1, userId);
+//        query2.setParameter(2, reqDTO.getResumeId());
+//        query2.setParameter(3, jobopenId);
+//        query2.setParameter(4, reqDTO.getSkills());
+//        query2.setParameter(5, role);
+//        query2.executeUpdate();
+
     }
 
 
@@ -66,19 +82,6 @@ public class JobopenRepository {
         query.executeUpdate();
     }
 
-    @Transactional
-    public void skillSave(JobopenRequest.SkillDTO reqDTO, Integer jobopenId, Integer userId, Integer role) {
-        String a = """
-                insert into skill_tb(user_id, resume_id, jobopen_id, skills, role) values (?,?,?,?,?)
-                """;
-        Query query = em.createNativeQuery(a, Skill.class);
-        query.setParameter(1, userId);
-        query.setParameter(2, reqDTO.getResumeId());
-        query.setParameter(3, jobopenId);
-        query.setParameter(4, reqDTO.getSkills());
-        query.setParameter(5, role);
-        query.executeUpdate();
-    }
 
     public Jobopen findByIdWithUser(int id) {
         String a = """

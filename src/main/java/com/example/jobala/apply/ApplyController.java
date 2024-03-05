@@ -25,6 +25,7 @@ public class ApplyController {
 
     private final ApplicantService applicantService;
 
+
     @GetMapping("/{applyId}")
     public ResponseEntity<List<ApplyRequest>> getApplicantProfile(@PathVariable Integer applyId) {
         List<ApplyRequest> applicantProfiles = applicantService.getApplicantProfile(applyId);

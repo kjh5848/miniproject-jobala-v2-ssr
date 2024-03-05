@@ -20,16 +20,8 @@ public class SkillRepository {
     }
 
     @Transactional
-    public void save(SkillRequest.CompSkillDTO reqDTO) {
-        String a = """
-                insert into skill_tb(role, resume_id, jobopen_id, skills) values (?,?,?,?)
-                """;
+    public void save() {
 
-        Query query = em.createNativeQuery(a, Skill.class);
-        query.setParameter(1, reqDTO.getResumeId());
-        query.setParameter(2, reqDTO.getJobOpenId());
-        query.setParameter(3, reqDTO.getSkills());
-        query.executeUpdate();
     }
 
     @Transactional

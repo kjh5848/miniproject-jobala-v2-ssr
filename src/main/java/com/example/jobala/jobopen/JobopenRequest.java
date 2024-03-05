@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JobopenRequest {
 
@@ -46,7 +48,7 @@ public class JobopenRequest {
         private String content;
         private Date endTime;
         private LocalDateTime createdAt;
-        private String[] skills; //내용
+        private List<String> skills = new ArrayList<>(); //내용
 
     }
 
@@ -57,6 +59,6 @@ public class JobopenRequest {
         private Integer userId;
         private Integer resumeId;
         private Integer jobOpenId;
-        private String[] skills;
+        private List<String> skills = new ArrayList<>();
     }
 }
