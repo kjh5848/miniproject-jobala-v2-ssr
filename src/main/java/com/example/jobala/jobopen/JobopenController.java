@@ -20,21 +20,16 @@ public class JobopenController {
     private final JobopenRepository jobopenRepository;
     private final HttpSession session;
 
-
     @PostMapping("/comp/jobopen/{id}/detete")
     public String delete(@PathVariable int id) {
         jobopenRepository.delete(id);
         return "redirect:/comp/mngForm";
     }
 
-
     @PostMapping("/comp/jobopen/{id}/update")
-    public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
-
+    public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         Jobopen jobopen = jobopenRepository.findById(id);
-        System.out.println("id = " + id);
-
-        jobopenRepository.update(jobopen.getId(), reqDTO);
+        jobopenRepository.update(jobopen, reqDTO);
         return "redirect:/comp/mngForm";
     }
 
@@ -46,36 +41,27 @@ public class JobopenController {
         return "/comp/jobopen/updateForm";
     }
 
-    @GetMapping("/comp/jobopen/{id}")
-    public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
-        Jobopen jobopen = jobopenRepository.findById(id);
-        req.setAttribute("jobopen", jobopen);
-        return "/guest/resume/detailForm";
-    }
-
     @PostMapping("/comp/jobopen/write")
-    public String jobopenWrite(@PathVariable int id, HttpServletRequest req, JobopenRequest.WriteDTO writeDTO, JobopenRequest.SkillDTO skillDTO) {
-        System.out.println("id = " + id);
-        System.out.println("reqDTO = " + writeDTO);
+    public String jobopenWrite( HttpServletRequest req, JobopenRequest.JobopenSaveDTO reqDTO) {
+        System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        jobopenRepository.save(writeDTO, sessionUser.getId(), sessionUser.getRole());
+        jobopenRepository.save(reqDTO, sessionUser);
 
         return "redirect:/comp/mngForm";
     }
-
 
     @GetMapping("/comp/writeForm")
     public String writeForm() {
         return "/comp/jobOpen/writeForm";
     }
 
-    @GetMapping("/comp/{id}")
+    @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-        System.out.println("id = " + id);
-
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
         req.setAttribute("jobopen", jobopen);
+
+
+
 
         return "/comp/jobopen/detailForm";
     }

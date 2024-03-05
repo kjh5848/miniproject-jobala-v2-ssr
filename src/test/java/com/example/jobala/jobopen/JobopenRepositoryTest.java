@@ -28,6 +28,7 @@ class JobopenRepositoryTest {
     public void findAll() {
         int idx = 1;
         //List<Jobopen> jobopenList = jobopenRepository.findAll();
-        //System.out.println("jobopenList = " + jobopenList);
+       // System.out.println("jobopenList = " + jobopenList);
+
     }
 }

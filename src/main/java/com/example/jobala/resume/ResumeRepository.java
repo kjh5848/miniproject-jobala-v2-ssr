@@ -53,7 +53,6 @@ public class ResumeRepository {
         query.setParameter(6, resumeSaveDTO.getContent());
         query.setParameter(7, resumeSaveDTO.getEdu());
         query.setParameter(8, user.getName());
-
         query.executeUpdate();
 
         Query query2 = em. createNativeQuery("select max(id) from resume_tb");
@@ -70,7 +69,6 @@ public class ResumeRepository {
         query3.setParameter(2,user.getRole());
         query3.setParameter(3,resumeId);
         query3.setParameter(4,json);
-
         query3.executeUpdate();
     }
 

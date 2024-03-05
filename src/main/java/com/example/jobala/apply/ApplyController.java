@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 //@RequestMapping("/applys")
 @RequiredArgsConstructor
 public class ApplyController {
-
+  
+    private final ApplyRepository applyRepository;
 
     @GetMapping("/applys/applyPositionForm")
     public String applyPositionForm() {
@@ -47,6 +49,7 @@ public class ApplyController {
         List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findAllByUserId(sessionUserId);
         return responseDTO;
     }
+
 
     // 핵심로직 : 지원 정보를 받아와서 상세보기
     @GetMapping("/applys/{applyId}")
