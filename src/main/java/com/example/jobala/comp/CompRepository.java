@@ -32,10 +32,10 @@ public class CompRepository {
                 """;
 
         Query query = em.createNativeQuery(q);
+
        JpaResultMapper rm = new JpaResultMapper();
        List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
         System.out.println(results);
-
 
         return results;
     }
