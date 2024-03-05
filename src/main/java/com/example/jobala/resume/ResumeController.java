@@ -8,6 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -54,8 +59,8 @@ public class ResumeController {
 
     @PostMapping("/guest/resume/write")
     public String write(ResumeRequest.SaveDTO resumeSaveDTO) {
-        int userId = 1;
-        resumeRepository.save(resumeSaveDTO, userId);
+        User user = (User) session.getAttribute("sessionUser");
+        resumeRepository.save(resumeSaveDTO, user);
         return "redirect:/guest/mngForm";
     }
 

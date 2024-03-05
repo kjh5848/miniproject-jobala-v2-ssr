@@ -1,5 +1,6 @@
 package com.example.jobala.resume;
 
+import com.example.jobala._user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -37,18 +38,28 @@ public class ResumeRepository {
     }
 
     @Transactional
-    public void save(ResumeRequest.SaveDTO resumeSaveDTO, int userId) {
-        Query query = em.createNativeQuery("insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at) values (?,?,?,?,?,?,?,now())");
-        System.out.println(resumeSaveDTO);
-        query.setParameter(1, userId);
+    public void save(ResumeRequest.SaveDTO resumeSaveDTO, User user) {
+        Query query = em.createNativeQuery("insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at, name) values (?,?,?,?,?,?,?,now(),?)");
+        query.setParameter(1, user.getId());
         query.setParameter(2, resumeSaveDTO.getResumeTitle());
         query.setParameter(3, resumeSaveDTO.getHopeJob());
         query.setParameter(4, resumeSaveDTO.getCareer());
         query.setParameter(5, resumeSaveDTO.getLicense());
         query.setParameter(6, resumeSaveDTO.getContent());
         query.setParameter(7, resumeSaveDTO.getEdu());
+        query.setParameter(8, resumeSaveDTO.getEdu());
+
+        Query query2 = em. createNativeQuery("select max(id) from resume_tb");
+        Integer resumeId = (Integer) query2.getSingleResult();
+
+        Query query3 = em.createNativeQuery("insert into skill_tb(user_id, role, resume_id, skills) values (?,?,?,?)");
+        query3.setParameter(1,user.getId());
+        query3.setParameter(2,user.getRole());
+        query3.setParameter(3,resumeId);
+        query3.setParameter(4,resumeSaveDTO.getSkills());
 
         query.executeUpdate();
+        query3.executeUpdate();
     }
 
     @Transactional

@@ -6,6 +6,7 @@ import java.sql.Date;
 
 public class CompRequest {
 
+
     // FIX: 파스칼 표기법 필요
     @Data
     public static class ScoutListDTO{
@@ -15,6 +16,5 @@ public class CompRequest {
         private String address;
         private String career;
     }
-
 
 }
