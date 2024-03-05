@@ -23,9 +23,18 @@ public class GuestRepository {
         return resumeList;
     }
 
+//    public List<Jobopen> findAll(String skills) {
+//        String q = """
+//                select * from jobopen_tb where order by id desc
+//                """;
+//
+//        Query query = em.createNativeQuery(q, Jobopen.class);
+//        return query.getResultList();
+//    }
+
     public List<Jobopen> findAll() {
         String q = """
-                select * from jobopen_tb order by id desc;
+                select * from jobopen_tb order by id desc
                 """;
         Query query = em.createNativeQuery(q, Jobopen.class);
         return query.getResultList();

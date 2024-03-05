@@ -41,15 +41,26 @@ values
     (3, 5, 4, '검토중', 0, now());
     
 
--- 스킬 더미
+-- 이력서 스킬 더미
 INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME)
 VALUES
     (2,0,2,'["Java","JavaScript","Spring"]'),
     (3,0,2,'["Java","Spring"]');
+
+-- 공고 스킬 더미
+INSERT INTO SKILL_TB(jobopen_id, role, user_id, name)
+values
+    (1, 1, 3,'["Java","JavaScript"]'),
+    (2, 1, 3,'["Java","JavaScript","Spring","HTML","jQuery","MySQL"]'),
+    (3, 1, 4,'["Java"]'),
+    (4, 1, 5,'["JavaScript","jQuery"]'),
+    (5, 1, 5,'["Java","Spring","HTML","jQuery","MySQL"]');
+
 
 
 INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME) 
 VALUES
     (2,0,2,'["Java","JavaScript","Spring"]'),
     (3,0,2,'["Java","Spring"]');
+
 
