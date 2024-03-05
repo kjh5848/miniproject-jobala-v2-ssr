@@ -18,14 +18,26 @@ public class CompRepository {
 
     public CompResponse.scoutListDTO scoutList(){
         String q = """
-                SELECT ut.name, rt.resume_title, ut.age, ut.address, rt.career
-                FROM resume_tb rt
-                INNER JOIN user_tb ut ON rt.user_id = ut.id
+                SELECT rt.name, rt.resume_title, ut.age, ut.address, rt.career
+                FROM user_tb ut
+                INNER JOIN (
+                select * 
+                from resume_tb
+                where id in (
+                select max(id)
+                from resume_tb
+                group by user_id
+                )
+                ) rt ON ut.id = rt.user_id
                 """;
 
         Query query = em.createNativeQuery(q);
-        JpaResultMapper rm = new JpaResultMapper();
-        CompResponse.scoutListDTO responseDTO = rm.uniqueResult(query,CompResponse.scoutListDTO.class);
+        List<Object[]> results = query.getResultList();
+
+        Object[] result = results.get(0);
+
+        CompResponse.scoutListDTO responseDTO = new CompResponse.scoutListDTO();
+        responseDTO.setName((String) result[0]);
 
         return responseDTO;
     }
