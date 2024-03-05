@@ -21,7 +21,5 @@ public class Apply {
     private String state;
     private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createdAt;
-
-    public void ifPresent(Object o) {
-    }
+    
 }
