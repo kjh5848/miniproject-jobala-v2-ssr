@@ -69,6 +69,4 @@ public class ResumeController {
         resumeRepository.delete(deleteDTO.getId());
         return "redirect:/guest/mngForm";
     }
-
-
 }
