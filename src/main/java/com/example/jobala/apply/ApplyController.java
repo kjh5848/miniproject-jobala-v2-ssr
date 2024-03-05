@@ -12,18 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 //@RequestMapping("/applys")
 @RequiredArgsConstructor
 public class ApplyController {
-
-    private final HttpSession session;
+  
     private final ApplyRepository applyRepository;
-
-    @GetMapping("/applys/applyPositionForm/{jobopenId}")
-    public String applyStatusForm(@PathVariable Integer jobopenId) {
-        return "/guest/_myPage/applyStatusForm";
-    }
 
     @GetMapping("/applys/applyPositionForm")
     public String applyPositionForm() {
@@ -60,11 +55,11 @@ public class ApplyController {
 //        return responseDTO;
 //    }
 
+
     // 핵심로직 : 지원 정보를 받아와서 상세보기
     @GetMapping("/applys/{applyId}")
     public @ResponseBody List<ApplyRequest> getApplicantProfile(@PathVariable Integer applyId) {
         List<ApplyRequest> applicantProfiles = new ArrayList<>();
-
         return applicantProfiles;
     }
 

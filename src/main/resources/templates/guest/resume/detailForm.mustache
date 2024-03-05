@@ -29,23 +29,16 @@
                                 <td>{{user.age}}</td>
                             </tr>
                             <tr>
-                                <th>학력</th>
-                                <td>{{resume.edu}}</td>
+                                <th>이메일</th>
+                                <td>{{user.email}}</td>
                                 <th>핸드폰</th>
                                 <td>{{user.phone}}</td>
                             </tr>
                             <tr>
-                                <th>이메일</th>
-                                <td>{{user.email}}</td>
                                 <th>주소</th>
-                                <td>{{user.address}}</td>
+                                <td colspan="3">{{user.address}}</td>
                             </tr>
-                            <tr>
 
-                            </tr>
-                            <tr>
-
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -85,20 +78,15 @@
                     <tr>
                         <td>스킬</td>
                         <td>
-                            <ul>
-                                <li>Java</li>
-                                <li>CSS</li>
-                                <li>HTML</li>
-                                <li>JavaScrpit</li>
-                            </ul>
+                            {{#skillsList}}
+                                <div>{{.}}</div>
+                            {{/skillsList}}
                         </td>
                     </tr>
                     <tr>
                         <td>자격증</td>
                         <td>
-                            <ul>
-                                <li>{{resume.license}}</li>
-                            </ul>
+                            <div>{{resume.license}}</div>
                         </td>
                     </tr>
                     </tbody>
