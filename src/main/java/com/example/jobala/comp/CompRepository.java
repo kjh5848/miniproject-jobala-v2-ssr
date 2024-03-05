@@ -9,6 +9,7 @@ import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -38,6 +39,10 @@ public class CompRepository {
 
         CompResponse.scoutListDTO responseDTO = new CompResponse.scoutListDTO();
         responseDTO.setName((String) result[0]);
+        responseDTO.setResumeTitle((String) result[1]);
+        responseDTO.setAge((Date) result[2]);
+        responseDTO.setAddress((String) result[3]);
+        responseDTO.setCareer((String) result[4]);
 
         return responseDTO;
     }
