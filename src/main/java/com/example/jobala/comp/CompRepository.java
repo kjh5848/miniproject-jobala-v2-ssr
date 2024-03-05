@@ -33,9 +33,7 @@ public class CompRepository {
 
         Query query = em.createNativeQuery(q);
         List<Object[]> results = query.getResultList();
-
         Object[] result = results.get(0);
-
         CompResponse.scoutListDTO responseDTO = new CompResponse.scoutListDTO();
         responseDTO.setName((String) result[0]);
 
