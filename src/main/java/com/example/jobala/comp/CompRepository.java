@@ -1,6 +1,5 @@
 package com.example.jobala.comp;
 
-import com.example.jobala.board.BoardRepository;
 import com.example.jobala.jobopen.Jobopen;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -16,7 +15,8 @@ import java.util.List;
 public class CompRepository {
     private final EntityManager em;
 
-    public CompResponse.scoutListDTO scoutList(){
+
+    public List<CompResponse.ScoutListDTO> scoutList(){
         String q = """
                 SELECT rt.name, rt.resume_title, ut.age, ut.address, rt.career
                 FROM user_tb ut
@@ -32,14 +32,12 @@ public class CompRepository {
                 """;
 
         Query query = em.createNativeQuery(q);
-        List<Object[]> results = query.getResultList();
 
-        Object[] result = results.get(0);
+       JpaResultMapper rm = new JpaResultMapper();
+       List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
+        System.out.println(results);
 
-        CompResponse.scoutListDTO responseDTO = new CompResponse.scoutListDTO();
-        responseDTO.setName((String) result[0]);
-
-        return responseDTO;
+        return results;
     }
 
     public List<Jobopen> findAll() {

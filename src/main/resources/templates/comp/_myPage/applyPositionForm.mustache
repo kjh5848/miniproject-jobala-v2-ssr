@@ -15,13 +15,6 @@
 
 </style>
 
-{{#applys}}
-    아이디 : {{id}} <br>
-    공고제목 : {{jobopenTitle}} <br>
-    이력서제목 : {{resumeTitle}} <br>
-    지원자명 : {{name}} <br>
-{{/applys}}
-
 <div class="container">
     <div class="card-body">
         <div class="row justify-content-center">
@@ -30,33 +23,35 @@
                     <h1>마이페이지</h1>
                     <div class="btn-group btn-group-lg">
                         <a href="/comp/profileForm">
-                            <button type="button" class="btn btn-outline-dark">프로필 관리</button>
+                            <button type="button" class="btn btn-outline-dark m-1">프로필 관리</button>
                         </a>
                         <a href="/comp/mngForm">
-                            <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                            <button type="button" class="btn btn-outline-dark m-1">채용공고 관리</button>
                         </a>
                         <a href="/applyPositionForm">
-                            <button type="button" class="btn btn-outline-dark">지원자 관리</button>
+                            <button type="button" class="btn btn-outline-dark m-1">지원자 관리</button>
                         </a>
                         <a href="/comp/scrapForm">
-                            <button type="button" class="btn btn-outline-dark">스크랩한 인재</button>
+                            <button type="button" class="btn btn-outline-dark m-1">스크랩</button>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="card border-0">
         <div class="profileBox" id="profileForm">
 
-            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-primary">5</span></h2>
+            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-info" id="offerCount"></span>
+            </h2>
             <div class="row">
                 <div class="col">
                     <div class="applyBox">
+
                         <table class="table" style="margin-top: -10px; max-width: 100%;">
                             <thead>
                             <tr>
-                                <th scope="col">No</th>
                                 <th scope="col">이름</th>
                                 <th scope="col">이력서</th>
                                 <th scope="col">공고명</th>
@@ -64,37 +59,53 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>홍길동</td>
-                                <td>이력서1.pdf</td>
-                                <td>소프트웨어 엔지니어</td>
-                                <td>제안중</td>
-                            </tr>
+                            {{#position}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{resumeTitle}}</td>
+                                    <td>{{jobopenTitle}}</td>
+                                    <td>{{state}}</td>
+                                </tr>
+                            {{/position}}
                             <!-- 추가 제안 내용들 -->
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
         </div>
 
+            <!--        {{#position}}-->
+        <!--            아이디 : {{id}} <br>-->
+        <!--            공고제목 : {{jobopenTitle}} <br>-->
+        <!--            이력서제목 : {{resumeTitle}} <br>-->
+        <!--            지원자명 : {{name}} <br>-->
+        <!--                학력 : {{edu}} <br>-->
+        <!--                마감일 : {{endTime}}-->
+            <!--        {{/position}}-->
+        <div id="applicantsList">
 
-        <div class="card border border-light shadow p-3 mb-3 bg-body rounded" style="position: relative;">
-            <p>jobopenTitle</p>
-            <h3>resumeTitle</h3>
-            <p>apply.name</p>
-            <p><small>edu</small><br><small>endTime</small></p>
-            <div class="status-box badge rounded-pill bg-secondary text-white" style="position: absolute; top: 10px; right: 10px;">
-                열 람 전 또는 검 토 중
-            </div>
-            <div class="button-container d-flex flex-column justify-content-center align-items-end position-absolute top-50 end-0 translate-middle-y mt-3">
-                <button class="btn btn-info m-2 mb-0" style="width: 70px; height: 40px;">합격</button>
-                <button class="btn btn-secondary m-2" style="width: 70px; height: 40px;">불합격</button>
-            </div>
-        </div>
+            <h2 class="text-left mb-4 mt-4" style="margin-top: -50px;">내 공고 지원자 목록<span class="badge bg-info"
+                                                                                        id="applyCount"></span></h2>
+            {{#applys}}
+                <div class="card border border-light shadow p-3 mb-3 bg-body rounded" style="position: relative;">
+                    <p>{{jobopenTitle}}</p>
+                    <h3>{{resumeTitle}}</h3>
+                    <p>{{name}}</p>
+                    <p><small>{{edu}}</small><br><small>{{endTime}}</small></p>
+                    <div class="status-box badge rounded-pill bg-secondary text-white"
+                         style="position: absolute; top: 10px; right: 10px;">
+                        열람전 검토중 완료
+                    </div>
+                    <div class="button-container d-flex flex-column justify-content-center align-items-end position-absolute top-50 end-0 translate-middle-y mt-3">
+                        <button class="btn btn-info m-2 mb-0 approveBtn" data-apply-id="id" style="width: 70px; height: 40px;">합격</button>
+                        <button class="btn btn-secondary m-2" style="width: 70px; height: 40px;">불합격</button>
+                    </div>
 
-        <div class="container mt-3">
+                </div>
+            {{/applys}}
+            <div class="container mt-3">
                 <ul
                         class="pagination justify-content-center"
                         style="margin-bottom: 50px; "
@@ -119,5 +130,39 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // '제안' 섹션의 개수 계산
+        var tbody = document.querySelector("table.table tbody");
+        var numberOfOffers = tbody ? tbody.querySelectorAll("tr").length : 0;
+        document.getElementById("offerCount").textContent = numberOfOffers;
+
+        // '내 공고 지원자 목록' 섹션의 개수 계산
+        var applicantsList = document.getElementById("applicantsList");
+        var numberOfCards = applicantsList.querySelectorAll(".card").length;
+        document.getElementById("applyCount").textContent = numberOfCards;
+
+        // 모든 합격, 불합격 버튼에 대한 이벤트 리스너 추가
+        var allButtons = document.querySelectorAll('.btn-info, .btn-secondary');
+
+        allButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                console.log("버튼 클릭됨:", this);
+                // 클릭된 버튼이 속한 카드 내의 모든 버튼을 찾습니다.
+                var buttonsInCard = this.closest('.card').querySelectorAll('.btn-info, .btn-secondary');
+
+                // 클릭된 버튼을 비활성화하고, 다른 버튼을 활성화합니다.
+                buttonsInCard.forEach(function(btn) {
+                    if (btn === button) {
+                        btn.disabled = true; // 클릭된 버튼 비활성화
+                    } else {
+                        btn.disabled = false; // 다른 버튼 활성화
+                    }
+                });
+            });
+        });
+    });
+</script>
+
 
 {{> layout/footer}}
