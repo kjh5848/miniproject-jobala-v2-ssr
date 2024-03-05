@@ -26,7 +26,7 @@ public class ApplyController {
     private final ApplicantService applicantService;
 
     @GetMapping("/{applyId}")
-    public ResponseEntity<List<ApplyRequest>> getApplicantProfile(@PathVariable Long applyId) {
+    public ResponseEntity<List<ApplyRequest>> getApplicantProfile(@PathVariable Integer applyId) {
         List<ApplyRequest> applicantProfiles = applicantService.getApplicantProfile(applyId);
         return ResponseEntity.ok().body(applicantProfiles);
     }
@@ -71,8 +71,8 @@ public class ApplyController {
 //        return ResponseEntity.ok(cardDetails);
 //    }
 
-    @GetMapping("/applyStatusForm")
-    public String applyStatusForm() {
+    @GetMapping("/applyPositionForm/{jobopenId}")
+    public String applyStatusForm(@PathVariable Integer jobopenId) {
         return "/guest/_myPage/applyStatusForm";
     }
 

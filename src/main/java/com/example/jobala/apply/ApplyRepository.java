@@ -68,12 +68,16 @@ public class ApplyRepository {
     }
 
     @Transactional
-    public Apply findById(Long id) {
+    public Apply findById(Integer id) {
         Query query = em.createNativeQuery("select * from apply_tb where id = ?", Apply.class);
         query.setParameter(1, id);
 
-        Apply apply = (Apply) query.getSingleResult();
-        return apply;
+        try {
+            Apply apply = (Apply) query.getSingleResult();
+            return apply;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Transactional
