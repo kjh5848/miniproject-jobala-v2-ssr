@@ -33,4 +33,4 @@ VALUES
 -- 선규가 1번 이력서로 네이버에 지원했다.
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(1, 3, 1, '검토중', 0, now());
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(2, 3, 1, '검토중', 0, now());
-INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(3, 5, 4, '검토중', 0, now());
+INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(3, 5, 4, '합격', 0, now());
