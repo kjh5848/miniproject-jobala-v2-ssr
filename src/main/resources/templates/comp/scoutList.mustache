@@ -49,14 +49,15 @@
 
         <div class="card-body">
             <h3 class="text-left mb-4">인재 명단</h3>
-            <!--            <a href="/guest/jobSearch/">-->
+            {{#scoutList}}
+             <a href="/comp/scoutList/{{id}}">
             <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3" style="cursor: pointer">
-                <h3>서강준</h3>
-                <h4><small>이력서2</small></h4>
+                <h3>{{name}}</h3>
+                <h4><small>{{resumeTitle}}</small></h4>
                 <div class="d-flex justify-content-between">
-                    <small>1998-02-02</small>
-                    <small>서울시 강남구</small>
-                    <small>신입</small>
+                    <small>{{age}}</small>
+                    <small>{{address}}</small>
+                    <small>{{career}}</small>
                     <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
                     <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
                     <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
@@ -66,7 +67,8 @@
                 <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
                         class="fas fa-heart"></i></span>
             </div>
-            <!--            </a>-->
+            </a>
+            {{/scoutList}}
             <!-- 추가된 인재 정보들 -->
             </tbody>
             </table>

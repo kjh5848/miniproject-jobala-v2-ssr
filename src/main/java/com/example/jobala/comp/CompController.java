@@ -24,6 +24,10 @@ public class CompController {
         return "/comp/scoutList";
     }
 
+    @GetMapping("/comp/scoutList/{id}")
+    public String aa(){
+        return "null";
+    }
 
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
