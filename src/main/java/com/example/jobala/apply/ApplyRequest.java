@@ -31,26 +31,12 @@ public class ApplyRequest {
 
         private String name;
         private String resumeTitle;
-        private String education;
+        private String edu;
         private String jobTitle;
 
     }
 
 
-    public ApplyRequest mapToApplicantProfileDTO(Apply apply, Resume resume, Jobopen jobopen) {
-        ApplyRequest applyRequest = new ApplyRequest();
 
-        // Assuming ApplyRequest has a method to set a ProfileDTO
-        ApplyRequest.ProfileDTO profileDTO = new ApplyRequest.ProfileDTO();
-        profileDTO.setName(resume.getName());
-        profileDTO.setResumeTitle(resume.getResumeTitle());
-        profileDTO.setEducation(resume.getEdu()); // Assuming 'getEducation()' method exists in Resume
-        profileDTO.setJobTitle(jobopen.getJobopenTitle()); // Assuming 'getJobTitle()' method exists in Jobopen
-
-        applyRequest.setProfileDTO(profileDTO); // Assuming 'setProfileDTO()' setter method exists in ApplyRequest
-
-
-        return applyRequest;
-    }
 
 }
