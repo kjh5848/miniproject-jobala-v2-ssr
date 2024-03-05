@@ -42,41 +42,28 @@ public class JobopenController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
         Jobopen jobopen = jobopenRepository.findById(id);
         request.setAttribute("jobopen", jobopen);
-
         return "/comp/jobopen/updateForm";
     }
 
-    @GetMapping("/comp/jobopen/{id}")
-    public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
-        Jobopen jobopen = jobopenRepository.findById(id);
-        req.setAttribute("jobopen", jobopen);
-        return "/guest/resume/detailForm";
-    }
 
     @PostMapping("/comp/jobopen/write")
-    public String jobopenWrite(@PathVariable int id, HttpServletRequest req, JobopenRequest.WriteDTO writeDTO, JobopenRequest.SkillDTO skillDTO) {
+    public String jobopenWrite(@PathVariable int id, HttpServletRequest req, JobopenRequest.SaveDTO reqDTO,JobopenRequest.JobopenSkillDTO reqDTO2) {
         System.out.println("id = " + id);
-        System.out.println("reqDTO = " + writeDTO);
+        System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        jobopenRepository.save(writeDTO, sessionUser.getId(), sessionUser.getRole());
-
+        jobopenRepository.save(reqDTO, sessionUser.getId(), sessionUser.getRole(),reqDTO2);
         return "redirect:/comp/mngForm";
     }
-
 
     @GetMapping("/comp/writeForm")
     public String writeForm() {
         return "/comp/jobOpen/writeForm";
     }
 
-    @GetMapping("/comp/{id}")
+    @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-        System.out.println("id = " + id);
-
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
         req.setAttribute("jobopen", jobopen);
-
         return "/comp/jobopen/detailForm";
     }
 

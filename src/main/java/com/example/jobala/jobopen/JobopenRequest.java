@@ -32,10 +32,10 @@ public class JobopenRequest {
         private String[] skills; //내용
     }
 
+
     @AllArgsConstructor
     @Data
-    public static class WriteDTO {
-
+    public static class SaveDTO {
         private Integer role;
         private Integer userId;
         private String edu;
@@ -49,12 +49,11 @@ public class JobopenRequest {
         private Date endTime;
         private LocalDateTime createdAt;
         private List<String> skills = new ArrayList<>(); //내용
-
     }
 
     @AllArgsConstructor
     @Data
-    public static class SkillDTO {
+    public static class JobopenSkillDTO {
         private Integer role;
         private Integer userId;
         private Integer resumeId;

@@ -8,14 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Repository
 @RequiredArgsConstructor
 public class JobopenRepository {
     private final EntityManager em;
-
-
 
     public Jobopen findByJobOpenId(int id) {
         String a = """
@@ -29,7 +25,7 @@ public class JobopenRepository {
     }
 
     @Transactional
-    public void save(JobopenRequest.WriteDTO reqDTO, int userId, Integer role) {
+    public void save(JobopenRequest.SaveDTO reqDTO, int userId, Integer role, JobopenRequest.JobopenSkillDTO reqDTO2) {
 
         System.out.println("reqDTO = " + reqDTO);
         String q = """
@@ -50,21 +46,25 @@ public class JobopenRepository {
 
         query.executeUpdate();
 
+        // jobopen id 받기
         String q2 = """
                 select max(id) from jobopen_tb
                 """;
-        // jobopen id 받기
+        Query query1 = em.createNativeQuery(q, Jobopen.class);
+        Integer jobopenId = (Integer) query1.getSingleResult();
 
-//        String q3 = """
-//                insert into skill_tb(user_id, resume_id, jobopen_id, skills, role) values (?,?,?,?,?)
-//                """;
-//        Query query2 = em.createNativeQuery(q3, Skill.class);
-//        query2.setParameter(1, userId);
-//        query2.setParameter(2, reqDTO.getResumeId());
-//        query2.setParameter(3, jobopenId);
-//        query2.setParameter(4, reqDTO.getSkills());
-//        query2.setParameter(5, role);
-//        query2.executeUpdate();
+
+        String q3 = """
+                insert into skill_tb(user_id, resume_id, jobopen_id, skills, role) values (?,?,?,?,?)
+                """;
+        Query query2 = em.createNativeQuery(q3, Skill.class);
+        query2.setParameter(1, userId);
+        query2.setParameter(2, reqDTO2.getResumeId());
+        query2.setParameter(3, jobopenId);
+        query2.setParameter(4, reqDTO2.getSkills());
+        query2.setParameter(5, role);
+
+        query2.executeUpdate();
 
     }
 
