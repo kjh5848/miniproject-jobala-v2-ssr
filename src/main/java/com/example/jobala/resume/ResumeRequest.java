@@ -3,6 +3,9 @@ package com.example.jobala.resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ResumeRequest {
 
     @AllArgsConstructor
@@ -14,6 +17,7 @@ public class ResumeRequest {
         private String license;
         private String content;
         private String edu;
+        private List<String> skills = new ArrayList<>();
     }
 
     @AllArgsConstructor
