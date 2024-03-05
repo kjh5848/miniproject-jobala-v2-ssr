@@ -5,6 +5,8 @@ import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,20 +18,9 @@ public class Apply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer resumeId;
-    private Integer userId;
+    private Integer userId; // 기업일수도 있고, 개인일 수도 있다.
     private Integer jobopenId;
-    private String state;
+    private String state; // 열람전, 합격, 불합격
     private Integer role; // 0 -> guest, 1 -> comp
-    private LocalDateTime createdAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resume_id")
-    private Resume resume;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "jobopen_id")
-    private Jobopen jobopen;
-
-    public void ifPresent(Object o) {
-    }
+    private Timestamp createdAt;
 }
