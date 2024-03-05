@@ -29,8 +29,8 @@ VALUES
 -- 스킬 더미
 INSERT INTO skill_tb (user_id, role, resume_id, jobopen_id, skills)
 VALUES
-    (1, 1, null, 1, 'Java, Python'),
-    (2, 0, 2, null, 'R, Python, SQL'),
-    (1, 1, null, 3, 'Adobe XD, Figma'),
-    (2, 0, 4, null, 'Google Analytics, Facebook Ads'),
-    (1, 1, null, 5, 'MS Office');
+    (2, 1, null, 1, 'Java, Python'),
+    (1, 0, 2, null, 'R, Python, SQL'),
+    (2, 1, null, 3, 'Adobe XD, Figma'),
+    (1, 0, 4, null, 'Google Analytics, Facebook Ads'),
+    (2, 1, null, 5, 'MS Office');
