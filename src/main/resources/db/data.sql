@@ -19,6 +19,9 @@ values (1, '서강준', '이력서 제목1-1', '프론트엔드', '신입', '정
 insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
 values (2, '박선규','이력서 제목2-1', '프론트엔드', '신입', 'SQLD', '2번 유저의 자기소개서 1..... ..... ..... .....', '고등학교 졸업', now());
 insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
+insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
+values (2, '박선규','이력서 제목2-1', '프론트엔드', '신입', 'SQLD', '2번 유저의 자기소개서 1..... ..... ..... .....', '고등학교 졸업', now());
+insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
 values (2, '박선규','이력서 제목2-2', '백엔드', '신입', 'SQLD', '2번 유저의 자기소개서 2..... ..... ..... .....', '고등학교 졸업', now());
 
 
@@ -31,8 +34,15 @@ VALUES
     (5, '쿠팡', '마케팅 전문가 채용', '쿠팡에서 함께 성장하세요!', '경력', '대졸', '백엔드', '서울', '정규직', '1억 2천만','2024-09-30',now(), 1),
     (5, '쿠팡', '운영 지원 인력 채용', '배달의민족의 성장을 함께 이끌어가세요!', '경력', '고졸', '프론트엔드', '서울', '계약직', '5천만', '2024-08-31',now(), 1);
 
+
 -- 개인이 지원하는 것이면 role = 0을 넣어야 한다.
 -- 선규가 1번 이력서로 네이버에 지원했다.
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(1, 3, 1, '검토중', 0, now());
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(2, 3, 1, '검토중', 0, now());
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) values(3, 5, 4, '검토중', 0, now());
+
+-- 스킬 더미
+INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME) VALUES(2,0,2,'["Java","JavaScript","Spring"]');
+INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME) VALUES(3,0,2,'["Java","Spring"]');
+
+

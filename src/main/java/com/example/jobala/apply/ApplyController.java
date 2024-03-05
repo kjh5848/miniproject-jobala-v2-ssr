@@ -17,13 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApplyController {
 
-    private final HttpSession session;
-    private final ApplyRepository applyRepository;
-
-    @GetMapping("/applys/applyPositionForm/{jobopenId}")
-    public String applyStatusForm(@PathVariable Integer jobopenId) {
-        return "/guest/_myPage/applyStatusForm";
-    }
 
     @GetMapping("/applys/applyPositionForm")
     public String applyPositionForm() {

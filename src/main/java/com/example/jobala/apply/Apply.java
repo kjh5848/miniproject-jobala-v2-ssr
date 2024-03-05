@@ -23,4 +23,6 @@ public class Apply {
     private String state; // 열람전, 합격, 불합격
     private Integer role; // 0 -> guest, 1 -> comp
     private Timestamp createdAt;
+
+  
 }
