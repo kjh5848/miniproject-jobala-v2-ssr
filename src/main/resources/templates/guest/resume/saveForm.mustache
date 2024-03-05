@@ -14,10 +14,10 @@
             </div>
             <div class="card-body row">
                 <div class="col-sm-3">
-                    <img src="/images/userImage.jpg" width="150" height="200" style="margin-left: 70px;">
+                    <img src="/upload/{{pic.imgFilename}}" width="150" height="200" style="margin-left: 70px;">
                 </div>
                 <div class="col-sm-9">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <tbody style="font-size: 15px;">
                         <tr>
                             <th>이름</th>
@@ -35,7 +35,11 @@
                             <th>주소</th>
                             <td colspan="3">{{user.address}}</td>
                         </tr>
-
+                            <th>이메일</th>
+                            <td>{{user.email}}</td>
+                            <th>주소</th>
+                            <td>{{user.address}}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

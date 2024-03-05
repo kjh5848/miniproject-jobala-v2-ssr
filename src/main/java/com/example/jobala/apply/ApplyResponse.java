@@ -7,6 +7,22 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 public class ApplyResponse {
+
+    @Data
+    public static class ApplyDTO {
+        private Integer id;
+        private String jobopenTitle;
+        private String resumeTitle;
+        private String name;
+
+        public ApplyDTO(Integer id, String jobopenTitle, String resumeTitle, String name) {
+            this.id = id;
+            this.jobopenTitle = jobopenTitle;
+            this.resumeTitle = resumeTitle;
+            this.name = name;
+        }
+    }
+
     @AllArgsConstructor
     @Data
     public static class CardDetailDTO {

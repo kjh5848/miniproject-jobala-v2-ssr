@@ -12,10 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.List;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +30,7 @@ public class ResumeController {
         User user = (User) session.getAttribute("sessionUser");
         req.setAttribute("user", user);
         return "/guest/resume/saveForm";
+
     }
 
     @PostMapping("/guest/resume/{id}/update")
@@ -83,6 +84,4 @@ public class ResumeController {
         resumeRepository.delete(deleteDTO.getId());
         return "redirect:/guest/mngForm";
     }
-
-
 }

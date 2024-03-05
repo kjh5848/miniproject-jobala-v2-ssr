@@ -8,11 +8,18 @@
                 <div class="upMenu text-center mb-4">
                     <h1>마이페이지</h1>
                     <div class="btn-group btn-group-lg">
-                        <button type="button" class="btn btn-outline-dark" id="profileBtn">프로필 관리</button>
-                        <a href="/guest/mngForm" type="button" class="btn btn-outline-dark">이력서 관리</a>
-                        <button type="button" class="btn btn-outline-dark">지원 관리</button>
-                        <button type="button" class="btn btn-outline-dark">스크랩한 기업</button>
-                        <button type="button" class="btn btn-outline-dark">로그아웃</button>
+                        <a href="/guest/profileForm">
+                            <button type="button" class="btn btn-outline-dark" id="profileBtn">프로필 관리</button>
+                        </a>
+                        <a href="/guest/mngForm">
+                            <button type="button" class="btn btn-outline-dark">이력서 관리</button>
+                        </a>
+                        <a href="/applyStatusForm">
+                            <button type="button" class="btn btn-outline-dark">지원 관리</button>
+                        </a>
+                        <a href="/guest/scrapForm">
+                            <button type="button" class="btn btn-outline-dark">스크랩한 기업</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -26,7 +33,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">비밀번호:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
+                            <input type="password" class="form-control" id="phone" name="phone" value="010-1234-5678">
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">전화번호:</label>

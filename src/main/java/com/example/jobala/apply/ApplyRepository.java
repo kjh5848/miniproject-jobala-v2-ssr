@@ -7,6 +7,7 @@ import jakarta.persistence.Query;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,27 +19,34 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ApplyRepository {
-    @Autowired
+
     private final EntityManager em;
 
-//        public ApplyResponse.CardDetailDTO findByIdWithUser(int id) {
-//        Query query = em.createNativeQuery("SELECT u.address, u.name, r.title, r.edu, a.status " +
-//                "FROM user_tb AS u " +
-//                "INNER JOIN resume_tb AS r ON u.id = r.user_id " +
-//                "INNER JOIN apply_tb AS a ON u.id = a.user_id " +
-//                "WHERE a.jobopen_id = ? " +
-//                "ORDER BY u.id ASC");
-//        query.setParameter(1, id);
-//        Object[] row = (Object[]) query.getSingleResult();
-//
-//        ApplyResponse.CardDetailDTO cardDetailDTO = new ApplyResponse.CardDetailDTO();
-//        cardDetailDTO.setName((String) row[0]);
-//        cardDetailDTO.setResumeTitle((String) row[1]);
-//        cardDetailDTO.setEdu((String) row[2]);
-//        cardDetailDTO.setState((String) row[3]);
-//
-//        return cardDetailDTO;
-//    }
+
+    /**
+     * select at.id, jot.jobopen_title, rt.resume_title, rt.name
+     * from apply_tb at inner join jobopen_tb jot on at.jobopen_id = jot.id
+     * inner join resume_tb rt on rt.id = at.resume_id
+     * where at.user_id = 3;
+     */
+
+    public List<ApplyResponse.ApplyDTO> findAllByUserId(int compId){ // 로그인한 기업 ID
+        String q = """
+                select at.id, jot.jobopen_title, rt.resume_title, rt.name 
+                from apply_tb at inner join jobopen_tb jot on at.jobopen_id = jot.id 
+                inner join resume_tb rt on rt.id = at.resume_id 
+                where at.user_id = ?;
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, compId);
+
+        // qlrm 사용하기
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
+        return responseDTO;
+    }
+
+
 
     public List<Integer> findJobOpenIdsByUserId(Integer userId) {
         Query query = em.createNativeQuery("SELECT DISTINCT jobopen_id FROM apply_tb WHERE user_id = ?1");
