@@ -6,9 +6,21 @@ import lombok.NoArgsConstructor;
 
 import javax.swing.plaf.PanelUI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class JobopenResponse {
+
+    @AllArgsConstructor
+    @Data
+    public static class SearchDTO {
+        private Integer id;
+        private String jobopenTitle;
+        private String compLocation;
+        private String career;
+        private String edu;
+        private Date endTime;
+    }
 
     @Data
     public static class DetailDTO {
@@ -23,7 +35,7 @@ public class JobopenResponse {
         private String content; //내용
         private String hopeJob; //내용
         private String name;
-
+        private List<String> skills = new ArrayList<>();
     }
 
 
