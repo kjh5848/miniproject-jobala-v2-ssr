@@ -32,19 +32,6 @@ public class CompController {
         return "/comp/scoutList";
     }
 
-    @GetMapping("/comp/scoutList/{id}")
-    public String scoutDetail(@PathVariable int id, HttpServletRequest req){
-        //1. 기업 정보 꺼내오기 (인증 체크)
-        User sessionUser = (User) session.getAttribute("sessionUser");
-
-        //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
-        Resume resume = (Resume) compRepository.findResumeById(id);
-
-        req.setAttribute("sessionUser", sessionUser);
-        req.setAttribute("resume", resume);
-
-        return "/geust/resume/detailForm";
-    }
 
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
