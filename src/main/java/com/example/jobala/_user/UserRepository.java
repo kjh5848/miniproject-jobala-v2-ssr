@@ -22,7 +22,7 @@ public class UserRepository {
         return query.getResultList();
     }
 
-    public void findById() {
+    public void findById(int id) {
         return;
     }
 

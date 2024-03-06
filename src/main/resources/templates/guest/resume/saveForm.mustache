@@ -10,7 +10,12 @@
                     <h5 class="card-header">인적사항</h5>
                 </div>
                 <div class="card-body row">
-                    <img id="imgPreview" src="{{#pic}}/image/{{pic.imgFilename}}{{/pic}}" alt="미리보기 이미지"
+                    {{#pic}}
+                        <img src="/image/{{pic.imgFilename}}" style="width:100%">
+                    {{/pic}}
+                    {{^pic}}
+                        <img  src="../images/avatar.png" alt="Card image" style="width:100%">
+                    {{/pic}}
                          style="width: 120px; height: 175px; border: 1px solid #ccc; margin-left: 200px;">
                     <input type="file" name="imgFile" id="imgFile"
                            style="margin-left: 188px; margin-top: 5px;">
@@ -42,7 +47,7 @@
     </form>
 </div>
 <div class="container">
-    <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+    <form action="/guest/resume/write" method="post" enctype="multipart/form-data" id="uploadForm">
         <div>
             <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목"
                    style="font-size: 30px; border-radius: 5px; width: 100%;">
