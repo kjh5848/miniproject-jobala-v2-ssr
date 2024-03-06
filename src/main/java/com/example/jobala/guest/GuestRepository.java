@@ -32,7 +32,7 @@ public class GuestRepository {
 //        return query.getResultList();
 //    }
 
-    public List<Jobopen> findAll() {
+    public List<Jobopen> findByJoboopenAll() {
         String q = """
                 select * from jobopen_tb order by id desc
                 """;

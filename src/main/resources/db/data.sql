@@ -58,9 +58,4 @@ values
 
 
 
-INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME) 
-VALUES
-    (2,0,2,'["Java","JavaScript","Spring"]'),
-    (3,0,2,'["Java","Spring"]');
-
 
