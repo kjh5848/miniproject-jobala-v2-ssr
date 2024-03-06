@@ -18,8 +18,12 @@ public class SkillRepository {
         Query query = em.createNativeQuery(q, Skill.class);
         query.setParameter(1,id);
 
-        Skill skill = (Skill) query.getSingleResult();
-        return skill;
+        try {
+            Skill skill = (Skill) query.getSingleResult();
+            return skill;
+        } catch (Exception e) {
+            return  null;
+        }
     }
 
     public void findAll() {
@@ -43,5 +47,20 @@ public class SkillRepository {
     @Transactional
     public void delete() {
         return;
+    }
+
+    public Skill findByJobopenId(int id) {
+        String q = """
+                select * from skill_tb where jobopen_id = ?;
+                """;
+        Query query = em.createNativeQuery(q, Skill.class);
+        query.setParameter(1,id);
+
+        try {
+            Skill skill = (Skill) query.getSingleResult();
+            return skill;
+        } catch (Exception e) {
+            return  null;
+        }
     }
 }
