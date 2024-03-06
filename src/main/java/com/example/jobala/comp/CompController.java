@@ -1,8 +1,11 @@
 package com.example.jobala.comp;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.ApplyRequest;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jdk.swing.interop.SwingInterOpUtils;
@@ -10,7 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,17 +26,23 @@ public class CompController {
     private final HttpSession session;
     private final CompRepository compRepository;
 
-
-
-
     @GetMapping("/comp/scoutList")
-    public String scoutList(HttpServletRequest req){
-//        List<CompResponse.ScoutListDTO> scoutList = compRepository.scoutList();
-//        req.setAttribute("scoutList", scoutList);
-        List<Resume> resumeList = compRepository.findResumeAll();
+    public String scoutList(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        int userId = sessionUser.getId();
+        // resumeList 메소드를 호출할 때 사용자 ID를 매개변수로 전달
+        List<CompResponse.ResumeDTO> resumeList = compRepository.resumeList(userId);
         req.setAttribute("resumeList", resumeList);
         return "/comp/scoutList";
     }
+
+    @GetMapping("/comp/scoutList/modal/{id}")
+    public @ResponseBody List<CompRequest> getApplicantProfile(@PathVariable Integer id) {
+        List<CompRequest> results = new ArrayList<>();
+        return results;
+    }
+
 
     @GetMapping("/comp/scoutList/{id}")
     public String scoutDetail(@PathVariable int id, HttpServletRequest req){
