@@ -72,12 +72,19 @@ public class CompRepository {
         return results;
     }
 
-    public List<Resume> findResumeAll() {
+    public Resume findResumeById(int id) {
         String q = """
-                select * from resume_tb order by id desc;              
+                select * from resume_tb where id = ?;              
                 """;
         Query query = em.createNativeQuery(q, Resume.class);
-        return query.getResultList();
+        query.setParameter(1, id);
+        try {
+            Resume resume = (Resume) query.getSingleResult();
+            return resume;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public List<Jobopen> findJobopenAll() {

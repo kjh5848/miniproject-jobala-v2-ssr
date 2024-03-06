@@ -44,7 +44,7 @@ public class CompController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
-        Resume resume = (Resume) compRepository.findResumeById(id);
+        Resume resume = compRepository.findResumeById(id);
 
         req.setAttribute("sessionUser", sessionUser);
         req.setAttribute("resume", resume);
