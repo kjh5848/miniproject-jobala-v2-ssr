@@ -33,6 +33,7 @@ public class ResumeController {
     private final SkillRepository skillRepository;
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
+    private final UserRepository userRepository;
     private final PicRepository picRepository;
     private final UserRepository userRepository;
 
@@ -62,6 +63,7 @@ public class ResumeController {
         req.setAttribute("resume", resume);
         return "/guest/resume/updateForm";
     }
+
 
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest request) {

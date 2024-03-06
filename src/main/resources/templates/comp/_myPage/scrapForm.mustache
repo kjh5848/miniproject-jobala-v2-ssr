@@ -33,19 +33,21 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">기업 이름</th>
-                            <th scope="col">공고</th>
-                            <th scope="col">마감날짜</th>
+                            <th scope="col">이름</th>
+                            <th scope="col">이력서 제목</th>
+                            <th scope="col">학력</th>
+                            <th scope="col">경력</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>기업 A</td>
-                            <td>프론트엔드 개발자 채용</td>
-                            <td>2024-03-01</td>
-                        </tr>
+                        {{#resumeList}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{resumeTitle}}</td>
+                                <td>{{edu}}</td>
+                                <td>{{career}}</td>
+                            </tr>
+                        {{/resumeList}}
                         <!-- Add more rows as needed -->
                         </tbody>
                     </table>

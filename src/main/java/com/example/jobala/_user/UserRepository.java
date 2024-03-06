@@ -22,7 +22,6 @@ public class UserRepository {
         return query.getResultList();
     }
 
-
     public User findById(int id) {
         String q = """
                 select * from user_tb where id = ?
