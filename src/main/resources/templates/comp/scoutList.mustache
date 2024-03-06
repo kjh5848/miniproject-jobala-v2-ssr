@@ -49,34 +49,35 @@
 
         <div class="card-body">
             <h3 class="text-left mb-4">인재 명단</h3>
-            {{#scoutList}}
-             <a href="/comp/scoutList/{{id}}">
-            <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3" style="cursor: pointer">
-                <h3>{{name}}</h3>
-                <h4><small>{{resumeTitle}}</small></h4>
-                <div class="d-flex justify-content-between">
-                    <small>{{age}}</small>
-                    <small>{{address}}</small>
-                    <small>{{career}}</small>
-                    <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
-                    <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
-                    <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
-                    <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
-                    <div><!--뷰 공간 여백 용으로 만들었습니다.--></div>
+            <div class="d-flex">
+                <div>
+                    {{#resumeList}}
+                        <a href="/guest/resume/{{id}}" class="btn">
+                            <div class="card col-3 border-2" style="width: 400px;">
+                                <img src="/image/jobaralogo.png" class="card-img-top" style="width:100%">
+                                <div class="card-body text-start">
+                                    <br>
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">{{name}}</h5>
+                                        <a href="/guest/resume/{{id}}" class="btn">
+                                            <i class="far fa-bookmark text-warning" onclick="toggleHeart()">
+                                            </i>
+                                        </a>
+                                    </div>
+                                    <hr>
+                                    <p class="card-text">{{resumeTitle}} {{edu}} {{career}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    {{/resumeList}}
+                    <!-- 추가된 인재 정보들 -->
+                    </tbody>
+                    </table>
                 </div>
-                <span class="like-icon position-absolute top-0 end-0 p-3" onclick="toggleHeart(this)"><i
-                        class="fas fa-heart"></i></span>
             </div>
-            </a>
-            {{/scoutList}}
-            <!-- 추가된 인재 정보들 -->
-            </tbody>
-            </table>
         </div>
+        <br><br><br>
     </div>
-</div>
-<br><br><br>
-</div>
-<!-- 인재 명단 end -->
+    <!-- 인재 명단 end -->
 
 {{> layout/footer}}
