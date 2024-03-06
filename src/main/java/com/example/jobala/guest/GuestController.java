@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,6 +20,16 @@ public class GuestController {
     private final GuestRepository guestRepository;
 
     // DEL: mainForm 삭제
+    @GetMapping("/guest/jobopenSearch")
+    public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills") String skills) {
+        // [,]를 없애기위해 substring
+        String slicedSkills = skills.substring(1, skills.length() - 1);
+        System.out.println(slicedSkills);
+        List<Jobopen> jobopenList = guestRepository.findAll(slicedSkills);
+        req.setAttribute("jobopenList", jobopenList);
+
+        return "/guest/jobSearch";
+    }
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {

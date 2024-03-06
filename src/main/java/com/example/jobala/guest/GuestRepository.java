@@ -1,6 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -23,14 +24,17 @@ public class GuestRepository {
         return resumeList;
     }
 
-//    public List<Jobopen> findAll(String skills) {
-//        String q = """
-//                select * from jobopen_tb where order by id desc
-//                """;
-//
-//        Query query = em.createNativeQuery(q, Jobopen.class);
-//        return query.getResultList();
-//    }
+    public List<Jobopen> findAll(String skills) {
+        String q = """
+                SELECT jb.* FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id where name like ? order by jb.id desc
+                """;
+        Query query = em.createNativeQuery(q, Jobopen.class);
+        query.setParameter(1,"%"+skills+"%");
+
+        List<Jobopen> jobopenList = query.getResultList();
+
+        return jobopenList;
+    }
 
     public List<Jobopen> findByJoboopenAll() {
         String q = """

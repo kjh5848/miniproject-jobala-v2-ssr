@@ -2,10 +2,10 @@
 
 
 <!--이력서 수정페이지-->
-<div class="container ">
-    <form action="/guest/resume/{{resume.id}}/update" method="post" enctype="application/x-www-form-urlencoded">
+<div class="container">
+    <form action="/guest/resume/write" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목" value="{{resume.resumeTitle}}"
+            <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목"
                    style="font-size: 30px; border-radius: 5px; width: 100%;">
         </div>
         <div class="card mb-2">
@@ -13,12 +13,26 @@
                 <h5 class="card-header">인적사항</h5>
             </div>
             <div class="card-body row">
-                <div class="col-sm-3">
-                    <img src="/images/userImage.jpg" width="150" height="200" style="margin-left: 70px;">
-                </div>
-                <div class="col-sm-9">
-                    <table class="table">
-                        <tbody style="font-size: 15px;">
+                <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div>
+                        <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목"
+                               style="font-size: 30px; border-radius: 5px; width: 100%;">
+                    </div>
+                    <div class="card mb-2">
+                        <div>
+                            <h5 class="card-header">인적사항</h5>
+                        </div>
+                        <div class="card-body row">
+                            <img id="imgPreview" src="{{#pic}}/image/{{pic.imgFilename}}{{/pic}}" alt="미리보기 이미지"
+                                 style="width: 120px; height: 175px; border: 1px solid #ccc; margin-left: 200px;">
+                            <p style="margin-left: 190px;">제목 : {{#pic}}이력서 사진{{/pic}}</p>
+                            <input type="file" name="imgFile" id="imgFile"
+                                   style="margin-left: 188px; margin-top: 5px;">
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-bordered" style="margin-top: -180px; margin-left: 450px;">
+
+                            <tbody style="font-size: 15px;">
                         <tr>
                             <th>이름</th>
                             <td>{{user.name}}</td>
@@ -151,5 +165,36 @@
 <br>
 <br><br>
 </div>
+
+<script>
+    const imgFileInput = document.getElementById('imgFile');
+    const imgPreview = document.getElementById('imgPreview');
+    const uploadBtn = document.getElementById('uploadBtn');
+    imgFileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    });
+    uploadBtn.addEventListener('click', function() {
+        const formData = new FormData();
+        const file = imgFileInput.files[0];
+        formData.append('imgFile', file);
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+                .then(response => response.json())
+                .then(data => {
+                    // 업로드가 성공하면 미리보기 이미지를 업데이트하거나 다른 작업을 수행합니다.
+                    console.log('업로드가 완료되었습니다.');
+                })
+                .catch(error => {
+                    console.error('업로드 중 오류가 발생했습니다:', error);
+                });
+    });
+</script>
 
 {{> layout/footer}}
