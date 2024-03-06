@@ -28,7 +28,7 @@ public class SkillRepository {
 
     public Skill findByJobopenId(Integer id) {
         String q = """
-                select * from skill_tb where id = ?;
+                select * from skill_tb where jobopen_id = ?;
                 """;
         Query query = em.createNativeQuery(q, Skill.class);
         query.setParameter(1,id);
