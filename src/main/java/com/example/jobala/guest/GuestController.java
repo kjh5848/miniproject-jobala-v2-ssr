@@ -54,4 +54,9 @@ public class GuestController {
         return "/guest/_myPage/profileForm";
     }
 
+    @GetMapping("/applyStatusForm")
+    public String applyStatusForm() {
+        return "/guest/_myPage/applyStatusForm";
+    }
+
 }

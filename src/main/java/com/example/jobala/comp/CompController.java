@@ -1,5 +1,8 @@
 package com.example.jobala.comp;
 
+
+import com.example.jobala.apply.ApplyRequest;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
@@ -10,7 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,5 +64,17 @@ public class CompController {
         return "/comp/_myPage/profileForm";
     }
 
+    @GetMapping("/detail")
+    public String getApplicantList(HttpServletRequest request) {
+        List<Resume> resumeList = compRepository.findResumeAll();
+        request.setAttribute("resumeList", resumeList);
 
+        return "/comp/jobopen/detailForm";
+    }
+
+    @GetMapping("/detail/{id}")
+    public @ResponseBody List<CompRequest> getresumeList(@PathVariable Integer id) {
+        List<CompRequest> resumeList = new ArrayList<>();
+        return resumeList;
+    }
 }
