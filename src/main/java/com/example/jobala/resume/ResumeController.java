@@ -34,9 +34,6 @@ public class ResumeController {
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
     private final UserRepository userRepository;
-    private final PicRepository picRepository;
-    private final UserRepository userRepository;
-
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {

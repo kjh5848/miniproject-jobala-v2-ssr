@@ -19,78 +19,13 @@ import java.util.List;
 public class CompRepository {
     private final EntityManager em;
 
-
-
-    public List<CompResponse.ResumeDTO> resumeList(int userId){
-        String q = """
-            SELECT rt.id, rt.resume_title, rt.career, rt.edu
-                   FROM resume_tb rt
-                   INNER JOIN apply_tb at ON rt.id = at.resume_id
-                   WHERE at.user_id = :userId
-           """;
-
-        Query query = em.createNativeQuery(q); // CompResponse.ResumeDTO.class 제거
-        query.setParameter("userId", userId);
-
-        // 쿼리 실행 후 결과를 CompResponse.ResumeDTO 리스트로 변환하는 로직 필요
-        List<Object[]> resultObjects = query.getResultList();
-        List<CompResponse.ResumeDTO> results = new ArrayList<>();
-        for (Object[] result : resultObjects) {
-            results.add(new CompResponse.ResumeDTO(
-                    (Integer) result[0], // id
-                    (String) result[1],  // resume_title
-                    (String) result[2],  // career
-                    (String) result[3]   // edu
-            ));
-        }
-
-        return results;
-    }
-
-
-
-//    public List<Resume> findAllResumesByUserId(Integer userId) {
-//        String q = "SELECT r FROM Resume r WHERE r.userId = :userId ORDER BY r.id DESC";
-//        return em.createQuery(q, Resume.class)
-//                .setParameter("userId", userId)
-//                .getResultList();
-//    }
-
-
-    public List<Resume> findResumeById(Integer userId) {
+    public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
         query.setParameter(1, userId);
-      
 
-    public List<Resume> findResumeAll() {
-        String q = """
-            select * from resume_tb order by id desc;              
-            """;
-        Query query = em.createNativeQuery(q, Resume.class);
-        return query.getResultList();
+        List<Resume> resumeList2 = query.getResultList();
+        return resumeList2;
     }
-//    public findAllByUserId(int guestId){
-//        String q = """
-//                SELECT r.id, r.resume_title, r.career, r.edu
-//                FROM resume_tb r
-//                WHERE r.user_id = ?;
-//                """;
-//        Query query = em.createNativeQuery(q,Resume.class);
-//        query.setParameter(1, guestId);
-//         List<Resume> resultList =query.getSingleResult();
-////        JpaResultMapper mapper = new JpaResultMapper();
-////        List<CompResponse.ResumeListDTO> resumeList = mapper.list(query, CompResponse.ResumeListDTO.class);
-////        return resumeList;
-//        return
-//    }
-    public List<Resume> findAllByUserId(int userId) {
-    Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
-    query.setParameter(1, userId);
-
-    List<Resume> resumeList = query.getResultList();
-    return resumeList;
-    }
-
 
     public List<CompResponse.ScoutListDTO> scoutList(){
         String q = """
@@ -109,26 +44,19 @@ public class CompRepository {
 
         Query query = em.createNativeQuery(q);
 
-       JpaResultMapper rm = new JpaResultMapper();
-       List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
+        JpaResultMapper rm = new JpaResultMapper();
+        List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
         System.out.println(results);
 
         return results;
     }
 
-    public Resume findResumeById(int id) {
+    public List<Resume> findResumeAll() {
         String q = """
-                select * from resume_tb where id = ?;              
+                select * from resume_tb order by id desc;              
                 """;
         Query query = em.createNativeQuery(q, Resume.class);
-        query.setParameter(1, id);
-        try {
-            Resume resume = (Resume) query.getSingleResult();
-            return resume;
-        } catch (Exception e) {
-            return null;
-        }
-
+        return query.getResultList();
     }
 
     public List<Jobopen> findJobopenAll() {
