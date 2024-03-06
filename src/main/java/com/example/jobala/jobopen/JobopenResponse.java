@@ -4,16 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.swing.plaf.PanelUI;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobopenResponse {
 
-    @AllArgsConstructor
-    @NoArgsConstructor
     @Data
     public static class DetailDTO {
-        private String name;
+        private Integer id;
         private String compname; //대표명
         private String jobopenTitle; //공고제목
         private String career;// 경력
@@ -22,20 +21,25 @@ public class JobopenResponse {
         private String salary; //연봉
         private String compLocation; //근무지역
         private String content; //내용
-        private List<String> skills = new ArrayList<>(); //내용
+        private String hopeJob; //내용
+        private String name;
 
-        public DetailDTO(String name, List<String> skills) {
-            this.name = name;
-            this.skills = skills;
-        }
     }
 
 
     @Data
     public static class SkillsDTO {
+        Integer id;
+        Integer jobopenId;
+        Integer role;
         String name;
-        List<String> skills;
 
+        public SkillsDTO(Object[] objects) {
+            this.id = (Integer) objects[0];
+            this.jobopenId = (Integer) objects[1];
+            this.role = (Integer) objects[2];
+            this.name = (String) objects[3];
+        }
 
     }
 

@@ -1,6 +1,10 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.skill.Skill;
+import com.example.jobala.skill.SkillRepository;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -9,11 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class JobopenController {
 
     private final JobopenRepository jobopenRepository;
+    private final SkillRepository skillRepository;
     private final HttpSession session;
 
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -55,10 +63,20 @@ public class JobopenController {
 
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-//        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
-//        req.setAttribute("jobopen", jobopen);
-        JobopenResponse.DetailDTO detailDTO = jobopenRepository.findByWithJobopen(id);
-        req.setAttribute("jobopen", detailDTO);
+        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+        // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
+        Skill skills = skillRepository.findByJobopenId(id);
+        String json = skills.getName();
+        // JSON -> List
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> skillsList = gson.fromJson(json, type);
+        System.out.println("다시 바꾼 결과 = " + skillsList);
+
+        req.setAttribute("skillsList", skillsList);
+        req.setAttribute("jobopen", jobopen);
+
 
         return "/comp/jobopen/detailForm";
     }

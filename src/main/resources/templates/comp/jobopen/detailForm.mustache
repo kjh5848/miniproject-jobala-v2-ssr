@@ -53,7 +53,6 @@
                         </div>
                     </div>
 
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -119,7 +118,9 @@
                 <td>0명</td>
                 <td>
                     <ul>
-                        <li>{{jobopen.name}}</li>
+                        {{#skillsList}}
+                            <li>{{.}}</li>
+                        {{/skillsList}}
                     </ul>
                 </td>
                 </tr>

@@ -8,6 +8,9 @@ import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class JobopenRepository {
@@ -123,30 +126,56 @@ public class JobopenRepository {
         query.executeUpdate();
     }
 
-    public JobopenResponse.DetailDTO findByWithJobopen(int id) {
-        String q = """
-                select
-                j.compname,
-                j.jobopen_title,
-                j.career,
-                j.edu,
-                j.job_type,
-                j.salary,
-                j.comp_location,
-                j.content,
-                s.name
-                from jobopen_tb j
-                inner join skill_tb s on j.id= s.jobopen_id
-                where j.id= ?
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, id);
-
-        JpaResultMapper rm = new JpaResultMapper();
-        JobopenResponse.DetailDTO respDTO = (JobopenResponse.DetailDTO) rm.list(query, JobopenResponse.DetailDTO.class);
-        System.out.println("respDTO = " + respDTO);
-        
-
-        return respDTO;
-    }
+//    public JobopenResponse.DetailDTO findByWithJobopen(int idx) {
+//        String q = """
+//                select
+//                j.id,
+//                j.compname,
+//                j.jobopen_title,
+//                j.career,
+//                j.edu,
+//                j.job_type,
+//                j.salary,
+//                j.comp_location,
+//                j.content,
+//                j.hope_job,
+//                s.name
+//                from jobopen_tb j
+//                inner join skill_tb s on j.id= s.jobopen_id
+//                where j.id= ?
+//                """;
+//        Query query = em.createNativeQuery(q);
+//        query.setParameter(1, idx);
+////
+////        Object[] row = (Object[]) query.getSingleResult();
+////
+////        Integer id = (Integer) row[0];
+////        String  compname = (String) row[1];
+////        String jobopenTitle = (String) row[2];
+////        String career = (String) row[3];
+////        String edu = (String) row[4];
+////        String jobType = (String) row[5];
+////        String salary = (String) row[6];
+////        String compLocation = (String) row[7];
+////        String content = (String) row[8];
+////        String hopeJob = (String) row[9];
+////        String name = (String) row[10];
+////
+////        JobopenResponse.DetailDTO respDTO = new JobopenResponse.DetailDTO();
+////        respDTO.setId(id);
+////        respDTO.setCompname(compname);
+////        respDTO.setJobopenTitle(jobopenTitle);
+////        respDTO.setCareer(career);
+////        respDTO.setEdu(edu);
+////        respDTO.setJobType(jobType);
+////        respDTO.setSalary(salary);
+////        respDTO.setCompLocation(compLocation);
+////        respDTO.setContent(content);
+////        respDTO.setHopeJob(hopeJob);
+////        respDTO.setName(name);
+////
+//
+//
+//        return respDTO;
+//    }
 }
