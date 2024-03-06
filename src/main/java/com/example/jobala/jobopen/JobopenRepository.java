@@ -1,14 +1,14 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.resume.Resume;
+import com.google.gson.Gson;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
-import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -29,7 +29,7 @@ public class JobopenRepository {
     }
 
     @Transactional
-    public void save(JobopenRequest.JobopenSaveDTO reqDTO, User sessionUser) {
+    public void save(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         // jobopen인설트
         String q = """
                 insert into jobopen_tb(user_id, edu, career, job_type, salary, hope_job ,comp_location ,content , end_time , jobopen_title, created_at, role) values (?,?,?,?,?,?,?,?,?,?,now(),?)
@@ -57,14 +57,20 @@ public class JobopenRepository {
 
         //스킬 insert
         String q3 = """
-                insert into skill_tb(user_id, resume_id, jobopen_id, name, role) values (?,?,?,?,?)
+                insert into skill_tb(user_id, role, jobopen_id, name) values (?,?,?,?)
                 """;
         Query query3 = em.createNativeQuery(q3);
+
+        // List -> JSON
+        List<String> skills = reqDTO.getSkills();
+        String json = new Gson().toJson(skills);
+        System.out.println("제이슨 결과 = " + json);
+
+
         query3.setParameter(1, sessionUser.getId());
-        query3.setParameter(2, null);
+        query3.setParameter(2, sessionUser.getRole());
         query3.setParameter(3, jobopenId);
-        query3.setParameter(4, reqDTO.getSkills());
-        query3.setParameter(5, sessionUser.getRole());
+        query3.setParameter(4, json);
         query3.executeUpdate();
 
     }
@@ -124,6 +130,22 @@ public class JobopenRepository {
         query.setParameter(9, reqDTO.getSkills());
         query.setParameter(10, jobopenId);
         query.executeUpdate();
+    }
+
+    public List<Jobopen> findAll() {
+        String q = """
+                select * from jobopen_tb order by id desc;              
+                """;
+        Query query = em.createNativeQuery(q, Jobopen.class);
+        return query.getResultList();
+    }
+
+    public List<Resume> findByResumeAll() {
+        String q = """
+                select * from resume_tb order by id desc;              
+                """;
+        Query query = em.createNativeQuery(q, Resume.class);
+        return query.getResultList();
     }
 
 //    public JobopenResponse.DetailDTO findByWithJobopen(int idx) {

@@ -6,9 +6,21 @@ import lombok.NoArgsConstructor;
 
 import javax.swing.plaf.PanelUI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class JobopenResponse {
+
+    @AllArgsConstructor
+    @Data
+    public static class SearchDTO {
+        private Integer id;
+        private String jobopenTitle;
+        private String compLocation;
+        private String career;
+        private String edu;
+        private Date endTime;
+    }
 
     @Data
     public static class DetailDTO {
@@ -25,24 +37,6 @@ public class JobopenResponse {
         private String name;
 
     }
-
-
-    @Data
-    public static class SkillsDTO {
-        Integer id;
-        Integer jobopenId;
-        Integer role;
-        String name;
-
-        public SkillsDTO(Object[] objects) {
-            this.id = (Integer) objects[0];
-            this.jobopenId = (Integer) objects[1];
-            this.role = (Integer) objects[2];
-            this.name = (String) objects[3];
-        }
-
-    }
-
 
     //사진
     //맞춤 공고

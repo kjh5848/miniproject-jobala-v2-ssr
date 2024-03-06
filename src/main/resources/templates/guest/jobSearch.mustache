@@ -17,8 +17,6 @@
                     <div class="select-box ">
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>기술스택</h4>
-                            <div class="select-package bg-info p-3 m-2 rounded-3">
-                                <h4>기술스택</h4>
                                 <div class="checkbox-package">
                                     <input type="checkbox" class="checkbox" value="Java" onchange="skillsFilter(this);" /> Java
                                     <input type="checkbox" class="checkbox" value="JavaScript" onchange="skillsFilter(this);" />JavaScript
@@ -27,7 +25,6 @@
                                     <input type="checkbox" class="checkbox" value="jQuery" onchange="skillsFilter(this);" /> jQuery
                                     <input type="checkbox" class="checkbox" value="MySQL" onchange="skillsFilter(this);" /> MySQL
                                 </div>
-                            </div>
 
                             <script>
                                 // 기술스택 필터 적용
@@ -71,7 +68,6 @@
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>지역</h4>
                             <div class="checkbox-package">
-                                <input type="checkbox" name="compLocation" class="checkbox" value=""/> 전체
                                 <input type="checkbox" name="compLocation" class="checkbox" value="서울"/> 서울
                                 <input type="checkbox" name="compLocation" class="checkbox" value="경기"/> 대전
                                 <input type="checkbox" name="compLocation" class="checkbox" value="광주"/> 대구
@@ -82,38 +78,35 @@
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>학력</h4>
                             <div class="checkbox-package">
-                                <input type="checkbox" name="" class="checkbox" value="고졸"/> 고졸
-                                <input type="checkbox" class="checkbox" value="대졸"/> 대졸
-                                <input type="checkbox" class="checkbox" value="학력무관"/> 학력무관
+                                <input type="checkbox" name="edu" class="checkbox" value="고졸"/> 고졸
+                                <input type="checkbox" name="edu" class="checkbox" value="대졸"/> 대졸
                             </div>
                         </div>
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>연봉</h4>
-                            <div class="checkbox-package" name="salary">
-                                <input type="checkbox" class="checkbox" value="협의"/>
+                            <div class="checkbox-package" >
+                                <input type="checkbox" name="salary" class="checkbox" value="협의"/>
                                 협의
-                                <input type="checkbox" class="checkbox" value="3,000만원 이하"/>
+                                <input type="checkbox" name="salary" class="checkbox" value="3,000만원 이하"/>
                                 3,000만원 이상
-                                <input type="checkbox" class="checkbox" value="5,000만원 이상"/>
+                                <input type="checkbox" name="salary" class="checkbox" value="5,000만원 이상"/>
                                 5,000만원 이상
                             </div>
                         </div>
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>희망 직무</h4>
-                            <div class="checkbox-package" name="hopeJob">
-                                <input type="checkbox" class="checkbox" value="프론트엔드"/>
+                            <div class="checkbox-package" >
+                                <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
                                 프론트엔드
-                                <input type="checkbox" class="checkbox" value="백엔드"/> 백엔드
-
-                                <input type="checkbox" class="checkbox" value="풀스택"/> 풀스택
+                                <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
                             </div>
                         </div>
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>고용형태</h4>
                             <div class="checkbox-package">
-                                <input type="checkbox" class="checkbox" value="정규직"/> 정규직
-                                <input type="checkbox" class="checkbox" value="계약직"/> 계약직
-                                <input type="checkbox" class="checkbox" value="인턴"/> 인턴
+                                <input type="checkbox" name="jobType" class="checkbox" value="정규직"/> 정규직
+                                <input type="checkbox" name="jobType" class="checkbox" value="계약직"/> 계약직
+                                <input type="checkbox" name="jobType" class="checkbox" value="인턴"/> 인턴
                             </div>
                         </div>
 

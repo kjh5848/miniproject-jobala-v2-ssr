@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class CompResponse {
 
@@ -18,4 +19,18 @@ public class CompResponse {
         private String career;
     }
 
+    @Data
+    public static class ResumeListDTO{
+        private Integer id;
+        private String resumeTitle;
+        private String career;
+        private String edu;
+
+        public ResumeListDTO(Integer id, String resumeTitle, String career, String edu) {
+            this.id = id;
+            this.resumeTitle = resumeTitle;
+            this.career = career;
+            this.edu = edu;
+        }
+    }
 }

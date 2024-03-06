@@ -21,11 +21,13 @@ public class GuestController {
 
     // DEL: mainForm 삭제
     @GetMapping("/guest/jobopenSearch")
-    public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills") String skills) {
+    public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
         // [,]를 없애기위해 substring
         String slicedSkills = skills.substring(1, skills.length() - 1);
         System.out.println(slicedSkills);
-        List<Jobopen> jobopenList = guestRepository.findAll(slicedSkills);
+        System.out.println(resDTO);
+        List<Jobopen> jobopenList = guestRepository.findAll(slicedSkills, resDTO);
+
         req.setAttribute("jobopenList", jobopenList);
 
         return "/guest/jobSearch";
@@ -33,7 +35,7 @@ public class GuestController {
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        List<Jobopen> jobopenList = guestRepository.findAll();
+        List<Jobopen> jobopenList = guestRepository.findByJoboopenAll();
         req.setAttribute("jobopenList", jobopenList);
         return "/guest/jobSearch";
     }
@@ -52,6 +54,11 @@ public class GuestController {
     @GetMapping("/guest/profileForm")
     public String profileForm() {
         return "/guest/_myPage/profileForm";
+    }
+
+    @GetMapping("/applyStatusForm")
+    public String applyStatusForm() {
+        return "/guest/_myPage/applyStatusForm";
     }
 
 }

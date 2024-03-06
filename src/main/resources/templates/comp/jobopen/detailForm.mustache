@@ -13,12 +13,6 @@
                     <p class="card-title">회사명</p>
                     <h2>{{jobopen.jobopenTitle}}</h2>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#applyModal">
-                        입사지원
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -29,35 +23,35 @@
     <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="applyModalLabel">이력서 목록</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card row">
-                        <div class="card-header">
-                            이력서1
-                        </div>
-                        <div class="card-body  shadow-5 ">
-                            <div class="col-md-8 align-items-center">
-                                저는 열정적인 사람입니다.
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="mt-3">
-                                    <p style="font-size: 15px;">신입 / 고졸 / 1년</p>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary text-nowrap ">선택</button>
-                                </div>
-                            </div>
-                        </div>
+                <form action="/applys/{{id}}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applyModalLabel">이력서 목록</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary">홈페이지 지원하기</button>
-                </div>
+                    <div class="modal-body">
+                        {{#resumeList}}
+                            <div class="card row mt-3 shadow-lg p-3 bg-body rounded-5">
+                                <div class="card-body  shadow-5 ">
+                                    <div class="col-md-8 align-items-center">
+                                        {{resumeTitle}}
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="mt-3">
+                                            <p style="font-size: 15px;">{{career}} / {{edu}} </p>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="id" value="{{id}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/resumeList}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        <button type="submit" class="btn btn-primary">홈페이지 지원하기</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
