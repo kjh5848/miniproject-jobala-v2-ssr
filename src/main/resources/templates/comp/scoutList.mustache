@@ -61,7 +61,7 @@
                                         <h5 class="card-title">{{name}}</h5>
                                         <div>
                                             <a href="/guest/resume/{{id}}" class="btn">
-                                                <i class="far fa-bookmark text-warning" onclick="toggleHeart()">
+                                                <i class="far fa-bookmark text-warning" onclick="toggleHeart({{id}})">
                                                 </i>
                                             </a>
                                         </div>
@@ -78,5 +78,23 @@
         <br><br><br>
     </div>
     <!-- 인재 명단 end -->
+
+    <script>
+        function toggleHeart({{id}}) {//북마크를 클릭 했을 때 AJAX 요청을 보내는 코드
+            $.ajax({
+                url: '/comp/scrap',
+                type: 'post',
+                data: {resume: id},
+                success: function (data) {
+                    //서버로 부터 받은 데이터를 이용하여 스크랩 화면을 업데이트하기.
+                    console.log('스크랩 성공', data);
+                    //이 단계에서 스크랩 페이지를 업데이트 하는 작업 수행 됨
+                },
+                error: function (xhr, status, error) {
+                    console.error('오류 발생:', error);
+                }
+            });
+        }
+    </script>
 
 {{> layout/footer}}
