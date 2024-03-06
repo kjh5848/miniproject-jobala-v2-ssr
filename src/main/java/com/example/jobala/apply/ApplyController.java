@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -17,11 +18,19 @@ import java.util.List;
 //@RequestMapping("/applys")
 @RequiredArgsConstructor
 public class ApplyController {
-  
+
     private final ApplyRepository applyRepository;
 
-    @GetMapping("/applys/applyPositionForm")
+
+    @PostMapping("/applys/{id}")
+    public String setApplicantList() {
+        return null;
+    }
+
+
+    @GetMapping("/applyPositionForm")
     public String applyPositionForm() {
+
         return "/comp/_myPage/applyPositionForm";
 
     }

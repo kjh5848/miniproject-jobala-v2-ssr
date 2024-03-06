@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +29,12 @@ public class JobopenRequest {
         private String compLocation; //근무지역
         private String content; //내용
         private List<String> skills = new ArrayList<>(); //내용
-
     }
 
 
     @AllArgsConstructor
     @Data
-    public static class JobopenSaveDTO {
+    public static class SaveDTO {
         private String edu;
         private String jobopenTitle;
         private String career;
@@ -47,15 +45,10 @@ public class JobopenRequest {
         private String content;
         private Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
+
+
     }
 
-    @AllArgsConstructor
-    @Data
-    public static class JobopenSkillDTO {
-        private Integer role;
-        private Integer userId;
-        private Integer resumeId;
-        private Integer jobOpenId;
-        private List<String> skills = new ArrayList<>();
-    }
 }
+
+

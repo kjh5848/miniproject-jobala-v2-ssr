@@ -1,6 +1,7 @@
 package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
+import com.example.jobala._user.UserRepository;
 import com.example.jobala.skill.Skill;
 import com.example.jobala.skill.SkillRepository;
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ public class ResumeController {
     private final SkillRepository skillRepository;
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
+    private final UserRepository userRepository;
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
@@ -54,7 +56,10 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest request) {
         Resume resume = resumeRepository.findById(id);
-        User user = (User) session.getAttribute("sessionUser");
+
+        int userId = resume.getUserId();
+//        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
+        User user = userRepository.findById(userId);
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
         Skill skills = skillRepository.findByResumeId(id);

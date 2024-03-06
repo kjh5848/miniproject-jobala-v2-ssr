@@ -1,7 +1,8 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
-import com.example.jobala.skill.Skill;
+import com.example.jobala.resume.Resume;
+import com.google.gson.Gson;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -15,19 +16,6 @@ import java.util.List;
 public class JobopenRepository {
     private final EntityManager em;
 
-    public void findBySkillId() {
-        String q = """
-                select name from skill_tb 
-                """;
-        Query query = em.createNativeQuery(q, Skill.class);
-        List<Object[]> skills = (List<Object[]>) query.getResultList();
-//
-//        for (Object skill : skills) {
-//            String name = (String) skill[0];
-//
-//            return ;
-//        }
-    }
 
     public Jobopen findByJobOpenId(int id) {
         String q = """
@@ -41,7 +29,7 @@ public class JobopenRepository {
     }
 
     @Transactional
-    public void save(JobopenRequest.JobopenSaveDTO reqDTO, User sessionUser) {
+    public void save(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         // jobopen인설트
         String q = """
                 insert into jobopen_tb(user_id, edu, career, job_type, salary, hope_job ,comp_location ,content , end_time , jobopen_title, created_at, role) values (?,?,?,?,?,?,?,?,?,?,now(),?)
@@ -69,24 +57,28 @@ public class JobopenRepository {
 
         //스킬 insert
         String q3 = """
-                insert into skill_tb(user_id, resume_id, jobopen_id, name, role) values (?,?,?,?,?)
+                insert into skill_tb(user_id, role, jobopen_id, name) values (?,?,?,?)
                 """;
         Query query3 = em.createNativeQuery(q3);
+
+        // List -> JSON
+        List<String> skills = reqDTO.getSkills();
+        String json = new Gson().toJson(skills);
+        System.out.println("제이슨 결과 = " + json);
+
+
         query3.setParameter(1, sessionUser.getId());
-        query3.setParameter(2, null);
+        query3.setParameter(2, sessionUser.getRole());
         query3.setParameter(3, jobopenId);
-        query3.setParameter(4, reqDTO.getSkills());
-        query3.setParameter(5, sessionUser.getRole());
+        query3.setParameter(4, json);
         query3.executeUpdate();
 
     }
 
-
     @Transactional
-    public void upDate() {
+    public void update() {
         return;
     }
-
 
     @Transactional
     public void delete(int id) {
@@ -140,4 +132,72 @@ public class JobopenRepository {
         query.executeUpdate();
     }
 
+    public List<Jobopen> findAll() {
+        String q = """
+                select * from jobopen_tb order by id desc;              
+                """;
+        Query query = em.createNativeQuery(q, Jobopen.class);
+        return query.getResultList();
+    }
+
+    public List<Resume> findByResumeAll() {
+        String q = """
+                select * from resume_tb order by id desc;              
+                """;
+        Query query = em.createNativeQuery(q, Resume.class);
+        return query.getResultList();
+    }
+
+//    public JobopenResponse.DetailDTO findByWithJobopen(int idx) {
+//        String q = """
+//                select
+//                j.id,
+//                j.compname,
+//                j.jobopen_title,
+//                j.career,
+//                j.edu,
+//                j.job_type,
+//                j.salary,
+//                j.comp_location,
+//                j.content,
+//                j.hope_job,
+//                s.name
+//                from jobopen_tb j
+//                inner join skill_tb s on j.id= s.jobopen_id
+//                where j.id= ?
+//                """;
+//        Query query = em.createNativeQuery(q);
+//        query.setParameter(1, idx);
+////
+////        Object[] row = (Object[]) query.getSingleResult();
+////
+////        Integer id = (Integer) row[0];
+////        String  compname = (String) row[1];
+////        String jobopenTitle = (String) row[2];
+////        String career = (String) row[3];
+////        String edu = (String) row[4];
+////        String jobType = (String) row[5];
+////        String salary = (String) row[6];
+////        String compLocation = (String) row[7];
+////        String content = (String) row[8];
+////        String hopeJob = (String) row[9];
+////        String name = (String) row[10];
+////
+////        JobopenResponse.DetailDTO respDTO = new JobopenResponse.DetailDTO();
+////        respDTO.setId(id);
+////        respDTO.setCompname(compname);
+////        respDTO.setJobopenTitle(jobopenTitle);
+////        respDTO.setCareer(career);
+////        respDTO.setEdu(edu);
+////        respDTO.setJobType(jobType);
+////        respDTO.setSalary(salary);
+////        respDTO.setCompLocation(compLocation);
+////        respDTO.setContent(content);
+////        respDTO.setHopeJob(hopeJob);
+////        respDTO.setName(name);
+////
+//
+//
+//        return respDTO;
+//    }
 }

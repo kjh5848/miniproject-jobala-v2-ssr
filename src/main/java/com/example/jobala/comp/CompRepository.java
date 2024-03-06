@@ -17,6 +17,7 @@ import java.util.List;
 public class CompRepository {
     private final EntityManager em;
 
+
     public List<Resume> findResumeAll() {
         String q = """
             select * from resume_tb order by id desc;              
@@ -44,7 +45,7 @@ public class CompRepository {
 
     List<Resume> resumeList = query.getResultList();
     return resumeList;
-}
+    }
 
 
     public List<CompResponse.ScoutListDTO> scoutList(){
@@ -71,7 +72,15 @@ public class CompRepository {
         return results;
     }
 
-    public List<Jobopen> findAll() {
+    public List<Resume> findResumeAll() {
+        String q = """
+                select * from resume_tb order by id desc;              
+                """;
+        Query query = em.createNativeQuery(q, Resume.class);
+        return query.getResultList();
+    }
+
+    public List<Jobopen> findJobopenAll() {
         String q = """
                 select * from jobopen_tb order by id desc;              
                 """;

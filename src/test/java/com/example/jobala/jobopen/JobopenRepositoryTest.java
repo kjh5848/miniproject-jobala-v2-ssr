@@ -1,12 +1,9 @@
 package com.example.jobala.jobopen;
 
-import jakarta.persistence.Query;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-
-import java.util.List;
 
 
 @Import(JobopenRepository.class) // 내가 만든 클래스는 import 해줘야 함.
@@ -15,6 +12,7 @@ class JobopenRepositoryTest {
 
     @Autowired // Test에서 DI 하는 코드
     private JobopenRepository jobopenRepository;
+
 
     @Test
     public void findByIdWithUser() {
@@ -28,7 +26,7 @@ class JobopenRepositoryTest {
     public void findAll() {
         int idx = 1;
         //List<Jobopen> jobopenList = jobopenRepository.findAll();
-       // System.out.println("jobopenList = " + jobopenList);
+        // System.out.println("jobopenList = " + jobopenList);
 
     }
 }
