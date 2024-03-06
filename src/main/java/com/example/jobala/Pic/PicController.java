@@ -3,10 +3,10 @@ package com.example.jobala.Pic;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.io.FileInputStream;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Path;
@@ -16,18 +16,15 @@ import java.nio.file.Paths;
 @Controller
 public class PicController {
 
-    private final String upload = "./upload/";
+    private final String uploadDir = "./image/"; // 파일 업로드 디렉토리
 
-    @GetMapping("/upload")
-    public void upload(@PathVariable String filename, HttpServletResponse response) {
-        Path file = Paths.get(upload, filename);
-        try (FileInputStream fis = new FileInputStream(file.toFile());
-             OutputStream os = response.getOutputStream()) {
-            byte[] buffer = new byte[1024];
-            int b;
-            while ((b = fis.read(buffer)) != -1) {
-                os.write(buffer, 0, b);
-            }
+    @PostMapping("/upload")
+    public void upload(@RequestParam("imgFile") MultipartFile imgFile, HttpServletResponse response) {
+        String filename = imgFile.getOriginalFilename(); // 업로드된 파일명 가져오기
+        Path file = Paths.get(uploadDir + filename); // 파일 경로 생성
+
+        try (OutputStream os = new FileOutputStream(file.toFile())) {
+            os.write(imgFile.getBytes()); // 파일 쓰기
         } catch (IOException e) {
             e.printStackTrace();
         }
