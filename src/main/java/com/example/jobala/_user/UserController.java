@@ -8,12 +8,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.swing.plaf.PanelUI;
-import java.awt.desktop.OpenURIEvent;
 import java.util.List;
 
 @Controller
@@ -48,8 +45,6 @@ public class UserController {
             System.out.println(1);
             return "/user/joinForm";
         }
-
-
         User user = userRepository.findByUsernameAndPassword(reqDTO);
 
         //권한체크(user=null 경우)

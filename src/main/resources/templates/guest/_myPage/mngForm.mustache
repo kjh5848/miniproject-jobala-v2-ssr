@@ -7,11 +7,18 @@
                 <div class="upMenu text-center mb-4">
                     <h1>마이페이지</h1>
                     <div class="btn-group btn-group-lg">
-                        <button type="button" class="btn btn-outline-dark" id="profileBtn">프로필 관리</button>
-                        <button type="button" class="btn btn-outline-dark">이력서 관리</button>
-                        <button type="button" class="btn btn-outline-dark">지원 관리</button>
-                        <button type="button" class="btn btn-outline-dark">스크랩한 기업</button>
-                        <button type="button" class="btn btn-outline-dark">로그아웃</button>
+                        <a href="/guest/profileForm">
+                            <button type="button" class="btn btn-outline-dark m-1" id="profileBtn">프로필 관리</button>
+                        </a>
+                        <a href="/guest/mngForm">
+                            <button type="button" class="btn btn-outline-dark m-1">이력서 관리</button>
+                        </a>
+                        <a href="/applyStatusForm">
+                            <button type="button" class="btn btn-outline-dark m-1">지원 관리</button>
+                        </a>
+                        <a href="/guest/scrapForm">
+                            <button type="button" class="btn btn-outline-dark m-1">스크랩한 기업</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -47,7 +54,7 @@
                         </tbody>
                     </table>
                     <div class="text-center"> <!-- Center the button -->
-                        <a href="/guest/resume/writeForm" class="btn btn-primary">새로운 이력서 작성하기</a>
+                        <a href="/guest/resume/saveForm" class="btn btn-primary">새로운 이력서 작성하기</a>
                         <!-- Styled in blue color -->
                     </div>
                 </div>

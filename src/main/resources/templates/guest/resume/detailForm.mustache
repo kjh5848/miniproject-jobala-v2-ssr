@@ -20,7 +20,7 @@
                         <img src="https://picsum.photos/800/400" class="img-fluid img-thumbnail">
                     </div>
                     <div class="card-body col-md-6 col-sm-12 justify-content-center">
-
+// 세션유저를 조인해서 넣어야함
                     </div>
                 </div>
             </div>
@@ -58,20 +58,15 @@
                     <tr>
                         <td>스킬</td>
                         <td>
-                            <ul>
-                                <li>Java</li>
-                                <li>CSS</li>
-                                <li>HTML</li>
-                                <li>JavaScrpit</li>
-                            </ul>
+                            {{#skillsList}}
+                                <div>{{.}}</div>
+                            {{/skillsList}}
                         </td>
                     </tr>
                     <tr>
                         <td>자격증</td>
                         <td>
-                            <ul>
-                                <li>{{resume.license}}</li>
-                            </ul>
+                            <div>{{resume.license}}</div>
                         </td>
                     </tr>
                     </tbody>

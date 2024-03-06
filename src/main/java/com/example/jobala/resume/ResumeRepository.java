@@ -1,11 +1,16 @@
 package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -47,18 +52,23 @@ public class ResumeRepository {
         query.setParameter(5, resumeSaveDTO.getLicense());
         query.setParameter(6, resumeSaveDTO.getContent());
         query.setParameter(7, resumeSaveDTO.getEdu());
-        query.setParameter(8, resumeSaveDTO.getEdu());
+        query.setParameter(8, user.getName());
+        query.executeUpdate();
 
         Query query2 = em. createNativeQuery("select max(id) from resume_tb");
         Integer resumeId = (Integer) query2.getSingleResult();
 
-        Query query3 = em.createNativeQuery("insert into skill_tb(user_id, role, resume_id, skills) values (?,?,?,?)");
+        Query query3 = em.createNativeQuery("insert into skill_tb(user_id, role, resume_id, name) values (?,?,?,?)");
+
+        // List -> JSON
+        List<String> skills = resumeSaveDTO.getSkills();
+        String json = new Gson().toJson(skills);
+        System.out.println("제이슨 결과 = " + json);
+
         query3.setParameter(1,user.getId());
         query3.setParameter(2,user.getRole());
         query3.setParameter(3,resumeId);
-        query3.setParameter(4,resumeSaveDTO.getSkills());
-
-        query.executeUpdate();
+        query3.setParameter(4,json);
         query3.executeUpdate();
     }
 

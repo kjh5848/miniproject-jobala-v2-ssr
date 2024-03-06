@@ -15,7 +15,7 @@ public class Resume {
     private Integer id;
 
     private Integer userId;
-    private String name;
+    private String name; // 지원자 이름
     private String resumeTitle;
     private String hopeJob;
     private String career;

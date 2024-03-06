@@ -32,14 +32,26 @@ VALUES
 
 -- 개인이 지원하는 것이면 role = 0을 넣어야 한다.
 -- 선규가 1번 이력서로 네이버에 지원했다.
-INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at)
+
+
+INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at) 
 values
     (1, 3, 1, '검토중', 0, now()),
     (2, 3, 1, '검토중', 0, now()),
     (3, 5, 4, '검토중', 0, now());
+    
 
--- 스킬 더미
+-- 이력서 스킬 더미
 INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME)
 VALUES
     (2,0,2,'["Java","JavaScript","Spring"]'),
     (3,0,2,'["Java","Spring"]');
+
+-- 공고 스킬 더미
+INSERT INTO SKILL_TB(jobopen_id, role, user_id, name)
+values
+    (1, 1, 3,'["Java","JavaScript"]'),
+    (2, 1, 3,'["Java","JavaScript","Spring","HTML","jQuery","MySQL"]'),
+    (3, 1, 4,'["Java"]'),
+    (4, 1, 5,'["JavaScript","jQuery"]'),
+    (5, 1, 5,'["Java","Spring","HTML","jQuery","MySQL"]');

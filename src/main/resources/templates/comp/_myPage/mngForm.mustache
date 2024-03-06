@@ -10,16 +10,16 @@
                     <h1>마이페이지</h1>
                     <div class="btn-group btn-group-lg">
                         <a href="/comp/profileForm">
-                            <button type="button" class="btn btn-outline-dark">프로필 관리</button>
+                            <button type="button" class="btn btn-outline-dark m-1">프로필 관리</button>
                         </a>
                         <a href="/comp/mngForm">
-                            <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
+                            <button type="button" class="btn btn-outline-dark m-1">채용공고 관리</button>
                         </a>
                         <a href="/applyPositionForm">
-                            <button type="button" class="btn btn-outline-dark">지원자 관리</button>
+                            <button type="button" class="btn btn-outline-dark m-1">지원자 관리</button>
                         </a>
                         <a href="/comp/scrapForm">
-                            <button type="button" class="btn btn-outline-dark">스크랩</button>
+                            <button type="button" class="btn btn-outline-dark m-1">스크랩</button>
                         </a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         {{#jobopenList}}
             <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
                 <div class="card-body">
-                    <a href="/comp/{{id}}">
+                    <a href="/comp/jobopen/{{id}}">
                         <div class="card-text mb-5 text-truncate">
                             <h2>{{jobopenTitle}}</h2>
                         </div>
@@ -65,7 +65,7 @@
 
 
         <div class="text-center mb-5">
-            <a href="/comp/writeForm">
+            <a href="/comp/jobopen/saveForm">
                 <button class="btn btn-primary">공고만들기</button>
             </a>
         </div>

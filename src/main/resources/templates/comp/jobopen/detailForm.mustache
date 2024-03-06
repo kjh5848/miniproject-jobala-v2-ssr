@@ -20,33 +20,6 @@
                     </button>
                 </div>
             </div>
-
-
-            <table class="table caption-top table-striped table-hover table-borderless table-sm">
-                <caption>기본정보</caption>
-                <tbody>
-                <tr>
-                    <th scope="row">경력</th>
-                    <td>{{jobopen.career}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">학력</th>
-                    <td>{{jobopen.edu}}</td>
-                </tr>
-                <tr>
-                    <th>고용 형태</th>
-                    <td>{{jobopen.jobType}}</td>
-                </tr>
-                <tr>
-                    <th>연봉</th>
-                    <td>{{jobopen.salary}}</td>
-                </tr>
-                <tr>
-                    <th>지역</th>
-                    <td>{{jobopen.compLocation}}</td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
     <!-- 회사 기본정보 -->
@@ -80,7 +53,6 @@
                         </div>
                     </div>
 
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -98,6 +70,39 @@
         <img src="https://picsum.photos/800/400" class="img-fluid">
         <div class="card-body">
             <div class="card-header">
+                <h3>기본 정보 및 모집분야</h3>
+            </div>
+            <table class="table table-hover table-borderless table-sm">
+                <thead class="table-dark">
+                <th colspan="2">기본 정보</th>
+
+                </thead>
+                <tbody>
+                <tr>
+                    <td>경력</td>
+                    <td>{{jobopen.career}}</td>
+                </tr>
+                <tr>
+                    <td>학력</td>
+                    <td>{{jobopen.edu}}</td>
+                </tr>
+                <tr>
+                    <td>고용 형태</td>
+                    <td>{{jobopen.jobType}}</td>
+                </tr>
+                <tr>
+                    <td>연봉</td>
+                    <td>{{jobopen.salary}}</td>
+                </tr>
+                <tr>
+                    <td>지역</td>
+                    <td>{{jobopen.compLocation}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-body">
+            <div class="card-header">
                 <h3>모집 분야</h3>
             </div>
             <table class="table table-hover">
@@ -109,17 +114,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <td>{{jobopen.hopeJob}}</td>
-                    <td>0명</td>
-                    <td>
-                        <ul>
-                            <li>{{jobopen.skills}}</li>
-                        </ul>
-                    </td>
+                <td>{{jobopen.hopeJob}}</td>
+                <td>0명</td>
+                <td>
+                    <ul>
+                        {{#skillsList}}
+                            <li>{{.}}</li>
+                        {{/skillsList}}
+                    </ul>
+                </td>
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 
