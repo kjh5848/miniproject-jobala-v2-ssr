@@ -28,7 +28,7 @@
     <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <form action="/applys/{{id}}">
+                <form id="applicationForm" action="/applys/{{id}}">
                     <div class="modal-header">
                         <h5 class="modal-title" id="applyModalLabel">이력서 목록</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        <button type="submit" class="btn btn-primary">홈페이지 지원하기</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">홈페이지 지원하기</button>
                     </div>
                 </form>
             </div>
@@ -244,6 +244,20 @@
     </div>
     <!-- 버튼으로 넘겨서 보기 -->
 </div>
+<script>
+    // 입사 지원하기 버튼
+    document.getElementById('applicationForm').addEventListener('submit', function(event) {
 
+        // 입사지원하기 버튼을 찾아서 텍스트 변경
+        var applyButton = document.querySelector('.btn-danger'); // 입사지원하기 버튼의 클래스나 ID에 따라 변경하세요
+        applyButton.textContent = '지원완료';
+        applyButton.disabled = true; // 버튼 비활성화
+        applyButton.classList.remove('btn-danger'); // 원래의 빨간색 클래스 제거
+        applyButton.classList.add('btn-secondary'); // 회색으로 변경
+
+        // 폼 제출을 중단
+        event.preventDefault();
+    });
+</script>
 
 {{> layout/footer}}
