@@ -6,8 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PicRequest {
 
     @Data
-    public static class UploadDTO{
-        private String title;
+    public static class UploadDTO {
         private MultipartFile imgFile;
     }
 }

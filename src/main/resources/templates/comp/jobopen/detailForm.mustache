@@ -34,7 +34,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
                         {{#resumeList}}
                             <div class="card row mt-3 shadow-lg p-3 bg-body rounded-5">
                                 <div class="card-body  shadow-5 ">
@@ -46,13 +45,12 @@
                                             <p style="font-size: 15px;">{{career}} / {{edu}} </p>
                                         </div>
                                         <div>
-                                            <input type="radio" name="id" value="{{Id}}">
+                                            <input type="radio" name="id" value="{{id}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         {{/resumeList}}
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

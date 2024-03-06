@@ -1,48 +1,32 @@
 package com.example.jobala.Pic;
 
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
 public class PicController {
 
-    private final PicRepository picRepository;
+    private final String uploadDir = "./image/"; // 파일 업로드 디렉토리
 
-    @PostMapping("/PicUpload")
-    public String PicUpload(PicRequest.UploadDTO requestDTO, @RequestParam int id, HttpServletRequest request) throws IOException {
-        // 1. 데이터 전달 받고
-        String title = requestDTO.getTitle();
-        MultipartFile imgFile = requestDTO.getImgFile();
-        System.out.println(title);
-        System.out.println(imgFile);
+    @PostMapping("/upload")
+    public void upload(@RequestParam("imgFile") MultipartFile imgFile, HttpServletResponse response) {
+        String filename = imgFile.getOriginalFilename(); // 업로드된 파일명 가져오기
+        Path file = Paths.get(uploadDir + filename); // 파일 경로 생성
 
-        // 2. 파일저장 위치 설정해서 파일을 저장 (UUID 붙여서 롤링)
-        String imgFilename = UUID.randomUUID() + "_" + imgFile.getOriginalFilename();
-        Path imgPath = Paths.get("./image/" + imgFilename);
-        try {
-            Files.write(imgPath, imgFile.getBytes());
-
-            // 3. DB에 저장 (title, realFileName)
-            picRepository.PicUpload(title, imgFilename);
-
+        try (OutputStream os = new FileOutputStream(file.toFile())) {
+            os.write(imgFile.getBytes()); // 파일 쓰기
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
-        Pic pic = picRepository.findById(id);
-        request.setAttribute("pic", pic); // HttpServletRequest를 사용하여 pic 객체를 추가
-
-        return "/guest/resume/save";
     }
 }

@@ -1,5 +1,8 @@
 package com.example.jobala.comp;
 
+
+import com.example.jobala.apply.ApplyRequest;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala._user.User;
 import com.example.jobala.apply.ApplyRequest;
 import com.example.jobala.apply.ApplyResponse;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +54,7 @@ public class CompController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
-        Resume resume = (Resume) compRepository.findResumeById(id);
+        Resume resume = compRepository.findResumeById(id);
 
         req.setAttribute("sessionUser", sessionUser);
         req.setAttribute("resume", resume);
@@ -70,5 +74,17 @@ public class CompController {
         return "/comp/_myPage/profileForm";
     }
 
+    @GetMapping("/detail")
+    public String getApplicantList(HttpServletRequest request) {
+        List<Resume> resumeList = compRepository.findResumeAll();
+        request.setAttribute("resumeList", resumeList);
 
+        return "/comp/jobopen/detailForm";
+    }
+
+    @GetMapping("/detail/{id}")
+    public @ResponseBody List<CompRequest> getresumeList(@PathVariable Integer id) {
+        List<CompRequest> resumeList = new ArrayList<>();
+        return resumeList;
+    }
 }

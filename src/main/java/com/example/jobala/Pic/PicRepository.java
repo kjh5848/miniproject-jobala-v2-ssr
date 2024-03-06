@@ -12,16 +12,17 @@ public class PicRepository {
     private final EntityManager em;
 
     @Transactional
-    public void PicUpload(String title, String imgFilename){
-        Query query = em.createNativeQuery("insert into pic_tb(title, img_filename) values(?,?)");
-        query.setParameter(1, "이력서 사진");
+    public void insert(int userId, String imgFilename){
+        Query query = em.createNativeQuery("insert into pic_tb (user_id, img_filename) values (?,?)");
+        query.setParameter(1, userId);
         query.setParameter(2, imgFilename);
 
         query.executeUpdate();
     }
 
+    @Transactional
     public Pic findById(int id){
-        Query query = em.createNativeQuery("select * from pic_tb where id = ?", Pic.class);
+        Query query = em.createNativeQuery("select * from pic_tb where user_id = ?", Pic.class);
         query.setParameter(1, id);
 
         return (Pic) query.getSingleResult();
