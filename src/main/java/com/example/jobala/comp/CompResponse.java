@@ -18,29 +18,4 @@ public class CompResponse {
         private String address;
         private String career;
     }
-
-    @Data
-
-    @AllArgsConstructor
-    public static class ResumeDTO {
-        private int id;
-        private String resumeTitle;
-        private String career;
-        private String education;
-    }
-
-    public static class ResumeListDTO{
-        private Integer id;
-        private String resumeTitle;
-        private String career;
-        private String edu;
-
-        public ResumeListDTO(Integer id, String resumeTitle, String career, String edu) {
-            this.id = id;
-            this.resumeTitle = resumeTitle;
-            this.career = career;
-            this.edu = edu;
-        }
-    }
-
 }

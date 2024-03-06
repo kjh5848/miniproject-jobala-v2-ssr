@@ -66,6 +66,12 @@ public class JobopenController {
 
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
+        // modal 이력서 id로 가져오기
+        User user = (User) session.getAttribute("sessionUser");
+        int userId = user.getId();
+        // resumeList 메소드를 호출할 때 사용자 ID를 매개변수로 전달
+        List<Resume> resumeList2 = jobopenRepository.findResumeById(user.getId());
+        req.setAttribute("resumeList2", resumeList2);
 
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
 
@@ -80,10 +86,10 @@ public class JobopenController {
         req.setAttribute("skillsList", skillsList);
 
         //이력서 리스트 불러오기
-        List<Resume> resumeList = jobopenRepository.findByResumeAll();
+//        List<Resume> resumeList = jobopenRepository.findByResumeAll();
 
         req.setAttribute("jobopen", jobopen);
-        req.setAttribute("resumeList", resumeList);
+//        req.setAttribute("resumeList", resumeList);
 
 
         return "/comp/jobopen/detailForm";
