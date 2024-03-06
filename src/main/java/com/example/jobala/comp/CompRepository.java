@@ -3,6 +3,7 @@ package com.example.jobala.comp;
 import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -17,6 +19,48 @@ import java.util.List;
 public class CompRepository {
     private final EntityManager em;
 
+
+
+    public List<CompResponse.ResumeDTO> resumeList(int userId){
+        String q = """
+            SELECT rt.id, rt.resume_title, rt.career, rt.edu
+                   FROM resume_tb rt
+                   INNER JOIN apply_tb at ON rt.id = at.resume_id
+                   WHERE at.user_id = :userId
+           """;
+
+        Query query = em.createNativeQuery(q); // CompResponse.ResumeDTO.class 제거
+        query.setParameter("userId", userId);
+
+        // 쿼리 실행 후 결과를 CompResponse.ResumeDTO 리스트로 변환하는 로직 필요
+        List<Object[]> resultObjects = query.getResultList();
+        List<CompResponse.ResumeDTO> results = new ArrayList<>();
+        for (Object[] result : resultObjects) {
+            results.add(new CompResponse.ResumeDTO(
+                    (Integer) result[0], // id
+                    (String) result[1],  // resume_title
+                    (String) result[2],  // career
+                    (String) result[3]   // edu
+            ));
+        }
+
+        return results;
+    }
+
+
+
+//    public List<Resume> findAllResumesByUserId(Integer userId) {
+//        String q = "SELECT r FROM Resume r WHERE r.userId = :userId ORDER BY r.id DESC";
+//        return em.createQuery(q, Resume.class)
+//                .setParameter("userId", userId)
+//                .getResultList();
+//    }
+
+
+    public List<Resume> findResumeById(Integer userId) {
+        Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
+        query.setParameter(1, userId);
+      
 
     public List<Resume> findResumeAll() {
         String q = """

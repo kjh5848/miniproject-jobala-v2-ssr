@@ -20,6 +20,15 @@ public class CompResponse {
     }
 
     @Data
+
+    @AllArgsConstructor
+    public static class ResumeDTO {
+        private int id;
+        private String resumeTitle;
+        private String career;
+        private String education;
+    }
+
     public static class ResumeListDTO{
         private Integer id;
         private String resumeTitle;
@@ -33,4 +42,5 @@ public class CompResponse {
             this.edu = edu;
         }
     }
+
 }
