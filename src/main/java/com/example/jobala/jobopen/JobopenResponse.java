@@ -35,26 +35,8 @@ public class JobopenResponse {
         private String content; //내용
         private String hopeJob; //내용
         private String name;
-        private List<String> skills = new ArrayList<>();
-    }
-
-
-    @Data
-    public static class SkillsDTO {
-        Integer id;
-        Integer jobopenId;
-        Integer role;
-        String name;
-
-        public SkillsDTO(Object[] objects) {
-            this.id = (Integer) objects[0];
-            this.jobopenId = (Integer) objects[1];
-            this.role = (Integer) objects[2];
-            this.name = (String) objects[3];
-        }
 
     }
-
 
     //사진
     //맞춤 공고

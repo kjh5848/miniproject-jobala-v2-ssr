@@ -61,8 +61,7 @@ public class ResumeController {
         String json = skills.getName();
         // JSON -> List
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {
-        }.getType();
+        Type type = new TypeToken<List<String>>() {}.getType();
         List<String> skillsList = gson.fromJson(json, type);
         System.out.println("다시 바꾼 결과 = " + skillsList);
         request.setAttribute("skillsList", skillsList);

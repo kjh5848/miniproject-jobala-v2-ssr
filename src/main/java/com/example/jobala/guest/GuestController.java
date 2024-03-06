@@ -33,7 +33,7 @@ public class GuestController {
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        List<Jobopen> jobopenList = guestRepository.findAll();
+        List<Jobopen> jobopenList = guestRepository.findByJoboopenAll();
         req.setAttribute("jobopenList", jobopenList);
         return "/guest/jobSearch";
     }
