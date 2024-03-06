@@ -23,14 +23,14 @@ public class GuestRepository {
         return resumeList;
     }
 
-//    public List<Jobopen> findAll(String skills) {
-//        String q = """
-//                select * from jobopen_tb where order by id desc
-//                """;
-//
-//        Query query = em.createNativeQuery(q, Jobopen.class);
-//        return query.getResultList();
-//    }
+    public List<Jobopen> findAll(String skills) {
+        String q = """
+                SELECT jb.*, sk.name FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id;
+                """;
+
+        Query query = em.createNativeQuery(q);
+        return query.getResultList();
+    }
 
     public List<Jobopen> findAll() {
         String q = """
