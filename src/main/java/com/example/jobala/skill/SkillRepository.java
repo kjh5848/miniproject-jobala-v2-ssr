@@ -26,6 +26,21 @@ public class SkillRepository {
         }
     }
 
+    public Skill findByJobopenId(Integer id) {
+        String q = """
+                select * from skill_tb where jobopen_id = ?;
+                """;
+        Query query = em.createNativeQuery(q, Skill.class);
+        query.setParameter(1,id);
+
+        try {
+            Skill skill = (Skill) query.getSingleResult();
+            return skill;
+        } catch (Exception e) {
+            return  null;
+        }
+    }
+
     public void findAll() {
         return;
     }
@@ -49,18 +64,5 @@ public class SkillRepository {
         return;
     }
 
-    public Skill findByJobopenId(int id) {
-        String q = """
-                select * from skill_tb where jobopen_id = ?;
-                """;
-        Query query = em.createNativeQuery(q, Skill.class);
-        query.setParameter(1,id);
 
-        try {
-            Skill skill = (Skill) query.getSingleResult();
-            return skill;
-        } catch (Exception e) {
-            return  null;
-        }
-    }
 }

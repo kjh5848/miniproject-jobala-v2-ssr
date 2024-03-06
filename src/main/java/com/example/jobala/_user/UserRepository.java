@@ -22,8 +22,15 @@ public class UserRepository {
         return query.getResultList();
     }
 
-    public void findById(int id) {
-        return;
+
+    public User findById(int id) {
+        String q = """
+                select * from user_tb where id = ?
+                """;
+        Query query = em.createNativeQuery(q,User.class);
+        query.setParameter(1, id);
+        User user = (User) query.getSingleResult();
+        return user;
     }
 
     @Transactional

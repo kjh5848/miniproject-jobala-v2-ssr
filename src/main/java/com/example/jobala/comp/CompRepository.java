@@ -1,6 +1,8 @@
 package com.example.jobala.comp;
 
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,36 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompRepository {
     private final EntityManager em;
+
+
+    public List<Resume> findResumeAll() {
+        String q = """
+            select * from resume_tb order by id desc;              
+            """;
+        Query query = em.createNativeQuery(q, Resume.class);
+        return query.getResultList();
+    }
+//    public findAllByUserId(int guestId){
+//        String q = """
+//                SELECT r.id, r.resume_title, r.career, r.edu
+//                FROM resume_tb r
+//                WHERE r.user_id = ?;
+//                """;
+//        Query query = em.createNativeQuery(q,Resume.class);
+//        query.setParameter(1, guestId);
+//         List<Resume> resultList =query.getSingleResult();
+////        JpaResultMapper mapper = new JpaResultMapper();
+////        List<CompResponse.ResumeListDTO> resumeList = mapper.list(query, CompResponse.ResumeListDTO.class);
+////        return resumeList;
+//        return
+//    }
+    public List<Resume> findAllByUserId(int userId) {
+    Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
+    query.setParameter(1, userId);
+
+    List<Resume> resumeList = query.getResultList();
+    return resumeList;
+    }
 
 
     public List<CompResponse.ScoutListDTO> scoutList(){
@@ -40,7 +72,22 @@ public class CompRepository {
         return results;
     }
 
-    public List<Jobopen> findAll() {
+    public Resume findResumeById(int id) {
+        String q = """
+                select * from resume_tb where id = ?;              
+                """;
+        Query query = em.createNativeQuery(q, Resume.class);
+        query.setParameter(1, id);
+        try {
+            Resume resume = (Resume) query.getSingleResult();
+            return resume;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public List<Jobopen> findJobopenAll() {
         String q = """
                 select * from jobopen_tb order by id desc;              
                 """;

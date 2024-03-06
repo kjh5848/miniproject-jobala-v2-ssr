@@ -29,14 +29,12 @@ public class JobopenRequest {
         private String compLocation; //근무지역
         private String content; //내용
         private List<String> skills = new ArrayList<>(); //내용
-
-
     }
 
 
     @AllArgsConstructor
     @Data
-    public static class JobopenSaveDTO {
+    public static class SaveDTO {
         private String edu;
         private String jobopenTitle;
         private String career;

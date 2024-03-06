@@ -1,6 +1,8 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.guest.GuestRepository;
+import com.example.jobala.resume.Resume;
 import com.example.jobala.skill.Skill;
 import com.example.jobala.skill.SkillRepository;
 import com.google.gson.Gson;
@@ -22,6 +24,8 @@ public class JobopenController {
 
     private final JobopenRepository jobopenRepository;
     private final SkillRepository skillRepository;
+    private final GuestRepository guestRepository;
+
     private final HttpSession session;
 
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -46,11 +50,10 @@ public class JobopenController {
     }
 
     @PostMapping("/comp/jobopen/save")
-    public String jobopenSave(JobopenRequest.JobopenSaveDTO reqDTO) {
+    public String jobopenSave(JobopenRequest.SaveDTO reqDTO) {
         System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
         jobopenRepository.save(reqDTO, sessionUser);
-
         return "redirect:/comp/mngForm";
     }
 
@@ -63,19 +66,24 @@ public class JobopenController {
 
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
+
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
         Skill skills = skillRepository.findByJobopenId(id);
         String json = skills.getName();
         // JSON -> List
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {
-        }.getType();
+        Type type = new TypeToken<List<String>>() {}.getType();
         List<String> skillsList = gson.fromJson(json, type);
         System.out.println("다시 바꾼 결과 = " + skillsList);
-
         req.setAttribute("skillsList", skillsList);
+
+        //이력서 리스트 불러오기
+        List<Resume> resumeList = jobopenRepository.findByResumeAll();
+
         req.setAttribute("jobopen", jobopen);
+        req.setAttribute("resumeList", resumeList);
 
 
         return "/comp/jobopen/detailForm";
