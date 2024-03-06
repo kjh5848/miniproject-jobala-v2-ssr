@@ -1,5 +1,7 @@
 package com.example.jobala.resume;
 
+import com.example.jobala.Pic.PicRepository;
+import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._user.User;
 import com.example.jobala.skill.Skill;
 import com.example.jobala.skill.SkillRepository;
@@ -12,9 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -24,6 +32,7 @@ public class ResumeController {
     private final SkillRepository skillRepository;
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
+    private final PicRepository picRepository;
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {

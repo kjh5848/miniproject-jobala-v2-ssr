@@ -12,15 +12,15 @@ public class PicRepository {
     private final EntityManager em;
 
     @Transactional
-    public void PicUpload(String title, String imgFilename){
+    public void PicUpload(String title, String imgFilename) {
         Query query = em.createNativeQuery("insert into pic_tb(title, img_filename) values(?,?)");
-        query.setParameter(1, "이력서 사진");
+        query.setParameter(1, title);
         query.setParameter(2, imgFilename);
 
         query.executeUpdate();
     }
 
-    public Pic findById(int id){
+    public Pic findById(int id) {
         Query query = em.createNativeQuery("select * from pic_tb where id = ?", Pic.class);
         query.setParameter(1, id);
 
