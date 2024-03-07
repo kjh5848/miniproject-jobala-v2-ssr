@@ -50,7 +50,7 @@ public class ResumeController {
     }
 
     @GetMapping("/guest/resume/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest req, PicRequest.UpdateDTO reqDTO) {
+    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeRepository.findById(id);
         User user = (User) session.getAttribute("sessionUser");
 
