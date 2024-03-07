@@ -4,6 +4,7 @@ values
     ('서강준', 'ssar', 'ssar@nate.com', '1234', '서울시 강남구', '1998-02-02','01022223333', 0, now()),
     ('박선규', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25','01012345678', 0, now());
 
+
 insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
 values
     ('5678', '홍길동', '네이버', '부산광역시 전포', 'com1', 'com1@nate.com', '1234', '담당자1', '01011112222', 1, now()),
@@ -33,12 +34,29 @@ VALUES
 -- 선규가 2번 이력서로 네이버에 지원했다.
 -- 선규가 2번 이력서로 쿠팡에 지원했다.
 -- 강준이가 1번 이력서로 네이버(2)에 지원했다.
-INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, role, created_at)
+INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, created_at)
 values
-    (3, 2, 1, '검토중', 0, now()),
-    (3, 2, 4, '검토중', 0, now()),
-    (1, 1, 2, '검토중', 0, now());
-    
+    (1, 3, 1, '검토중', now()),
+    (2, 3, 1, '검토중', now()),
+    (3, 5, 4, '검토중', now());
+--     (3, 2, 1, '검토중', 0, now()),
+--     (3, 2, 4, '검토중', 0, now()),
+--     (1, 1, 2, '검토중', 0, now()),
+--     (3, 2, 1, '검토중', 0, now()),
+--     (3, 2, 4, '검토중', 0, now()),
+--     (1, 1, 2, '검토중', 0, now());
+
+
+-- -- 개인에서 보는 지원한 현황 더미
+INSERT INTO apply_tb(resume_id, user_id, jobopen_id, state, created_at)
+values
+    (3, 2, 1, '검토중', now()),
+    (3, 2, 4, '검토중', now()),
+    (1, 1, 2, '검토중', now()),
+    (3, 2, 1, '검토중', now()),
+    (3, 2, 4, '검토중', now()),
+    (1, 1, 2, '검토중', now());
+
 
 -- 이력서 스킬 더미
 INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME)
@@ -46,7 +64,7 @@ VALUES
     (1,0,1, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
     (2,0,2,'["Java","JavaScript","Spring"]'),
     (3,0,2,'["Java","Spring"]');
-    
+
 
 -- 공고 스킬 더미
 INSERT INTO SKILL_TB(jobopen_id, role, user_id, name)
@@ -57,12 +75,14 @@ values
     (4, 1, 5,'["JavaScript","jQuery"]'),
     (5, 1, 5,'["Java","Spring","HTML","jQuery","MySQL"]');
 
+
 -- 개인이 공고를 선택한 더미
 Insert Into scrap_tb(user_id, jobopen_id, role, create_at)
 values (1, 1, 0, now()),
        (1, 2, 0, now()),
        (2, 3, 0, now()),
        (2, 4, 0, now());
+
 
 -- 기업이 이력서를 선택한 더미
 Insert Into scrap_tb(user_id, resume_id, role, create_at)
