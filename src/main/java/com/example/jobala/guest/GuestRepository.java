@@ -1,5 +1,6 @@
 package com.example.jobala.guest;
 
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
@@ -28,15 +29,20 @@ public class GuestRepository {
 
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
-
-
+      
         JpaResultMapper mapper = new JpaResultMapper();
         List<GuestResponse.JopOpenApplyDTO> applystate = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
         return applystate;
 
 
-    }
 
+
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<GuestResponse.JopOpenApplyDTO> JopOpenApplyDTO = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
+        return JopOpenApplyDTO;
+    }
+  
+  
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
         query.setParameter(1, userId);

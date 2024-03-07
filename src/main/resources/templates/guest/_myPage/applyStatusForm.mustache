@@ -1,5 +1,11 @@
 {{> layout/header}}
 
+{{#applystate}}
+    {{jobopenTitle}}
+    {{resumeTitle}}
+    {{state}}
+{{/applystate}}
+
 <!--개인 지원현황 페이지-->
 <div class="container mt-5">
     <div class="card-body">
@@ -30,7 +36,8 @@
             <div class="col">
                 <div class="applyBox">
                     <h2 class="text-left">지원 현황</h2>
-                    <table class="table">
+
+                    <table class="table" id="applicationTable">
                         <thead>
                         <tr>
                             <th>공고 제목</th>
@@ -56,5 +63,4 @@
     <br>
     <br>
 </div>
-
 {{> layout/footer}}
