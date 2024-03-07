@@ -39,12 +39,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>기업 A</td>
-                        <td>프론트엔드 개발자 채용</td>
-                        <td>2024-03-01</td>
-                    </tr>
+                    {{#jobopenList}}
+                        <tr onClick="location.href='/comp/jobopen/{{id}}'">
+                            <td>{{name}}</td>
+                            <td>{{resumeTitle}}</td>
+                            <td>{{edu}}</td>
+                            <td>{{career}}</td>
+                        </tr>
+                    {{/jobopenList}}
                     <!-- Add more rows as needed -->
                     </tbody>
                 </table>

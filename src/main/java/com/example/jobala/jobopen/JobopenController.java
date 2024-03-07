@@ -75,7 +75,6 @@ public class JobopenController {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
-
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
