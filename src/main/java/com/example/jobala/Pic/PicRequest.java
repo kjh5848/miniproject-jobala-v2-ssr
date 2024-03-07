@@ -9,5 +9,8 @@ public class PicRequest {
     public static class UploadDTO {
         private String title;
         private MultipartFile imgFile;
+
+        private Integer resumeId;
+        private Integer jpbOpenId;
     }
 }

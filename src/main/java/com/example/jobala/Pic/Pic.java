@@ -12,5 +12,8 @@ public class Pic {
     private Integer id;
     private String title;
     private String imgFilename; // 파일 패스
+
+    private Integer resumeId;
+    private Integer jpbOpenId;
 }
 
