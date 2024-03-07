@@ -6,6 +6,7 @@ import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,17 +17,23 @@ import java.util.List;
 public class GuestRepository {
     private final EntityManager em;
 
-    public void findStateByUserId(Integer id){
+    public List<GuestResponse.JopOpenApplyDTO> findStateByUserId(int userId){
         String q = """
-                select j.jobopen_title,  r.resume_title, a.state, a.id
-                from apply_tb a
-                inner join jobopen_tb j on a.id = j.id
-                inner join resume_tb r on a.id = r.id
-                where user_id = ?;
+                SELECT j.jobopen_title, r.resume_title, a.state
+                FROM apply_tb a
+                INNER JOIN jobopen_tb j ON a.jobopen_id = j.id
+                INNER JOIN resume_tb r ON a.resume_id = r.id
+                WHERE a.user_id = ?;
                 """;
 
-//        List<jobopen> jobopenList = quer
-//        Query query = em.createNativeQuery(q);
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, userId);
+
+
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<GuestResponse.JopOpenApplyDTO> applystate = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
+        return applystate;
+
 
     }
 

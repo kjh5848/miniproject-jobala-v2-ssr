@@ -24,6 +24,5 @@ public class GuestResponse {
         private String jobopenTitle;
         private String resumeTitle;
         private String state;
-        private String username;
     }
 }
