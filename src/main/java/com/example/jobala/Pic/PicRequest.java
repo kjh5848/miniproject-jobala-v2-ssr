@@ -10,4 +10,10 @@ public class PicRequest {
         private String title;
         private MultipartFile imgFile;
     }
+
+    @Data
+    public static class UpdateDTO {
+        private String title;
+        private MultipartFile imgFile;
+    }
 }
