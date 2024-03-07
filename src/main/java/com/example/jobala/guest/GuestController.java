@@ -69,7 +69,8 @@ public class GuestController {
 
         List<GuestResponse.JopOpenApplyDTO> applystate = guestRepository.findStateByUserId(userId);
         req.setAttribute("applystate", applystate);
-
         return "/guest/_myPage/applyStatusForm";
     }
+
 }
+

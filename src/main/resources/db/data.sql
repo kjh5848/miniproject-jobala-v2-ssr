@@ -90,3 +90,7 @@ values (3, 1, 1, now()),
        (3, 2, 1, now()),
        (4, 3, 1, now()),
        (5, 1, 1, now());
+
+-- 자유게시판 더미
+-- insert into board_tb()
+-- values
