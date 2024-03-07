@@ -30,19 +30,33 @@
             <div class="col">
                 <div class="applyBox">
                     <h2 class="text-left">지원 현황</h2>
-                    <table class="table">
+<!--{{#applystate}}
+    {{jobopenTitle}}
+    {{resumeTitle}}
+    {{state}}
+    {{/applystate}}
+-->
+                    <table class="table" id="applicationTable">
                         <thead>
                         <tr>
                             <th>번호</th>
-                            <th>지원 공고</th>
-                            <th>진행여부</th>
+                            <th>공고 제목</th>
+                            <th>이력서 제목</th>
+                            <th>상태</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td></td>
                             <td>[카카오모빌리디] 서버(백엔드) 개발자]</td>
+                            <td>저는 열정적인 인재입니다</td>
                             <td>합격</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>[카카오모빌리디] 서버(백엔드) 개발자2</td>
+                            <td>저는 열정적인 인재입니다2</td>
+                            <td>불합격</td>
                         </tr>
                         </tbody>
                     </table>
@@ -54,5 +68,15 @@
     <br>
     <br>
 </div>
-
+<script>
+    // 번호 Auto increment 하기 문서가 준비되면 실행
+    $(document).ready(function() {
+        var table = document.getElementById("applicationTable");
+        var rows = table.getElementsByTagName("tr");
+        for(var i = 1; i < rows.length; i++) {
+            // 첫 번째 셀(번호 셀)에 행 번호를 설정
+            rows[i].cells[0].innerHTML = i;
+        }
+    });
+</script>
 {{> layout/footer}}

@@ -1,6 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,6 +59,10 @@ public class GuestController {
 
     @GetMapping("/applyStatusForm")
     public String applyStatusForm() {
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//        int userId = sessionUser.getId();
+//        List<GuestResponse.jobopenApplyDTO> applystate = GuestRepository.findStateByUserId(sessionUserId);
+//        request.setAttribute("applystate", applystate);
         return "/guest/_myPage/applyStatusForm";
     }
 
