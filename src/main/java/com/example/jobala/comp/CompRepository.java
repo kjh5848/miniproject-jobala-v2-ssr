@@ -59,11 +59,12 @@ public class CompRepository {
         return query.getResultList();
     }
 
-    public List<Jobopen> findJobopenAll() {
+    public List<Jobopen> findJobopenById(int id) {
         String q = """
-                select * from jobopen_tb order by id desc;              
+                select * from jobopen_tb where user_id= ? order by id desc;
                 """;
         Query query = em.createNativeQuery(q, Jobopen.class);
+        query.setParameter(1,id);
         return query.getResultList();
     }
 

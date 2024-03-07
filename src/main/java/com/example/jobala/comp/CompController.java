@@ -45,7 +45,8 @@ public class CompController {
 
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
-        List<Jobopen> jobopenList = compRepository.findJobopenAll();
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<Jobopen> jobopenList = compRepository.findJobopenById(sessionUser.getId());
         req.setAttribute("jobopenList", jobopenList);
         return "/comp/_myPage/mngForm";
     }

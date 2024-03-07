@@ -1,6 +1,7 @@
 package com.example.jobala.apply;
 
 
+import com.example.jobala._user.User;
 import com.example.jobala.board.Board;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApplyController {
 
+    private final HttpSession session;
     private final ApplyRepository applyRepository;
 
 //    @PostMapping("/updateApplicationStatus")
@@ -63,36 +65,36 @@ public class ApplyController {
 //    }
 
     // 핵심로직 : 지원 목록 가져오기
-    @GetMapping("/applys")
-    public String getApplicantList(HttpServletRequest request) {
-        // 1. 로그인한 아이디 가져오기 (세션) session.getAttribute();
-        int sessionUserId = 3;
-
-        // 2. 조회
-        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findAllByUserId(sessionUserId);
-        request.setAttribute("applys", responseDTO);
-        List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findAllByUserId(sessionUserId);
-        request.setAttribute("position", responseDTO2);
-
-//        // 페이징
-//        int pageIndex = page - 1;
+//    @GetMapping("/applys")
+//    public String getApplicantList(HttpServletRequest request) {
+//        // 1. 로그인한 아이디 가져오기 (세션) session.getAttribute();
+//        int sessionUserId = 3;
 //
-//        List<Apply> applyList = applyRepository.findAll(pageIndex);
+//        // 2. 조회
+//        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findAllByUserId(sessionUserId);
+//        request.setAttribute("applys", responseDTO);
+//        List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findAllByUserId(sessionUserId);
+//        request.setAttribute("position", responseDTO2);
 //
-//        // 전체 페이지 개수 계산
-//        int totalCount = applyRepository.count().intValue();
-//        int pageSize = 3; // 한 페이지에 표시할 아이템의 수
-//        int totalPageCount = (totalCount + pageSize - 1) / pageSize;
+////        // 페이징
+////        int pageIndex = page - 1;
+////
+////        List<Apply> applyList = applyRepository.findAll(pageIndex);
+////
+////        // 전체 페이지 개수 계산
+////        int totalCount = applyRepository.count().intValue();
+////        int pageSize = 3; // 한 페이지에 표시할 아이템의 수
+////        int totalPageCount = (totalCount + pageSize - 1) / pageSize;
+////
+////        request.setAttribute("applyList", applyList);
+////        request.setAttribute("first", page == 1);
+////        request.setAttribute("last", page.equals(totalPageCount));
+////        request.setAttribute("prev", page > 1 ? page - 1 : 1);
+////        request.setAttribute("next", page < totalPageCount ? page + 1 : totalPageCount);
 //
-//        request.setAttribute("applyList", applyList);
-//        request.setAttribute("first", page == 1);
-//        request.setAttribute("last", page.equals(totalPageCount));
-//        request.setAttribute("prev", page > 1 ? page - 1 : 1);
-//        request.setAttribute("next", page < totalPageCount ? page + 1 : totalPageCount);
-
-
-        return "comp/_myPage/applyPositionForm";
-    }
+//
+//        return "comp/_myPage/applyPositionForm";
+//    }
 
 
 //    // 핵심로직 : 지원 목록 가져오기
@@ -119,7 +121,13 @@ public class ApplyController {
 
 
     @GetMapping("/applyPositionForm")
-    public String applyPositionForm(HttpServletRequest request) {
+    public String applyPositionForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findCompApplyByUserId(sessionUser.getId());
+        req.setAttribute("compApply", responseDTO);
+        List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findGuestApplyByUserId(sessionUser.getId());
+        req.setAttribute("guestApply", responseDTO2);
+
         return "/comp/_myPage/applyPositionForm";
     }
 

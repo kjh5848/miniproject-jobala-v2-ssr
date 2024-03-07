@@ -24,13 +24,30 @@ public class ApplyRepository {
         query.executeUpdate();
     }
 
-    public List<ApplyResponse.ApplyDTO> findAllByUserId(int compId){ // 로그인한 기업 ID
+    public List<ApplyResponse.ApplyDTO> findGuestApplyByUserId(int compId){ // 로그인한 기업 ID
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE at.user_id = ?;
+                WHERE at.user_id = ? AND at.ROLE = 0;
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, compId);
+
+        // qlrm 사용하기
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
+        return responseDTO;
+    }
+
+    public List<ApplyResponse.ApplyDTO> findCompApplyByUserId(int compId){ // 로그인한 기업 ID
+        String q = """
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state
+                FROM apply_tb at
+                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                INNER JOIN resume_tb rt ON rt.id = at.resume_id
+                WHERE at.user_id = ? AND at.ROLE = 1;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
