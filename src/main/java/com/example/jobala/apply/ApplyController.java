@@ -5,6 +5,7 @@ import com.example.jobala.board.Board;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,34 @@ import java.util.List;
 public class ApplyController {
 
     private final ApplyRepository applyRepository;
+
+//    @PostMapping("/updateApplicationStatus")
+//    public ResponseEntity<String> updateApplicationStatus(
+//            @RequestParam("applyId") Integer applicationId,
+//            @RequestParam("status") Integer status) {
+//
+//        // 상태값을 문자열로 변환
+//        String statusString = convertStatusToString(status);
+//
+//        // 상태 업데이트 시도
+//        try {
+//            applyRepository.passFailStatus(applicationId, statusString);
+//            return ResponseEntity.ok("지원 상태가 성공적으로 업데이트되었습니다.");
+//        } catch (Exception e) {
+//            // 예외 처리 및 에러 응답
+//            return ResponseEntity.badRequest().body("상태 업데이트를 실패하였습니다.");
+//        }
+//    }
+//
+//    private String convertStatusToString(Integer status) {
+//        if (status.equals(0)) {
+//            return "합격";
+//        } else if (status.equals(1)) {
+//            return "불합격";
+//        } else {
+//            return "미정"; // 기본값
+//        }
+//    }
 
 
     @PostMapping("/applys/{id}")
@@ -35,7 +64,7 @@ public class ApplyController {
 
     // 핵심로직 : 지원 목록 가져오기
     @GetMapping("/applys")
-    public String getApplicantList(HttpServletRequest request, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+    public String getApplicantList(HttpServletRequest request) {
         // 1. 로그인한 아이디 가져오기 (세션) session.getAttribute();
         int sessionUserId = 3;
 
@@ -45,21 +74,21 @@ public class ApplyController {
         List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findAllByUserId(sessionUserId);
         request.setAttribute("position", responseDTO2);
 
-        // 페이징
-        int pageIndex = page - 1;
-
-        List<Apply> applyList = applyRepository.findAll(pageIndex);
-
-        // 전체 페이지 개수 계산
-        int totalCount = applyRepository.count().intValue();
-        int pageSize = 3; // 한 페이지에 표시할 아이템의 수
-        int totalPageCount = (totalCount + pageSize - 1) / pageSize;
-
-        request.setAttribute("applyList", applyList);
-        request.setAttribute("first", page == 1);
-        request.setAttribute("last", page.equals(totalPageCount));
-        request.setAttribute("prev", page > 1 ? page - 1 : 1);
-        request.setAttribute("next", page < totalPageCount ? page + 1 : totalPageCount);
+//        // 페이징
+//        int pageIndex = page - 1;
+//
+//        List<Apply> applyList = applyRepository.findAll(pageIndex);
+//
+//        // 전체 페이지 개수 계산
+//        int totalCount = applyRepository.count().intValue();
+//        int pageSize = 3; // 한 페이지에 표시할 아이템의 수
+//        int totalPageCount = (totalCount + pageSize - 1) / pageSize;
+//
+//        request.setAttribute("applyList", applyList);
+//        request.setAttribute("first", page == 1);
+//        request.setAttribute("last", page.equals(totalPageCount));
+//        request.setAttribute("prev", page > 1 ? page - 1 : 1);
+//        request.setAttribute("next", page < totalPageCount ? page + 1 : totalPageCount);
 
 
         return "comp/_myPage/applyPositionForm";
@@ -86,7 +115,7 @@ public class ApplyController {
         return applicantProfiles;
     }
 
-    // 페이징
+// 페이징
 
 
     @GetMapping("/applyPositionForm")
