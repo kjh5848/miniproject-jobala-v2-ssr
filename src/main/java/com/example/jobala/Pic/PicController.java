@@ -22,19 +22,23 @@ public class PicController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> upload(PicRequest.UploadDTO reqDTO) {
-
         String title = reqDTO.getTitle();
         MultipartFile imgFile = reqDTO.getImgFile();
 
+        // 이미지 파일의 저장 경로 설정
         String imgFilename = UUID.randomUUID() + "_" + imgFile.getOriginalFilename();
         Path imgPath = Paths.get("./image/" + imgFilename);
 
         try {
+            // 이미지 파일을 지정된 경로에 저장
             Files.write(imgPath, imgFile.getBytes());
 
+            // 이미지 파일의 저장 경로를 웹에서 인식할 수 있는 주소로 변경
+            String webImgPath = imgPath.toString().replace("\\", "/");
+            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
+
             // 파일 경로를 디비에 저장
-            picRepository.upload(title, imgPath.toString());
-            System.out.println("d");
+            picRepository.upload(title, webImgPath);
 
             return ResponseEntity.ok().body("이미지 업로드 및 데이터베이스 저장이 완료되었습니다.");
         } catch (IOException e) {

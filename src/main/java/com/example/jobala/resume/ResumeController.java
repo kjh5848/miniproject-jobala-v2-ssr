@@ -1,5 +1,6 @@
 package com.example.jobala.resume;
 
+import com.example.jobala.Pic.Pic;
 import com.example.jobala.Pic.PicRepository;
 import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._user.User;
@@ -17,15 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,6 +30,7 @@ public class ResumeController {
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
     private final UserRepository userRepository;
+    private final PicRepository picRepository;
     private final ScrapRepository scrapRepository;
 
     @GetMapping("/guest/resume/saveForm")
@@ -54,11 +50,18 @@ public class ResumeController {
     }
 
     @GetMapping("/guest/resume/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+    public String updateForm(@PathVariable Integer id, HttpServletRequest req, PicRequest.UpdateDTO reqDTO) {
         Resume resume = resumeRepository.findById(id);
         User user = (User) session.getAttribute("sessionUser");
+
+        // 이력서에 저장된 이미지 파일 정보 가져오기
+        Pic pic = picRepository.findByPic(id);
+
+        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
+
         req.setAttribute("user", user);
         req.setAttribute("resume", resume);
+
         return "/guest/resume/updateForm";
     }
 

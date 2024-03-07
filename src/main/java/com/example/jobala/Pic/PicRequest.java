@@ -9,5 +9,4 @@ public class PicRequest {
         private String title;
         private MultipartFile imgFile;
     }
-
 }
