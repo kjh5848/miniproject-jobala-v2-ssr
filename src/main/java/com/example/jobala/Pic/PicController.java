@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,9 +21,10 @@ public class PicController {
     private final PicRepository picRepository;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> upload(PicRequest.UploadDTO requestDTO) {
-        String title = requestDTO.getTitle();
-        MultipartFile imgFile = requestDTO.getImgFile();
+    public ResponseEntity<String> upload(PicRequest.UploadDTO reqDTO) {
+
+        String title = reqDTO.getTitle();
+        MultipartFile imgFile = reqDTO.getImgFile();
 
         String imgFilename = UUID.randomUUID() + "_" + imgFile.getOriginalFilename();
         Path imgPath = Paths.get("./image/" + imgFilename);
@@ -32,6 +34,7 @@ public class PicController {
 
             // 파일 경로를 디비에 저장
             picRepository.upload(title, imgPath.toString());
+            System.out.println("d");
 
             return ResponseEntity.ok().body("이미지 업로드 및 데이터베이스 저장이 완료되었습니다.");
         } catch (IOException e) {
