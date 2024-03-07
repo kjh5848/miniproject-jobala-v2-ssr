@@ -1,9 +1,11 @@
--- 회원가입 더미
+-- 개인 회원가입 더미
 insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
 values ('서강준', 'ssar', 'ssar@nate.com', '1234', '서울시 강남구', '1998-02-02', '01022223333', 0, now()),
        ('박선규', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now());
 
 
+
+-- 기업 회원가입 더미
 insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
 values ('5678', '홍길동', '네이버', '부산광역시 전포', 'com1', 'com1@nate.com', '1234', '담당자1', '01011112222', 1, now()),
        ('8888', '임꺽정', '카카오', '부산광역시 남포동', 'com2', 'com2@nate.com', '1234', '담당자2', '01011112222', 1, now()),
@@ -43,6 +45,10 @@ values
     (3, 2, 1, '검토중', now()),
     (3, 2, 4, '검토중', now()),
     (1, 1, 2, '검토중', now());
+
+
+-- 합격, 불합격 더미가 필요함
+
 
 
 

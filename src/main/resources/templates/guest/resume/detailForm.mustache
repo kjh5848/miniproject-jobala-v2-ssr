@@ -13,12 +13,11 @@
                     <form action="/comp/scrap" method="post" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="resumeId" value="{{resume.id}}">
                         {{#scrap}}
-                            <i id="bookmark" class="fas fa-bookmark text-warning" style="font-size: 20px;" ></i>
+                            <i id="bookmark" class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
                         {{/scrap}}
                         {{^scrap}}
-                            <i id="bookmark" class="far fa-bookmark text-warning" style="font-size: 20px;" ></i>
+                            <i id="bookmark" class="far fa-bookmark text-warning" style="font-size: 20px;"></i>
                         {{/scrap}}
-
                     </form>
                     <h2 class="card-title">{{resume.resumeTitle}}</h2>
                 </div>
@@ -65,9 +64,7 @@
         <div class="card-body">
             <div class="card-header">
                 <h3>상세사항</h3>
-
                 <table class="table">
-
                     <tbody>
                     <tr>
                         <th>경력</th>
@@ -174,7 +171,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="https://picsum.photos/200" alt="회사 이미지" class="img-fluid rounded-start">
+                                <img src="https://picsum.photos/200" alt="회사 이미지"
+                                     class="img-fluid rounded-start">
                             </div>
                             <div class="col-md-9">
                                 <p class="card-title">이름</p>
@@ -220,7 +218,7 @@
     //     });
     // });
 
-    $("#bookmark").click(function() {
+    $("#bookmark").click(function () {
         $(this).closest("form").submit(); // submit 이벤트 발생
     });
 </script>

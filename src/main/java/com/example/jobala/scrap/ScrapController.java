@@ -1,6 +1,7 @@
 package com.example.jobala.scrap;
 
 import com.example.jobala._user.User;
+import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,18 +24,28 @@ public class ScrapController {
     @GetMapping("/comp/scrapForm")
     public String compScrapForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        // 로그인 여부 확인
+        if (sessionUser == null) {
+            // 로그인하지 않았다면 로그인 페이지로 리다이렉트
+            return "redirect:/loginForm";
+        }
         List<Resume> resumeList = scrapRepository.findResumeAll(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
+
         return "/comp/_myPage/scrapForm";
     }
 
     @PostMapping("/comp/scrap")
-    public String scrapResume(ScrapRequest.CompScrap reqDTO){
+    public String scrapResume(ScrapRequest.CompScrap reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        int resumeId = reqDTO.getResumeId();
-        int userId = sessionUser.getId();
+        // 로그인 여부 확인
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
         Scrap scrap = null;
+        int resumeId = reqDTO.getResumeId();
+        int userId = sessionUser.getId();
         try {
             scrap = scrapRepository.findCompScrapById(resumeId, userId);
         } catch (Exception e) {
@@ -45,25 +56,36 @@ public class ScrapController {
         if (scrap != null) {
             scrapRepository.compScrapDelete(scrap.getId());
         }
-        return "redirect:/guest/resume/"+reqDTO.getResumeId();
+
+        return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
 
 
-
     @GetMapping("/guest/scrapForm")
-    public String guestScrapForm() {
+    public String guestScrapForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        // 로그인 여부 확인
+        if (sessionUser == null) {
+            // 로그인하지 않았다면 로그인 페이지로 리다이렉트
+            return "redirect:/loginForm";
+        }
+        List<Jobopen> jobopenList = scrapRepository.findJobopenAll(sessionUser.getId());
+        req.setAttribute("jobopenList", jobopenList);
         return "/guest/_myPage/scrapForm";
     }
 
 
-
     @PostMapping("/guest/scrap")
-    public String scrapJobopen(ScrapRequest.GuestScrap reqDTO){
+    public String scrapJobopen(ScrapRequest.GuestScrap reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        int jobopenId = reqDTO.getJobopenId();
-        int userId = sessionUser.getId();
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
         // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
         Scrap scrap = null;
+        int jobopenId = reqDTO.getJobopenId();
+        int userId = sessionUser.getId();
         try {
             scrap = scrapRepository.findGuestScrapById(jobopenId, userId);
         } catch (Exception e) {
@@ -74,7 +96,6 @@ public class ScrapController {
         if (scrap != null) {
             scrapRepository.guestScrapDelete(scrap.getId());
         }
-        return "redirect:/comp/jobopen/"+reqDTO.getJobopenId();
+        return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
     }
-
 }
