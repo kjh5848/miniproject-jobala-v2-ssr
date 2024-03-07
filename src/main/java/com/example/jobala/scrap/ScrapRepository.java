@@ -22,9 +22,6 @@ public class ScrapRepository {
         return query.getResultList();
     }
 
-    public void findAll() {
-        return;
-    }
 
     public Scrap findCompScrapById(int resumeId, int userId) {
         String q = """
@@ -35,31 +32,6 @@ public class ScrapRepository {
         query.setParameter(2, userId);
         Scrap scrap = (Scrap) query.getSingleResult();
         return scrap;
-    }
-
-    public int findCompScrapByIds(int resumeId, int userId) {
-        String q = """
-                select count(*) from scrap_tb where role = 1 AND resume_id = ? AND user_id = ?; 
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, resumeId);
-        query.setParameter(2, userId);
-        return ((Number) query.getSingleResult()).intValue();
-    }
-
-    @Transactional
-    public void save() {
-        return;
-    }
-
-    @Transactional
-    public void upDate() {
-        return;
-    }
-
-    @Transactional
-    public void delete() {
-        return;
     }
 
     @Transactional
@@ -82,5 +54,46 @@ public class ScrapRepository {
         Query query = em.createNativeQuery(q);
         query.setParameter(1,id);
         query.executeUpdate();
+    }
+
+    public Scrap findGuestScrapById(int jobopenId, int userId) {
+        String q = """
+                select * from scrap_tb where role = 1 AND jobopen_id = ? AND user_id = ?; 
+                """;
+        Query query = em.createNativeQuery(q, Scrap.class);
+        query.setParameter(1, jobopenId);
+        query.setParameter(2, userId);
+        Scrap scrap = (Scrap) query.getSingleResult();
+        return scrap;
+    }
+
+    public void guestScrapSave(int jobopenId, int userId) {
+        String q = """
+                insert into scrap_tb(user_id, jobopen_id, role, create_at) values (?,?,?,now());
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, userId);
+        query.setParameter(2, jobopenId);
+        query.setParameter(3, 1);
+        query.executeUpdate();
+    }
+
+    public void guestScrapDelete(Integer id) {
+        String q = """
+                delete from scrap_tb where id = ?
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1,id);
+        query.executeUpdate();
+    }
+
+    public void findAll() {
+        return;
+    }
+
+
+    @Transactional
+    public void update() {
+        return;
     }
 }

@@ -27,7 +27,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
-
 @Controller
 @RequiredArgsConstructor
 public class ResumeController {
@@ -43,7 +42,6 @@ public class ResumeController {
         User user = (User) session.getAttribute("sessionUser");
         req.setAttribute("user", user);
         return "/guest/resume/saveForm";
-
     }
 
     @PostMapping("/guest/resume/{id}/update")

@@ -44,12 +44,36 @@ public class ScrapController {
         if (scrap != null) {
             scrapRepository.compScrapDelete(scrap.getId());
         }
-
         return "redirect:/guest/resume/"+reqDTO.getResumeId();
     }
+
+
 
     @GetMapping("/guest/scrapForm")
     public String guestScrapForm() {
         return "/guest/_myPage/scrapForm";
     }
+
+
+
+    @PostMapping("/guest/scrap")
+    public String scrapJobopen(ScrapRequest.GuestScrap reqDTO){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        int jobopenId = reqDTO.getJobopenId();
+        int userId = sessionUser.getId();
+        // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
+        Scrap scrap = null;
+        try {
+            scrap = scrapRepository.findGuestScrapById(jobopenId, userId);
+        } catch (Exception e) {
+        }
+        if (scrap == null) {
+            scrapRepository.guestScrapSave(jobopenId, userId);
+        }
+        if (scrap != null) {
+            scrapRepository.guestScrapDelete(scrap.getId());
+        }
+        return "redirect:/comp/jobopen/"+reqDTO.getJobopenId();
+    }
+
 }
