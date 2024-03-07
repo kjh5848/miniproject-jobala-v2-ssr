@@ -20,15 +20,20 @@ public class GuestRepository {
 
     public List<GuestResponse.JopOpenApplyDTO> findStateByUserId(int userId){
         String q = """
-            SELECT j.jobopen_title, r.resume_title, a.state
-            FROM apply_tb a
-            INNER JOIN jobopen_tb j ON a.jobopen_id = j.id
-            INNER JOIN resume_tb r ON a.resume_id = r.id
-            WHERE a.user_id = ?;
-            """;
+                SELECT j.jobopen_title, r.resume_title, a.state
+                FROM apply_tb a
+                INNER JOIN jobopen_tb j ON a.jobopen_id = j.id
+                INNER JOIN resume_tb r ON a.resume_id = r.id
+                WHERE a.user_id = ?;
+                """;
 
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
+      
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<GuestResponse.JopOpenApplyDTO> applystate = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
+        return applystate;
+
 
         JpaResultMapper mapper = new JpaResultMapper();
         List<GuestResponse.JopOpenApplyDTO> JopOpenApplyDTO = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);

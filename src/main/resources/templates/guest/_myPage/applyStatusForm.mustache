@@ -45,18 +45,15 @@
                             <th>상태</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>[카카오모빌리디] 서버(백엔드) 개발자]</td>
-                            <td>저는 열정적인 인재입니다</td>
-                            <td>합격</td>
-                        </tr>
-                        <tr>
-                            <td>[네이버] 서버(백엔드) 개발자2</td>
-                            <td>저는 열정적인 인재입니다2</td>
-                            <td>불합격</td>
-                        </tr>
-                        </tbody>
+                        {{#applystate}}
+                            <tbody>
+                            <tr>
+                                <td>{{jobopenTitle}}</td>
+                                <td>{{resumeTitle}}</td>
+                                <td>{{state}}</td>
+                            </tr>
+                            </tbody>
+                        {{/applystate}}       
                     </table>
                 </div>
             </div>
