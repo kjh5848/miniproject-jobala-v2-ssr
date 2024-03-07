@@ -60,10 +60,10 @@ public class ScrapRepository {
     }
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public List<Jobopen> findJobopenAll(Integer userId) {
         String q = """
-                SELECT r.* FROM jobopen_tb r inner join Scrap_tb s on r.id = s.jobopen_id
+                SELECT r.* FROM jobopen_tb r inner join scrap_tb s on r.id = s.jobopen_id
                 where s.user_id = ? ORDER BY r.id DESC;
                 """;
         Query query = em.createNativeQuery(q, Jobopen.class);
