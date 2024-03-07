@@ -14,11 +14,13 @@ import java.util.List;
 public class ScrapRepository {
     private final EntityManager em;
 
-    public List<Resume> findResumeAll() {
+    public List<Resume> findResumeAll(int userId) {
         String q = """
-                select * from resume_tb order by id desc;              
+                SELECT r.* FROM resume_tb r inner join Scrap_tb s on r.id = s.resume_id 
+                where s.user_id = ? ORDER BY r.id DESC;
                 """;
         Query query = em.createNativeQuery(q, Resume.class);
+        query.setParameter(1,userId);
         return query.getResultList();
     }
 
