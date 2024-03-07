@@ -1,9 +1,9 @@
 {{> layout/header}}
-<!--{{#resumeList}}-->
+        <!--{{#resumeList}}-->
 <!--    {{resumeTitle}}-->
 <!--    {{career}}-->
 <!--    {{edu}}-->
-<!--    {{/resumeList}}-->
+        <!--    {{/resumeList}}-->
 
 <!--채용공고 상세페이지-->
 <!-- 회사 기본정보 -->
@@ -12,11 +12,33 @@
     <hr>
     <div class="card mb-3">
         <div class="card-body">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-center">
                 <div>
-                    <i class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
-                    <p class="card-title">회사명</p>
-                    <h2>{{jobopen.jobopenTitle}}</h2>
+                    <p class="card-title">({{jobopen.compname}})</p>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h2>{{jobopen.jobopenTitle}}</h2>
+                        </div>
+                        <div class="ml-4">
+                            {{#sessionUser}}
+                                <form action="/guest/scrap" method="post">
+                                    <input type="hidden" name="jobopenId" value="{{jobopen.id}}">
+                                    {{#scrap}}
+                                        <i id="bookmark" class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
+                                    {{/scrap}}
+                                    {{^scrap}}
+                                        <i id="bookmark" class="far fa-bookmark text-warning" style="font-size: 20px;"></i>
+                                    {{/scrap}}
+                                </form>
+                            {{/sessionUser}}
+
+                        </div>
+                            <script>
+                                $("#bookmark").click(function () {
+                                    $(this).closest("form").submit(); // submit 이벤트 발생
+                                });
+                            </script>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,10 +118,11 @@
                 <tr>
                     <td>지역</td>
                     <td>{{jobopen.compLocation}}</td>
-                </tr>
+                </tr><
                 </tbody>
             </table>
         </div>
+
         <div class="card-body">
             <div class="card-header">
                 <h3>모집 분야</h3>
@@ -131,13 +154,14 @@
 
     <!-- 회사 공고 이미지 -->
 
-
     <!-- 지원하기 버튼 -->
-    <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
-        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">
-            입사지원하기
-        </button>
-    </div>
+    {{#user}}
+        <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
+            <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">
+                입사지원하기
+            </button>
+        </div>
+    {{/user}}
     <!-- 지원하기 버튼 -->
 
 
@@ -154,11 +178,10 @@
             </ul>
         </div>
     </div>
-    <!-- 이력서 접수 방법 -->
+<!--     이력서 접수 방법 -->
 
 
-    <!-- 맞춤형 공고 -->
-
+<!--     맞춤형 공고 -->
     <h2>맞춤 공고</h2>
     <div class="d-flex justify-content-between mb-5 gap-2">
         <div class="card flex-wrap: wrap " style="width:200px">
@@ -246,7 +269,7 @@
 </div>
 <script>
     // 입사 지원하기 버튼
-    document.getElementById('applicationForm').addEventListener('submit', function(event) {
+    document.getElementById('applicationForm').addEventListener('submit', function (event) {
 
         // 입사지원하기 버튼을 찾아서 텍스트 변경
         var applyButton = document.querySelector('.btn-danger'); // 입사지원하기 버튼의 클래스나 ID에 따라 변경하세요
@@ -258,6 +281,9 @@
         // 폼 제출을 중단
         event.preventDefault();
     });
+
+
+
 </script>
 
 {{> layout/footer}}

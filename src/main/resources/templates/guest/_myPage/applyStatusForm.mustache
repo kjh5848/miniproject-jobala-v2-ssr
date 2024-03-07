@@ -1,7 +1,7 @@
 {{> layout/header}}
 
 <!--개인 지원현황 페이지-->
-<div class="container mt-5">
+<div class="container">
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -30,21 +30,24 @@
             <div class="col">
                 <div class="applyBox">
                     <h2 class="text-left">지원 현황</h2>
-                    <table class="table">
+
+                    <table class="table" id="applicationTable">
                         <thead>
                         <tr>
-                            <th>번호</th>
-                            <th>지원 공고</th>
-                            <th>진행여부</th>
+                            <th>공고 제목</th>
+                            <th>이력서 제목</th>
+                            <th>상태</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>[카카오모빌리디] 서버(백엔드) 개발자]</td>
-                            <td>합격</td>
-                        </tr>
-                        </tbody>
+                        {{#applystate}}
+                            <tbody>
+                            <tr>
+                                <td>{{jobopenTitle}}</td>
+                                <td>{{resumeTitle}}</td>
+                                <td>{{state}}</td>
+                            </tr>
+                            </tbody>
+                        {{/applystate}}
                     </table>
                 </div>
             </div>
@@ -54,5 +57,4 @@
     <br>
     <br>
 </div>
-
 {{> layout/footer}}

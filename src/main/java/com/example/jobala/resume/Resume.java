@@ -23,6 +23,7 @@ public class Resume {
     private String content;
     private String edu;
     private LocalDateTime createdAt;
+
     @ColumnDefault("0")
     private Integer ROLE; // 0 -> guest, 1 -> comp
 }

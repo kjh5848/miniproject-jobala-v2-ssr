@@ -5,6 +5,8 @@ import com.example.jobala.Pic.PicRepository;
 import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserRepository;
+import com.example.jobala.scrap.Scrap;
+import com.example.jobala.scrap.ScrapRepository;
 import com.example.jobala.skill.Skill;
 import com.example.jobala.skill.SkillRepository;
 import com.google.gson.Gson;
@@ -20,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.lang.reflect.Type;
 import java.util.List;
 
-
 @Controller
 @RequiredArgsConstructor
 public class ResumeController {
@@ -30,13 +31,13 @@ public class ResumeController {
     private final HttpSession session;
     private final UserRepository userRepository;
     private final PicRepository picRepository;
+    private final ScrapRepository scrapRepository;
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
         User user = (User) session.getAttribute("sessionUser");
         req.setAttribute("user", user);
         return "/guest/resume/saveForm";
-
     }
 
     @PostMapping("/guest/resume/{id}/update")
@@ -66,8 +67,18 @@ public class ResumeController {
 
 
     @GetMapping("/guest/resume/{id}")
-    public String detailForm(@PathVariable Integer id, HttpServletRequest request) {
+    public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeRepository.findById(id);
+
+        // 스크랩
+        try {
+            User sessionUser = (User) session.getAttribute("sessionUser");
+            Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
+            req.setAttribute("scrap",scrap);
+        } catch (Exception e) {
+        }
+
+
 
         int userId = resume.getUserId();
 //        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
@@ -82,10 +93,10 @@ public class ResumeController {
         }.getType();
         List<String> skillsList = gson.fromJson(json, type);
         System.out.println("다시 바꾼 결과 = " + skillsList);
-        request.setAttribute("skillsList", skillsList);
+        req.setAttribute("skillsList", skillsList);
 
-        request.setAttribute("user", user);
-        request.setAttribute("resume", resume);
+        req.setAttribute("user", user);
+        req.setAttribute("resume", resume);
         return "/guest/resume/detailForm";
     }
 

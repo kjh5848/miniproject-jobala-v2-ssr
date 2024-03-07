@@ -3,6 +3,8 @@ package com.example.jobala.jobopen;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestRepository;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.scrap.Scrap;
+import com.example.jobala.scrap.ScrapRepository;
 import com.example.jobala.skill.Skill;
 import com.example.jobala.skill.SkillRepository;
 import com.google.gson.Gson;
@@ -25,6 +27,7 @@ public class JobopenController {
     private final JobopenRepository jobopenRepository;
     private final SkillRepository skillRepository;
     private final GuestRepository guestRepository;
+    private final ScrapRepository scrapRepository;
 
     private final HttpSession session;
 
@@ -67,33 +70,37 @@ public class JobopenController {
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         // modal 이력서 id로 가져오기
-        User user = (User) session.getAttribute("sessionUser");
-        int userId = user.getId();
-        // resumeList 메소드를 호출할 때 사용자 ID를 매개변수로 전달
-        List<Resume> resumeList2 = jobopenRepository.findResumeById(user.getId());
-        req.setAttribute("resumeList2", resumeList2);
+        User user = null;
+        try {
+            user = (User) session.getAttribute("sessionUser");
+            Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
+            req.setAttribute("scrap",scrap);
+        } catch (Exception e) {
+        }
+        req.setAttribute("user", user);
 
+        // resumeList 메소드를 호출할 때 사용자 ID를 매개변수로 전달
+        if (user != null) {
+            List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
+            req.setAttribute("resumeList2", resumeList2);
+        }
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
         Skill skills = skillRepository.findByJobopenId(id);
         String json = skills.getName();
+
         // JSON -> List
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
         List<String> skillsList = gson.fromJson(json, type);
         System.out.println("다시 바꾼 결과 = " + skillsList);
         req.setAttribute("skillsList", skillsList);
-
-        //이력서 리스트 불러오기
-//        List<Resume> resumeList = jobopenRepository.findByResumeAll();
-
         req.setAttribute("jobopen", jobopen);
-//        req.setAttribute("resumeList", resumeList);
-
 
         return "/comp/jobopen/detailForm";
+        
     }
-
-
 }
