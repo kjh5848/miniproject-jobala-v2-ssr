@@ -16,6 +16,20 @@ import java.util.List;
 public class GuestRepository {
     private final EntityManager em;
 
+    public void findStateByUserId(Integer id){
+        String q = """
+                select j.jobopen_title,  r.resume_title, a.state, a.id
+                from apply_tb a
+                inner join jobopen_tb j on a.id = j.id
+                inner join resume_tb r on a.id = r.id
+                where user_id = ?;
+                """;
+
+//        List<jobopen> jobopenList = quer
+//        Query query = em.createNativeQuery(q);
+
+    }
+
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
         query.setParameter(1, userId);
