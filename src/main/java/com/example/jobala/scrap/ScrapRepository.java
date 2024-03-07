@@ -26,8 +26,25 @@ public class ScrapRepository {
         return;
     }
 
-    public void findById() {
-        return;
+    public Scrap findCompScrapById(int resumeId, int userId) {
+        String q = """
+                select * from scrap_tb where role = 1 AND resume_id = ? AND user_id = ?; 
+                """;
+        Query query = em.createNativeQuery(q, Scrap.class);
+        query.setParameter(1, resumeId);
+        query.setParameter(2, userId);
+        Scrap scrap = (Scrap) query.getSingleResult();
+        return scrap;
+    }
+
+    public int findCompScrapByIds(int resumeId, int userId) {
+        String q = """
+                select count(*) from scrap_tb where role = 1 AND resume_id = ? AND user_id = ?; 
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, resumeId);
+        query.setParameter(2, userId);
+        return ((Number) query.getSingleResult()).intValue();
     }
 
     @Transactional
@@ -43,5 +60,27 @@ public class ScrapRepository {
     @Transactional
     public void delete() {
         return;
+    }
+
+    @Transactional
+    public void compScrapSave(int resumeId, int userId) {
+        String q = """
+                insert into scrap_tb(user_id, resume_id, role, create_at) values (?,?,?,now());
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, userId);
+        query.setParameter(2, resumeId);
+        query.setParameter(3, 1);
+        query.executeUpdate();
+    }
+
+    @Transactional
+    public void compScrapDelete(int id) {
+        String q = """
+                delete from scrap_tb where id = ?
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1,id);
+        query.executeUpdate();
     }
 }
