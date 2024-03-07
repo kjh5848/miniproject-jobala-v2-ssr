@@ -43,6 +43,7 @@ values
 -- 이력서 스킬 더미
 INSERT INTO SKILL_TB(RESUME_ID,ROLE,USER_ID,NAME)
 VALUES
+    (1,0,1, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
     (2,0,2,'["Java","JavaScript","Spring"]'),
     (3,0,2,'["Java","Spring"]');
     
@@ -56,3 +57,16 @@ values
     (4, 1, 5,'["JavaScript","jQuery"]'),
     (5, 1, 5,'["Java","Spring","HTML","jQuery","MySQL"]');
 
+-- 개인이 공고를 선택한 더미
+Insert Into scrap_tb(user_id, jobopen_id, role, create_at)
+values (1, 1, 0, now()),
+       (1, 2, 0, now()),
+       (2, 3, 0, now()),
+       (2, 4, 0, now());
+
+-- 기업이 이력서를 선택한 더미
+Insert Into scrap_tb(user_id, resume_id, role, create_at)
+values (3, 1, 1, now()),
+       (3, 2, 1, now()),
+       (4, 3, 1, now()),
+       (5, 1, 1, now());

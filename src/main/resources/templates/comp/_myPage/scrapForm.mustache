@@ -5,23 +5,25 @@
 
 
     <div class="card-body">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="upMenu text-center mb-4">
-                    <h1>마이페이지</h1>
-                    <div class="btn-group btn-group-lg">
-                        <a href="/comp/profileForm">
-                            <button type="button" class="btn btn-outline-dark">프로필 관리</button>
-                        </a>
-                        <a href="/comp/mngForm">
-                            <button type="button" class="btn btn-outline-dark">채용공고 관리</button>
-                        </a>
-                        <a href="/applyPositionForm">
-                            <button type="button" class="btn btn-outline-dark">지원자 관리</button>
-                        </a>
-                        <a href="/comp/scrapForm">
-                            <button type="button" class="btn btn-outline-dark">스크랩한 인재</button>
-                        </a>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="upMenu text-center mb-4">
+                        <h1>마이페이지</h1>
+                        <div class="btn-group btn-group-lg">
+                            <a href="/comp/profileForm">
+                                <button type="button" class="btn btn-outline-dark m-1">프로필 관리</button>
+                            </a>
+                            <a href="/comp/mngForm">
+                                <button type="button" class="btn btn-outline-dark m-1">채용공고 관리</button>
+                            </a>
+                            <a href="/applys">
+                                <button type="button" class="btn btn-outline-dark m-1">지원자 관리</button>
+                            </a>
+                            <a href="/comp/scrapForm">
+                                <button type="button" class="btn btn-outline-dark m-1">스크랩</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,11 +43,11 @@
                         </thead>
                         <tbody>
                         {{#resumeList}}
-                            <tr>
-                                <td>{{name}}</td>
-                                <td>{{resumeTitle}}</td>
-                                <td>{{edu}}</td>
-                                <td>{{career}}</td>
+                            <tr onClick="location.href='/guest/resume/{{id}}'">
+                                    <td>{{name}}</td>
+                                    <td>{{resumeTitle}}</td>
+                                    <td>{{edu}}</td>
+                                    <td>{{career}}</td>
                             </tr>
                         {{/resumeList}}
                         <!-- Add more rows as needed -->

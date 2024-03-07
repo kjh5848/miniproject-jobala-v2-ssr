@@ -14,6 +14,7 @@
                              style="width:100%; height: 100%;">
                     </div>
                     <input type="file" name="imgFile" id="imgFile" onchange="previewImage(this);" style="margin-bottom: 10px;">
+                    <input type="hidden" name="title" id="title"> <!-- 타이틀 입력란 -->
                     <div>
                         <button type="button" onclick="uploadImage()">사진 저장</button>
                     </div>
@@ -164,9 +165,14 @@
 <script>
     const imgFileInput = document.getElementById('imgFile');
     const imgPreview = document.getElementById('imgPreview');
+    const picTitleInput = document.getElementById('title'); // 타이틀 입력란 변경
 
     imgFileInput.addEventListener('change', function (event) {
-        previewImage(this);
+        const file = event.target.files[0]; // 선택된 파일 가져오기
+        if (file) {
+            // 파일 이름을 타이틀로 자동 채우기
+            picTitleInput.value = file.name; // 타이틀 입력란에 파일 이름 설정
+        }
     });
 
     function previewImage(input) {
