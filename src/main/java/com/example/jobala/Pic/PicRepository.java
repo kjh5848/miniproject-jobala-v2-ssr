@@ -12,9 +12,9 @@ public class PicRepository {
     private final EntityManager em;
 
     @Transactional
-    public void insert(int userId, String imgFilename){
-        Query query = em.createNativeQuery("insert into pic_tb (user_id, img_filename) values (?,?)");
-        query.setParameter(1, userId);
+    public void upload(String title, String imgFilename){
+        Query query = em.createNativeQuery("insert into pic_tb(title, img_filename) values(?,?)");
+        query.setParameter(1, title);
         query.setParameter(2, imgFilename);
 
         query.executeUpdate();
