@@ -1,11 +1,13 @@
 package com.example.jobala.guest;
 
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuestRepository {
     private final EntityManager em;
+
+    public List<GuestResponse.JopOpenApplyDTO> findStateByUserId(int userId){
+        String q = """
+            SELECT j.jobopen_title, r.resume_title, a.state
+            FROM apply_tb a
+            INNER JOIN jobopen_tb j ON a.jobopen_id = j.id
+            INNER JOIN resume_tb r ON a.resume_id = r.id
+            WHERE a.user_id = ?;
+            """;
+
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, userId);
+
+        JpaResultMapper mapper = new JpaResultMapper();
+        List<GuestResponse.JopOpenApplyDTO> JopOpenApplyDTO = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
+        return JopOpenApplyDTO;
+
+
+    }
 
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);

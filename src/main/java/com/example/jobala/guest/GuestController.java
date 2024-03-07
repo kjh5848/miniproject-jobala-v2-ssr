@@ -1,6 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.ApplyRequest;
 import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
@@ -9,8 +10,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -43,12 +47,12 @@ public class GuestController {
 
 
     @GetMapping("/guest/mngForm")
-    public String mngForm(HttpServletRequest request) {
+    public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         int userId = sessionUser.getId();
         System.out.println(userId);
         List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
-        request.setAttribute("resumeList", resumeList);
+        req.setAttribute("resumeList", resumeList);
         return "/guest/_myPage/mngForm";
     }
 
@@ -58,12 +62,13 @@ public class GuestController {
     }
 
     @GetMapping("/applyStatusForm")
-    public String applyStatusForm() {
-//        User sessionUser = (User) session.getAttribute("sessionUser");
-//        int userId = sessionUser.getId();
-//        List<GuestResponse.jobopenApplyDTO> applystate = GuestRepository.findStateByUserId(sessionUserId);
-//        request.setAttribute("applystate", applystate);
+    public String applyStatusForm(HttpServletRequest req, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        int userId = sessionUser.getId();
+
+        List<GuestResponse.JopOpenApplyDTO> applystate = guestRepository.findStateByUserId(userId);
+        req.setAttribute("applystate", applystate);
+
         return "/guest/_myPage/applyStatusForm";
     }
-
 }

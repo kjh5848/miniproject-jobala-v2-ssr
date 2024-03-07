@@ -1,5 +1,6 @@
 package com.example.jobala.apply;
 
+import com.example.jobala.board.Board;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,18 @@ public class ApplyRepository {
      * inner join resume_tb rt on rt.id = at.resume_id
      * where at.user_id = 3;
      */
+
+    // 페이징
+    public Long count() {
+        Query query = em.createNativeQuery("select count(*) from apply_tb");
+        return (Long) query.getSingleResult();
+    }
+
+    public List<Apply> findAll(Integer page) {
+        Query query = em.createNativeQuery("select * from apply_tb order by id desc limit ?, 3", Apply.class);
+        query.setParameter(1, page * 3);
+        return query.getResultList();
+    }
 
     public List<ApplyResponse.ApplyDTO> findAllByUserId(int compId){ // 로그인한 기업 ID
         String q = """

@@ -19,10 +19,10 @@ public class GuestResponse {
     @Data
     @AllArgsConstructor
     public static class JopOpenApplyDTO {
+        private Integer id;
         private String jobopenTitle;
         private String resumeTitle;
         private String state;
-        private String username;
     }
 }
 
