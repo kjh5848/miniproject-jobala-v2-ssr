@@ -22,7 +22,8 @@ public class ScrapController {
 
     @GetMapping("/comp/scrapForm")
     public String compScrapForm(HttpServletRequest req) {
-        List<Resume> resumeList = scrapRepository.findResumeAll();
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<Resume> resumeList = scrapRepository.findResumeAll(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "/comp/_myPage/scrapForm";
     }
