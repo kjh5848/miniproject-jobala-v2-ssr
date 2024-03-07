@@ -20,9 +20,9 @@ public class PicController {
     private final PicRepository picRepository;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> upload(PicRequest.UploadDTO requestDTO) {
-        String title = requestDTO.getTitle();
-        MultipartFile imgFile = requestDTO.getImgFile();
+    public ResponseEntity<String> upload(PicRequest.UploadDTO reqDTO) {
+        String title = reqDTO.getTitle();
+        MultipartFile imgFile = reqDTO.getImgFile();
 
         String imgFilename = UUID.randomUUID() + "_" + imgFile.getOriginalFilename();
         Path imgPath = Paths.get("./image/" + imgFilename);
