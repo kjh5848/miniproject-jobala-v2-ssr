@@ -57,14 +57,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{#position}}
+                            {{#compApply}}
                                 <tr>
                                     <td>{{name}}</td>
                                     <td>{{resumeTitle}}</td>
                                     <td>{{jobopenTitle}}</td>
                                     <td>{{state}}</td>
                                 </tr>
-                            {{/position}}
+                            {{/compApply}}
                             <!-- 추가 제안 내용들 -->
                             </tbody>
                         </table>
@@ -74,19 +74,19 @@
             </div>
         </div>
 
-            <!--        {{#position}}-->
+            <!--        {{#guestApply}}-->
         <!--            아이디 : {{id}} <br>-->
         <!--            공고제목 : {{jobopenTitle}} <br>-->
         <!--            이력서제목 : {{resumeTitle}} <br>-->
         <!--            지원자명 : {{name}} <br>-->
         <!--                학력 : {{edu}} <br>-->
         <!--                마감일 : {{endTime}}-->
-            <!--        {{/position}}-->
+            <!--        {{/guestApply}}-->
         <div id="applicantsList">
 
             <h2 class="text-left mb-4 mt-4" style="margin-top: -50px;">내 공고 지원자 목록<span class="badge bg-info"
                                                                                         id="applyCount"></span></h2>
-            {{#applys}}
+            {{#guestApply}}
                 <div class="card border border-light shadow p-3 mb-3 bg-body rounded" style="position: relative;">
                     <p>{{jobopenTitle}}</p>
                     <h3>{{resumeTitle}}</h3>
@@ -115,7 +115,7 @@
                     </div>
 
                 </div>
-            {{/applys}}
+            {{/guestApply}}
             <div class="container mt-3">
                 <ul
                         class="pagination justify-content-center"
