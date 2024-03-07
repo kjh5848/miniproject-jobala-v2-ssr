@@ -16,9 +16,9 @@ import java.util.List;
 public class JobopenRepository {
     private final EntityManager em;
 
-    public List<Resume> findResumeById(int userId) {
+    public List<Resume> findResumeById(User user) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
-        query.setParameter(1, userId);
+        query.setParameter(1, user.getId());
 
         List<Resume> resumeList2 = query.getResultList();
         return resumeList2;
