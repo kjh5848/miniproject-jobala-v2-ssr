@@ -15,101 +15,23 @@
             <th>글쓴이</th>
             <th>제목</th>
             <th>등록일</th>
-            <th>답변 여부</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-
-        <tr>
-            <td>07</td>
-            <td>홍길동</td>
-            <td>카카오에게 문의 드립니다</td>
-            <td>2023-12-10</td>
-            <td>
-                <div class="d-flex">
-                    답변 완료
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>06</td>
-            <td>임꺽정</td>
-            <td>카카오 복지</td>
-            <td>2023-12-08</td>
-            <td>
-                <div class="d-flex">
-                    <div class="d-flex">
-                        미 열람
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>05</td>
-            <td>히두</td>
-            <td>네임드 회사 입사 조건</td>
-            <td>2023-12-06</td>
-            <td>
-                <div class="d-flex">
+        {{#boardList}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{username}}</td>
+                <td>{{title}}</td>
+                <td>{{createdAt}}</td>
+                <td>
                     <div class="d-flex">
                         답변 완료
                     </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>04</td>
-            <td>카카오 에이스</td>
-            <td>정시 퇴근 부탁</td>
-            <td>2023-12-06</td>
-            <td>
-                <div class="d-flex">
-                    <div class="d-flex">
-                        답변 완료
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>03</td>
-            <td>배민 인싸</td>
-            <td>연봉 올려주세요!</td>
-            <td>2023-12-04</td>
-            <td>
-                <div class="d-flex">
-                    <div class="d-flex">
-                        답변 완료
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>02</td>
-            <td>배민 1위가 되고 싶은</td>
-            <td>플러터 책 글쓴이 최주호</td>
-            <td>2023-12-04</td>
-            <td>
-                <div class="d-flex">
-                    <div class="d-flex">
-                        답변 완료
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>01</td>
-            <td>인간</td>
-            <td>1년차 개발자</td>
-            <td>2023-12-04</td>
-            <td>
-                <div class="d-flex">
-                    <div class="d-flex">
-                        답변 완료
-                    </div>
-                </div>
-            </td>
-        </tr>
+                </td>
+            </tr>
+        {{/boardList}}
         </tbody>
     </table>
     <br>
