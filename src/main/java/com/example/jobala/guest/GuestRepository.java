@@ -33,13 +33,6 @@ public class GuestRepository {
         JpaResultMapper mapper = new JpaResultMapper();
         List<GuestResponse.JopOpenApplyDTO> applystate = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
         return applystate;
-
-
-
-
-        JpaResultMapper mapper = new JpaResultMapper();
-        List<GuestResponse.JopOpenApplyDTO> JopOpenApplyDTO = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
-        return JopOpenApplyDTO;
     }
   
   
