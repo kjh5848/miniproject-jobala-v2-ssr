@@ -10,7 +10,16 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <div>
-                    <i class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
+                    <form action="/comp/scrap" method="post" enctype="application/x-www-form-urlencoded">
+                        <input type="hidden" name="resumeId" value="{{resume.id}}">
+                        {{#scrap}}
+                            <i id="bookmark" class="fas fa-bookmark text-warning" style="font-size: 20px;" ></i>
+                        {{/scrap}}
+                        {{^scrap}}
+                            <i id="bookmark" class="far fa-bookmark text-warning" style="font-size: 20px;" ></i>
+                        {{/scrap}}
+
+                    </form>
                     <h2 class="card-title">{{resume.resumeTitle}}</h2>
                 </div>
             </div>
@@ -203,5 +212,17 @@
     </div>
     <!-- 버튼으로 넘겨서 보기 -->
 </div>
+
+<script>
+    // $(document).ready(() => {
+    //     $("#bookmark").click(() => {
+    //         $("#bookmark").toggleClass("fas far");
+    //     });
+    // });
+
+    $("#bookmark").click(function() {
+        $(this).closest("form").submit(); // submit 이벤트 발생
+    });
+</script>
 
 {{> layout/footer}}

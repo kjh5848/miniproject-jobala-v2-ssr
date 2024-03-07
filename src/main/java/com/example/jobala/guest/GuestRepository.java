@@ -33,10 +33,9 @@ public class GuestRepository {
         JpaResultMapper mapper = new JpaResultMapper();
         List<GuestResponse.JopOpenApplyDTO> JopOpenApplyDTO = mapper.list(query, GuestResponse.JopOpenApplyDTO.class);
         return JopOpenApplyDTO;
-
-
     }
-
+  
+  
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
         query.setParameter(1, userId);
