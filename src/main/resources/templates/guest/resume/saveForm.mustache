@@ -2,7 +2,7 @@
 
 <!-- 이력서 수정페이지 -->
 <div class="container">
-    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+    <form id="picUploadForm" action="/upload" method="post" enctype="multipart/form-data">
         <div class="card-body row" style="width: 100%; margin-left: 1px;">
             <div class="card mb-2" style="padding: 0px;">
                 <div>
@@ -13,8 +13,7 @@
                         <img id="imgPreview" src="../images/avatar.png" alt="Card image"
                              style="width:100%; height: 100%;">
                     </div>
-                    <input type="file" name="imgFile" id="imgFile" onchange="previewImage(this);"
-                           style="margin-bottom: 10px;">
+                    <input type="file" name="imgFile" id="imgFile" onchange="previewImage(this);" style="margin-bottom: 10px;">
                     <div>
                         <button type="button" onclick="uploadImage()">사진 저장</button>
                     </div>
@@ -46,7 +45,7 @@
     </form>
 </div>
 <div class="container">
-    <form action="/guest/resume/write" method="post" enctype="multipart/form-data" id="uploadForm">
+    <form action="/guest/resume/save" method="post" >
         <div>
             <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목"
                    style="font-size: 30px; border-radius: 5px; width: 100%;">
@@ -179,13 +178,61 @@
         reader.readAsDataURL(file);
     }
 
-    function uploadImage() {
-        const form = document.getElementById('uploadForm');
-        // 폼 제출
-        form.submit();
-        // 기본 이벤트 동작 막기
-        return false;
+    // "작성완료" 버튼 클릭 시 이벤트 핸들러
+    document.querySelector('#picUploadForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // 폼 기본 제출 이벤트 막기
+
+        const formData = new FormData(this);
+
+        try {
+            // 이력서 데이터를 서버로 전송
+            const response = await fetch('/guest/resume/save', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('이력서를 제출하는 도중에 오류가 발생했습니다.');
+            }
+
+            // 페이지 이동
+            window.location.href = '/success'; // 성공 페이지로 이동
+        } catch (error) {
+            console.error(error);
+            // 오류 처리 로직 추가
+        }
+    });
+
+    // 사진 저장 버튼 클릭 시 이벤트 핸들러
+    async function uploadImage() {
+        const form = document.getElementById('picUploadForm');
+        const formData = new FormData(form);
+
+        try {
+            // 이미지를 서버로 전송
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('이미지를 업로드하는 도중에 오류가 발생했습니다.');
+            }
+
+            // 이미지 업로드가 성공하면 응답 데이터에서 이미지 경로 받아오기
+            const responseData = await response.json();
+            const imageUrl = responseData.imageUrl; // 서버에서 이미지 경로를 제공하는 경우
+
+            // 미리보기로 이미지 표시
+            const imgPreview = document.getElementById('imgPreview');
+            imgPreview.src = imageUrl;
+        } catch (error) {
+            console.error(error);
+            // 오류 처리 로직 추가
+        }
     }
+
+
 </script>
 
 {{> layout/footer}}
