@@ -13,16 +13,16 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ApplyRepository {
-    @Autowired
+
     private final EntityManager em;
 
-
-    /**
-     * select at.id, jot.jobopen_title, rt.resume_title, rt.name
-     * from apply_tb at inner join jobopen_tb jot on at.jobopen_id = jot.id
-     * inner join resume_tb rt on rt.id = at.resume_id
-     * where at.user_id = 3;
-     */
+    @Transactional
+    public void passFailStatus(Integer applyId, String status) {
+        Query query = em.createNativeQuery("UPDATE apply_tb SET state = ? WHERE id = ?");
+        query.setParameter(1, status);
+        query.setParameter(2, applyId);
+        query.executeUpdate();
+    }
 
     public List<ApplyResponse.ApplyDTO> findAllByUserId(int compId){ // 로그인한 기업 ID
         String q = """

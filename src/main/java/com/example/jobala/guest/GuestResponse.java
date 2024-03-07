@@ -3,8 +3,6 @@ package com.example.jobala.guest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
-
 public class GuestResponse {
 
     @AllArgsConstructor
@@ -24,6 +22,6 @@ public class GuestResponse {
         private String jobopenTitle;
         private String resumeTitle;
         private String state;
-        private String username;
     }
 }
+
