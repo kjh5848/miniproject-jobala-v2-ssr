@@ -155,4 +155,14 @@ public class ApplyRepository {
     public void delete() {
         return;
     }
+
+    public int countJobopenApplyById(int jobopenId) {
+        String q = """
+                select count(*) from apply_tb where jobopen_id = ? and role = 0;
+                """;
+        Query query = em.createNativeQuery(q, Long.class);
+        query.setParameter(1,jobopenId);
+        Long count = (Long) query.getSingleResult();
+        return count.intValue();
+    }
 }
