@@ -69,4 +69,16 @@ private final BoardRepository boardRepository;
     public String saveForm() {
         return "/board/saveForm";
     }
+
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable int id, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) { // 401
+            return "redirect:/loginForm";
+        }
+
+        boardRepository.deleteById(id);
+
+        return "redirect:/board/mainForm";
+    }
 }
