@@ -4,10 +4,10 @@
 <div class="container mt-5 p-5">
     <div class="d-flex justify-content-between">
         <div>
-            <h2><b>카카오에게 문의 드립니다.</b></h2>
+            <h2><b>{{board.title}}</b></h2>
         </div>
         <div>
-            <b>작성자</b> : 홍길동
+            <b>작성자</b> {{board.username}}
             <div>
                 <form action="/board/{id}/updateForm" method="get">
                     <button class="btn btn-warning me-1">수정</button>
@@ -23,7 +23,7 @@
     <!-- 게시글내용 -->
     <div class="mb-5">
         <p>
-            카카오에 들어가려면 코테를 어떻게 준비해야 되나요?
+            {{board.content}}
         </p>
     </div>
     <!-- 댓글 -->

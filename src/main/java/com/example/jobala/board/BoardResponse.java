@@ -18,4 +18,14 @@ public class BoardResponse {
         private Timestamp createdAt; // LocalDateTime을 사용하면 안된다.
         private String username;
     }
+
+    @AllArgsConstructor
+    @Data
+    public static class BoardDetailDTO{
+        private Integer id;
+        private String title;
+        private String content;
+        private Integer userId;
+        private String username;
+    }
 }

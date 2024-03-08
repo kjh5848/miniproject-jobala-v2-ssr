@@ -1,10 +1,15 @@
 package com.example.jobala.board;
 
+import com.example.jobala.apply.ApplyRequest;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,9 +25,13 @@ private final BoardRepository boardRepository;
         return "/board/mainForm";
     }
 
-    @GetMapping("/board/DetailForm")
-    public String boardDetail() {
-        return "/board/DetailForm";
+    @GetMapping("/board/{id}/detailForm")
+    public String boardDetail(@PathVariable int id, HttpServletRequest req) {
+
+        BoardResponse.BoardDetailDTO responseDTO = boardRepository.findById(id);
+
+        req.setAttribute("board", responseDTO);
+        return "board/DetailForm";
     }
 
     @GetMapping("/board/updateForm")
