@@ -122,7 +122,7 @@ public class ApplyController {
 
 
     @GetMapping("/applyPositionForm")
-    public String applyPositionForm(HttpServletRequest req) {
+    public String applyPositionForm(HttpServletRequest req ) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
         req.setAttribute("Apply", responseDTO);
