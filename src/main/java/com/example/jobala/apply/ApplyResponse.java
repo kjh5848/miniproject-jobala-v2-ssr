@@ -15,8 +15,9 @@ public class ApplyResponse {
         private String edu;
         private Date endTime;
         private String state;
+        private Integer resumeId;
 
-        public ApplyDTO(Integer id, String jobopenTitle, String resumeTitle, String name, String edu, Date endTime, String state) {
+        public ApplyDTO(Integer id, String jobopenTitle, String resumeTitle, String name, String edu, Date endTime, String state, Integer resumeId) {
             this.id = id;
             this.jobopenTitle = jobopenTitle;
             this.resumeTitle = resumeTitle;
@@ -24,6 +25,7 @@ public class ApplyResponse {
             this.edu = edu;
             this.endTime = endTime;
             this.state = state;
+            this.resumeId = resumeId;
         }
     }
 
