@@ -1,12 +1,15 @@
 package com.example.jobala.board;
 
+import com.example.jobala._user.User;
 import com.example.jobala.apply.ApplyRequest;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 private final BoardRepository boardRepository;
+    private final HttpSession session;
 
     @GetMapping("/board/mainForm")
     public String boardForm(HttpServletRequest req) {
@@ -34,9 +38,31 @@ private final BoardRepository boardRepository;
         return "board/DetailForm";
     }
 
-    @GetMapping("/board/updateForm")
-    public String updateForm() {
-        return "/board/updateForm";
+    @PostMapping("/board/{id}/update")
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if(sessionUser == null){
+            return "redirect:/loginForm";
+        }
+        BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
+        boardRepository.update(requestDTO, id);
+
+        return "redirect:/board/" + id + "/detailForm";
+    }
+
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable int id, HttpServletRequest request) {
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
+        BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
+        request.setAttribute("board", board);
+
+        return "board/updateForm";
     }
 
     @GetMapping("/board/saveForm")
