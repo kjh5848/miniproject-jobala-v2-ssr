@@ -17,6 +17,15 @@ public class BoardRepository {
     private final EntityManager em;
 
     @Transactional
+    public void save(BoardRequest.SaveDTO requestDTO, int userId) {
+        Query query = em.createNativeQuery("insert into board_tb(title, content, user_id, created_at) values(?,?,?, now())");
+        query.setParameter(1, requestDTO.getTitle());
+        query.setParameter(2, requestDTO.getContent());
+        query.setParameter(3, userId);
+
+        query.executeUpdate();
+    }
+    @Transactional
     public void deleteById(int id) {
         Query query = em.createNativeQuery("delete from board_tb where id = ?");
         query.setParameter(1, id);

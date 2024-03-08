@@ -1,8 +1,6 @@
 package com.example.jobala.board;
 
 import com.example.jobala._user.User;
-import com.example.jobala.apply.ApplyRequest;
-import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,8 +55,23 @@ private final BoardRepository boardRepository;
     }
 
     @GetMapping("/board/saveForm")
-    public String saveForm() {
-        return "/board/saveForm";
+    public String saveForm(){
+        return"/board/saveForm";
+    }
+
+    @PostMapping ("/board/save")
+    public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request) {
+        // 1. 인증 체크
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
+
+        // insert into board_tb(title, content, user_id, created_at) values(?,?,?, now());
+        boardRepository.save(requestDTO, sessionUser.getId());
+
+        return "redirect:/";
     }
 
     @PostMapping("/board/{id}/delete")
