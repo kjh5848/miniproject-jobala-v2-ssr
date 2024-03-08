@@ -2,11 +2,9 @@ package com.example.jobala.apply;
 
 
 import com.example.jobala._user.User;
-import com.example.jobala.board.Board;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,13 +51,12 @@ public class ApplyController {
 
 
     @PostMapping("/resumeApplys")
-    public String apply(ApplyResponse.ResumeApplyDTO respDTO) {
+    public String apply(ApplyRequest.ResumeApplyDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        System.out.println("지원하기 이력서, 공고 아이디 = " + reqDTO);
+        applyRepository.resumeApplySave(reqDTO,sessionUser);
 
-        System.out.println("지원하기 이력서, 공고 아이디 = " + respDTO);
-        applyRepository.resumeApplySave(respDTO,sessionUser);
-
-        return "redirect:/comp/jobopen/" + respDTO.getJobopenId();
+        return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
     }
 
 

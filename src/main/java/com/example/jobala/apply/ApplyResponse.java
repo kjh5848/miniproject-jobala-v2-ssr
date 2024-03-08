@@ -5,12 +5,7 @@ import lombok.Data;
 import java.sql.Date;
 
 public class ApplyResponse {
-    @Data
-    public static class ResumeApplyDTO {
-        private Integer resumeId;
-        private Integer jobopenId;
 
-    }
 
     @Data
     public static class ApplyDTO {

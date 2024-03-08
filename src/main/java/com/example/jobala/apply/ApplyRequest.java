@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 public class ApplyRequest {
+
     @Data
     @AllArgsConstructor
     public static class ResumeApplyDTO {
