@@ -26,7 +26,7 @@ public class ApplyRepository {
 
     public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId, String state){ // 로그인한 기업 ID
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state 
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
                 FROM apply_tb at 
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id 
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id 
@@ -44,7 +44,7 @@ public class ApplyRepository {
 
     public List<ApplyResponse.ApplyDTO> findByUserId(int userId){ // 로그인한 User ID
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id

@@ -133,7 +133,7 @@ public class ApplyController {
         List<ApplyResponse.ApplyDTO> responseDTO3 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "합격");
         req.setAttribute("ApplyComp2", responseDTO3);
         // 불합격
-        List<ApplyResponse.ApplyDTO> responseDTO4 = apqplyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
+        List<ApplyResponse.ApplyDTO> responseDTO4 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
         req.setAttribute("ApplyComp3", responseDTO4);
 
         return "/comp/_myPage/applyPositionForm";
