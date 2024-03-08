@@ -14,8 +14,8 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String content;
+    private String comment;
     private Integer boardId;//외래키.
-    private Integer userId;
+    private String username;
     private LocalDateTime createdAt;
 }

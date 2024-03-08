@@ -105,3 +105,12 @@ VALUES (2, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'
 INSERT INTO pic_tb(jobopen_id, img_filename, title)
 VALUES (1, 'naverlogo.png', 'naverlogo.png'),
        (2, 'naverlogo.png', 'naverlogo.png');
+
+--댓글 더미
+Insert Into reply_tb(comment, board_id, username, created_at)
+values('꼰대임?', 1, 'ssar', now()), --ssar이 1번 게시물에 댓글을 작성했다.
+      ('넌 몇년차인데?ㅋㅋ', 1 , 'cos', now()), --cos가 1번 게시물에 댓글을 작성했다.
+      ('관심 받고 싶니?', 2, 'ssar', now()), --ssar이 2번 게시물에 댓글을 작성했다.
+      ('너가 주면 난 내 전재산 준다', 2, 'cos', now()); --cos가 2번 게시물에 댓글을 작성했다.
+
+
