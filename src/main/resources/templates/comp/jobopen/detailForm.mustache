@@ -24,20 +24,22 @@
                                 <form action="/guest/scrap" method="post">
                                     <input type="hidden" name="jobopenId" value="{{jobopen.id}}">
                                     {{#scrap}}
-                                        <i id="bookmark" class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
+                                        <i id="bookmark" class="fas fa-bookmark text-warning"
+                                           style="font-size: 20px;"></i>
                                     {{/scrap}}
                                     {{^scrap}}
-                                        <i id="bookmark" class="far fa-bookmark text-warning" style="font-size: 20px;"></i>
+                                        <i id="bookmark" class="far fa-bookmark text-warning"
+                                           style="font-size: 20px;"></i>
                                     {{/scrap}}
                                 </form>
                             {{/sessionUser}}
 
                         </div>
-                            <script>
-                                $("#bookmark").click(function () {
-                                    $(this).closest("form").submit(); // submit 이벤트 발생
-                                });
-                            </script>
+                        <script>
+                            $("#bookmark").click(function () {
+                                $(this).closest("form").submit(); // submit 이벤트 발생
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -47,18 +49,18 @@
 
 
     <!-- 입사지원 클릭시 창띄우기 -->
-    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <form id="applicationForm" action="/applys/{{id}}">
+    <form id="applicationForm" action="/resumeApplys" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="jobopenId" value="{{jobopen.id}}">
+        <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="applyModalLabel">이력서 목록</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         {{#resumeList2}}
                             <div class="card row mt-3 shadow-lg p-3 bg-body rounded-5">
-                                <div class="card-body  shadow-5 ">
+                                <div class="card-body shadow-5">
                                     <div class="col-md-8 align-items-center">
                                         {{resumeTitle}}
                                     </div>
@@ -67,7 +69,7 @@
                                             <p style="font-size: 15px;">{{career}} / {{edu}} </p>
                                         </div>
                                         <div>
-                                            <input type="radio" name="id" value="{{id}}">
+                                            <input type="radio" name="resumeId" value="{{id}}">
                                         </div>
                                     </div>
                                 </div>
@@ -75,20 +77,20 @@
                         {{/resumeList2}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">홈페이지 지원하기</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">닫기</button>
+                        <button type="submit" class="btn btn-primary">홈페이지 지원하기</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
     <!-- 입사지원 클릭시 창띄우기 -->
 
 
     <!-- 회사 공고 이미지 -->
     <div class="card mb-3">
         <h2 class="card-header">채용공고 상세보기</h2>
-        <img src="https://picsum.photos/800/400" class="img-fluid">
+        <img src="/image/{{pic.ImgFilename}}" class="img-fluid">
         <div class="card-body">
             <div class="card-header">
                 <h3>기본 정보 및 모집분야</h3>
@@ -118,7 +120,8 @@
                 <tr>
                     <td>지역</td>
                     <td>{{jobopen.compLocation}}</td>
-                </tr><
+                </tr>
+                <
                 </tbody>
             </table>
         </div>
@@ -178,10 +181,10 @@
             </ul>
         </div>
     </div>
-<!--     이력서 접수 방법 -->
+    <!--     이력서 접수 방법 -->
 
 
-<!--     맞춤형 공고 -->
+    <!--     맞춤형 공고 -->
     <h2>맞춤 공고</h2>
     <div class="d-flex justify-content-between mb-5 gap-2">
         <div class="card flex-wrap: wrap " style="width:200px">
@@ -267,23 +270,5 @@
     </div>
     <!-- 버튼으로 넘겨서 보기 -->
 </div>
-<script>
-    // 입사 지원하기 버튼
-    document.getElementById('applicationForm').addEventListener('submit', function (event) {
-
-        // 입사지원하기 버튼을 찾아서 텍스트 변경
-        var applyButton = document.querySelector('.btn-danger'); // 입사지원하기 버튼의 클래스나 ID에 따라 변경하세요
-        applyButton.textContent = '지원완료';
-        applyButton.disabled = true; // 버튼 비활성화
-        applyButton.classList.remove('btn-danger'); // 원래의 빨간색 클래스 제거
-        applyButton.classList.add('btn-secondary'); // 회색으로 변경
-
-        // 폼 제출을 중단
-        event.preventDefault();
-    });
-
-
-
-</script>
 
 {{> layout/footer}}

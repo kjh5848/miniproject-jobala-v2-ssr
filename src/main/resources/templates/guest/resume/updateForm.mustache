@@ -2,7 +2,7 @@
 
 <!-- 이력서 수정페이지 -->
 <div class="container">
-    <form id="picUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+    <form id="picUploadForm" action="/resume/upload" method="post" enctype="multipart/form-data">
         <div class="card-body row" style="width: 100%; margin-left: 1px;">
             <div class="card mb-2" style="padding: 0px;">
                 <div>
@@ -180,7 +180,7 @@
         const formData = new FormData();
         const file = imgFileInput.files[0];
         formData.append('imgFile', file);
-        fetch('/upload', {
+        fetch('/resume/upload', {
             method: 'POST',
             body: formData
         })

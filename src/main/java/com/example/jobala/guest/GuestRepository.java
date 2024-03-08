@@ -43,8 +43,6 @@ public class GuestRepository {
         return resumeList;
     }
 
-
-
     // 모든 필터를 선택해야 한다는 치명적 단점이 존재함
     public List<Jobopen> findAll(String skills, GuestResponse.SearchDTO resDTO) {
         String skillQuery = """
