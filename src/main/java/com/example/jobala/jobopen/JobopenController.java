@@ -1,5 +1,7 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala.Pic.Pic;
+import com.example.jobala.Pic.PicRepository;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestRepository;
 import com.example.jobala.resume.Resume;
@@ -29,8 +31,8 @@ public class JobopenController {
     private final SkillRepository skillRepository;
     private final GuestRepository guestRepository;
     private final ScrapRepository scrapRepository;
+    private final PicRepository picRepository;
     private final ResumeRepository resumeRepository;
-
     private final HttpSession session;
 
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -47,9 +49,14 @@ public class JobopenController {
     }
 
     @GetMapping("/comp/jobopen/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
+    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         Jobopen jobopen = jobopenRepository.findById(id);
-        request.setAttribute("jobopen", jobopen);
+        req.setAttribute("jobopen", jobopen);
+
+        // 이력서에 저장된 이미지 파일 정보 가져오기
+        Pic pic = picRepository.jobopenFindByPic(id);
+        System.out.println(pic);
+        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
 
         return "/comp/jobopen/updateForm";
     }
@@ -105,6 +112,10 @@ public class JobopenController {
         req.setAttribute("skillsList", skillsList);
         req.setAttribute("jobopen", jobopen);
         req.setAttribute("resume", resume);
+
+        // 이력서 상세보기에 이미지 불러오기
+        Pic pic = picRepository.jobopenFindByPic(id);
+        req.setAttribute("pic", pic);
 
         return "/comp/jobopen/detailForm";
         
