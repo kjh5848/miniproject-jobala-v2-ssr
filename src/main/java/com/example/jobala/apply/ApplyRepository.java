@@ -158,7 +158,7 @@ public class ApplyRepository {
 
     public int countJobopenApplyById(int jobopenId) {
         String q = """
-                select count(*) from apply_tb where jobopen_id = ? and role = 0;
+                select count(*) from apply_tb where jobopen_id = ? and role = 0 and state = '검토중';
                 """;
         Query query = em.createNativeQuery(q, Long.class);
         query.setParameter(1,jobopenId);
