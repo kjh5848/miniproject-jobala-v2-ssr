@@ -55,7 +55,7 @@ public class ResumeController {
         User user = (User) session.getAttribute("sessionUser");
 
         // 이력서에 저장된 이미지 파일 정보 가져오기
-        Pic pic = picRepository.guestFindByPic(id);
+        Pic pic = picRepository.resumeFindByPic(id);
 
         req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
 
@@ -71,7 +71,7 @@ public class ResumeController {
         Resume resume = resumeRepository.findById(id);
 
         // 이력서 상세보기에 이미지 불러오기
-        Pic pic = picRepository.guestFindByPic(id);
+        Pic pic = picRepository.resumeFindByPic(id);
         req.setAttribute("pic", pic);
 
         // 스크랩

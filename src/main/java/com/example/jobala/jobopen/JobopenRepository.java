@@ -24,7 +24,7 @@ public class JobopenRepository {
         return resumeList2;
     }
 
-    public Jobopen findByJobOpenId(int id) {
+    public Jobopen findByJobopenId(int id) {
         String q = """
                 select * from jobopen_tb where id =?
                 """;
