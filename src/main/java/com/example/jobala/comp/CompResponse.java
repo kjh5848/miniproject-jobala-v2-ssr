@@ -9,6 +9,14 @@ import java.time.LocalDateTime;
 
 public class CompResponse {
 
+    @AllArgsConstructor
+    @Data
+    public static class SearchDTO {
+        private String career;
+        private String edu;
+        private String hopeJob;
+    }
+
     @Data
     @AllArgsConstructor
     public static class ScoutListDTO{
