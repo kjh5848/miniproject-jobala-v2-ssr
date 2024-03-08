@@ -60,16 +60,17 @@ public class ApplyRepository {
     }
 
 
-    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId){ // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
+    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId, String state){ // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, jot.id
+                SELECT at.id, jot.jobopen_title, rt.resume_title, jot.compname, rt.edu, jot.end_Time, at.state, jot.id
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE rt.user_id = ? and at.role = 1;
+                WHERE rt.user_id = ? and at.role = 1 and at.state = ?;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
+        query.setParameter(2, state);
 
         // qlrm 사용하기
         JpaResultMapper mapper = new JpaResultMapper();

@@ -35,17 +35,17 @@ public class ApplyResponse {
         private Integer id;
         private String jobopenTitle;
         private String resumeTitle;
-        private String name;
+        private String compname;
         private String edu;
         private Date endTime;
         private String state;
         private Integer jobopenId;
 
-        public ApplyDTO2(Integer id, String jobopenTitle, String resumeTitle, String name, String edu, Date endTime, String state, Integer jobopenId) {
+        public ApplyDTO2(Integer id, String jobopenTitle, String resumeTitle, String compname, String edu, Date endTime, String state, Integer jobopenId) {
             this.id = id;
             this.jobopenTitle = jobopenTitle;
             this.resumeTitle = resumeTitle;
-            this.name = name;
+            this.compname = compname;
             this.edu = edu;
             this.endTime = endTime;
             this.state = state;
