@@ -51,9 +51,14 @@ public class ApplyController {
 //    }
 
 
-    @PostMapping("/applys/{id}")
-    public String setApplicantList() {
-        return null;
+    @PostMapping("/resumeApplys")
+    public String apply(ApplyResponse.ResumeApplyDTO respDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        System.out.println("지원하기 이력서, 공고 아이디 = " + respDTO);
+        applyRepository.resumeApplySave(respDTO,sessionUser);
+
+        return "redirect:/comp/jobopen/" + respDTO.getJobopenId();
     }
 
 
