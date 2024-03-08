@@ -21,7 +21,7 @@ public class PicController {
 
     private final PicRepository picRepository;
 
-    @PostMapping("/upload")
+    @PostMapping("/guest/upload")
     public ResponseEntity<String> upload(PicRequest.UploadDTO reqDTO) {
         String title = reqDTO.getTitle();
         MultipartFile imgFile = reqDTO.getImgFile();
@@ -39,7 +39,7 @@ public class PicController {
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
             // 파일 경로를 디비에 저장
-            picRepository.upload(title, webImgPath);
+            picRepository.resumeUpload(title, webImgPath);
 
             return ResponseEntity.ok().body("이미지 업로드 및 데이터베이스 저장이 완료되었습니다.");
         } catch (IOException e) {
@@ -49,7 +49,7 @@ public class PicController {
         }
     }
 
-    @PostMapping("/update")
+    @PostMapping("/guest/update")
     public ResponseEntity<String> update(PicRequest.UpdateDTO reqDTO, @RequestParam int id) {
         String title = reqDTO.getTitle();
         MultipartFile imgFile = reqDTO.getImgFile();
@@ -67,7 +67,7 @@ public class PicController {
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
             // 파일 경로를 디비에 저장
-            picRepository.upload(title, webImgPath);
+            picRepository.resumeUpdate(title, webImgPath, id);
 
             return ResponseEntity.ok().body("이미지 업로드 및 데이터베이스 저장이 완료되었습니다.");
         } catch (IOException e) {
