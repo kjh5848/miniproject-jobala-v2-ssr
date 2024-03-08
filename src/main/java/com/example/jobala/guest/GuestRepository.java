@@ -1,5 +1,6 @@
 package com.example.jobala.guest;
 
+import com.example.jobala._user.User;
 import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
@@ -17,6 +18,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuestRepository {
     private final EntityManager em;
+
+    public List<GuestResponse.GuestProfileDTO> findProfileByUserId(int userId) {
+        Query query = em.createNativeQuery("SELECT name, password, phone, email FROM user_tb WHERE id = ?", GuestResponse.GuestProfileDTO.class);
+        query.setParameter(1, userId);
+
+        List<GuestResponse.GuestProfileDTO> GuestProfile = query.getResultList();
+        return GuestProfile;
+    }
 
     public List<GuestResponse.JopOpenApplyDTO> findStateByUserId(int userId){
         String q = """

@@ -30,27 +30,29 @@
             <div class="card-body">
                 <div class="content">
                     <h2>프로필 관리</h2>
+{{#guestProfile}}
                     <form action="#" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">이름:</label>
-                            <input type="text" class="form-control" id="name" name="name" value="홍길동">
+                            <input type="text" class="form-control" id="name" name="name" value={{name}}>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">비밀번호:</label>
-                            <input type="password" class="form-control" id="phone" name="phone" value="010-1234-5678">
+                            <input type="password" class="form-control" id="phone" name="phone" value={{password}}>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">전화번호:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
+                            <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">이메일:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="hong@example.com">
+                            <input type="email" class="form-control" id="email" name="email" value={{email}}>
                         </div>
                         <div class="text-center"> <!-- Centering the button -->
                             <button type="submit" class="btn btn-primary">저장</button>
                         </div>
                     </form>
+{{/guestProfile}}
                 </div>
             </div>
         </div>
