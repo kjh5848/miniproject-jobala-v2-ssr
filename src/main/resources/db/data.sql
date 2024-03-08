@@ -98,10 +98,14 @@ VALUES ('1년차 개발자들', '1년차 개발자들 요즘 패기가 없더라
 
 -- 이력서 사진 더미
 INSERT INTO pic_tb(resume_id, img_filename, title)
-VALUES (2, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
+VALUES (1, 'userimage2.png', 'userimage2.png'),
+       (2, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
        (3, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg');
 
 -- 채용 공고 사진 더미
 INSERT INTO pic_tb(jobopen_id, img_filename, title)
 VALUES (1, 'naverlogo.png', 'naverlogo.png'),
-       (2, 'naverlogo.png', 'naverlogo.png');
+       (2, 'naverlogo.png', 'naverlogo.png'),
+       (3, 'kakaologo.svg', 'kakaologo.svg'),
+       (4, 'coupanglogo.png', 'coupanglogo.png'),
+       (5, 'coupanglogo.png', 'coupanglogo.png');
