@@ -70,6 +70,10 @@ public class ResumeController {
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeRepository.findById(id);
 
+        // 이력서 상세보기에 이미지 불러오기
+        Pic pic = picRepository.findByPic(id);
+        req.setAttribute("pic", pic);
+
         // 스크랩
         try {
             User sessionUser = (User) session.getAttribute("sessionUser");
