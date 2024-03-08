@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +61,17 @@ public class GuestController {
         List<GuestResponse.GuestProfileDTO> guestProfile = guestRepository.findProfileByUserId(sessionUser.getId());
         req.setAttribute("guestProfile", guestProfile);
         return "/guest/_myPage/profileForm";
+    }
+
+    @PostMapping("/guest/updateProfile")
+    public String updateProfile(@ModelAttribute GuestResponse.GProfileUpdateDTO profileDto, HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if(sessionUser == null) {
+            return "redirect:/login";
+        }
+        profileDto.setId(sessionUser.getId());
+        guestRepository.updateProfile(profileDto);
+        return "redirect:/guest/profileForm";
     }
 }
 
