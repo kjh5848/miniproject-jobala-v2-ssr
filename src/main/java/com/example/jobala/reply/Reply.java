@@ -3,6 +3,8 @@ package com.example.jobala.reply;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @Table(name = "reply_tb")
@@ -13,6 +15,7 @@ public class Reply {
     private Integer id;
 
     private String content;
-    private Integer board_id;//외래키.
-    private Integer user_id;
+    private Integer boardId;//외래키.
+    private Integer userId;
+    private LocalDateTime createdAt;
 }
