@@ -2,15 +2,15 @@ package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Type;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Repository
 @RequiredArgsConstructor
@@ -37,6 +37,14 @@ public class ResumeRepository {
     public Resume findById(Integer id) {
         Query query = em.createNativeQuery("select * from resume_tb where id = ?", Resume.class);
         query.setParameter(1, id);
+
+        Resume resume = (Resume) query.getSingleResult();
+        return resume;
+    }
+
+    public Resume findByResumeUserId(User sessionUser) {
+        Query query = em.createNativeQuery("select * from resume_tb where id = ?", Resume.class);
+        query.setParameter(1, sessionUser.getId());
 
         Resume resume = (Resume) query.getSingleResult();
         return resume;
