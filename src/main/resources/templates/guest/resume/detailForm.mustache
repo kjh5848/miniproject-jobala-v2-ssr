@@ -25,205 +25,204 @@
             <div class="card border-0">
                 <div class="d-flex row">
                     <div class="card-body p-3 col-md-5 col-sm-12">
-                        <div style="margin-left: 190px; width: 180px; height: 200px; border: 1px solid #ccc; margin-bottom: 10px;">
+                        <div style="margin-left: 140px; width: 180px; height: 200px; border: 1px solid #ccc; margin-bottom: 10px;">
                             <img id="imgPreview" src="/image/{{pic.ImgFilename}}" alt="          "
                                  style="width:100%; height: 100%;">
                         </div>
                     </div>
                     <div class="card-body col-md-6 col-sm-12 justify-content-center">
-                        <div class="card-body col-md-6 col-sm-12 justify-content-center">
-                            <table class="table table-bordered" style="margin-top: 10px; margin-left: -90px;">
-                                <tbody style="font-size: 15px;">
-                                <tr>
-                                    <th>이름</th>
-                                    <td>{{user.name}}</td>
-                                    <th>나이</th>
-                                    <td>{{user.age}}</td>
-                                </tr>
-                                <tr>
-                                    <th>이메일</th>
-                                    <td>{{user.email}}</td>
-                                    <th>주소</th>
-                                    <td>{{user.address}}</td>
-                                </tr>
-                                <tr>
+                        <table class="table" style="margin-left: -110px; margin-top: 50px;">
+                            <tbody style="font-size: 15px;">
+                            <tr>
+                                <th>이름</th>
+                                <td>{{user.name}}</td>
+                                <th>나이</th>
+                                <td>{{user.age}}</td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td>{{user.email}}</td>
+                                <th>주소</th>
+                                <td>{{user.address}}</td>
+                            </tr>
+                            <tr>
 
-                                </tr>
-                                <tr>
+                            </tr>
+                            <tr>
 
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- 회사 기본정보 -->
+    </div>
+    <!-- 회사 기본정보 -->
 
-        <!-- 회사 공고 이미지 -->
-        <div class="card mb-3">
-            <h3 class="card-header">이력서 상세보기</h3>
+    <!-- 회사 공고 이미지 -->
+    <div class="card mb-3">
+        <h3 class="card-header">이력서 상세보기</h3>
+        <div class="card-body">
+            <div class="card-header">
+                <h3>상세사항</h3>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>경력</th>
+                        <td>{{resume.career}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>학력</td>
+                        <td>{{resume.edu}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>희망직무</td>
+                        <td>{{resume.hopeJob}}</td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>스킬</td>
+                        <td>
+                            {{#skillsList}}
+                                <div>{{.}}</div>
+                            {{/skillsList}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>자격증</td>
+                        <td>
+                            <div>{{resume.license}}</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 회사 공고 이미지 -->
+
+    <!-- 자기소개서 -->
+    <div class="card">
+        <h3 class="card-header">자기소개서</h3>
+        <div class="card-body">
+            <p>{{resume.content}}</p>
+        </div>
+    </div>
+
+
+    <!-- 지원하기 버튼 -->
+    <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
+        <button class="btn btn-lg btn-danger">포지션 제안하기</button>
+    </div>
+    <!-- 지원하기 버튼 -->
+
+
+    <!-- 맞춤형 공고 -->
+
+    <h2>맞춤 인재</h2>
+    <div class="d-flex justify-content-between mb-5 gap-2">
+        <div class="card flex-wrap: wrap " style="width:220px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
             <div class="card-body">
-                <div class="card-header">
-                    <h3>상세사항</h3>
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <th>경력</th>
-                            <td>{{resume.career}}</td>
-
-                        </tr>
-                        <tr>
-                            <td>학력</td>
-                            <td>{{resume.edu}}</td>
-
-                        </tr>
-                        <tr>
-                            <td>희망직무</td>
-                            <td>{{resume.hopeJob}}</td>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>스킬</td>
-                            <td>
-                                {{#skillsList}}
-                                    <div>{{.}}</div>
-                                {{/skillsList}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>자격증</td>
-                            <td>
-                                <div>{{resume.license}}</div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <h4 class="card-title">이름</h4>
+                <p class="card-text">이력서 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
             </div>
         </div>
-
-
-        <!-- 회사 공고 이미지 -->
-
-        <!-- 자기소개서 -->
-        <div class="card">
-            <h3 class="card-header">자기소개서</h3>
+        <div class="card flex-wrap: wrap " style="width:220px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
             <div class="card-body">
-                <p>{{resume.content}}</p>
+                <h4 class="card-title">이름</h4>
+                <p class="card-text">이력서 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
             </div>
         </div>
 
-
-        <!-- 지원하기 버튼 -->
-        <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
-            <button class="btn btn-lg btn-danger">포지션 제안하기</button>
-        </div>
-        <!-- 지원하기 버튼 -->
-
-
-        <!-- 맞춤형 공고 -->
-
-        <h2>맞춤 인재</h2>
-        <div class="d-flex justify-content-between mb-5 gap-2">
-            <div class="card flex-wrap: wrap " style="width:220px">
-                <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">이름</h4>
-                    <p class="card-text">이력서 타이틀</p>
-                    <a href="#" class="btn btn-primary">자세히 보기</a>
-                </div>
-            </div>
-            <div class="card flex-wrap: wrap " style="width:220px">
-                <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">이름</h4>
-                    <p class="card-text">이력서 타이틀</p>
-                    <a href="#" class="btn btn-primary">자세히 보기</a>
-                </div>
-            </div>
-
-            <div class="card" style="width:220px">
-                <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">이름</h4>
-                    <p class="card-text">이력서 타이틀</p>
-                    <a href="#" class="btn btn-primary">자세히 보기</a>
-                </div>
-            </div>
-
-            <div class="card" style="width:220px">
-                <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-title">이름</h4>
-                    <p class="card-text">이력서 타이틀</p>
-                    <a href="#" class="btn btn-primary">자세히 보기</a>
-                </div>
+        <div class="card" style="width:220px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">이름</h4>
+                <p class="card-text">이력서 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
             </div>
         </div>
-        <!-- 맞춤형 공고 -->
+
+        <div class="card" style="width:220px">
+            <img class="card-img-top" src="https://picsum.photos/200" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">이름</h4>
+                <p class="card-text">이력서 타이틀</p>
+                <a href="#" class="btn btn-primary">자세히 보기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 맞춤형 공고 -->
 
 
-        <!-- 버튼으로 넘겨서 보기 -->
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="https://picsum.photos/200" alt="회사 이미지"
-                                         class="img-fluid rounded-start">
-                                </div>
-                                <div class="col-md-9">
-                                    <p class="card-title">이름</p>
-                                    <h2>저는 열정적인 사람입니다.</h2>
-                                    <p class="card-text">
-                                        부산 / 신입 / 대졸
-                                    </p>
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <button class="btn btn-primary">이력서 보기</button>
-                                        </div>
+    <!-- 버튼으로 넘겨서 보기 -->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="https://picsum.photos/200" alt="회사 이미지"
+                                     class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-9">
+                                <p class="card-title">이름</p>
+                                <h2>저는 열정적인 사람입니다.</h2>
+                                <p class="card-text">
+                                    부산 / 신입 / 대졸
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button class="btn btn-primary">이력서 보기</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                </div>
             </div>
-            <div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            <div class="carousel-item">
             </div>
-            <br><br><br>
         </div>
-        <!-- 버튼으로 넘겨서 보기 -->
+        <div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <br><br><br>
     </div>
+    <!-- 버튼으로 넘겨서 보기 -->
+</div>
 
-    <script>
-        // $(document).ready(() => {
-        //     $("#bookmark").click(() => {
-        //         $("#bookmark").toggleClass("fas far");
-        //     });
-        // });
+<script>
+    // $(document).ready(() => {
+    //     $("#bookmark").click(() => {
+    //         $("#bookmark").toggleClass("fas far");
+    //     });
+    // });
 
-        $("#bookmark").click(function () {
-            $(this).closest("form").submit(); // submit 이벤트 발생
-        });
-    </script>
+    $("#bookmark").click(function () {
+        $(this).closest("form").submit(); // submit 이벤트 발생
+    });
+</script>
 
 {{> layout/footer}}

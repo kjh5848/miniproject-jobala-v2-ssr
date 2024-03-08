@@ -1,7 +1,7 @@
 -- 개인 회원가입 더미
 insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
 values ('서강준', 'ssar', 'ssar@nate.com', '1234', '서울시 강남구', '1998-02-02', '01022223333', 0, now()),
-       ('박선규', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now());
+       ('김주혁', 'cos', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now());
 
 
 -- 기업 회원가입 더미
