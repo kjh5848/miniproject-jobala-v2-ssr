@@ -14,8 +14,31 @@ import java.util.List;
 public class ReplyRepository {
     private final EntityManager em;
 
+    public Reply findById(int id) {
+        String q = "select * from reply_tb where id = ?";
+        Query query = em.createNativeQuery(q, Reply.class);
+        query.setParameter(1, id);
+
+        try {
+            return (Reply) query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
     @Transactional
-    public List<ReplyResponse.ReplyListDTO> replyList(int boardId){
+    public void deleteById(int id) {
+        String q = "delete from reply_tb where id = ?";
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, id);
+
+        query.executeUpdate();
+    }
+
+
+    @Transactional
+    public List<ReplyResponse.ReplyListDTO> replyList(int boardId) {
         String q = """
                 select bt.id, rt.username, rt.comment 
                 from reply_tb rt 
