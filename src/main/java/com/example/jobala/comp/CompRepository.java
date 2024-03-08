@@ -1,6 +1,7 @@
 package com.example.jobala.comp;
 
 import com.example.jobala.apply.ApplyResponse;
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
@@ -18,6 +19,69 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompRepository {
     private final EntityManager em;
+
+    public List<Resume> findAll(String skills, CompResponse.SearchDTO resDTO) {
+        String skillQuery = """
+               SELECT rt.* FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id
+               where sk.name like ? 
+               AND (rt.career IN (?, ?))
+               AND (rt.edu IN (?, ?))
+               AND (rt.hope_job IN (?, ?))
+               order by rt.id desc
+               """;
+
+        // career 파싱
+        String[] career = {null , null};
+        String[] careerArr;
+        try {
+            careerArr = resDTO.getCareer().split(",");
+            for (int i = 0; i < careerArr.length ; i++) {
+                career[i] = careerArr[i];
+            }
+        } catch (Exception e) {
+            career[0] = "신입";
+            career[1] = "경력";
+        }
+
+        // edu 파싱
+        String[] edu = {null, null};
+        String[] eduArr;
+        try {
+            eduArr = resDTO.getEdu().split(",");
+            for (int i = 0; i < eduArr.length ; i++) {
+                edu[i] = eduArr[i];
+            }
+        } catch (Exception e) {
+            edu[0] = "고등학교 졸업";
+            edu[1] = "대학교 졸업";
+        }
+
+        // hopeJob 파싱
+        String[] hopeJob = {null, null};
+        String[] hopeJobArr;
+        try {
+            hopeJobArr = resDTO.getHopeJob().split(",");
+            for (int i = 0; i < hopeJobArr.length ; i++) {
+                hopeJob[i] = hopeJobArr[i];
+            }
+        } catch (Exception e) {
+            hopeJob[0] = "프론트엔드";
+            hopeJob[1] = "백엔드";
+        }
+
+        Query query = em.createNativeQuery(skillQuery, Resume.class);
+        query.setParameter(1, "%" + skills + "%");
+        query.setParameter(2, career[0]);
+        query.setParameter(3, career[1]);
+        query.setParameter(4, edu[0]);
+        query.setParameter(5, edu[1]);
+        query.setParameter(6, hopeJob[0]);
+        query.setParameter(7, hopeJob[1]);
+
+        List<Resume> resumeList = query.getResultList();
+
+        return resumeList;
+    }
 
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);

@@ -22,8 +22,8 @@ public class ApplyController {
     private final HttpSession session;
     private final ApplyRepository applyRepository;
 
-    @PostMapping("/applyStatus/update")
-    public String updateApplicationStatus(
+    @PostMapping("comp/applyStatus/update")
+    public String updateCompApplicationStatus(
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         applyRepository.statusUpdate(applyId, status);
 
@@ -39,6 +39,14 @@ public class ApplyController {
 //            return ResponseEntity.badRequest().body("상태 업데이트를 실패하였습니다.");
 //        }
         return "redirect:/applyPositionForm";
+    }
+
+    @PostMapping("guest/applyStatus/update")
+    public String updateGuestApplicationStatus(
+            @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
+        applyRepository.statusUpdate(applyId, status);
+
+        return "redirect:/applyStatusForm";
     }
 
 //    private String convertStatusToString(Integer status) {
@@ -126,7 +134,7 @@ public class ApplyController {
 
 
     @GetMapping("/applyPositionForm")
-    public String applyPositionForm(HttpServletRequest req) {
+    public String applyPositionForm(HttpServletRequest req ) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
         req.setAttribute("Apply", responseDTO);
@@ -149,12 +157,19 @@ public class ApplyController {
         int userId =  sessionUser.getId();
         System.out.println(userId);
         //내가 지원한 공고 현황
-        List<ApplyResponse.ApplyDTO> applystate = applyRepository.findByUserId(userId);
-        req.setAttribute("applystate", applystate);
+        List<ApplyResponse.ApplyDTO> respDTO = applyRepository.findByUserId(userId);
+        req.setAttribute("Apply", respDTO);
 
         //기업에 공고 제안 받은거
-        List<ApplyResponse.ApplyDTO2> applystate2 = applyRepository.findJopOpenByUserId(userId);
-        req.setAttribute("applystate2", applystate2);
+        List<ApplyResponse.ApplyDTO2> respDTO2 = applyRepository.findJopOpenByUserId(userId, "검토중");
+        req.setAttribute("ApplyGuest", respDTO2);
+
+        List<ApplyResponse.ApplyDTO2> respDTO3 = applyRepository.findJopOpenByUserId(userId, "수락");
+        req.setAttribute("ApplyGuest2", respDTO3);
+
+        List<ApplyResponse.ApplyDTO2> respDTO4 = applyRepository.findJopOpenByUserId(userId, "거절");
+        req.setAttribute("ApplyGuest3", respDTO4);
+
         return "/guest/_myPage/applyStatusForm";
     }
 
