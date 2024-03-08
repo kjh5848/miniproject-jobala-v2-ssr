@@ -13,6 +13,13 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
+    public static class JobopenDetailDTO {
+        private String jobopenTitle;
+        private String compname;
+    }
+
+    @AllArgsConstructor
+    @Data
     public static class SearchDTO {
         private Integer id;
         private String jobopenTitle;

@@ -23,6 +23,7 @@ public class UserController {
 
     @GetMapping("/")
     public String mainForm(HttpServletRequest req) {
+
         List<Jobopen> jobopenList = userRepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "index";

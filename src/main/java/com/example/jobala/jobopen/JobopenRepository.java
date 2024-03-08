@@ -1,11 +1,13 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.resume.Resume;
 import com.google.gson.Gson;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,17 +24,6 @@ public class JobopenRepository {
 
         List<Resume> resumeList2 = query.getResultList();
         return resumeList2;
-    }
-
-    public Jobopen findByJobopenId(int id) {
-        String q = """
-                select * from jobopen_tb where id =?
-                """;
-
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, id);
-        Jobopen jobopen = (Jobopen) query.getSingleResult();
-        return jobopen;
     }
 
     @Transactional
@@ -154,6 +145,21 @@ public class JobopenRepository {
         Query query = em.createNativeQuery(q, Resume.class);
         return query.getResultList();
     }
+
+    public JobopenResponse.JobopenDetailDTO findByUserAndJobopen(int id) {
+        String q = """
+                SELECT j.jobopen_title, u.compname
+                FROM user_tb u join jobopen_tb j on u.id= j.user_id where j.id = ?
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, id);
+
+        JpaResultMapper rm = new JpaResultMapper();
+        JobopenResponse.JobopenDetailDTO respDTO = rm.uniqueResult(query, JobopenResponse.JobopenDetailDTO.class);
+        return respDTO;
+    }
+
+
 
 //    public JobopenResponse.DetailDTO findByWithJobopen(int idx) {
 //        String q = """

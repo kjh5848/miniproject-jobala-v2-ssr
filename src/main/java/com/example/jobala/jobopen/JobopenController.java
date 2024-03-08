@@ -77,13 +77,13 @@ public class JobopenController {
     }
 
     @GetMapping("/comp/jobopen/{id}")
-    public String detailForm(@PathVariable int id, HttpServletRequest req) {
+    public String detailForm(@PathVariable int id, HttpServletRequest req,JobopenResponse.DetailDTO respDTO) {
         // modal 이력서 id로 가져오기
         User user = null;
         try {
             user = (User) session.getAttribute("sessionUser");
             Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
-            req.setAttribute("scrap",scrap);
+            req.setAttribute("scrap", scrap);
         } catch (Exception e) {
         }
         req.setAttribute("user", user);
@@ -93,11 +93,9 @@ public class JobopenController {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
-
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
-        Resume resume = resumeRepository.findByResumeUserId(user);
+        JobopenResponse.JobopenDetailDTO JobopenRespDTO= jobopenRepository.findByUserAndJobopen(id);
 
-        System.out.println("resume = " + resume);
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
         Skill skills = skillRepository.findByJobopenId(id);
@@ -111,13 +109,13 @@ public class JobopenController {
         System.out.println("다시 바꾼 결과 = " + skillsList);
         req.setAttribute("skillsList", skillsList);
         req.setAttribute("jobopen", jobopen);
-        req.setAttribute("resume", resume);
+        req.setAttribute("JobopenRespDTO", JobopenRespDTO);
 
         // 이력서 상세보기에 이미지 불러오기
         Pic pic = picRepository.jobopenFindByPic(id);
         req.setAttribute("pic", pic);
 
         return "/comp/jobopen/detailForm";
-        
+
     }
 }

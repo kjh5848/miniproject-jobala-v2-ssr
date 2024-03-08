@@ -52,14 +52,14 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeRepository.findById(id);
-        User user = (User) session.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
 
         // 이력서에 저장된 이미지 파일 정보 가져오기
         Pic pic = picRepository.resumeFindByPic(id);
 
         req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
 
-        req.setAttribute("user", user);
+        req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
 
         return "/guest/resume/updateForm";
@@ -69,20 +69,19 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeRepository.findById(id);
+        User sessionUser = (User) session.getAttribute("sessionUser");
 
         // 이력서 상세보기에 이미지 불러오기
         Pic pic = picRepository.resumeFindByPic(id);
         req.setAttribute("pic", pic);
 
-        // 스크랩
-        try {
-            User sessionUser = (User) session.getAttribute("sessionUser");
-            Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
-            req.setAttribute("scrap",scrap);
-        } catch (Exception e) {
-        }
 
-
+            // 스크랩
+            try {
+                Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
+                req.setAttribute("scrap",scrap);
+            } catch (Exception e) {
+            }
 
         int userId = resume.getUserId();
 //        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
