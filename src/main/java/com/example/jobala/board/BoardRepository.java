@@ -51,7 +51,7 @@ public class BoardRepository {
     public List<BoardResponse.DetailDTO> findAllWithUser() {
         String q = """
                 select bt.id, bt.title, bt.created_at, ut.username from board_tb bt 
-                inner join user_tb ut on bt.user_id = ut.id
+                inner join user_tb ut on bt.user_id = ut.id order by bt.id DESC
                 """;
         Query query = em.createNativeQuery(q);
         // qlrm

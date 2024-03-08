@@ -23,5 +23,14 @@ public class GuestResponse {
         private String resumeTitle;
         private String state;
     }
+
+    @Data
+    @AllArgsConstructor
+    public static class GuestProfileDTO {
+        private String name;
+        private String password;
+        private String phone;
+        private String email;
+    }
 }
 

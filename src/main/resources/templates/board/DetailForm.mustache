@@ -42,8 +42,8 @@
         <div class="card-footer">
             <b>댓글리스트</b>
         </div>
-        {{#replyList}}
         <div class="list-group">
+        {{#replyList}}
             <!-- 댓글아이템 -->
             <div class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex">
@@ -54,18 +54,9 @@
                     <button class="btn"><i class="fa-solid fa-trash"></i></button>
                 </form>
             </div>
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
-                    <div>{{comment}}</div>
-                </div>
-                <form action="/reply/1/delete" method="post">
-                    <button class="btn"><i class="fa-solid fa-trash"></i></button>
-                </form>
-            </div>
-        </div>
         {{/replyList}}
+        </div>
+
     </div>
     <br><br>
 </div>

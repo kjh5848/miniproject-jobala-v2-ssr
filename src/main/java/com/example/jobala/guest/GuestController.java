@@ -3,6 +3,7 @@ package com.example.jobala.guest;
 import com.example.jobala._user.User;
 import com.example.jobala.apply.ApplyRequest;
 import com.example.jobala.apply.ApplyResponse;
+import com.example.jobala.board.BoardResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,9 +58,12 @@ public class GuestController {
     }
 
     @GetMapping("/guest/profileForm")
-    public String profileForm() {
+    public String profileForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        int userId = sessionUser.getId();
+        List<GuestResponse.GuestProfileDTO> guestProfile = guestRepository.findProfileByUserId(sessionUser.getId());
+        req.setAttribute("guestProfile", guestProfile);
         return "/guest/_myPage/profileForm";
     }
-
 }
 
