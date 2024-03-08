@@ -17,6 +17,13 @@ public class BoardRepository {
     private final EntityManager em;
 
     @Transactional
+    public void deleteById(int id) {
+        Query query = em.createNativeQuery("delete from board_tb where id = ?");
+        query.setParameter(1, id);
+        query.executeUpdate();
+    }
+
+    @Transactional
     public void update(BoardRequest.UpdateDTO requestDTO, int id) {
         Query query = em.createNativeQuery("update board_tb set title=?, content=? where id = ?");
         query.setParameter(1, requestDTO.getTitle());
@@ -40,8 +47,6 @@ public class BoardRepository {
         BoardResponse.BoardDetailDTO responseDTO = rm.uniqueResult(query, BoardResponse.BoardDetailDTO.class);
         return responseDTO;
     }
-
-
 
     public List<BoardResponse.DetailDTO> findAllWithUser() {
         String q = """
