@@ -14,10 +14,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Column(unique = true, length = 15)
     private String username; // 아이디
-    private String compNum;
+    private String compNum; //
     private String password;
     private String name;
     private String compname;
