@@ -29,14 +29,7 @@ private final BoardRepository boardRepository;
         return "/board/mainForm";
     }
 
-    @GetMapping("/board/{id}/detailForm")
-    public String boardDetail(@PathVariable int id, HttpServletRequest req) {
 
-        BoardResponse.BoardDetailDTO responseDTO = boardRepository.findById(id);
-
-        req.setAttribute("board", responseDTO);
-        return "board/DetailForm";
-    }
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
