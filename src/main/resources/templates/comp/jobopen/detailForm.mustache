@@ -7,13 +7,15 @@
 
 <!--채용공고 상세페이지-->
 <!-- 회사 기본정보 -->
-<div class="container mt-5 p-5">
+<div class="container p-5">
     <h1>채용공고</h1>
     <hr>
     <div class="card mb-3">
         <div class="card-body">
             <div class="d-flex justify-content-center">
-                <div>
+                <img src="/image/{{pic.ImgFilename}}" class="d-flex justify-content:center"
+                     style="margin-top:-5px; margin-left: -20px;">
+                <div style="margin-left: 10px; margin-top: 10px;">
                     <p class="card-title">({{jobopen.compname}})</p>
                     <div class="d-flex justify-content-between">
                         <div>
@@ -33,7 +35,6 @@
                                     {{/scrap}}
                                 </form>
                             {{/sessionUser}}
-
                         </div>
                         <script>
                             $("#bookmark").click(function () {
@@ -77,7 +78,8 @@
                         {{/resumeList2}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">닫기</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">닫기
+                        </button>
                         <button type="submit" class="btn btn-primary">홈페이지 지원하기</button>
                     </div>
                 </div>
@@ -89,9 +91,7 @@
 
     <!-- 회사 공고 이미지 -->
     <div class="card mb-3">
-        <h2 class="card-header">채용공고 상세보기</h2>
-        <img src="/image/{{pic.ImgFilename}}" class="img-fluid">
-        <div class="card-body">
+        <div class="card-body" style="width: 102.5%; margin-left: -15px; margin-top: -15px;">
             <div class="card-header">
                 <h3>기본 정보 및 모집분야</h3>
             </div>
@@ -121,16 +121,15 @@
                     <td>지역</td>
                     <td>{{jobopen.compLocation}}</td>
                 </tr>
-                <
                 </tbody>
             </table>
         </div>
 
-        <div class="card-body">
-            <div class="card-header">
+        <div class="card-body" style="margin-bottom: -17px;">
+            <div class="card-header" style="width: 102.5%; margin-left: -15px;">
                 <h3>모집 분야</h3>
             </div>
-            <table class="table table-hover">
+            <table class="table table-hover" style="width: 102.5%; margin-left: -15px; margin-bottom: 0px;">
                 <thead class="table-dark">
                 <tr>
                     <th>직무</th>
@@ -138,7 +137,7 @@
                     <th>요구스킬</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody >
                 <td>{{jobopen.hopeJob}}</td>
                 <td>0명</td>
                 <td>
@@ -175,9 +174,9 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item"><b>온라인 접수</b>: 회사 홈페이지 접속 후 지원</li>
+                <li class="list-group-item"><b>온라인 접수</b> : 회사 홈페이지 접속 후 지원</li>
                 <li class="list-group-item"><b>이메일 접수</b> : resume@company.com 으로 이력서 첨부</li>
-                <li class="list-group-item"><b>방문 접수</b>: 회사 본사 방문 후 접수</li>
+                <li class="list-group-item"><b>방문 접수</b> : 회사 본사 방문 후 접수</li>
             </ul>
         </div>
     </div>
