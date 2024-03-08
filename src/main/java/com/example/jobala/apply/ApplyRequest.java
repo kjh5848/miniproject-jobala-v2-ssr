@@ -15,6 +15,16 @@ public class ApplyRequest {
 
     }
 
+    @Data
+    @AllArgsConstructor
+    public static class JobopenApplyDTO {
+        private Integer resumeId;
+        private Integer jobopenId;
+        private Integer userId;
+
+
+    }
+
     @AllArgsConstructor
     @Data
     public class PassFailDTO {

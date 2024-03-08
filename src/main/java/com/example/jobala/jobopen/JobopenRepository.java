@@ -155,6 +155,14 @@ public class JobopenRepository {
         return query.getResultList();
     }
 
+    public List<Jobopen> findJobopenById(User user) {
+        Query query = em.createNativeQuery("select * from jobopen_tb where user_id = ? order by id desc", Jobopen.class);
+        query.setParameter(1, user.getId());
+
+        List<Jobopen> jobopenList = query.getResultList();
+        return jobopenList;
+    }
+
 //    public JobopenResponse.DetailDTO findByWithJobopen(int idx) {
 //        String q = """
 //                select

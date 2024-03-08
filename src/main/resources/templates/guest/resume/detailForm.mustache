@@ -118,10 +118,46 @@
 
     <!-- 지원하기 버튼 -->
     <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
-        <button class="btn btn-lg btn-danger">포지션 제안하기</button>
+        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">포지션 제안하기</button>
     </div>
     <!-- 지원하기 버튼 -->
-
+    <!-- 입사지원 클릭시 창띄우기 -->
+    <form id="applicationForm" action="/jobopenApplys" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="resumeId" value="{{resume.id}}">
+        <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applyModalLabel">공고 목록</h5>
+                    </div>
+                    <div class="modal-body">
+                        {{#jobopenList}}
+                            <div class="card row mt-3 shadow-lg p-3 bg-body rounded-5">
+                                <div class="card-body shadow-5">
+                                    <div class="col-md-8 align-items-center">
+                                        {{jobopenTitle}}
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="mt-3">
+                                            <p style="font-size: 15px;">{{hopeJob}} / {{career}} </p>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="jobopenId" value="{{id}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/jobopenList}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">닫기</button>
+                        <button type="submit" class="btn btn-primary">제안하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- 입사지원 클릭시 창띄우기 -->
 
     <!-- 맞춤형 공고 -->
 

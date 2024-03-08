@@ -5,6 +5,8 @@ import com.example.jobala.Pic.PicRepository;
 import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserRepository;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenRepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapRepository;
 import com.example.jobala.skill.Skill;
@@ -32,6 +34,7 @@ public class ResumeController {
     private final UserRepository userRepository;
     private final PicRepository picRepository;
     private final ScrapRepository scrapRepository;
+    private final JobopenRepository jobopenRepository;
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
@@ -73,20 +76,24 @@ public class ResumeController {
         // 이력서 상세보기에 이미지 불러오기
         Pic pic = picRepository.resumeFindByPic(id);
         req.setAttribute("pic", pic);
-
+        User sessionUser = null;
         // 스크랩
         try {
-            User sessionUser = (User) session.getAttribute("sessionUser");
+            sessionUser = (User) session.getAttribute("sessionUser");
             Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
-            req.setAttribute("scrap",scrap);
+            req.setAttribute("scrap", scrap);
         } catch (Exception e) {
         }
 
+        if (sessionUser != null) {
+            List<Jobopen> jobopenList = jobopenRepository.findJobopenById(sessionUser);
+            req.setAttribute("jobopenList", jobopenList);
+        }
 
 
         int userId = resume.getUserId();
 //        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
-        User user = userRepository.findById(userId);
+        sessionUser = userRepository.findById(userId);
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
         Skill skills = skillRepository.findByResumeId(id);
@@ -99,7 +106,7 @@ public class ResumeController {
         System.out.println("다시 바꾼 결과 = " + skillsList);
         req.setAttribute("skillsList", skillsList);
 
-        req.setAttribute("user", user);
+        req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
         return "/guest/resume/detailForm";
     }
