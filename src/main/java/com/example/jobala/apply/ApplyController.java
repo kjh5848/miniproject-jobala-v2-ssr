@@ -3,6 +3,7 @@ package com.example.jobala.apply;
 
 import com.example.jobala._user.User;
 import com.example.jobala.board.Board;
+import com.example.jobala.guest.GuestResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -137,6 +138,21 @@ public class ApplyController {
         req.setAttribute("ApplyComp3", responseDTO4);
 
         return "/comp/_myPage/applyPositionForm";
+    }
+
+    @GetMapping("/applyStatusForm")
+    public String applyStatusForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        int userId =  sessionUser.getId();
+        System.out.println(userId);
+        //내가 지원한 공고 현황
+        List<ApplyResponse.ApplyDTO> applystate = applyRepository.findByUserId(userId);
+        req.setAttribute("applystate", applystate);
+
+        //기업에 공고 제안 받은거
+        List<ApplyResponse.ApplyDTO2> applystate2 = applyRepository.findJopOpenByUserId(userId);
+        req.setAttribute("applystate2", applystate2);
+        return "/guest/_myPage/applyStatusForm";
     }
 
 }
