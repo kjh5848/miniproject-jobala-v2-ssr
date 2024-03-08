@@ -77,13 +77,13 @@ public class JobopenController {
     }
 
     @GetMapping("/comp/jobopen/{id}")
-    public String detailForm(@PathVariable int id, HttpServletRequest req,JobopenResponse.DetailDTO respDTO) {
+    public String detailForm(@PathVariable int id, HttpServletRequest req) {
         // modal 이력서 id로 가져오기
         User user = null;
         try {
             user = (User) session.getAttribute("sessionUser");
             Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
-            req.setAttribute("scrap", scrap);
+            req.setAttribute("scrap",scrap);
         } catch (Exception e) {
         }
         req.setAttribute("user", user);
@@ -93,6 +93,7 @@ public class JobopenController {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
+
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
         JobopenResponse.JobopenDetailDTO JobopenRespDTO= jobopenRepository.findByUserAndJobopen(id);
 
@@ -116,6 +117,6 @@ public class JobopenController {
         req.setAttribute("pic", pic);
 
         return "/comp/jobopen/detailForm";
-
+        
     }
 }

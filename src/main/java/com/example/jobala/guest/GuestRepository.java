@@ -93,8 +93,8 @@ public class GuestRepository {
                 edu[i] = eduArr[i];
             }
         } catch (Exception e) {
-            edu[0] = "고졸";
-            edu[1] = "대졸";
+            edu[0] = "고등학교 졸업";
+            edu[1] = "대학교 졸업";
         }
 
         // salary 파싱
