@@ -61,6 +61,15 @@ public class ApplyController {
         return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
     }
 
+    @PostMapping("/jobopenApplys")
+    public String apply(ApplyRequest.JobopenApplyDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
+        applyRepository.jobopenApplySave(reqDTO,sessionUser);
+
+        return "redirect:/guest/resume/" + reqDTO.getResumeId();
+    }
+
 
 //    @GetMapping("/applyPositionForm")
 //    public String applyPositionForm() {
