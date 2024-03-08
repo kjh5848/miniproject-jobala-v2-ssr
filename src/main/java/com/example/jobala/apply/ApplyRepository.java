@@ -17,23 +17,24 @@ public class ApplyRepository {
     private final EntityManager em;
 
     @Transactional
-    public void passFailStatus(Integer applyId, String status) {
+    public void statusUpdate(Integer applyId, String status) {
         Query query = em.createNativeQuery("UPDATE apply_tb SET state = ? WHERE id = ?");
         query.setParameter(1, status);
         query.setParameter(2, applyId);
         query.executeUpdate();
     }
 
-    public List<ApplyResponse.ApplyDTO> findGuestApplyByUserId(int compId){ // 로그인한 기업 ID
+    public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId, String state){ // 로그인한 기업 ID
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state
-                FROM apply_tb at
-                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
-                INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE at.user_id = ? AND at.ROLE = 0;
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state 
+                FROM apply_tb at 
+                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id 
+                INNER JOIN resume_tb rt ON rt.id = at.resume_id 
+                WHERE jot.user_id = ? and at.role = 0 and at.state = ?;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
+        query.setParameter(2, state);
 
         // qlrm 사용하기
         JpaResultMapper mapper = new JpaResultMapper();
@@ -41,16 +42,16 @@ public class ApplyRepository {
         return responseDTO;
     }
 
-    public List<ApplyResponse.ApplyDTO> findCompApplyByUserId(int compId){ // 로그인한 기업 ID
+    public List<ApplyResponse.ApplyDTO> findByUserId(int userId){ // 로그인한 User ID
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE at.user_id = ? AND at.ROLE = 1;
+                WHERE at.user_id = ?;
                 """;
         Query query = em.createNativeQuery(q);
-        query.setParameter(1, compId);
+        query.setParameter(1, userId);
 
         // qlrm 사용하기
         JpaResultMapper mapper = new JpaResultMapper();

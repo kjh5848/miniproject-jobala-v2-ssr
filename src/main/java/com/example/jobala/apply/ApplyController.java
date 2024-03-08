@@ -22,24 +22,25 @@ public class ApplyController {
     private final HttpSession session;
     private final ApplyRepository applyRepository;
 
-//    @PostMapping("/updateApplicationStatus")
-//    public ResponseEntity<String> updateApplicationStatus(
-//            @RequestParam("applyId") Integer applicationId,
-//            @RequestParam("status") Integer status) {
-//
-//        // 상태값을 문자열로 변환
+    @PostMapping("/applyStatus/update")
+    public String updateApplicationStatus(
+            @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
+        applyRepository.statusUpdate(applyId, status);
+
+        // 상태값을 문자열로 변환
 //        String statusString = convertStatusToString(status);
-//
-//        // 상태 업데이트 시도
+
+        // 상태 업데이트 시도
 //        try {
-//            applyRepository.passFailStatus(applicationId, statusString);
+////            applyRepository.passFailStatus(applyId, statusString);
 //            return ResponseEntity.ok("지원 상태가 성공적으로 업데이트되었습니다.");
 //        } catch (Exception e) {
 //            // 예외 처리 및 에러 응답
 //            return ResponseEntity.badRequest().body("상태 업데이트를 실패하였습니다.");
 //        }
-//    }
-//
+        return "redirect:/applyPositionForm";
+    }
+
 //    private String convertStatusToString(Integer status) {
 //        if (status.equals(0)) {
 //            return "합격";
@@ -123,10 +124,17 @@ public class ApplyController {
     @GetMapping("/applyPositionForm")
     public String applyPositionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findCompApplyByUserId(sessionUser.getId());
-        req.setAttribute("compApply", responseDTO);
-        List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findGuestApplyByUserId(sessionUser.getId());
-        req.setAttribute("guestApply", responseDTO2);
+        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
+        req.setAttribute("Apply", responseDTO);
+        // 검토중
+        List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "검토중");
+        req.setAttribute("ApplyComp", responseDTO2);
+        // 합격
+        List<ApplyResponse.ApplyDTO> responseDTO3 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "합격");
+        req.setAttribute("ApplyComp2", responseDTO3);
+        // 불합격
+        List<ApplyResponse.ApplyDTO> responseDTO4 = apqplyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
+        req.setAttribute("ApplyComp3", responseDTO4);
 
         return "/comp/_myPage/applyPositionForm";
     }
