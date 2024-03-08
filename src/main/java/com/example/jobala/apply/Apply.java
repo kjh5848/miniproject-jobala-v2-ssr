@@ -4,6 +4,7 @@ import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "apply_tb")
-
+// user_id, role, resume_id, jobopen_id, created_at
 public class Apply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

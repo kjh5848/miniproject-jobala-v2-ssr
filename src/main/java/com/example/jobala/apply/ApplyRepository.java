@@ -1,10 +1,10 @@
 package com.example.jobala.apply;
 
+import com.example.jobala._user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,6 +94,21 @@ public class ApplyRepository {
     }
 
     @Transactional
+    public void resumeApplySave(ApplyResponse.ResumeApplyDTO respDTO, User sessionUser) {
+        String q = """
+                insert into apply_tb(user_id, role, resume_id, jobopen_id,state, created_at)values (?,?,?,?,?,now())
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, sessionUser.getId());
+        query.setParameter(2, sessionUser.getRole());
+        query.setParameter(3, respDTO.getResumeId());
+        query.setParameter(4, respDTO.getJobopenId());
+        query.setParameter(5, "검토중");
+        query.executeUpdate();
+    }
+
+
+    @Transactional
     public void save() {
         return;
     }
@@ -107,5 +122,4 @@ public class ApplyRepository {
     public void delete() {
         return;
     }
-
 }
