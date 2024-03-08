@@ -5,6 +5,7 @@ import com.example.jobala.Pic.PicRepository;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestRepository;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeRepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapRepository;
 import com.example.jobala.skill.Skill;
@@ -31,7 +32,7 @@ public class JobopenController {
     private final GuestRepository guestRepository;
     private final ScrapRepository scrapRepository;
     private final PicRepository picRepository;
-
+    private final ResumeRepository resumeRepository;
     private final HttpSession session;
 
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -92,8 +93,11 @@ public class JobopenController {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
-        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
 
+        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+        Resume resume = resumeRepository.findByResumeUserId(user);
+
+        System.out.println("resume = " + resume);
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
         Skill skills = skillRepository.findByJobopenId(id);
@@ -107,6 +111,7 @@ public class JobopenController {
         System.out.println("다시 바꾼 결과 = " + skillsList);
         req.setAttribute("skillsList", skillsList);
         req.setAttribute("jobopen", jobopen);
+        req.setAttribute("resume", resume);
 
         // 이력서 상세보기에 이미지 불러오기
         Pic pic = picRepository.jobopenFindByPic(id);
