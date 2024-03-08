@@ -2,8 +2,10 @@ package com.example.jobala.comp;
 
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.ApplyRepository;
 import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,6 +24,7 @@ public class CompController {
 
     private final HttpSession session;
     private final CompRepository compRepository;
+    private final ApplyRepository applyRepository;
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
@@ -29,7 +33,7 @@ public class CompController {
         System.out.println(slicedSkills);
         System.out.println(resDTO);
         List<Resume> resumeList = compRepository.findAll(slicedSkills, resDTO);
-;
+        ;
         req.setAttribute("resumeList", resumeList);
 
         return "/comp/scoutList";
@@ -60,8 +64,18 @@ public class CompController {
 
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
+        // 채용 공고 목록 조회
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Jobopen> jobopenList = compRepository.findJobopenById(sessionUser.getId());
+        List<Jobopen> temp = compRepository.findJobopenById(sessionUser.getId());
+        List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
+
+        jobopenList.forEach(dto -> {
+            int count = applyRepository.countJobopenApplyById(dto.getId());
+            dto.setCount(count);
+        });
+
+
+//        req.setAttribute("count",countApplyList);
         req.setAttribute("jobopenList", jobopenList);
         return "/comp/_myPage/mngForm";
     }
