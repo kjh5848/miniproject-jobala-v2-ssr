@@ -56,5 +56,39 @@
     <br>
     <br>
     <br>
+    <div class="card border-0">
+        <div class="profileBox" id="profileForm">
+
+            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-info" id="offerCount"></span>
+            </h2>
+            <div class="row">
+                <div class="col">
+                    <div class="applyBox">
+                        <table class="table" style="margin-top: -10px; max-width: 100%;">
+                            <thead>
+                            <tr>
+                                <th scope="col">이름</th>
+                                <th scope="col">이력서</th>
+                                <th scope="col">공고명</th>
+                                <th scope="col">상태</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#applystate2}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{resumeTitle}}</td>
+                                    <td>{{jobopenTitle}}</td>
+                                    <td>{{state}}</td>
+                                </tr>
+                            {{/applystate2}}
+                            <!-- 추가 제안 내용들 -->
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 {{> layout/footer}}

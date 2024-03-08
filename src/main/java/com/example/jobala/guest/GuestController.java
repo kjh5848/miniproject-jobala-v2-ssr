@@ -61,16 +61,5 @@ public class GuestController {
         return "/guest/_myPage/profileForm";
     }
 
-    @GetMapping("/applyStatusForm")
-    public String applyStatusForm(HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        int userId =  sessionUser.getId();
-        System.out.println(userId);
-
-        List<GuestResponse.JopOpenApplyDTO> applystate = guestRepository.findStateByUserId(userId);
-        req.setAttribute("applystate", applystate);
-        return "/guest/_myPage/applyStatusForm";
-    }
-
 }
 
