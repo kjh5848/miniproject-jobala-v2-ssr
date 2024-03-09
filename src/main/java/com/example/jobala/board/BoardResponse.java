@@ -1,6 +1,5 @@
 package com.example.jobala.board;
 
-import com.example.jobala._user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -37,3 +36,4 @@ public class BoardResponse {
             this.username = username;
         }
     }
+}
