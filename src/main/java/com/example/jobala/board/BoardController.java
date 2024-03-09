@@ -42,7 +42,7 @@ private final ReplyRepository replyRepository;
         req.setAttribute("replyList", replyList);
         req.setAttribute("isSameCheck", isSameCheck);
 
-        return "/board/DetailForm";
+        return "detailForm";
     }
 
     @PostMapping("/board/{id}/update")
