@@ -12,19 +12,26 @@
         </h2>
         <div>
             <!-- 구직자 기술스택 매칭리스트 목록 -->
-            <form id="searchForm" action="/guest/jobopenSearch" method="get" enctype="application/x-www-form-urlencoded">
+            <form id="searchForm" action="/guest/jobopenSearch" method="get"
+                  enctype="application/x-www-form-urlencoded">
                 <div class="card-body select-box border border-2 mb-5 rounded-3">
                     <div class="select-box ">
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>기술스택</h4>
-                                <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="Java" onchange="skillsFilter(this);" /> Java
-                                    <input type="checkbox" class="checkbox" value="JavaScript" onchange="skillsFilter(this);" />JavaScript
-                                    <input type="checkbox" class="checkbox" value="Spring" onchange="skillsFilter(this);" /> Spring
-                                    <input type="checkbox" class="checkbox" value="HTML" onchange="skillsFilter(this);" /> HTML
-                                    <input type="checkbox" class="checkbox" value="jQuery" onchange="skillsFilter(this);" /> jQuery
-                                    <input type="checkbox" class="checkbox" value="MySQL" onchange="skillsFilter(this);" /> MySQL
-                                </div>
+                            <div class="checkbox-package">
+                                <input type="checkbox" class="checkbox" value="Java" onchange="skillsFilter(this);"/>
+                                Java
+                                <input type="checkbox" class="checkbox" value="JavaScript"
+                                       onchange="skillsFilter(this);"/>JavaScript
+                                <input type="checkbox" class="checkbox" value="Spring" onchange="skillsFilter(this);"/>
+                                Spring
+                                <input type="checkbox" class="checkbox" value="HTML" onchange="skillsFilter(this);"/>
+                                HTML
+                                <input type="checkbox" class="checkbox" value="jQuery" onchange="skillsFilter(this);"/>
+                                jQuery
+                                <input type="checkbox" class="checkbox" value="MySQL" onchange="skillsFilter(this);"/>
+                                MySQL
+                            </div>
 
                             <script>
                                 // 기술스택 필터 적용
@@ -58,7 +65,7 @@
 
                         </div>
 
-                      <div class="select-package bg-info p-3 m-2 rounded-3">
+                        <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>경력</h4>
                             <div class="checkbox-package">
                                 <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입
@@ -84,7 +91,7 @@
                         </div>
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>연봉</h4>
-                            <div class="checkbox-package" >
+                            <div class="checkbox-package">
                                 <input type="checkbox" name="salary" class="checkbox" value="협의"/>
                                 협의
                                 <input type="checkbox" name="salary" class="checkbox" value="3,000만원 이하"/>
@@ -95,7 +102,7 @@
                         </div>
                         <div class="select-package bg-info p-3 m-2 rounded-3">
                             <h4>희망 직무</h4>
-                            <div class="checkbox-package" >
+                            <div class="checkbox-package">
                                 <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
                                 프론트엔드
                                 <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
@@ -112,7 +119,8 @@
 
                         <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
                             <input type="hidden" name="skills" id="skillsInput">
-                            <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()"> <!-- 좌우 여백만 추가 -->
+                            <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()">
+                                <!-- 좌우 여백만 추가 -->
                                 필터 적용하기
                             </button>
                         </div>
