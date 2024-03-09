@@ -43,22 +43,22 @@
             <b>댓글리스트</b>
         </div>
         <div class="list-group">
-        {{#replyList}}
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
-                    <div>{{comment}}</div>
+            {{#replyList}}
+                <!-- 댓글아이템 -->
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex">
+                        <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
+                        <div>{{comment}}</div>
+                    </div>
+                    {{#isSameCheck}}
+                        <form action="/reply/{{id}}/delete" method="post">
+                            <button class="btn"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    {{/isSameCheck}}
                 </div>
-                <form action="/reply/1/delete" method="post">
-                    <button class="btn"><i class="fa-solid fa-trash"></i></button>
-                </form>
-            </div>
-        {{/replyList}}
+            {{/replyList}}
         </div>
-
     </div>
-    <br><br>
 </div>
 
 
