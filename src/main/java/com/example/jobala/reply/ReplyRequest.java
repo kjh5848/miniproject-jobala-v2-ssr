@@ -8,4 +8,6 @@ public class ReplyRequest {
         private String comment;
         private Integer boardId;
     }
+
+
 }

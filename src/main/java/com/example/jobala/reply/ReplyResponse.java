@@ -6,15 +6,6 @@ import lombok.Data;
 
 public class ReplyResponse {
 
-
-    @AllArgsConstructor
-    @Data
-    public static class ReplyListDTO {
-        private Integer boardId;
-        private String username;
-        private String comment;
-    }
-
     @AllArgsConstructor
     @Data
     public static class ReplyDTO {

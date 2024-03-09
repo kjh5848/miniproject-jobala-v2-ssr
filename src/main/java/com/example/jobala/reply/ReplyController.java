@@ -15,6 +15,7 @@ public class ReplyController {
     private final BoardRepository boardRepository;
     private final HttpSession session;
 
+
     @PostMapping("reply/save")
     public String repluSave(ReplyRequest.WriteDTO reqDTO) {
         System.out.println("reqDTO = " + reqDTO);
@@ -27,6 +28,7 @@ public class ReplyController {
 
     @PostMapping("/reply/{id}/delete")
     public String deleteReply(@PathVariable int id, HttpSession session) {
+        System.out.println("id = " + id);
         // 댓글의 username과 세션의 username 비교해서 같으면 삭제 가능
         User sessionUser = (User) session.getAttribute("sessionUser");
 
@@ -37,15 +39,14 @@ public class ReplyController {
         Reply reply = replyRepository.findById(id);
 
         if (reply == null) {
-            return "redirect:/board/DetailForm";
+            return "error/404";
         }
-
-        if (!sessionUser.getUsername().equals(reply.getUsername())) {
-            return "redirect:/loginForm";
+        if (reply.getUserId() != sessionUser.getId()) {
+            return "error/403";
         }
 
         replyRepository.deleteById(id);
 
-        return "redirect:/board/" + reply.getBoardId() + "/detailForm";
+        return "redirect:/board/" + reply.getBoardId();
     }
 }

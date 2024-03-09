@@ -53,11 +53,11 @@
                         <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
                         <div>{{comment}}</div>
                     </div>
-
-                    <form action="/reply/{{id}}/delete" method="post">
-                        <button class="btn"><i class="fa-solid fa-trash"></i></button>
-                    </form>
-
+                    {{#replyOwner}}
+                        <form action="/reply/{{id}}/delete" method="post">
+                            <button class="btn"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    {{/replyOwner}}
                 </div>
             {{/replyList}}
         </div>
