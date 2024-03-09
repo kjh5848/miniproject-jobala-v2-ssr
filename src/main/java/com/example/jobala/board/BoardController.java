@@ -25,8 +25,6 @@ private final BoardRepository boardRepository;
         return "/board/mainForm";
     }
 
-
-
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
 
@@ -59,20 +57,25 @@ private final BoardRepository boardRepository;
         return"/board/saveForm";
     }
 
-    @PostMapping ("/board/save")
+    @PostMapping("/board/save")
     public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request) {
-        // 1. 인증 체크
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/loginForm";
+        }
+
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
 
-
-        // insert into board_tb(title, content, user_id, created_at) values(?,?,?, now());
+        // 게시물 저장 로직
         boardRepository.save(requestDTO, sessionUser.getId());
 
-        return "redirect:/";
+        // 메인 폼으로 리다이렉트
+        return "redirect:/board/mainForm";
     }
+
 
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id, HttpServletRequest request) {
