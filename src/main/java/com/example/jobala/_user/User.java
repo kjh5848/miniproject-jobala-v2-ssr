@@ -27,5 +27,4 @@ public class User {
     private Date age;
     private Integer role; // 0 -> guest, 1 -> comp
     private LocalDateTime createdAt;
-
 }

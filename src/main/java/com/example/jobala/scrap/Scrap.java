@@ -3,7 +3,7 @@ package com.example.jobala.scrap;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -16,5 +16,5 @@ public class Scrap {
     private Integer jobopenId;
     private Integer resumeId;
     private Integer role; // 0 -> guest, 1 -> comp
-    private LocalDateTime createAt;
+    private Timestamp createAt;
 }
