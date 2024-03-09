@@ -67,6 +67,7 @@ VALUES (10, '쿠팡', '소프트웨어 개발자 채용', '네이버에서 함�
         '2024-06-22', now(), 1);
 
 
+
 -- 개인이 기업공고를 보고 지원한 더미 9개
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, role, state, created_at)
 VALUES (1, 1, 10, 0, '검토중', NOW()),
@@ -158,28 +159,28 @@ VALUES ('1년차 개발자들', '1년차 개발자들 요즘 패기가 없더라
 
 -- 이력서 사진 더미
 INSERT INTO pic_tb(resume_id, img_filename, title)
-VALUES (1, 'userimage2.png', 'userimage2.png'),
-       (2, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (3, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (4, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (5, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (6, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (7, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (8, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (9, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg');
+VALUES (1, 'userImage.jpg', 'userImage.jpg'),
+       (2, 'userImage2.jpg', 'userImage2.jpg'),
+       (3, 'userImage3.jpg', 'userImage3.jpg'),
+       (4, 'userimage4.png', 'userimage4.png'),
+       (5, 'userimage5.png', 'userimage5.png'),
+       (6, 'userimage6.png', 'userimage6.png'),
+       (7, 'userimage7.png', 'userimage7.png'),
+       (8, 'userimage8.png', 'userimage8.png'),
+       (9, 'userimage9.png', 'userimage9.png');
 
 
 -- 채용 공고 사진 더미
 INSERT INTO pic_tb(jobopen_id, img_filename, title)
-VALUES (1, 'naverlogo.png', 'naverlogo.png'),
+VALUES (1, 'coupangglogo.png', 'cupanglogo.png'),
        (2, 'naverlogo.png', 'naverlogo.png'),
        (3, 'kakaologo.svg', 'kakaologo.svg'),
-       (4, 'coupanglogo.png', 'coupanglogo.png'),
-       (5, 'coupanglogo.png', 'coupanglogo.png'),
-       (6, 'coupanglogo.png', 'coupanglogo.png'),
-       (7, 'coupanglogo.png', 'coupanglogo.png'),
-       (8, 'coupanglogo.png', 'coupanglogo.png'),
-       (9, 'coupanglogo.png', 'coupanglogo.png');
+       (4, 'tosslogo.png', 'toslogo.png'),
+       (5, 'baeminnlogo.png','balogo.png'),
+       (6, 'linelogo.png', 'linelogo.png'),
+       (7, 'carrotlogo.png', 'carrotlogo.png'),
+       (8, 'hybelogo.png', 'hibelogo.png'),
+       (9, 'getintherelogo.png', 'getintherelogo.png');
 
 --댓글 더미
 Insert Into reply_tb(comment, board_id, username, created_at)

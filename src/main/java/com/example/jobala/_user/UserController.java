@@ -1,29 +1,36 @@
 package com.example.jobala._user;
 
+import com.example.jobala.Pic.Pic;
+import com.example.jobala.Pic.PicRepository;
+import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._core.util.ApiUtil;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenRepository;
+import com.example.jobala.jobopen.JobopenRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
     private final JobopenRepository jobopenRepository;
+    private final PicRepository picRepository;
 
     private final HttpSession session;
 
     @GetMapping("/")
-    public String mainForm(HttpServletRequest req) {
-
+    public String mainForm(HttpServletRequest req, PicRequest.UploadDTO reqDTO) {
         List<Jobopen> jobopenList = userRepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
