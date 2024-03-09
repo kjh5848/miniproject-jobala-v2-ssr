@@ -19,15 +19,13 @@ public class CompRepository {
 
     @Transactional
     public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
-        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, compname = ?, address = ?, comp_num = ? WHERE id = ?");
+        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ? WHERE id = ?");
         query.setParameter(1, profileDto.getName());
         query.setParameter(2, profileDto.getPassword());
         query.setParameter(3, profileDto.getPhone());
         query.setParameter(4, profileDto.getEmail());
-        query.setParameter(5, profileDto.getCompname());
-        query.setParameter(6, profileDto.getAddress());
-        query.setParameter(7, profileDto.getCompNum());
-        query.setParameter(8, profileDto.getId());
+        query.setParameter(5, profileDto.getAddress());
+        query.setParameter(6, profileDto.getId());
         query.executeUpdate();
     }
 

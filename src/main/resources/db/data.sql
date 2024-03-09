@@ -13,7 +13,7 @@ values
 
 
 -- -- 기업 회원가입 더미 9개
-insert into user_tb(git , ceo, compname, address, username, email, password, name, phone, role, created_at)
+insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
 values
     ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com1', 'actor1@nate.com', '1234', '이병헌', '01011112223', 1, now()),
     ('737-546-7196', '송중기', '네이버', '서울특별시 종로구', 'com2', 'actor2@nate.com', '1234', '송중기', '01011112224', 1, now()),
