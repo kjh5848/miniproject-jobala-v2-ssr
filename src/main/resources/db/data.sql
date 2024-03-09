@@ -67,7 +67,6 @@ VALUES (10, '쿠팡', '소프트웨어 개발자 채용', '네이버에서 함�
         '2024-06-22', now(), 1);
 
 
-
 -- 개인이 기업공고를 보고 지원한 더미 9개
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, role, state, created_at)
 VALUES (1, 1, 10, 0, '검토중', NOW()),
@@ -176,15 +175,15 @@ VALUES (1, 'coupangglogo.png', 'cupanglogo.png'),
        (2, 'naverlogo.png', 'naverlogo.png'),
        (3, 'kakaologo.svg', 'kakaologo.svg'),
        (4, 'tosslogo.png', 'toslogo.png'),
-       (5, 'baeminnlogo.png','balogo.png'),
+       (5, 'baeminnlogo.png', 'balogo.png'),
        (6, 'linelogo.png', 'linelogo.png'),
        (7, 'carrotlogo.png', 'carrotlogo.png'),
        (8, 'hybelogo.png', 'hibelogo.png'),
        (9, 'getintherelogo.png', 'getintherelogo.png');
 
 --댓글 더미
-Insert Into reply_tb(comment, board_id, username, created_at)
-values ('꼰대임?', 1, 'cos2', now()),       --cos2이 1번 게시물에 댓글을 작성했다.
-       ('넌 몇년차인데?ㅋㅋ', 1, 'cos3', now()), --cos3가 1번 게시물에 댓글을 작성했다.
-       ('관심 받고 싶니?', 2, 'cos1', now()),  --cos1이 2번 게시물에 댓글을 작성했다.
-       ('너가 주면 난 내 전재산 준다', 2, 'cos3', now()); --cos3가 2번 게시물에 댓글을 작성했다.
+Insert Into reply_tb(user_id, comment, board_id, username, created_at)
+values (2, '꼰대임?', 1, 'cos2', now()),       --cos2이 1번 게시물에 댓글을 작성했다.
+       (3, '넌 몇년차인데?ㅋㅋ', 1, 'cos3', now()), --cos3가 1번 게시물에 댓글을 작성했다.
+       (1, '관심 받고 싶니?', 2, 'cos1', now()),  --cos1이 2번 게시물에 댓글을 작성했다.
+       (3, '너가 주면 난 내 전재산 준다', 2, 'cos3', now()); --cos3가 2번 게시물에 댓글을 작성했다.
