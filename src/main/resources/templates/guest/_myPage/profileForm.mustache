@@ -31,14 +31,14 @@
                 <div class="content">
                     <h2>프로필 관리</h2>
 {{#guestProfile}}
-                    <form action="#" method="post">
+                    <form action="/guest/updateProfile" method="post">
                         <div class="mb-3">
                             <label for="name" class="form-label">이름:</label>
                             <input type="text" class="form-control" id="name" name="name" value={{name}}>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">비밀번호:</label>
-                            <input type="password" class="form-control" id="phone" name="phone" value={{password}}>
+                            <input type="password" class="form-control" id="password" name="password" value={{password}}>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">전화번호:</label>

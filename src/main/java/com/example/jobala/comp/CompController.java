@@ -11,9 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,9 +79,21 @@ public class CompController {
     }
 
     @GetMapping("/comp/profileForm")
-    public String profileForm() {
+    public String profileForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<CompResponse.CompProfileDTO> compProfile = compRepository.findProfileByUserId(sessionUser.getId());
+        req.setAttribute("compProfile", compProfile);
         return "/comp/_myPage/profileForm";
     }
 
-
+    @PostMapping("/comp/updateProfile")
+    public String updateProfile(@ModelAttribute CompResponse.CProfileUpdateDTO profileDto) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if(sessionUser == null) {
+            return "redirect:/login";
+        }
+        profileDto.setId(sessionUser.getId());
+        compRepository.updateProfile(profileDto);
+        return "redirect:/comp/profileForm";
+    }
 }
