@@ -8,9 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,9 +22,7 @@ public class ScrapController {
     @GetMapping("/comp/scrapForm")
     public String compScrapForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        // 로그인 여부 확인
         if (sessionUser == null) {
-            // 로그인하지 않았다면 로그인 페이지로 리다이렉트
             return "redirect:/loginForm";
         }
         List<Resume> resumeList = scrapRepository.findResumeAll(sessionUser.getId());
@@ -38,10 +34,10 @@ public class ScrapController {
     @PostMapping("/comp/scrap")
     public String scrapResume(ScrapRequest.CompScrap reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        // 로그인 여부 확인
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
+
         // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
         Scrap scrap = null;
         int resumeId = reqDTO.getResumeId();
@@ -64,13 +60,13 @@ public class ScrapController {
     @GetMapping("/guest/scrapForm")
     public String guestScrapForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        // 로그인 여부 확인
         if (sessionUser == null) {
-            // 로그인하지 않았다면 로그인 페이지로 리다이렉트
             return "redirect:/loginForm";
         }
+
         List<Jobopen> jobopenList = scrapRepository.findJobopenAll(sessionUser.getId());
         req.setAttribute("jobopenList", jobopenList);
+
         return "/guest/_myPage/scrapForm";
     }
 

@@ -24,7 +24,7 @@ public class ApplyRepository {
         query.executeUpdate();
     }
 
-    public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId, String state){ // 로그인한 기업 ID
+    public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId, String state) { // 로그인한 기업 ID
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
                 FROM apply_tb at 
@@ -42,13 +42,13 @@ public class ApplyRepository {
         return responseDTO;
     }
 
-    public List<ApplyResponse.ApplyDTO> findByUserId(int userId){ // 로그인한 User ID
+    public List<ApplyResponse.ApplyDTO> findByUserId(int userId) { // 로그인한 User ID
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE at.user_id = ?;
+                WHERE at.user_id = ? order by id desc;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
@@ -60,7 +60,7 @@ public class ApplyRepository {
     }
 
 
-    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId, String state){ // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
+    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId, String state) { // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, jot.compname, rt.edu, jot.end_Time, at.state, jot.id
                 FROM apply_tb at
@@ -78,7 +78,7 @@ public class ApplyRepository {
         return responseDTO;
     }
 
-    public List<ApplyResponse.HireDTO> hfindAllByUserId(int compId){ // 로그인한 기업 ID
+    public List<ApplyResponse.HireDTO> hfindAllByUserId(int compId) { // 로그인한 기업 ID
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, at.state
                 FROM apply_tb at
@@ -161,7 +161,7 @@ public class ApplyRepository {
                 select count(*) from apply_tb where jobopen_id = ? and role = 0 and state = '검토중';
                 """;
         Query query = em.createNativeQuery(q, Long.class);
-        query.setParameter(1,jobopenId);
+        query.setParameter(1, jobopenId);
         Long count = (Long) query.getSingleResult();
         return count.intValue();
     }

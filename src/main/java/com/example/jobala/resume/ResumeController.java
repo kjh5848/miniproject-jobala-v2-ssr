@@ -2,7 +2,6 @@ package com.example.jobala.resume;
 
 import com.example.jobala.Pic.Pic;
 import com.example.jobala.Pic.PicRepository;
-import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserRepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -38,31 +37,37 @@ public class ResumeController {
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
-        User user = (User) session.getAttribute("sessionUser");
-        req.setAttribute("user", user);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        req.setAttribute("sessionUser", sessionUser);
         return "/guest/resume/saveForm";
     }
 
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         Resume resume = resumeRepository.findById(id);
-        System.out.println("id = " + id);
-        System.out.println("resume.getId() = " + resume.getId());
         resumeRepository.update(resume.getId(), reqDTO);
         return "redirect:/guest/mngForm";
     }
 
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         Resume resume = resumeRepository.findById(id);
-        User user = (User) session.getAttribute("sessionUser");
 
         // 이력서에 저장된 이미지 파일 정보 가져오기
         Pic pic = picRepository.resumeFindByPic(id);
-
         req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
-
-        req.setAttribute("user", user);
+        req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
 
         return "/guest/resume/updateForm";
@@ -72,17 +77,21 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeRepository.findById(id);
-
         // 이력서 상세보기에 이미지 불러오기
         Pic pic = picRepository.resumeFindByPic(id);
         req.setAttribute("pic", pic);
-        
+
+        boolean isGuestScrap = false;
         User sessionUser = null;
         // 스크랩
         try {
             sessionUser = (User) session.getAttribute("sessionUser");
-            Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
-            req.setAttribute("scrap", scrap);
+            if (sessionUser.getRole() == 1) {
+                isGuestScrap = true;
+                req.setAttribute("isGuestScrap", isGuestScrap);
+                Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
+                req.setAttribute("scrap", scrap);
+            }
         } catch (Exception e) {
         }
 
@@ -114,14 +123,20 @@ public class ResumeController {
 
     @PostMapping("/guest/resume/save")
     public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
-        User user = (User) session.getAttribute("sessionUser");
-        System.out.println("리스트 = " + resumeSaveDTO.getSkills());
-        resumeRepository.save(resumeSaveDTO, user);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        resumeRepository.save(resumeSaveDTO, sessionUser);
         return "redirect:/guest/mngForm";
     }
 
     @PostMapping("/resume/{id}/delete")
     public String delete(ResumeRequest.DeleteDTO deleteDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         resumeRepository.delete(deleteDTO.getId());
         return "redirect:/guest/mngForm";
     }

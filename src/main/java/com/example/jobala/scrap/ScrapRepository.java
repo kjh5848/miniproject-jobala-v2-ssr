@@ -21,7 +21,7 @@ public class ScrapRepository {
                 where s.user_id = ? ORDER BY r.id DESC;
                 """;
         Query query = em.createNativeQuery(q, Resume.class);
-        query.setParameter(1,userId);
+        query.setParameter(1, userId);
         return query.getResultList();
     }
 
@@ -40,7 +40,7 @@ public class ScrapRepository {
     @Transactional
     public void compScrapSave(Integer resumeId, Integer userId) {
         String q = """
-                insert into scrap_tb(user_id, resume_id, role, create_at) values (?,?,?,now());
+                insert into scrap_tb(user_id, resume_id, role, created_at) values (?,?,?,now());
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
@@ -55,19 +55,19 @@ public class ScrapRepository {
                 delete from scrap_tb where id = ?
                 """;
         Query query = em.createNativeQuery(q);
-        query.setParameter(1,id);
+        query.setParameter(1, id);
         query.executeUpdate();
     }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public List<Jobopen> findJobopenAll(Integer userId) {
         String q = """
                 SELECT r.* FROM jobopen_tb r inner join scrap_tb s on r.id = s.jobopen_id
                 where s.user_id = ? ORDER BY r.id DESC;
                 """;
         Query query = em.createNativeQuery(q, Jobopen.class);
-        query.setParameter(1,userId);
+        query.setParameter(1, userId);
         return query.getResultList();
     }
 
@@ -86,7 +86,7 @@ public class ScrapRepository {
     @Transactional
     public void guestScrapSave(Integer jobopenId, Integer userId) {
         String q = """
-                insert into scrap_tb(user_id, jobopen_id, role, create_at) values (?,?,?,now());
+                insert into scrap_tb(user_id, jobopen_id, role, created_at) values (?,?,?,now());
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
@@ -101,7 +101,7 @@ public class ScrapRepository {
                 delete from scrap_tb where id = ?
                 """;
         Query query = em.createNativeQuery(q);
-        query.setParameter(1,id);
+        query.setParameter(1, id);
         query.executeUpdate();
     }
 

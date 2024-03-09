@@ -1,10 +1,10 @@
 package com.example.jobala.Pic;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -21,9 +20,11 @@ import java.util.UUID;
 public class PicController {
 
     private final PicRepository picRepository;
+    private final HttpSession session;
 
     @PostMapping("/resume/upload")
     public ResponseEntity<String> resumeUpload(PicRequest.UploadDTO reqDTO) {
+
         String title = reqDTO.getTitle();
         MultipartFile imgFile = reqDTO.getImgFile();
 
@@ -79,7 +80,7 @@ public class PicController {
     }
 
     @PostMapping("/jobopen/upload")
-    public ResponseEntity<String>jobopenUpload(PicRequest.UploadDTO reqDTO) {
+    public ResponseEntity<String> jobopenUpload(PicRequest.UploadDTO reqDTO) {
         String title = reqDTO.getTitle();
         MultipartFile imgFile = reqDTO.getImgFile();
 

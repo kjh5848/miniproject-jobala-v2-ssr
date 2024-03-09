@@ -2,8 +2,6 @@ package com.example.jobala.apply;
 
 
 import com.example.jobala._user.User;
-import com.example.jobala.board.Board;
-import com.example.jobala.guest.GuestResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +23,10 @@ public class ApplyController {
     @PostMapping("comp/applyStatus/update")
     public String updateCompApplicationStatus(
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         applyRepository.statusUpdate(applyId, status);
 
         // 상태값을 문자열로 변환
@@ -44,6 +46,10 @@ public class ApplyController {
     @PostMapping("guest/applyStatus/update")
     public String updateGuestApplicationStatus(
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         applyRepository.statusUpdate(applyId, status);
 
         return "redirect:/applyStatusForm";
@@ -63,8 +69,11 @@ public class ApplyController {
     @PostMapping("/resumeApplys")
     public String apply(ApplyRequest.ResumeApplyDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         System.out.println("지원하기 이력서, 공고 아이디 = " + reqDTO);
-        applyRepository.resumeApplySave(reqDTO,sessionUser);
+        applyRepository.resumeApplySave(reqDTO, sessionUser);
 
         return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
     }
@@ -72,8 +81,11 @@ public class ApplyController {
     @PostMapping("/jobopenApplys")
     public String apply(ApplyRequest.JobopenApplyDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
-        applyRepository.jobopenApplySave(reqDTO,sessionUser);
+        applyRepository.jobopenApplySave(reqDTO, sessionUser);
 
         return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
@@ -143,8 +155,11 @@ public class ApplyController {
 
 
     @GetMapping("/applyPositionForm")
-    public String applyPositionForm(HttpServletRequest req ) {
+    public String applyPositionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
         req.setAttribute("Apply", responseDTO);
         // 검토중
@@ -163,7 +178,10 @@ public class ApplyController {
     @GetMapping("/applyStatusForm")
     public String applyStatusForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        int userId =  sessionUser.getId();
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        int userId = sessionUser.getId();
         System.out.println(userId);
         //내가 지원한 공고 현황
         List<ApplyResponse.ApplyDTO> respDTO = applyRepository.findByUserId(userId);

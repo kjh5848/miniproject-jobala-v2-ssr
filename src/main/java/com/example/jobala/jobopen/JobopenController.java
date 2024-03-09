@@ -38,12 +38,20 @@ public class JobopenController {
 
     @PostMapping("/comp/jobopen/{id}/detete")
     public String delete(@PathVariable int id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         jobopenRepository.delete(id);
         return "redirect:/comp/mngForm";
     }
 
     @PostMapping("/comp/jobopen/{id}/update")
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         Jobopen jobopen = jobopenRepository.findById(id);
         jobopenRepository.update(jobopen, reqDTO);
         return "redirect:/comp/mngForm";
@@ -51,6 +59,10 @@ public class JobopenController {
 
     @GetMapping("/comp/jobopen/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         Jobopen jobopen = jobopenRepository.findById(id);
         req.setAttribute("jobopen", jobopen);
 
@@ -64,27 +76,39 @@ public class JobopenController {
 
     @PostMapping("/comp/jobopen/save")
     public String jobopenSave(JobopenRequest.SaveDTO reqDTO) {
-        System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         jobopenRepository.save(reqDTO, sessionUser);
         return "redirect:/comp/mngForm";
     }
 
     @GetMapping("/comp/jobopen/saveForm")
     public String saveForm(HttpServletRequest req) {
-        User user = (User) session.getAttribute("sessionUser");
-        req.setAttribute("user", user);
-        return "/comp/jobOpen/saveForm";
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        return "/comp/jobopen/saveForm";
     }
 
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-        // modal 이력서 id로 가져오기
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        boolean isCompScrap = false;
         User user = null;
         try {
             user = (User) session.getAttribute("sessionUser");
-            Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
-            req.setAttribute("scrap",scrap);
+            if (user.getRole() == 0) {
+                isCompScrap = true;
+                req.setAttribute("isCompScrap", isCompScrap);
+                Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
+                req.setAttribute("scrap", scrap);
+            }
         } catch (Exception e) {
         }
         req.setAttribute("user", user);
@@ -96,7 +120,7 @@ public class JobopenController {
         }
 
         Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
-        JobopenResponse.JobopenDetailDTO JobopenRespDTO= jobopenRepository.findByUserAndJobopen(id);
+        JobopenResponse.JobopenDetailDTO JobopenRespDTO = jobopenRepository.findByUserAndJobopen(id);
 
 
         // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
@@ -118,6 +142,6 @@ public class JobopenController {
         req.setAttribute("pic", pic);
 
         return "/comp/jobopen/detailForm";
-        
+
     }
 }

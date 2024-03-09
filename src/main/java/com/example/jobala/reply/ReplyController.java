@@ -18,9 +18,11 @@ public class ReplyController {
 
     @PostMapping("reply/save")
     public String repluSave(ReplyRequest.SaveDTO reqDTO) {
-        System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
-        System.out.println("sessionUser.getId() = " + sessionUser.getId());
+
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         replyRepository.save(reqDTO, sessionUser);
         return "redirect:/board/" + reqDTO.getBoardId();
     }
@@ -31,7 +33,6 @@ public class ReplyController {
         System.out.println("id = " + id);
         // 댓글의 username과 세션의 username 비교해서 같으면 삭제 가능
         User sessionUser = (User) session.getAttribute("sessionUser");
-
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }

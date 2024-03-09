@@ -24,6 +24,10 @@ public class GuestController {
     // DEL: mainForm 삭제
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         // [,]를 없애기위해 substring
         String slicedSkills = skills.substring(1, skills.length() - 1);
         System.out.println(slicedSkills);
@@ -36,6 +40,10 @@ public class GuestController {
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         List<Jobopen> jobopenList = guestRepository.findByJoboopenAll();
         req.setAttribute("jobopenList", jobopenList);
         return "/guest/jobSearch";
@@ -45,6 +53,9 @@ public class GuestController {
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         int userId = sessionUser.getId();
         System.out.println(userId);
         List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
@@ -55,6 +66,9 @@ public class GuestController {
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         List<GuestResponse.GuestProfileDTO> guestProfile = guestRepository.findProfileByUserId(sessionUser.getId());
         req.setAttribute("guestProfile", guestProfile);
         return "/guest/_myPage/profileForm";

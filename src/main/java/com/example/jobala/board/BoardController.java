@@ -24,8 +24,11 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
-        System.out.println("id = " + id);
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        System.out.println("id = " + id);
 
         BoardResponse.BoardDetailDTO boardDetailDTO = boardRepository.findById(id);
 
@@ -76,6 +79,10 @@ public class BoardController {
 
     @GetMapping("/board/saveForm")
     public String saveForm() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
         return "/board/saveForm";
     }
 

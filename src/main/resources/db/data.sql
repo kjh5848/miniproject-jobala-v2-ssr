@@ -70,15 +70,15 @@ VALUES (10, '쿠팡', '소프트웨어 개발자 채용', '네이버에서 함�
 
 -- 개인이 기업공고를 보고 지원한 더미 9개
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, role, state, created_at)
-VALUES (1, 1, 10, 0, '검토중', NOW()),
-       (2, 2, 11, 0, '검토중', NOW()),
-       (3, 3, 12, 0, '검토중', NOW()),
-       (4, 4, 13, 0, '검토중', NOW()),
-       (5, 5, 14, 0, '검토중', NOW()),
-       (6, 6, 15, 0, '검토중', NOW()),
-       (7, 7, 16, 0, '검토중', NOW()),
-       (8, 8, 17, 0, '검토중', NOW()),
-       (9, 9, 18, 0, '검토중', NOW());
+VALUES (1, 1, 1, 0, '검토중', NOW()),
+       (2, 2, 2, 0, '검토중', NOW()),
+       (3, 3, 3, 0, '검토중', NOW()),
+       (4, 4, 4, 0, '검토중', NOW()),
+       (5, 5, 5, 0, '검토중', NOW()),
+       (6, 6, 6, 0, '검토중', NOW()),
+       (7, 7, 7, 0, '검토중', NOW()),
+       (8, 8, 8, 0, '검토중', NOW()),
+       (9, 9, 9, 0, '검토중', NOW());
 
 
 ---기업이 포지션 제안한 공고 현황 더미
@@ -116,7 +116,7 @@ VALUES (1, 1, 10, '["Java","JavaScript","Spring","HTML","jQuery"]'),
        (6, 1, 15, '["Java","Spring","MySQL"]'),
        (7, 1, 16, '["JavaScript","Spring","HTML"]'),
        (8, 1, 17, '["Java","JavaScript","HTML"]'),
-       (9, 1, 19, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
+       (9, 1, 18, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
 
 
 -- 개인이 공고를 스트랩한 더미
@@ -177,7 +177,7 @@ VALUES (1, 'cupanglogo.png', 'cupanglogo.png'),
        (3, 'kakaologo.svg', 'kakaologo.svg'),
        (4, 'toslogo.png', 'toslogo.png'),
        (5, 'linelogo.png', 'linelogo.png'),
-       (6, 'balogo.png','balogo.png'),
+       (6, 'balogo.png', 'balogo.png'),
        (7, 'carrotlogo.png', 'carrotlogo.png'),
        (8, 'hibelogo.png', 'hibelogo.png'),
        (9, 'getintherelogo.png', 'getintherelogo.png');
