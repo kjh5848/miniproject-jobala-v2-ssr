@@ -1,11 +1,11 @@
 -- -- 개인 회원가입 더미 9개
 insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
 values
-    ('서강준', 'cos1', 'ssar@nate.com', '1234', '서울시 강남구', '1998-02-02', '01022223333', 0, now()),
-    ('김주혁', 'cos2', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
-    ('김흥국', 'cos3', 'gook@nate.com', '1234', '부산광역시 해운대구', '1997-03-25', '01012345678', 0, now()),
+    ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
+    ('송민경', 'cos2', 'ssar@nate.com', '1234', '서울시 황학구', '1992-05-19', '01022223333', 0, now()),
+    ('박찬혁', 'cos3', 'gook@nate.com', '1234', '부산광역시 해운대구', '1997-07-23', '01012345678', 0, now()),
     ('강호동', 'cos4', 'dong@nate.com', '1234', '부산광역시 기장군', '1995-04-17', '01012345678', 0, now()),
-    ('유재석', 'cos5', 'seok@nate.com', '1234', '부산광역시 ', '2000-04-25', '01012345678', 0, now()),
+    ('유재석', 'cos5', 'seok@nate.com', '1234', '부산광역시', '2000-04-25', '01012345678', 0, now()),
     ('지석진', 'cos6', 'jin@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
     ('송지효', 'cos7', 'ji@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
     ('김종국', 'cos8', 'jong@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
@@ -13,7 +13,7 @@ values
 
 
 -- -- 기업 회원가입 더미 9개
-insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
+insert into user_tb(comp_num , ceo, compname, address, username, email, password, name, phone, role, created_at)
 values
     ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com1', 'actor1@nate.com', '1234', '이병헌', '01011112223', 1, now()),
     ('737-546-7196', '송중기', '네이버', '서울특별시 종로구', 'com2', 'actor2@nate.com', '1234', '송중기', '01011112224', 1, now()),
@@ -29,9 +29,9 @@ values
 -- -- 이력서 더미
 insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
 values
-    (1, '서강준', '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사', '안녕하세요, 저는 신입 프론트엔드 개발자 서강준입니다. 웹 개발에 관심이 많으며 새로운 기술을 배우고 싶습니다.', '대학교 졸업', now()),
-    (2, '김주혁', '혁신적인 백엔드 엔지니어 이력서', '백엔드', '신입', 'SQLD', '안녕하세요, 혁신적인 백엔드 엔지니어 지원자 김주혁입니다. 데이터베이스 관리와 서버 구축에 대한 열정으로 새로운 기술을 개발하고자 합니다.', '고등학교 졸업', now()),
-    (3, '김흥국', '새로운 시각의 프론트엔드 엔지니어 지원서', '프론트엔드', '신입', 'SQLD', '안녕하세요, 프론트엔드 엔지니어 지원자 김흥국입니다. 사용자 중심의 디자인과 웹 기술에 대한 열정으로 새로운 경험을 제공하고자 합니다.', '고등학교 졸업', now()),
+    (1, '김주혁', '혁신적인 백엔드 엔지니어 이력서', '백엔드', '신입', 'SQLD', '안녕하세요, 혁신적인 백엔드 엔지니어 지원자 김주혁입니다. 데이터베이스 관리와 서버 구축에 대한 열정으로 새로운 기술을 개발하고자 합니다.', '고등학교 졸업', now()),
+    (2, '송민경', '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사', '안녕하세요, 저는 신입 프론트엔드 개발자 송민경입니다. 웹 개발에 관심이 많으며 새로운 기술을 배우고 싶습니다.', '대학교 졸업', now()),
+    (3, '박찬혁', '새로운 시각의 프론트엔드 엔지니어 지원서', '프론트엔드', '신입', 'SQLD', '안녕하세요, 프론트엔드 엔지니어 지원자 박찬혁입니다. 사용자 중심의 디자인과 웹 기술에 대한 열정으로 새로운 경험을 제공하고자 합니다.', '고등학교 졸업', now()),
     (4, '강호동', '데이터 전문가로서의 백엔드 엔지니어링 이력서', '백엔드', '신입', '정보처리기사', '안녕하세요, 데이터 전문가로서의 백엔드 엔지니어 강호동입니다. 데이터 처리와 보안에 대한 전문성으로 효율적인 시스템을 구축하고자 합니다.', '고등학교 졸업', now()),
     (5, '유재석', '창의적인 프론트엔드 개발자 자기소개서', '프론트엔드', '신입', '정보처리기사', '안녕하세요, 창의적인 프론트엔드 개발자 유재석입니다. 사용자들의 니즈를 파악하여 독특하고 창의적인 웹 서비스를 개발하고자 합니다.', '고등학교 졸업', now()),
     (6, '지석진', '현명한 백엔드 엔지니어의 이력서', '백엔드', '신입', 'SQLD', '안녕하세요, 현명한 백엔드 엔지니어 지원자 지석진입니다. 데이터 처리와 시스템 관리에 대한 노하우로 안정적인 시스템을 구축하고자 합니다.', '고등학교 졸업', now()),
@@ -48,7 +48,7 @@ VALUES
     (12, '카카오', 'UI/UX 디자이너 채용', '라인에서 사용자 경험을 디자인하세요!', '신입', '대학교 졸업', '프론트엔드', '서울', '정규직', '3000만원 이상', '2024-10-31', now(), 1),
     (13, '토스', '마케팅 전문가 채용', '토스에서 함께 성장하세요!', '경력', '대학교 졸업', '백엔드', '부산', '정규직', '협의', '2024-09-30', now(), 1),
     (14, '배달의 민족', '운영 지원 인력 채용', '배달의민족의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '프론트엔드', '서울', '계약직', '협의', '2024-08-31', now(), 1),
-    (15, '배달의 민족', '운영 지원 인력 채용', '배달의민족의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '프론트엔드', '부산', '정규직', '협의', '2024-09-11', now(), 1),
+    (15, '라인', '운영 지원 인력 채용', '라인의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '프론트엔드', '부산', '정규직', '협의', '2024-09-11', now(), 1),
     (16, '당근마켓', '소프트웨어 개발자 채용', '배달의민족의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '백엔드', '서울', '정규직', '5000만원 이상', '2024-10-12', now(), 1),
     (17, '하이브', '마케팅 전문가 채용', '배달의민족의 성장을 함께 이끌어가세요!', '경력', '고등학교 졸업', '프론트엔드', '서울', '계약직', '협의', '2024-05-20', now(), 1),
     (18, '겟인데어', 'UI/UX 디자이너 채용', '배달의민족의 성장을 함께 이끌어가세요!', '경력', '고등학교 졸업', '프론트엔드', '부산', '계약직', '3000만원 이상', '2024-06-22', now(), 1);
@@ -156,29 +156,29 @@ VALUES
 
 -- 이력서 사진 더미
 INSERT INTO pic_tb(resume_id, img_filename, title)
-VALUES (1, 'userimage2.png', 'userimage2.png'),
-       (2, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (3, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (4, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (5, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (6, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (7, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (8, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg'),
-       (9, 'df106e66-d2c3-4153-9366-243fda8584d5_userImage.jpg', 'userImage.jpg');
+VALUES (1, 'userImage.jpg', 'userImage.jpg'),
+       (2, 'userImage2.jpg', 'userImage2.jpg'),
+       (3, 'userImage3.jpg', 'userImage3.jpg'),
+       (4, 'userimage4.png', 'userimage4.png'),
+       (5, 'userimage5.png', 'userimage5.png'),
+       (6, 'userimage6.png', 'userimage6.png'),
+       (7, 'userimage7.png', 'userimage7.png'),
+       (8, 'userimage8.png', 'userimage8.png'),
+       (9, 'userimage9.png', 'userimage9.png');
 
 
 
 -- 채용 공고 사진 더미
 INSERT INTO pic_tb(jobopen_id, img_filename, title)
-VALUES (1, 'naverlogo.png', 'naverlogo.png'),
+VALUES (1, 'coupangglogo.png', 'cupanglogo.png'),
        (2, 'naverlogo.png', 'naverlogo.png'),
        (3, 'kakaologo.svg', 'kakaologo.svg'),
-       (4, 'coupanglogo.png', 'coupanglogo.png'),
-       (5, 'coupanglogo.png', 'coupanglogo.png'),
-       (6, 'coupanglogo.png', 'coupanglogo.png'),
-       (7, 'coupanglogo.png', 'coupanglogo.png'),
-       (8, 'coupanglogo.png', 'coupanglogo.png'),
-       (9, 'coupanglogo.png', 'coupanglogo.png');
+       (4, 'tosslogo.png', 'toslogo.png'),
+       (5, 'baeminnlogo.png','balogo.png'),
+       (6, 'linelogo.png', 'linelogo.png'),
+       (7, 'carrotlogo.png', 'carrotlogo.png'),
+       (8, 'hybelogo.png', 'hibelogo.png'),
+       (9, 'getintherelogo.png', 'getintherelogo.png');
 
 --댓글 더미
 Insert Into reply_tb(comment, board_id, username, created_at)

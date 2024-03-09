@@ -34,6 +34,7 @@ public class JobopenController {
     private final PicRepository picRepository;
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
+    private Pic pic;
 
     @PostMapping("/comp/jobopen/{id}/detete")
     public String delete(@PathVariable int id) {
