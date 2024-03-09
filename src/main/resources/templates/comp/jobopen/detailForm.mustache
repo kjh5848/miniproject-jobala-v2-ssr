@@ -25,7 +25,7 @@
                                 <h2>{{JobopenRespDTO.jobopenTitle}}</h2>
                             </div>
                             <div class="ml-4">
-                                {{#sessionUser}}
+                                {{#isCompScrap}}
                                     <form action="/guest/scrap" method="post">
                                         <input type="hidden" name="jobopenId" value="{{jobopen.id}}">
                                         {{#scrap}}
@@ -37,7 +37,7 @@
                                                style="font-size: 20px;"></i>
                                         {{/scrap}}
                                     </form>
-                                {{/sessionUser}}
+                                {{/isCompScrap}}
 
                             </div>
                             <script>
@@ -164,13 +164,13 @@
     <!-- 회사 공고 이미지 -->
 
     <!-- 지원하기 버튼 -->
-    {{#user}}
+    {{#isCompScrap}}
         <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
             <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">
                 입사지원하기
             </button>
         </div>
-    {{/user}}
+    {{/isCompScrap}}
     <!-- 지원하기 버튼 -->
 
 
@@ -201,7 +201,8 @@
             </div>
         </div>
         <div class="card flex-wrap: wrap " style="width:280px">
-            <img class="card-img-top" src="/image/getintherelogo.png" alt="Card image" style="width:100%; height: 130px;">
+            <img class="card-img-top" src="/image/getintherelogo.png" alt="Card image"
+                 style="width:100%; height: 130px;">
             <div class="card-body">
                 <h4 class="card-title">겟인데어</h4>
                 <p class="card-text">UI/UX 디자이너 채용</p>
@@ -248,7 +249,8 @@
                                 </p>
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="/comp/jobopen/2" class="btn btn-primary" style="margin-left: 250px;">자세히 보기</a>
+                                        <a href="/comp/jobopen/2" class="btn btn-primary" style="margin-left: 250px;">자세히
+                                            보기</a>
                                     </div>
                                 </div>
                             </div>

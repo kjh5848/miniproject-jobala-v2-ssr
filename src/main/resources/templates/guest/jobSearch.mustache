@@ -131,16 +131,26 @@
             <!-- 구직자 기술스택 매칭리스트 목록 -->
 
             <!-- 채용공고 목록 -->
-            {{#jobopenList}}
-                <a onClick="location.href='/comp/jobopen/{{id}}'" style="cursor:pointer;">
-                    <div class="card border-info shadow-sm p-3 mx-1 my-1 rounded-3" style="cursor: pointer"
-                         data-tech="JAVA" data-exp="정규직" data-location="서울">
-                        <h4>{{jobopenTitle}}</h4>
-                        <p><small>{{compLocation}}</small><small>{{career}}</small> <small>{{edu}}</small></p>
-                        <p><small>{{endTime}}</small></p>
+            <div class="row">
+                {{#jobopenList}}
+                    <div class="col-md-4 mb-4">
+                        <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                            <div class="card col-3 border-0 shadow" style="width: 100%;">
+                                <img src="#" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
+                                <div class="card-body text-start">
+                                    <br>
+                                    {{compname}}
+                                    <h5 class="card-title">{{jobopenTitle}}</h5>
+                                    <hr>
+                                    <p class="card-text">{{compLocation}} {{career}} {{edu}}</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            {{/jobopenList}}
+                {{/jobopenList}}
+
+            </div>
+
             <!-- 채용공고 목록 -->
 
 

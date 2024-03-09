@@ -1,5 +1,6 @@
 package com.example.jobala.board;
 
+import com.example.jobala._user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -43,9 +44,4 @@ public class BoardResponse {
         }
 
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 593162fa3ebc38813fbef4de11cb541ebdc205e6
 }
