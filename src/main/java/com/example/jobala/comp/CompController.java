@@ -1,12 +1,14 @@
 package com.example.jobala.comp;
 
 
+import com.example.jobala.Pic.Pic;
 import com.example.jobala._user.User;
 import com.example.jobala.apply.ApplyRepository;
 import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -96,4 +98,5 @@ public class CompController {
         compRepository.updateProfile(profileDto);
         return "redirect:/comp/profileForm";
     }
+
 }
