@@ -1,18 +1,17 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
-import com.example.jobala.apply.ApplyRequest;
-import com.example.jobala.apply.ApplyResponse;
-import com.example.jobala.board.BoardResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,7 +29,6 @@ public class GuestController {
         System.out.println(slicedSkills);
         System.out.println(resDTO);
         List<Jobopen> jobopenList = guestRepository.findAll(slicedSkills, resDTO);
-
         req.setAttribute("jobopenList", jobopenList);
 
         return "/guest/jobSearch";
@@ -65,7 +63,7 @@ public class GuestController {
     @PostMapping("/guest/updateProfile")
     public String updateProfile(@ModelAttribute GuestResponse.GProfileUpdateDTO profileDto) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if(sessionUser == null) {
+        if (sessionUser == null) {
             return "redirect:/login";
         }
         profileDto.setId(sessionUser.getId());
