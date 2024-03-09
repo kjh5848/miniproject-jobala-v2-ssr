@@ -7,8 +7,8 @@
             <h2><b>{{board.title}}</b></h2>
         </div>
         <div>
-            <b>작성자</b> {{board.username}}
-            <div>
+            <b style="margin-left: 5px;">작성자</b> {{board.username}}
+            <div class="d-flex">
                 <form action="/board/{id}/updateForm" method="get">
                     <a href="/board/{{board.id}}/updateForm" class="btn btn-warning me-1">수정</a>
                 </form>
@@ -31,7 +31,7 @@
         <!-- 댓글등록 -->
         <div class="card-body">
             <form action="/reply/save" method="post">
-                <input type="hidden" name="boardId" value="1">
+                <input type="hidden" name="boardId" value="{{board.id}}">
                 <textarea class="form-control" rows="2" name="comment"></textarea>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>

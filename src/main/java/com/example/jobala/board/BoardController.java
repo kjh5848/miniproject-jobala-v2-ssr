@@ -1,6 +1,8 @@
 package com.example.jobala.board;
 
 import com.example.jobala._user.User;
+import com.example.jobala.reply.ReplyRepository;
+import com.example.jobala.reply.ReplyResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +18,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 private final BoardRepository boardRepository;
+//private final ReplyRepository replyRepository;
     private final HttpSession session;
 
     @GetMapping("/board/mainForm")
     public String boardForm(HttpServletRequest req) {
-        List<BoardResponse.DetailDTO> respDTO = boardRepository.findAllWithUser();
+        List<BoardResponse.MainDetailDTO> respDTO = boardRepository.findAllWithUser();
         req.setAttribute("boardList", respDTO);
         return "/board/mainForm";
+    }
+
+    @GetMapping("/board/{id}/detailForm")
+    public String boardDetail(@PathVariable int id, HttpServletRequest req, ReplyResponse.ReplyListDTO replyListDTO) {
+
+        BoardResponse.BoardDetailDTO respDTO = boardRepository.findById(id);
+        //List<ReplyResponse.ReplyListDTO> replyList = replyRepository.replyList(id);
+
+        // 댓글 주인 여부체크
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Boolean isSameCheck = sessionUser != null && sessionUser.getUsername().equals(replyListDTO.getUsername());
+
+        req.setAttribute("board", respDTO);
+        //req.setAttribute("replyList", replyList);
+        req.setAttribute("isSameCheck", isSameCheck);
+
+        return "/board/DetailForm";
     }
 
     @PostMapping("/board/{id}/update")
@@ -35,7 +55,7 @@ private final BoardRepository boardRepository;
         BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
         boardRepository.update(requestDTO, id);
 
-        return "redirect:/board/" + id + "/detailForm";
+        return "redirect:/board/mainForm";
     }
 
     @GetMapping("/board/{id}/updateForm")

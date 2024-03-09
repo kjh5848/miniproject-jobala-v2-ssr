@@ -5,10 +5,8 @@ import com.example.jobala.board.BoardRepository;
 import com.example.jobala.board.BoardResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,20 +21,26 @@ public class ReplyController {
     private final HttpSession session;
 
 
-    @GetMapping("/board/{id}/detailForm")
-    public String boardDetail(@PathVariable int id, HttpServletRequest req, ReplyResponse.ReplyListDTO replyListDTO) {
+    @PostMapping("/reply/save")
+    public String save(ReplyRequest.SaveDTO reqDTO, HttpServletRequest req) {
+        System.out.println(reqDTO);
 
-        BoardResponse.BoardDetailDTO responseDTO = boardRepository.findById(id);
+        // 1. 인증 체크
+        User sessionUser = (User) req.getSession().getAttribute("sessionUser");
+        System.out.println("sessionUser:" + sessionUser);
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
+        // reqDTO에서 id를 가져옵니다. (예를 들어, getId() 메소드가 있다고 가정)
+        int id = reqDTO.getBoardId();
+
+        // 이제 'id' 변수를 사용해 boardRepository를 호출할 수 있습니다.
+        BoardResponse.BoardDetailDTO respDTO = boardRepository.findById(id);
         List<ReplyResponse.ReplyListDTO> replyList = replyRepository.replyList(id);
+        replyRepository.save(reqDTO, sessionUser.getUsername());
 
-        // 댓글 주인 여부체크
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        Boolean isSameCheck = sessionUser != null && sessionUser.getUsername().equals(replyListDTO.getUsername());
-
-        req.setAttribute("board", responseDTO);
-        req.setAttribute("replyList", replyList);
-        req.setAttribute("isSameCheck", isSameCheck);
-
+        req.setAttribute("board", respDTO);
         return "/board/DetailForm";
     }
 

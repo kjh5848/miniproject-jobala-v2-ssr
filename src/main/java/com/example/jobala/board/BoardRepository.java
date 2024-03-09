@@ -1,8 +1,6 @@
 package com.example.jobala.board;
 
-import com.example.jobala.comp.CompResponse;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +23,7 @@ public class BoardRepository {
 
         query.executeUpdate();
     }
+
     @Transactional
     public void deleteById(int id) {
         Query query = em.createNativeQuery("delete from board_tb where id = ?");
@@ -44,11 +43,11 @@ public class BoardRepository {
 
     public BoardResponse.BoardDetailDTO findById(int id) {
         String q = """
-               select b.id, b.title, b.content, b.user_id, u.username 
-               from board_tb b 
-               inner join user_tb u on b.user_id = u.id 
-               where b.id = ?
-               """;
+                select b.id, b.title, b.content, b.user_id, u.username 
+                from board_tb b 
+                inner join user_tb u on b.user_id = u.id 
+                where b.id = ?
+                """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, id);
 
@@ -57,15 +56,15 @@ public class BoardRepository {
         return responseDTO;
     }
 
-    public List<BoardResponse.DetailDTO> findAllWithUser() {
+    public List<BoardResponse.MainDetailDTO> findAllWithUser() {
         String q = """
-                select bt.id, bt.title, bt.created_at, ut.username from board_tb bt 
+                select bt.id, bt.user_id, bt.title, bt.created_at, ut.username from board_tb bt 
                 inner join user_tb ut on bt.user_id = ut.id order by bt.id DESC
                 """;
         Query query = em.createNativeQuery(q);
         // qlrm
         JpaResultMapper rm = new JpaResultMapper();
-        List<BoardResponse.DetailDTO> respDTO = rm.list(query, BoardResponse.DetailDTO.class);
+        List<BoardResponse.MainDetailDTO> respDTO = rm.list(query, BoardResponse.MainDetailDTO.class);
         return respDTO;
     }
 }
