@@ -1,11 +1,11 @@
 package com.example.jobala.reply;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import lombok.Data;
 
 public class ReplyRequest {
+
 
     @Data
     public static class SaveDTO {

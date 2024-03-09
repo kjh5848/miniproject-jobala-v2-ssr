@@ -21,6 +21,24 @@ private final BoardRepository boardRepository;
 private final ReplyRepository replyRepository;
     private final HttpSession session;
 
+    @GetMapping("/board/{id}")
+    public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
+        System.out.println("id = " + id);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        BoardResponse.BoardDetailDTO boardDetailDTO = boardRepository.findById(id);
+
+        List<ReplyResponse.ReplyDTO> replyList = replyRepository.findByBoardId(id, sessionUser);
+        System.out.println("replyList = " + replyList);
+        boardDetailDTO.isOwner(sessionUser);
+
+        req.setAttribute("board", boardDetailDTO);
+        req.setAttribute("replyList", replyList);
+
+        return "/board/detailForm";
+    }
+
+
     @GetMapping("/board/mainForm")
     public String boardForm(HttpServletRequest req) {
         List<BoardResponse.MainDetailDTO> respDTO = boardRepository.findAllWithUser();
@@ -46,10 +64,10 @@ private final ReplyRepository replyRepository;
     }
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO) {
 
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if(sessionUser == null){
+        if (sessionUser == null) {
             return "redirect:/loginForm";
         }
         BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
@@ -73,8 +91,8 @@ private final ReplyRepository replyRepository;
     }
 
     @GetMapping("/board/saveForm")
-    public String saveForm(){
-        return"/board/saveForm";
+    public String saveForm() {
+        return "/board/saveForm";
     }
 
     @PostMapping("/board/save")

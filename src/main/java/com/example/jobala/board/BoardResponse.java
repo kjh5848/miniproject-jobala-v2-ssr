@@ -37,4 +37,3 @@ public class BoardResponse {
             this.username = username;
         }
     }
-}
