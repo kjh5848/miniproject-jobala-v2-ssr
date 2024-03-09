@@ -28,6 +28,16 @@ public class ReplyRepository {
     }
 
     @Transactional
+    public void save(ReplyRequest.SaveDTO requestDTO, String username) {
+        Query query = em.createNativeQuery("insert into reply_tb (comment, board_id, username, created_at) values(?, ?, ?, now())");
+        query.setParameter(1, requestDTO.getComment());
+        query.setParameter(2, requestDTO.getBoardId());
+        query.setParameter(3, username);
+
+        query.executeUpdate();
+    }
+
+    @Transactional
     public void deleteById(int id) {
         String q = "delete from reply_tb where id = ?";
         Query query = em.createNativeQuery(q);
