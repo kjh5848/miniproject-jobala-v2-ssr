@@ -74,15 +74,15 @@
                 <h5 class="text-left mb-4">기업 정보</h5>
                 <div class="mb-3">
                     <label for="companyName" class="form-label">회사명</label>
-                    <input type="text" class="form-control" id="companyName" name="companyName" value={{compname}}>
+                    <p>{{compname}}</p>
+                </div>
+                <div class="mb-3">
+                    <label for="businessNumber" class="form-label">사업자 번호</label>
+                    <p>{{compNum}}</p>
                 </div>
                 <div class="mb-3">
                     <label for="scale" class="form-label">주소</label>
                     <input type="text" class="form-control" id="address" name="address" value={{address}}>
-                </div>
-                <div class="mb-3">
-                    <label for="businessNumber" class="form-label">사업자 번호</label>
-                    <input type="text" class="form-control" id="businessNumber" name="businessNumber" value={{compNum}}>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-lg">저장</button>
