@@ -60,6 +60,27 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('form').submit(function(e){
+            e.preventDefault(); // 폼 제출 기본 동작 차단
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // form 데이터 직렬화
+                success: function(data)
+                {
+                    // 댓글이 성공적으로 등록되면 페이지 새로고침
+                    location.reload(); // 현재 페이지를 다시 불러오는 명령
+                }
+            });
+        });
+    });
+</script>
 
 
 {{> layout/footer}}
