@@ -119,16 +119,16 @@ VALUES (1, 1, 10, '["Java","JavaScript","Spring","HTML","jQuery"]'),
 
 
 -- 개인이 공고를 스트랩한 더미
-INSERT INTO scrap_tb(user_id, jobopen_id, resumeId, role, created_at)
-VALUES (1, 1, 0, 0, NOW());
---        (2, 2, 0, NOW()),
---        (3, 3, 0, NOW()),
---        (4, 4, 0, NOW()),
---        (5, 5, 0, NOW()),
---        (6, 6, 0, NOW()),
---        (7, 7, 0, NOW()),
---        (8, 8, 0, NOW()),
---        (9, 9, 0, NOW());
+INSERT INTO scrap_tb(user_id, jobopen_id, role, created_at)
+VALUES (1, 1, 0, NOW()),
+       (2, 2, 0, NOW()),
+       (3, 3, 0, NOW()),
+       (4, 4, 0, NOW()),
+       (5, 5, 0, NOW()),
+       (6, 6, 0, NOW()),
+       (7, 7, 0, NOW()),
+       (8, 8, 0, NOW()),
+       (9, 9, 0, NOW());
 
 -- 기업이 이력서를 스트랩한 더미
 INSERT INTO scrap_tb(user_id, resume_id, role, created_at)

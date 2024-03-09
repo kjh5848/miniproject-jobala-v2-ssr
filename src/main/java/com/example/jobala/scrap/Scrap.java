@@ -16,5 +16,5 @@ public class Scrap {
     private Integer jobopenId;
     private Integer resumeId;
     private Integer role; // 0 -> guest, 1 -> comp
-    private Timestamp createAt;
+    private Timestamp createdAt;
 }
