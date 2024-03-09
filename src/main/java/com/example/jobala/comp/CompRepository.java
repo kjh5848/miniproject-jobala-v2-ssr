@@ -1,10 +1,8 @@
 package com.example.jobala.comp;
 
-import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +10,34 @@ import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class CompRepository {
     private final EntityManager em;
+
+    @Transactional
+    public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
+        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, compname = ?, address = ?, comp_num = ? WHERE id = ?");
+        query.setParameter(1, profileDto.getName());
+        query.setParameter(2, profileDto.getPassword());
+        query.setParameter(3, profileDto.getPhone());
+        query.setParameter(4, profileDto.getEmail());
+        query.setParameter(5, profileDto.getCompname());
+        query.setParameter(6, profileDto.getAddress());
+        query.setParameter(7, profileDto.getCompNum());
+        query.setParameter(8, profileDto.getId());
+        query.executeUpdate();
+    }
+
+    public List<CompResponse.CompProfileDTO> findProfileByUserId(int userId) {
+        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
+        query.setParameter(1, userId);
+
+        List<CompResponse.CompProfileDTO> CompProfile = query.getResultList();
+        return CompProfile;
+    }
 
     public List<Resume> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """

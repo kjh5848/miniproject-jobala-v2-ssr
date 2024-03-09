@@ -26,4 +26,29 @@ public class CompResponse {
         private String address;
         private String career;
     }
+
+    @Data
+    @AllArgsConstructor
+    public static class CompProfileDTO {
+        private String name;
+        private String password;
+        private String phone;
+        private String email;
+        private String compname;
+        private String address;
+        private String compNum;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class CProfileUpdateDTO {
+        private String name;
+        private String password;
+        private String phone;
+        private String email;
+        private String compname;
+        private String address;
+        private String compNum;
+        private Integer id;
+    }
 }

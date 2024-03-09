@@ -50,41 +50,45 @@
             <h5 class="text-left mb-4">담당자 정보</h5>
             <div class="profile-container">
             </div>
-            <script src="script.js"></script>
-            <div class="line"></div>
-            <div class="mb-3">
-                <label for="name" class="form-label">이름</label>
-                <input type="text" class="form-control" id="name" name="name" value="홍길동">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">전화번호</label>
-                <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">이메일</label>
-                <input type="tel" class="form-control" id="phone" name="phone" value="010-1234-5678">
-            </div>
+            {{#compProfile}}
+                <script src="script.js"></script>
+                <div class="line"></div>
+            <form action="/comp/updateProfile" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" value={{name}}>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호:</label>
+                    <input type="password" class="form-control" id="password" name="password" value={{password}}>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">전화번호</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" value={{email}}>
+                </div>
 
-            <h5 class="text-left mb-4">기업 정보</h5>
-            <div class="mb-3">
-                <label for="companyName" class="form-label">회사명</label>
-                <input type="text" class="form-control" id="companyName" name="companyName">
-            </div>
-            <div class="mb-3">
-                <label for="scale" class="form-label">주소</label>
-                <input type="text" class="form-control" id="scale" name="scale">
-            </div>
-            <div class="mb-3">
-                <label for="businessNumber" class="form-label">사업자 번호</label>
-                <input type="text" class="form-control" id="businessNumber" name="businessNumber">
-            </div>
-            <div class="mb-3">
-                <label for="scale" class="form-label">규모</label>
-                <input type="text" class="form-control" id="scale" name="scale">
-            </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-primary btn-lg">저장</button>
-            </div>
+                <h5 class="text-left mb-4">기업 정보</h5>
+                <div class="mb-3">
+                    <label for="companyName" class="form-label">회사명</label>
+                    <input type="text" class="form-control" id="companyName" name="companyName" value={{compname}}>
+                </div>
+                <div class="mb-3">
+                    <label for="scale" class="form-label">주소</label>
+                    <input type="text" class="form-control" id="address" name="address" value={{address}}>
+                </div>
+                <div class="mb-3">
+                    <label for="businessNumber" class="form-label">사업자 번호</label>
+                    <input type="text" class="form-control" id="businessNumber" name="businessNumber" value={{compNum}}>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">저장</button>
+                </div>
+            </form>
+            {{/compProfile}}
         </div>
     </div>
     <br><br><br>

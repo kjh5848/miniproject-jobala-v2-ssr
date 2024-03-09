@@ -57,14 +57,13 @@ public class GuestController {
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        int userId = sessionUser.getId();
         List<GuestResponse.GuestProfileDTO> guestProfile = guestRepository.findProfileByUserId(sessionUser.getId());
         req.setAttribute("guestProfile", guestProfile);
         return "/guest/_myPage/profileForm";
     }
 
     @PostMapping("/guest/updateProfile")
-    public String updateProfile(@ModelAttribute GuestResponse.GProfileUpdateDTO profileDto, HttpServletRequest req) {
+    public String updateProfile(@ModelAttribute GuestResponse.GProfileUpdateDTO profileDto) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if(sessionUser == null) {
             return "redirect:/login";
