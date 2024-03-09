@@ -36,14 +36,5 @@ public class BoardResponse {
             this.userId = userId;
             this.username = username;
         }
-
-        // 보더의 주인여부 확인
-        public void isOwner(User sessionUser) {
-            if (sessionUser == null) boardOwner = false;
-            else boardOwner = sessionUser.getId() == userId;
-        }
-
     }
-
-
 }

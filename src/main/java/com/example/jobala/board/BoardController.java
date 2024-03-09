@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 private final BoardRepository boardRepository;
-//private final ReplyRepository replyRepository;
+private final ReplyRepository replyRepository;
     private final HttpSession session;
 
     @GetMapping("/board/mainForm")
@@ -32,14 +32,14 @@ private final BoardRepository boardRepository;
     public String boardDetail(@PathVariable int id, HttpServletRequest req, ReplyResponse.ReplyListDTO replyListDTO) {
 
         BoardResponse.BoardDetailDTO respDTO = boardRepository.findById(id);
-        //List<ReplyResponse.ReplyListDTO> replyList = replyRepository.replyList(id);
+        List<ReplyResponse.ReplyListDTO> replyList = replyRepository.replyList(id);
 
         // 댓글 주인 여부체크
         User sessionUser = (User) session.getAttribute("sessionUser");
         Boolean isSameCheck = sessionUser != null && sessionUser.getUsername().equals(replyListDTO.getUsername());
 
         req.setAttribute("board", respDTO);
-        //req.setAttribute("replyList", replyList);
+        req.setAttribute("replyList", replyList);
         req.setAttribute("isSameCheck", isSameCheck);
 
         return "/board/DetailForm";
