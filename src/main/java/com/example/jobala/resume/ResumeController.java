@@ -67,6 +67,7 @@ public class ResumeController {
         // 이력서에 저장된 이미지 파일 정보 가져오기
         Pic pic = picRepository.resumeFindByPic(id);
         req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
+
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
 

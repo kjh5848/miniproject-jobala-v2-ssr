@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class JobopenRequest {
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {
-        //compname = ? ,jobopenTitle=? , career=?, edu=?, jobType=?,salary=?,compLocation=?,content=?
+        //compname = ? ,jobopenTitle=? , career=?, edu=?, jobType=?,salary=?,compLocation=?,content=? ,skills =?
         private String compname; //대표명
         private String jobopenTitle; //공고제목
         private String career;// 경력
@@ -29,8 +28,7 @@ public class JobopenRequest {
         private String salary; //연봉
         private String compLocation; //근무지역
         private String content; //내용
-        private Timestamp createdAt; //내용
-
+        private String endTime; //내용
     }
 
 

@@ -48,12 +48,13 @@ public class JobopenController {
 
     @PostMapping("/comp/jobopen/{id}/update")
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
+        System.out.println("id = " + id);
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
         Jobopen jobopen = jobopenRepository.findById(id);
-        jobopenRepository.update(jobopen, reqDTO);
+        jobopenRepository.update(jobopen.getId(), reqDTO);
         return "redirect:/comp/mngForm";
     }
 

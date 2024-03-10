@@ -73,7 +73,7 @@ public class JobopenRepository {
     }
 
     @Transactional
-    public void update() {
+    public void update(Integer id, JobopenRequest.UpdateDTO reqDTO) {
         return;
     }
 
@@ -113,7 +113,7 @@ public class JobopenRepository {
     @Transactional
     public void update(Jobopen jobopenId, JobopenRequest.UpdateDTO reqDTO) {
         String a = """
-                update jobopen_tb set compname = ? ,jobopen_title=? , career=?, edu=?, job_type=?, salary=?, comp_location=?,content=?  where id=?
+                update jobopen_tb set compname = ? ,jobopen_title=? , career=?, edu=?, job_type=?,salary=?, comp_location=?, content=? , end_time = ? where id = ?
                 """;
         Query query = em.createNativeQuery(a);
         query.setParameter(1, reqDTO.getCompname());
@@ -124,9 +124,11 @@ public class JobopenRepository {
         query.setParameter(6, reqDTO.getSalary());
         query.setParameter(7, reqDTO.getCompLocation());
         query.setParameter(8, reqDTO.getContent());
-        query.setParameter(9, jobopenId);
+        query.setParameter(9, reqDTO.getEndTime());
+        query.setParameter(10, jobopenId);
         query.executeUpdate();
     }
+
 
     public List<Jobopen> findAll() {
         String q = """
