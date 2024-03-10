@@ -18,8 +18,12 @@ public class User {
     private String username; // 아이디
     private String compNum; //
     private String password;
+
+    @Column(unique = true, length = 15)
     private String name;
     private String compname;
+
+    @Column(nullable = false)//널 값 허용 안하는 어노테이션
     private String email;
     private String phone;
     private String ceo;

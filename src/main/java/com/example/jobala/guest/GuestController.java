@@ -2,7 +2,9 @@ package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,7 @@ public class GuestController {
         String slicedSkills = skills.substring(1, skills.length() - 1);
         System.out.println(slicedSkills);
         System.out.println(resDTO);
-        List<Jobopen> jobopenList = guestRepository.findAll(slicedSkills, resDTO);
+        List<JobopenResponse.ListDTO> jobopenList = guestRepository.findAll(slicedSkills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
 
         return "/guest/jobSearch";
@@ -44,7 +46,7 @@ public class GuestController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        List<Jobopen> jobopenList = guestRepository.findByJoboopenAll();
+        List<JobopenResponse.ListDTO> jobopenList = guestRepository.findByJoboopenAll();
         req.setAttribute("jobopenList", jobopenList);
         return "/guest/jobSearch";
     }

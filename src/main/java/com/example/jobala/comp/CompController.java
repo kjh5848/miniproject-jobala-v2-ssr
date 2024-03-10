@@ -30,9 +30,10 @@ public class CompController {
         }
         // [,]를 없애기위해 substring
         String slicedSkills = skills.substring(1, skills.length() - 1);
+        System.out.println(slicedSkills);
+        System.out.println(resDTO);
+        List<ResumeResponse.ListDTO> resumeList = compRepository.findAll(slicedSkills, resDTO);
 
-        List<Resume> resumeList = compRepository.findAll(slicedSkills, resDTO);
-        ;
         req.setAttribute("resumeList", resumeList);
 
         return "/comp/scoutList";

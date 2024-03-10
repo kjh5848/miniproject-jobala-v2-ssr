@@ -9,7 +9,7 @@
     <div class="card-body">
         <div>
             <h2>
-                공고 목록
+                총 <span id="totalJobs">00</span>건의 공고
             </h2>
         </div>
         <div>
@@ -25,8 +25,7 @@
 
                 <div id="demo" class="mt-3 collapse " style="height: 60px;">
                     <div class="select-box">
-                        <div class="select-package p-3 rounded-3 shadow d-flex align-items-center"
-                             style="margin-left:9.2px; width: 1280px;">
+                        <div class="select-package p-3 rounded-3 shadow d-flex align-items-center" style="margin-left:9.2px; width: 1280px;">
                             <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
                                     data-bs-target="#skills">
                                 기술스택
@@ -162,10 +161,10 @@
                     <div class="col-md-4 mb-4">
                         <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
                             <div class="card col-3 border-0 shadow" style="width: 100%;">
-                                <img src="#" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
+                                <img src="/image/{{imgFilename}}" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
                                 <div class="card-body text-start">
                                     <br>
-                                    <h5 class="card-title">{{compname}} / {{jobopenTitle}}</h5>
+                                    <h5 class="card-title">{{jobopenTitle}}</h5>
                                     <hr>
                                     <p class="card-text">{{compLocation}} / {{career}} / {{edu}}</p>
                                 </div>

@@ -5,6 +5,7 @@ import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenRepository;
+import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class UserController {
 
     @GetMapping("/")
     public String mainForm(HttpServletRequest req, PicRequest.UploadDTO reqDTO) {
-        List<Jobopen> jobopenList = userRepository.findAll();
+        List<JobopenResponse.ListDTO> jobopenList = userRepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }
