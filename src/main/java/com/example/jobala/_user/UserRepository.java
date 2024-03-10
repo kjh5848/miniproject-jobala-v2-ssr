@@ -1,9 +1,11 @@
 package com.example.jobala._user;
 
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +16,16 @@ import java.util.List;
 public class UserRepository {
     private final EntityManager em;
 
-    public List<Jobopen> findAll() {
+    public List<JobopenResponse.ListDTO> findAll() {
         String q = """
-                select * from jobopen_tb order by id desc;              
+                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
+               (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename  from jobopen_tb jb order by id desc;              
                 """;
-        Query query = em.createNativeQuery(q, Jobopen.class);
-        return query.getResultList();
+        Query query = em.createNativeQuery(q);
+
+        JpaResultMapper rm = new JpaResultMapper();
+        List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
+        return jobopenList;
     }
 
     public User findById(int id) {

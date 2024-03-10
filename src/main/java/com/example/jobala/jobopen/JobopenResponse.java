@@ -7,6 +7,17 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class JobopenResponse {
+    @AllArgsConstructor
+    @Data
+    public static class ListDTO {
+        private Integer id;
+        private String jobopenTitle;
+        private String compLocation;
+        private String career;
+        private String edu;
+        private String imgFilename;
+    }
+
     @Data
     public static class DTO {
         private Integer id;

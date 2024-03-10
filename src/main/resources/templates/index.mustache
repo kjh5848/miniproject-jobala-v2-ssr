@@ -23,7 +23,7 @@
                 <div class="col-md-4 mb-4">
                     <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
                         <div class="card col-3 border-0 shadow" style="width: 100%;">
-                            <img src="#" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
+                            <img src="/image/{{imgFilename}}" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
                             <div class="card-body text-start">
                                 <br>
                                 <h5 class="card-title">{{jobopenTitle}}</h5>
@@ -38,42 +38,42 @@
     </div>
     <!-- 채용 공고 end -->
 </div>
-<script>
-    // 대체 이미지 URL을 사용자가 맞춤 설정할 수 있도록 함수를 정의합니다.
-    function setJobOpenImageURL(jobopenList) {
-        // jobopenList 엘리먼트를 가져옵니다. 셀렉터는 jobopenList를 감싸는 엘리먼트에 적용되어야 정확합니다.
-        var cards = document.querySelectorAll('.card img');
+<!--<script>-->
+<!--    // 대체 이미지 URL을 사용자가 맞춤 설정할 수 있도록 함수를 정의합니다.-->
+<!--    function setJobOpenImageURL(jobopenList) {-->
+<!--        // jobopenList 엘리먼트를 가져옵니다. 셀렉터는 jobopenList를 감싸는 엘리먼트에 적용되어야 정확합니다.-->
+<!--        var cards = document.querySelectorAll('.card img');-->
 
-        // 각 card에 대해 함수를 실행합니다.
-        cards.forEach(function (card, index) {
-            if (jobopenList[index] && jobopenList[index].imageURL) {
-                // imageURL을 제공된 URL로 설정합니다.
-                card.src = jobopenList[index].imageURL;
-            } else {
-                // 이미지 URL이 존재하지 않으면 기본 이미지로 설정합니다.
-                card.src = '/path/to/default/image.jpg'; // 경로를 적절한 기본 이미지 경로로 대체
-            }
-        });
-    }
+<!--        // 각 card에 대해 함수를 실행합니다.-->
+<!--        cards.forEach(function (card, index) {-->
+<!--            if (jobopenList[index] && jobopenList[index].imageURL) {-->
+<!--                // imageURL을 제공된 URL로 설정합니다.-->
+<!--                card.src = jobopenList[index].imageURL;-->
+<!--            } else {-->
+<!--                // 이미지 URL이 존재하지 않으면 기본 이미지로 설정합니다.-->
+<!--                card.src = '/path/to/default/image.jpg'; // 경로를 적절한 기본 이미지 경로로 대체-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
 
-    // 문서가 로드될 때 함수를 호출합니다.
-    document.addEventListener('DOMContentLoaded', function () {
-        // 모의 데이터: 실제 사용할 때는 서버에서 데이터를 가져오거나 다른 방식으로 구성하세요.
-        var mockJobopenList = [
-            {id: 1, imageURL: '/image/getintherelogo.png'},
-            {id: 2, imageURL: '/image/hibelogo.png'},
-            {id: 3, imageURL: '/image/carrotlogo.png'},
-            {id: 4, imageURL: '/image/balogo.png'},
-            {id: 5, imageURL: '/image/linelogo.png'},
-            {id: 6, imageURL: '/image/toslogo.png'},
-            {id: 7, imageURL: '/image/kakao.png'},
-            {id: 8, imageURL: '/image/naverlogo.png'},
-            {id: 9, imageURL: '/image/cupanglogo.png'}
-        ];
+<!--    // 문서가 로드될 때 함수를 호출합니다.-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        // 모의 데이터: 실제 사용할 때는 서버에서 데이터를 가져오거나 다른 방식으로 구성하세요.-->
+<!--        var mockJobopenList = [-->
+<!--            {id: 1, imageURL: '/image/getintherelogo.png'},-->
+<!--            {id: 2, imageURL: '/image/hibelogo.png'},-->
+<!--            {id: 3, imageURL: '/image/carrotlogo.png'},-->
+<!--            {id: 4, imageURL: '/image/balogo.png'},-->
+<!--            {id: 5, imageURL: '/image/linelogo.png'},-->
+<!--            {id: 6, imageURL: '/image/toslogo.png'},-->
+<!--            {id: 7, imageURL: '/image/kakao.png'},-->
+<!--            {id: 8, imageURL: '/image/naverlogo.png'},-->
+<!--            {id: 9, imageURL: '/image/cupanglogo.png'}-->
+<!--        ];-->
 
-        // 함수 호출
-        setJobOpenImageURL(mockJobopenList);
-    });
-</script>
+<!--        // 함수 호출-->
+<!--        setJobOpenImageURL(mockJobopenList);-->
+<!--    });-->
+<!--</script>-->
 
 {{> layout/footer}}

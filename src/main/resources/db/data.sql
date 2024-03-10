@@ -159,8 +159,8 @@ VALUES ('1년차 개발자들', '1년차 개발자들 요즘 패기가 없더라
 -- 이력서 사진 더미
 INSERT INTO pic_tb(resume_id, img_filename, title)
 VALUES (1, 'userImage.jpg', 'userImage.jpg'),
-       (2, 'userImage2.jpg', 'userImage2.jpg'),
-       (3, 'userImage3.jpg', 'userImage3.jpg'),
+       (3, 'userImage2.jpg', 'userImage2.jpg'),
+       (2, 'userImage3.jpg', 'userImage3.jpg'),
        (4, 'userimage4.png', 'userimage4.png'),
        (5, 'userimage5.png', 'userimage5.png'),
        (6, 'userimage6.png', 'userimage6.png'),
