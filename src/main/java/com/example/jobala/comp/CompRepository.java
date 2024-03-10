@@ -2,6 +2,7 @@ package com.example.jobala.comp;
 
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -37,14 +38,16 @@ public class CompRepository {
         return CompProfile;
     }
 
-    public List<Resume> findAll(String skills, CompResponse.SearchDTO resDTO) {
+    public List<ResumeResponse.ListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
-                SELECT rt.* FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id
+                SELECT rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
+                (select img_filename from pic_tb where resume_id =  rt.id) img_filename 
+                FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id 
                 where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
-                AND (rt.career IN (?, ?))
-                AND (rt.edu IN (?, ?))
-                AND (rt.hope_job IN (?, ?))
-                order by rt.id desc
+                AND (rt.career IN (?, ?)) 
+                AND (rt.edu IN (?, ?)) 
+                AND (rt.hope_job IN (?, ?)) 
+                order by rt.id desc 
                 """;
         // skill 파싱
         String[] skill = {"", "", "", "", "", ""};
@@ -96,7 +99,7 @@ public class CompRepository {
             hopeJob[1] = "백엔드";
         }
 
-        Query query = em.createNativeQuery(skillQuery, Resume.class);
+        Query query = em.createNativeQuery(skillQuery);
         query.setParameter(1, "%"+skill[0]+"%");
         query.setParameter(2, "%"+skill[1]+"%");
         query.setParameter(3, "%"+skill[2]+"%");
@@ -110,7 +113,8 @@ public class CompRepository {
         query.setParameter(11, hopeJob[0]);
         query.setParameter(12, hopeJob[1]);
 
-        List<Resume> resumeList = query.getResultList();
+        JpaResultMapper rm = new JpaResultMapper();
+        List<ResumeResponse.ListDTO> resumeList = rm.list(query, ResumeResponse.ListDTO.class);
 
         return resumeList;
     }
@@ -147,12 +151,15 @@ public class CompRepository {
         return results;
     }
 
-    public List<Resume> findResumeAll() {
+    public List<ResumeResponse.ListDTO> findResumeAll() {
         String q = """
-                select * from resume_tb order by id desc;              
+                select rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
+                (select img_filename from pic_tb where resume_id =  rt.id) img_filename from resume_tb rt order by id desc;              
                 """;
-        Query query = em.createNativeQuery(q, Resume.class);
-        return query.getResultList();
+        Query query = em.createNativeQuery(q);
+        JpaResultMapper rm = new JpaResultMapper();
+        List<ResumeResponse.ListDTO> resumeList = rm.list(query, ResumeResponse.ListDTO.class);
+        return resumeList;
     }
 
     public List<Jobopen> findJobopenById(int id) {

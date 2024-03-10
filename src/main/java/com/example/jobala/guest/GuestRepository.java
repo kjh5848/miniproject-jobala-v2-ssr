@@ -140,8 +140,8 @@ public class GuestRepository {
             }
         } catch (Exception e) {
             salary[0] = "협의";
-            salary[1] = "3,000만원 이상";
-            salary[2] = "5,000만원 이상";
+            salary[1] = "3000만원 이상";
+            salary[2] = "5000만원 이상";
         }
 
         // hopeJob 파싱

@@ -6,6 +6,7 @@ import com.example.jobala.apply.ApplyRepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class CompController {
         String slicedSkills = skills.substring(1, skills.length() - 1);
         System.out.println(slicedSkills);
         System.out.println(resDTO);
-        List<Resume> resumeList = compRepository.findAll(slicedSkills, resDTO);
-        ;
+        List<ResumeResponse.ListDTO> resumeList = compRepository.findAll(slicedSkills, resDTO);
+
         req.setAttribute("resumeList", resumeList);
 
         return "/comp/scoutList";
@@ -45,8 +46,10 @@ public class CompController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        List<Resume> resumeList = compRepository.findResumeAll();
+        System.out.println("여기");
+        List<ResumeResponse.ListDTO> resumeList = compRepository.findResumeAll();
         req.setAttribute("resumeList", resumeList);
+        System.out.println("리튬리스트 쫙"+resumeList);
         return "/comp/scoutList";
     }
 
