@@ -1,12 +1,12 @@
-package com.example.jobala._core.util;
+package com.example.jobala._core.utill;
 
 import lombok.Data;
 
 @Data
 public class ApiUtil<T> {
 
-    private Integer status ;
-    private String msg ;
+    private Integer status;
+    private String msg;
     private T body;
 
     public ApiUtil(T body) {
@@ -18,6 +18,6 @@ public class ApiUtil<T> {
     public ApiUtil(Integer status, String msg) {
         this.status = status;
         this.msg = msg;
-        this.body = null ;
+        this.body = null;
     }
 }

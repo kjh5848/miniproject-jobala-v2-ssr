@@ -1,6 +1,5 @@
 package com.example.jobala.comp;
 
-import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
@@ -19,6 +18,7 @@ public class CompRepository {
 
     @Transactional
     public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
+        System.out.println("profileDto = " + profileDto);
         Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ? WHERE id = ?");
         query.setParameter(1, profileDto.getName());
         query.setParameter(2, profileDto.getPassword());
@@ -39,20 +39,20 @@ public class CompRepository {
 
     public List<Resume> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
-               SELECT rt.* FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id
-               where sk.name like ? 
-               AND (rt.career IN (?, ?))
-               AND (rt.edu IN (?, ?))
-               AND (rt.hope_job IN (?, ?))
-               order by rt.id desc
-               """;
+                SELECT rt.* FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id
+                where sk.name like ? 
+                AND (rt.career IN (?, ?))
+                AND (rt.edu IN (?, ?))
+                AND (rt.hope_job IN (?, ?))
+                order by rt.id desc
+                """;
 
         // career 파싱
-        String[] career = {null , null};
+        String[] career = {null, null};
         String[] careerArr;
         try {
             careerArr = resDTO.getCareer().split(",");
-            for (int i = 0; i < careerArr.length ; i++) {
+            for (int i = 0; i < careerArr.length; i++) {
                 career[i] = careerArr[i];
             }
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class CompRepository {
         String[] eduArr;
         try {
             eduArr = resDTO.getEdu().split(",");
-            for (int i = 0; i < eduArr.length ; i++) {
+            for (int i = 0; i < eduArr.length; i++) {
                 edu[i] = eduArr[i];
             }
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class CompRepository {
         String[] hopeJobArr;
         try {
             hopeJobArr = resDTO.getHopeJob().split(",");
-            for (int i = 0; i < hopeJobArr.length ; i++) {
+            for (int i = 0; i < hopeJobArr.length; i++) {
                 hopeJob[i] = hopeJobArr[i];
             }
         } catch (Exception e) {
@@ -108,7 +108,7 @@ public class CompRepository {
         return resumeList2;
     }
 
-    public List<CompResponse.ScoutListDTO> scoutList(){
+    public List<CompResponse.ScoutListDTO> scoutList() {
         String q = """
                 SELECT rt.name, rt.resume_title, ut.age, ut.address, rt.career
                 FROM user_tb ut
@@ -145,7 +145,7 @@ public class CompRepository {
                 select * from jobopen_tb where user_id= ? order by id desc;
                 """;
         Query query = em.createNativeQuery(q, Jobopen.class);
-        query.setParameter(1,id);
+        query.setParameter(1, id);
         return query.getResultList();
     }
 
