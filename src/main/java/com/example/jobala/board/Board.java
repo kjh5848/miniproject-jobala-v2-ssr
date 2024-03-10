@@ -3,7 +3,9 @@ package com.example.jobala.board;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
