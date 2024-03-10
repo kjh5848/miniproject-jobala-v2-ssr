@@ -6,6 +6,7 @@ import com.example.jobala.board.BoardRequest;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -65,17 +66,19 @@ public class GuestRepository {
     }
 
     // 모든 필터를 선택해야 한다는 치명적 단점이 존재함
-    public List<Jobopen> findAll(String skills, GuestResponse.SearchDTO resDTO) {
+    public List<JobopenResponse.ListDTO> findAll(String skills, GuestResponse.SearchDTO resDTO) {
         String skillQuery = """
-               SELECT jb.* FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id
+               SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
+               (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename 
+               FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id 
                where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
-               AND (jb.career IN (?, ?))
-               AND (jb.comp_location IN (?, ?, ?, ?))
-               AND (jb.edu IN (?, ?))
-               AND (jb.salary IN (?, ?, ?))
-               AND (jb.hope_job IN (?, ?))
-               AND (jb.job_type IN (?, ?, ?))
-               order by jb.id desc
+               AND (jb.career IN (?, ?)) 
+               AND (jb.comp_location IN (?, ?, ?, ?)) 
+               AND (jb.edu IN (?, ?)) 
+               AND (jb.salary IN (?, ?, ?)) 
+               AND (jb.hope_job IN (?, ?)) 
+               AND (jb.job_type IN (?, ?, ?)) 
+               order by jb.id desc 
                """;
         // skill 파싱
         String[] skill = {"", "", "", "", "", ""};
@@ -171,7 +174,7 @@ public class GuestRepository {
             jobType[2] = "인턴";
         }
 
-        Query query = em.createNativeQuery(skillQuery, Jobopen.class);
+        Query query = em.createNativeQuery(skillQuery);
         query.setParameter(1, "%"+skill[0]+"%");
         query.setParameter(2, "%"+skill[1]+"%");
         query.setParameter(3, "%"+skill[2]+"%");
@@ -195,17 +198,22 @@ public class GuestRepository {
         query.setParameter(21, jobType[1]);
         query.setParameter(22, jobType[2]);
 
-        List<Jobopen> jobopenList = query.getResultList();
+        JpaResultMapper rm = new JpaResultMapper();
+        List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
 
         return jobopenList;
     }
 
-    public List<Jobopen> findByJoboopenAll() {
+    public List<JobopenResponse.ListDTO> findByJoboopenAll() {
         String q = """
-                select * from jobopen_tb order by id desc
+                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
+               (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename  from jobopen_tb jb order by id desc;      
                 """;
-        Query query = em.createNativeQuery(q, Jobopen.class);
-        return query.getResultList();
+        Query query = em.createNativeQuery(q);
+
+        JpaResultMapper rm = new JpaResultMapper();
+        List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
+        return jobopenList;
     }
 
     public void findById() {
