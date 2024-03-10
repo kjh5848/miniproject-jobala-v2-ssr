@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,6 +49,12 @@ public class BoardController {
     public String boardForm(HttpServletRequest req) {
         List<BoardResponse.MainDetailDTO> respDTO = boardRepository.findAllWithUser();
         req.setAttribute("boardList", respDTO);
+
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStringWithoutTime = sdf.format(date);
+        req.setAttribute("currentDate", dateStringWithoutTime);
+
         return "/board/mainForm";
     }
 
