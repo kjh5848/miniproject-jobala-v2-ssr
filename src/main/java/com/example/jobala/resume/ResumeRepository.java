@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @Repository
 @RequiredArgsConstructor
 public class ResumeRepository {
@@ -29,17 +27,25 @@ public class ResumeRepository {
                 .getSingleResult();
     }
 
+//이미지 받아와서 4
+//    public List<Resume> findAllLimt() {
+//        String q = """
+//                select r.*, p.IMG_FILENAME from resume_tb r join pic_tb p on r.id = p.resume_id order by id desc Limit 4
+//                """;
+//        Query query = em.createNativeQuery(q, Resume.class);
+//        return query.getResultList();
+//    }
 
-    public void findAll() {
-        return;
-    }
 
     public Resume findById(Integer id) {
         Query query = em.createNativeQuery("select * from resume_tb where id = ?", Resume.class);
         query.setParameter(1, id);
 
-        Resume resume = (Resume) query.getSingleResult();
-        return resume;
+        try {
+            return (Resume) query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Resume findByResumeUserId(User sessionUser) {
@@ -63,7 +69,7 @@ public class ResumeRepository {
         query.setParameter(8, user.getName());
         query.executeUpdate();
 
-        Query query2 = em. createNativeQuery("select max(id) from resume_tb");
+        Query query2 = em.createNativeQuery("select max(id) from resume_tb");
         Integer resumeId = (Integer) query2.getSingleResult();
 
         Query query3 = em.createNativeQuery("insert into skill_tb(user_id, role, resume_id, name) values (?,?,?,?)");
@@ -73,10 +79,10 @@ public class ResumeRepository {
         String json = new Gson().toJson(skills);
         System.out.println("제이슨 결과 = " + json);
 
-        query3.setParameter(1,user.getId());
-        query3.setParameter(2,user.getRole());
-        query3.setParameter(3,resumeId);
-        query3.setParameter(4,json);
+        query3.setParameter(1, user.getId());
+        query3.setParameter(2, user.getRole());
+        query3.setParameter(3, resumeId);
+        query3.setParameter(4, json);
         query3.executeUpdate();
     }
 
@@ -93,7 +99,7 @@ public class ResumeRepository {
         query.executeUpdate();
 
         Query query2 = em.createNativeQuery("select id from skill_tb where resume_id = ?");
-        query2.setParameter(1,resumeId);
+        query2.setParameter(1, resumeId);
         Integer skillId = (Integer) query2.getSingleResult();
 
         Query query3 = em.createNativeQuery("update skill_tb set name= ? where id = ?");
@@ -101,8 +107,8 @@ public class ResumeRepository {
         List<String> skills = reqDTO.getSkills();
         String json = new Gson().toJson(skills);
         System.out.println("제이슨 결과 = " + json);
-        query3.setParameter(1,json);
-        query3.setParameter(2,skillId);
+        query3.setParameter(1, json);
+        query3.setParameter(2, skillId);
         query3.executeUpdate();
     }
 

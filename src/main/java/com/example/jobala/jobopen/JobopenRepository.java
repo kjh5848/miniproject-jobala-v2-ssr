@@ -130,6 +130,14 @@ public class JobopenRepository {
     }
 
 
+    public List<Jobopen> findAllDesc() {
+        String q = """
+                select * from jobopen_tb order by id desc;              
+                """;
+        Query query = em.createNativeQuery(q, Jobopen.class);
+        return query.getResultList();
+    }
+
     public List<Jobopen> findAll() {
         String q = """
                 select * from jobopen_tb order by id desc;              

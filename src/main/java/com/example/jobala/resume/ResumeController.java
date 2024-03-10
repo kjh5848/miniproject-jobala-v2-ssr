@@ -77,6 +77,8 @@ public class ResumeController {
 
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
+//        기업에서 이력서를 볼때 보이는 최근 이력서 4개 조인하는
+
         Resume resume = resumeRepository.findById(id);
         // 이력서 상세보기에 이미지 불러오기
         Pic pic = picRepository.resumeFindByPic(id);
