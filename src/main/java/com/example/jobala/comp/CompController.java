@@ -6,6 +6,7 @@ import com.example.jobala.apply.ApplyRepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,7 @@ public class CompController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        List<Resume> resumeList = compRepository.findResumeAll();
+        List<ResumeResponse.ListDTO> resumeList = compRepository.findResumeAll();
         req.setAttribute("resumeList", resumeList);
         return "/comp/scoutList";
     }
