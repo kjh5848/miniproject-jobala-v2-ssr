@@ -85,7 +85,7 @@ public class JobopenController {
     }
 
     @GetMapping("/comp/jobopen/saveForm")
-    public String saveForm(HttpServletRequest req) {
+    public String saveForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
@@ -95,10 +95,6 @@ public class JobopenController {
 
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         boolean isCompScrap = false;
         User user = null;
         try {

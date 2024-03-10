@@ -4,119 +4,114 @@
 
 <div class="container">
 
-        <!-- 인재 명단 삭제 -->
-        <br><br>
-        <!-- 필터링 start -->
-        <form id="searchForm" action="/comp/resumeSearch" method="get" enctype="application/x-www-form-urlencoded">
-            <div class="card-body select-box border border-2 mb-5 rounded-3">
-                <div class="select-box ">
-                    <div class="select-package bg-info p-3 m-2 rounded-3">
-                        <h4>기술스택</h4>
-                        <div class="checkbox-package">
-                            <input type="checkbox" class="checkbox" value="Java" onchange="skillsFilter(this);" /> Java
-                            <input type="checkbox" class="checkbox" value="JavaScript" onchange="skillsFilter(this);" />JavaScript
-                            <input type="checkbox" class="checkbox" value="Spring" onchange="skillsFilter(this);" /> Spring
-                            <input type="checkbox" class="checkbox" value="HTML" onchange="skillsFilter(this);" /> HTML
-                            <input type="checkbox" class="checkbox" value="jQuery" onchange="skillsFilter(this);" /> jQuery
-                            <input type="checkbox" class="checkbox" value="MySQL" onchange="skillsFilter(this);" /> MySQL
-                        </div>
+    <!-- 인재 명단 삭제 -->
+    <br><br>
+    <!-- 필터링 start -->
+    <form id="searchForm" action="/comp/resumeSearch" method="get" enctype="application/x-www-form-urlencoded">
+        <div class="card-body select-box border border-2 mb-5 rounded-3">
+            <div class="select-box ">
+                <div class="select-package bg-info p-3 m-2 rounded-3">
+                    <h4>기술스택</h4>
+                    <div class="checkbox-package">
+                        <input type="checkbox" class="checkbox" value="Java" onchange="skillsFilter(this);"/> Java
+                        <input type="checkbox" class="checkbox" value="JavaScript" onchange="skillsFilter(this);"/>JavaScript
+                        <input type="checkbox" class="checkbox" value="Spring" onchange="skillsFilter(this);"/> Spring
+                        <input type="checkbox" class="checkbox" value="HTML" onchange="skillsFilter(this);"/> HTML
+                        <input type="checkbox" class="checkbox" value="jQuery" onchange="skillsFilter(this);"/> jQuery
+                        <input type="checkbox" class="checkbox" value="MySQL" onchange="skillsFilter(this);"/> MySQL
+                    </div>
 
-                        <script>
-                            // 기술스택 필터 적용
-                            var skillArr = new Array(); //필터 내용을 저장하는 배열
+                    <script>
+                        // 기술스택 필터 적용
+                        var skillArr = new Array(); //필터 내용을 저장하는 배열
 
-                            //필터 내용을 저장하는 function
-                            function skillsFilter(target) {
+                        //필터 내용을 저장하는 function
+                        function skillsFilter(target) {
 
-                                var skillVal = target.value; //check value
-                                var confirmCheck = target.checked; //check여부 확인
-                                console.log("필터 선택값 : " + skillVal);
-                                console.log("선택여부 : " + confirmCheck);
+                            var skillVal = target.value; //check value
+                            var confirmCheck = target.checked; //check여부 확인
+                            console.log("필터 선택값 : " + skillVal);
+                            console.log("선택여부 : " + confirmCheck);
 
-                                if (confirmCheck == true) { // check true
-                                    skillArr.push(skillVal); // check value filter 배열에 입력
-                                } else { // check false
-                                    skillArr.splice(skillArr.indexOf(skillVal), 1); // check value filter 배열내용 삭제
-                                }
-                                console.log("필터입력값 출력 : " + skillArr);
+                            if (confirmCheck == true) { // check true
+                                skillArr.push(skillVal); // check value filter 배열에 입력
+                            } else { // check false
+                                skillArr.splice(skillArr.indexOf(skillVal), 1); // check value filter 배열내용 삭제
                             }
+                            console.log("필터입력값 출력 : " + skillArr);
+                        }
 
-                            function applyFilters() {
+                        function applyFilters() {
 
-                                var skillString = JSON.stringify(skillArr); // JSON 문자열로 변환
-                                document.getElementById("skillsInput").value = skillString; // 숨겨진 input에 값 설정
+                            var skillString = JSON.stringify(skillArr); // JSON 문자열로 변환
+                            document.getElementById("skillsInput").value = skillString; // 숨겨진 input에 값 설정
 
-                                // 폼 제출
-                                document.getElementById("searchForm").submit(); // 올바른 폼 ID를 사용
-                            }
-                        </script>
+                            // 폼 제출
+                            document.getElementById("searchForm").submit(); // 올바른 폼 ID를 사용
+                        }
+                    </script>
 
-                    </div>
+                </div>
 
-                    <div class="select-package bg-info p-3 m-2 rounded-3">
-                        <h4>경력</h4>
-                        <div class="checkbox-package">
-                            <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입
-                            <input type="checkbox" name="career" class="checkbox" value="경력"/> 경력
-                        </div>
-                    </div>
-
-                    <div class="select-package bg-info p-3 m-2 rounded-3">
-                        <h4>학력</h4>
-                        <div class="checkbox-package">
-                            <input type="checkbox" name="edu" class="checkbox" value="고졸"/> 고졸
-                            <input type="checkbox" name="edu" class="checkbox" value="대졸"/> 대졸
-                        </div>
-                    </div>
-
-                    <div class="select-package bg-info p-3 m-2 rounded-3">
-                        <h4>희망 직무</h4>
-                        <div class="checkbox-package" >
-                            <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
-                            프론트엔드
-                            <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
-                        </div>
-                    </div>
-
-                    <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
-                        <input type="hidden" name="skills" id="skillsInput">
-                        <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()"> <!-- 좌우 여백만 추가 -->
-                            필터 적용하기
-                        </button>
+                <div class="select-package bg-info p-3 m-2 rounded-3">
+                    <h4>경력</h4>
+                    <div class="checkbox-package">
+                        <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입
+                        <input type="checkbox" name="career" class="checkbox" value="경력"/> 경력
                     </div>
                 </div>
-            </div>
-        </form>
 
-        <!-- 필터링 end -->
-
-        <!-- 인재 명단 start -->
-
-        <div class="card-body">
-            <h3 class="text-left mb-4">인재 명단</h3>
-            <div class="row">
-                {{#resumeList}}
-                    <div class="col-md-4 mb-4" style="width: 440px;">
-                        <div class="card" style="width: 410px; height: 490px;">
-                            <a onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer; margin-left: 55px;">
-                                <img src="#" style="width: 298px; height: 300px; margin-top: 20px;" class="card-img-top" style="width:100%;">
-                                <div class="card-body text-start" style="margin-left: -55px; margin-top: -10px;">
-                                    <br>
-                                    <div>
-                                        <h5 class="card-title">{{name}}</h5>
-                                    </div>
-                                    <hr>
-                                    <p class="card-text">{{resumeTitle}} {{edu}} {{career}}</p>
-                                </div>
-                            </a>
-                        </div>
+                <div class="select-package bg-info p-3 m-2 rounded-3">
+                    <h4>학력</h4>
+                    <div class="checkbox-package">
+                        <input type="checkbox" name="edu" class="checkbox" value="고졸"/> 고졸
+                        <input type="checkbox" name="edu" class="checkbox" value="대졸"/> 대졸
                     </div>
-                {{/resumeList}}
+                </div>
+
+                <div class="select-package bg-info p-3 m-2 rounded-3">
+                    <h4>희망 직무</h4>
+                    <div class="checkbox-package">
+                        <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
+                        프론트엔드
+                        <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
+                    </div>
+                </div>
+
+                <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
+                    <input type="hidden" name="skills" id="skillsInput">
+                    <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()"> <!-- 좌우 여백만 추가 -->
+                        필터 적용하기
+                    </button>
+                </div>
             </div>
         </div>
-        <br><br><br>
+    </form>
+
+    <!-- 필터링 end -->
+
+    <!-- 인재 명단 start -->
+    <h3 class="text-left mb-4">인재 명단</h3>
+    <div class="row">
+        {{#resumeList}}
+            <div class="col-md-4 mb-4">
+                <a onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer; margin-left: 55px;">
+                    <div class="card col-3 border-0 shadow" style="width: 100%;">
+                        <img src="#" alt="이미지를 표시할 수 없습니다.">
+                        <div class="card-body text-start">
+                            <br>
+                            <h5 class="card-title">{{name}}</h5>
+                            <hr>
+                            <p class="card-text">{{resumeTitle}} {{edu}} {{career}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {{/resumeList}}
     </div>
-    <!-- 인재 명단 end -->
+</div>
+<br><br><br>
+<!-- 인재 명단 end -->
 
 <script>
     // 대체 이미지 URL을 사용자가 맞춤 설정할 수 있도록 함수를 정의합니다.

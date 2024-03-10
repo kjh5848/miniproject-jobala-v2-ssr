@@ -8,32 +8,39 @@
             <button class="btn btn-primary">search</button>
         </form>
     </div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>글쓴이</th>
-            <th>제목</th>
-            <th>등록일</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#boardList}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{username}}</td>
-                <td><a href="/board/{{id}}" style="cursor:pointer">{{title}}</a></td>
-                <td>{{createdAt}}</td>
-                <td>
-                    <div class="d-flex">
+    <div class="card shadow">
 
-                    </div>
-                </td>
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>번호</th>
+                <th>글쓴이</th>
+                <th>제목</th>
+                <th>등록일</th>
+                <th></th>
             </tr>
-        {{/boardList}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {{#boardList}}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="ml-2"> {{id}}</td>
+                    <td>{{username}}</td>
+                    <td><a href="/board/{{id}}" style="cursor:pointer">{{title}}</a></td>
+                    <td>{{createdAt}}</td>
+                    <td>
+                        <div class="d-flex">
+
+                        </div>
+                    </td>
+                </tr>
+            {{/boardList}}
+            </tbody>
+        </table>
+    </div>
     <br>
     <form action="/board/saveForm" method="get">
         <div class="d-flex justify-content-center mb-3">
@@ -42,7 +49,6 @@
     </form>
     <br>
     <ul class="pagination d-flex justify-content-center">
-        <
         <li class="page-item ">
             <a class="page-link" href="">Previous</a>
         </li>
@@ -54,6 +60,4 @@
 
 </div>
 
-
-</html>
 {{> layout/footer}}

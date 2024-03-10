@@ -47,47 +47,49 @@
     <div class="card-body">
         <div class="profileBox mt-3" id="profileForm">
             <h2 class="text-center mb-4">프로필 관리</h2>
-            <h5 class="text-left mb-4">담당자 정보</h5>
+            <h3 class="text-left text-primary mb-4">회사 및 담당자 정보</h3>
             <div class="profile-container">
             </div>
             {{#compProfile}}
                 <script src="script.js"></script>
                 <div class="line"></div>
-            <form action="/comp/updateProfile" method="post">
-                <div class="mb-3">
-                    <label for="name" class="form-label">이름</label>
-                    <input type="text" class="form-control" id="name" name="name" value={{name}}>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">비밀번호:</label>
-                    <input type="password" class="form-control" id="password" name="password" value={{password}}>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">전화번호</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">이메일</label>
-                    <input type="email" class="form-control" id="email" name="email" value={{email}}>
-                </div>
+                <form action="/comp/updateProfile" method="post">
+                    <div class="mb-3">
+                        <span for="companyName" class="form-label">회사명 : </span>
+                        <span>{{compname}}</span>
+                    </div>
+                    <div class="mb-3">
+                        <span for="businessNumber" class="form-label">사업자 번호 : </span>
+                        <span>{{compNum}}</span>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">이름</label>
+                        <input type="text" class="form-control" id="name" name="name" value={{name}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">비밀번호:</label>
+                        <input type="password" class="form-control" id="password" name="password" value={{password}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">전화번호</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">이메일</label>
+                        <input type="email" class="form-control" id="email" name="email" value={{email}}>
+                    </div>
 
-                <h5 class="text-left mb-4">기업 정보</h5>
-                <div class="mb-3">
-                    <label for="companyName" class="form-label">회사명</label>
-                    <p>{{compname}}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="businessNumber" class="form-label">사업자 번호</label>
-                    <p>{{compNum}}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="scale" class="form-label">주소</label>
-                    <input type="text" class="form-control" id="address" name="address" value={{address}}>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">저장</button>
-                </div>
-            </form>
+                    <div class="mb-3">
+                        <label for="scale" class="form-label">주소</label>
+                        <input type="text" class="form-control" id="address" name="address" value={{address}}>
+                    </div>
+
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">저장</button>
+                    </div>
+                </form>
             {{/compProfile}}
         </div>
     </div>

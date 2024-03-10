@@ -30,7 +30,7 @@
 
     <div class="container mt-3 ">
         {{#sessionUser}}
-            <h3>안녕하세요. {{name}} 담당자님</h3>
+            😊안녕하세요. <span class="text-primary">{{name}}</span> 담당자님</h3>
         {{/sessionUser}}
         <div class="d-flex justify-content-between mt-5 mb-2">
             <h2>내가 올린 공고</h2>
@@ -39,22 +39,27 @@
         {{#jobopenList}}
             <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
                 <div class="card-body">
-                    <a onClick="location.href='/comp/jobopen/{{id}}'" style="cursor:pointer">
-                        <div class="card-text mb-5 text-truncate">
-                            <h2>{{jobopenTitle}}</h2>
-                        </div>
-                    </a>
-                    <div class="d-flex justify-content-between">
-                        <a href="/applyPositionForm">
-                            <button  type="button" class="btn btn-primary">
-                                지원자 현황 <span class="badge bg-danger">{{count}}</span>
-                            </button>
+                    <div>
+                        <a onClick="location.href='/comp/mngForm{{id}}'" style="cursor:pointer">
+                            <div class="card-text mb-5 text-truncate">
+                                <h2>{{jobopenTitle}}</h2>
+                            </div>
                         </a>
+                    </div>
+                    <div class="d-flex justify-content-between">
                         <div>
+                            <a href="/applyPositionForm">
+                                <button type="button" class="btn btn-primary">
+                                    지원자 현황 <span class="badge bg-danger">{{count}}</span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="align-self-center">
                             <a href="/comp/jobopen/{{id}}/updateForm">
                                 <button class="btn btn-info">수정</button>
                             </a>
-                            <form action="/comp/jobopen/{{id}}/detete" method="post">
+
+                            <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
                                 <button class="btn btn-secondary">삭제</button>
                             </form>
                         </div>
@@ -62,6 +67,38 @@
                 </div>
             </div>
         {{/jobopenList}}
+
+        {{#ApplyComp}}
+            <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
+                <div class="card-body">
+                    <div>
+                        <a onClick="location.href='/comp/jobopen/{{id}}'" style="cursor:pointer">
+                            <div class="card-text mb-5 text-truncate">
+                                <h2>{{jobopenTitle}}</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="/applyPositionForm">
+                                <button type="button" class="btn btn-primary">
+                                    지원자 현황 <span class="badge bg-danger">{{count}}</span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="align-self-center">
+                            <a href="/comp/jobopen/{{id}}/updateForm">
+                                <button class="btn btn-info">수정</button>
+                            </a>
+
+                            <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
+                                <button class="btn btn-secondary">삭제</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/ApplyComp}}
 
 
         <div class="text-center mb-5">
