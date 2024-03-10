@@ -34,28 +34,30 @@ public class UserRepository {
 
     @Transactional
     public void userSave(UserRequst.joinDTO reqDTO) {
-        Query query = em.createNativeQuery("insert into  user_tb(name, username, password, address, phone, role, created_at) values(?, ?, ?, ?, ?, ?, now()) ");
+        Query query = em.createNativeQuery("insert into  user_tb(name, username, email, password, address, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getName());
         query.setParameter(2,reqDTO.getUsername());
-        query.setParameter(3,reqDTO.getPassword());
-        query.setParameter(4,reqDTO.getAddress());
-        query.setParameter(5,reqDTO.getPhone());
-        query.setParameter(6,0);
+        query.setParameter(3,reqDTO.getEmail());
+        query.setParameter(4,reqDTO.getPassword());
+        query.setParameter(5,reqDTO.getAddress());
+        query.setParameter(6,reqDTO.getPhone());
+        query.setParameter(7,0);
         query.executeUpdate();
     }
 
     @Transactional
     public void compSave(UserRequst.joinDTO reqDTO) {
-        Query query = em.createNativeQuery("insert into  user_tb(comp_num, ceo, compname, address, username, password, name, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ");
+        Query query = em.createNativeQuery("insert into  user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getCompNum());
         query.setParameter(2,reqDTO.getCeo());
         query.setParameter(3,reqDTO.getCompname());
         query.setParameter(4,reqDTO.getAddress());
         query.setParameter(5,reqDTO.getUsername());
-        query.setParameter(6,reqDTO.getPassword());
-        query.setParameter(7,reqDTO.getName());
-        query.setParameter(8,reqDTO.getPhone());
-        query.setParameter(9,1);
+        query.setParameter(6,reqDTO.getEmail());
+        query.setParameter(7,reqDTO.getPassword());
+        query.setParameter(8,reqDTO.getName());
+        query.setParameter(9,reqDTO.getPhone());
+        query.setParameter(10,1);
         query.executeUpdate();
     }
 
