@@ -35,5 +35,6 @@ public class ResumeRequest {
         private String license;
         private String content;
         private String edu;
+        private List<String> skills = new ArrayList<>();
     }
 }
