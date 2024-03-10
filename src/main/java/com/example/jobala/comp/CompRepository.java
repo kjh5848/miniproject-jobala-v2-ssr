@@ -40,12 +40,22 @@ public class CompRepository {
     public List<Resume> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.* FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id
-                where sk.name like ? 
+                where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
                 AND (rt.career IN (?, ?))
                 AND (rt.edu IN (?, ?))
                 AND (rt.hope_job IN (?, ?))
                 order by rt.id desc
                 """;
+        // skill 파싱
+        String[] skill = {"", "", "", "", "", ""};
+        String[] skillArr;
+        try {
+            skillArr = skills.split(",");
+            for (int i = 0; i < skillArr.length; i++) {
+                skill[i] = skillArr[i];
+            }
+        } catch (Exception e) {
+        }
 
         // career 파싱
         String[] career = {null, null};
@@ -87,13 +97,18 @@ public class CompRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery, Resume.class);
-        query.setParameter(1, "%" + skills + "%");
-        query.setParameter(2, career[0]);
-        query.setParameter(3, career[1]);
-        query.setParameter(4, edu[0]);
-        query.setParameter(5, edu[1]);
-        query.setParameter(6, hopeJob[0]);
-        query.setParameter(7, hopeJob[1]);
+        query.setParameter(1, "%"+skill[0]+"%");
+        query.setParameter(2, "%"+skill[1]+"%");
+        query.setParameter(3, "%"+skill[2]+"%");
+        query.setParameter(4, "%"+skill[3]+"%");
+        query.setParameter(5, "%"+skill[4]+"%");
+        query.setParameter(6, "%"+skill[5]+"%");
+        query.setParameter(7, career[0]);
+        query.setParameter(8, career[1]);
+        query.setParameter(9, edu[0]);
+        query.setParameter(10, edu[1]);
+        query.setParameter(11, hopeJob[0]);
+        query.setParameter(12, hopeJob[1]);
 
         List<Resume> resumeList = query.getResultList();
 

@@ -41,7 +41,7 @@ public class ResumeController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        req.setAttribute("sessionUser", sessionUser);
+        req.setAttribute("user", sessionUser);
         return "/guest/resume/saveForm";
     }
 

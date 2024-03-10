@@ -51,15 +51,15 @@ public class ResumeRepository {
     }
 
     @Transactional
-    public void save(ResumeRequest.SaveDTO resumeSaveDTO, User user) {
+    public void save(ResumeRequest.SaveDTO reqDTO, User user) {
         Query query = em.createNativeQuery("insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at, name) values (?,?,?,?,?,?,?,now(),?)");
         query.setParameter(1, user.getId());
-        query.setParameter(2, resumeSaveDTO.getResumeTitle());
-        query.setParameter(3, resumeSaveDTO.getHopeJob());
-        query.setParameter(4, resumeSaveDTO.getCareer());
-        query.setParameter(5, resumeSaveDTO.getLicense());
-        query.setParameter(6, resumeSaveDTO.getContent());
-        query.setParameter(7, resumeSaveDTO.getEdu());
+        query.setParameter(2, reqDTO.getResumeTitle());
+        query.setParameter(3, reqDTO.getHopeJob());
+        query.setParameter(4, reqDTO.getCareer());
+        query.setParameter(5, reqDTO.getLicense());
+        query.setParameter(6, reqDTO.getContent());
+        query.setParameter(7, reqDTO.getEdu());
         query.setParameter(8, user.getName());
         query.executeUpdate();
 
@@ -69,7 +69,7 @@ public class ResumeRepository {
         Query query3 = em.createNativeQuery("insert into skill_tb(user_id, role, resume_id, name) values (?,?,?,?)");
 
         // List -> JSON
-        List<String> skills = resumeSaveDTO.getSkills();
+        List<String> skills = reqDTO.getSkills();
         String json = new Gson().toJson(skills);
         System.out.println("제이슨 결과 = " + json);
 
@@ -81,16 +81,29 @@ public class ResumeRepository {
     }
 
     @Transactional
-    public void update(int resumeId, ResumeRequest.UpdateDTO requestDTO) {
+    public void update(int resumeId, ResumeRequest.UpdateDTO reqDTO) {
         Query query = em.createNativeQuery("update resume_tb set resume_title=?, hope_job=?, career=?, license=?, content=?, edu=? where id=?");
-        query.setParameter(1, requestDTO.getResumeTitle());
-        query.setParameter(2, requestDTO.getHopeJob());
-        query.setParameter(3, requestDTO.getCareer());
-        query.setParameter(4, requestDTO.getLicense());
-        query.setParameter(5, requestDTO.getContent());
-        query.setParameter(6, requestDTO.getEdu());
+        query.setParameter(1, reqDTO.getResumeTitle());
+        query.setParameter(2, reqDTO.getHopeJob());
+        query.setParameter(3, reqDTO.getCareer());
+        query.setParameter(4, reqDTO.getLicense());
+        query.setParameter(5, reqDTO.getContent());
+        query.setParameter(6, reqDTO.getEdu());
         query.setParameter(7, resumeId);
         query.executeUpdate();
+
+        Query query2 = em.createNativeQuery("select id from skill_tb where resume_id = ?");
+        query2.setParameter(1,resumeId);
+        Integer skillId = (Integer) query2.getSingleResult();
+
+        Query query3 = em.createNativeQuery("update skill_tb set name= ? where id = ?");
+        // List -> JSON
+        List<String> skills = reqDTO.getSkills();
+        String json = new Gson().toJson(skills);
+        System.out.println("제이슨 결과 = " + json);
+        query3.setParameter(1,json);
+        query3.setParameter(2,skillId);
+        query3.executeUpdate();
     }
 
     @Transactional
