@@ -68,7 +68,8 @@ public class GuestRepository {
     public List<Jobopen> findAll(String skills, GuestResponse.SearchDTO resDTO) {
         String skillQuery = """
                SELECT jb.* FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id
-               where sk.name like ? AND (jb.career IN (?, ?))
+               where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
+               AND (jb.career IN (?, ?))
                AND (jb.comp_location IN (?, ?, ?, ?))
                AND (jb.edu IN (?, ?))
                AND (jb.salary IN (?, ?, ?))
@@ -76,6 +77,17 @@ public class GuestRepository {
                AND (jb.job_type IN (?, ?, ?))
                order by jb.id desc
                """;
+        // skill 파싱
+        String[] skill = {"", "", "", "", "", ""};
+        String[] skillArr;
+        try {
+            skillArr = skills.split(",");
+            for (int i = 0; i < skillArr.length; i++) {
+                skill[i] = skillArr[i];
+            }
+        } catch (Exception e) {
+        }
+
 
         // career 파싱
         String[] career = {null , null};
@@ -160,23 +172,28 @@ public class GuestRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery, Jobopen.class);
-        query.setParameter(1, "%" + skills + "%");
-        query.setParameter(2, career[0]);
-        query.setParameter(3, career[1]);
-        query.setParameter(4, compLocation[0]);
-        query.setParameter(5, compLocation[1]);
-        query.setParameter(6, compLocation[2]);
-        query.setParameter(7, compLocation[3]);
-        query.setParameter(8, edu[0]);
-        query.setParameter(9, edu[1]);
-        query.setParameter(10, salary[0]);
-        query.setParameter(11, salary[1]);
-        query.setParameter(12, salary[2]);
-        query.setParameter(13, hopeJob[0]);
-        query.setParameter(14, hopeJob[1]);
-        query.setParameter(15, jobType[0]);
-        query.setParameter(16, jobType[1]);
-        query.setParameter(17, jobType[2]);
+        query.setParameter(1, "%"+skill[0]+"%");
+        query.setParameter(2, "%"+skill[1]+"%");
+        query.setParameter(3, "%"+skill[2]+"%");
+        query.setParameter(4, "%"+skill[3]+"%");
+        query.setParameter(5, "%"+skill[4]+"%");
+        query.setParameter(6, "%"+skill[5]+"%");
+        query.setParameter(7, career[0]);
+        query.setParameter(8, career[1]);
+        query.setParameter(9, compLocation[0]);
+        query.setParameter(10, compLocation[1]);
+        query.setParameter(11, compLocation[2]);
+        query.setParameter(12, compLocation[3]);
+        query.setParameter(13, edu[0]);
+        query.setParameter(14, edu[1]);
+        query.setParameter(15, salary[0]);
+        query.setParameter(16, salary[1]);
+        query.setParameter(17, salary[2]);
+        query.setParameter(18, hopeJob[0]);
+        query.setParameter(19, hopeJob[1]);
+        query.setParameter(20, jobType[0]);
+        query.setParameter(21, jobType[1]);
+        query.setParameter(22, jobType[2]);
 
         List<Jobopen> jobopenList = query.getResultList();
 
