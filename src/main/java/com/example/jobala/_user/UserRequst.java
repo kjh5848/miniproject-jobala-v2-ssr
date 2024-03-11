@@ -16,6 +16,7 @@ public class UserRequst {
         private String email;
         private String password;
         private String name;
+        private String age;
         private String phone;
         private Integer role; // 0 -> guest, 1 -> comp
         private LocalDateTime createdAt;
