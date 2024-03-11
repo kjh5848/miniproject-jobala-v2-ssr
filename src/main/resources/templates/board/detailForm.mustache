@@ -9,14 +9,14 @@
         <div>
             <b style="margin-left: 5px;">작성자</b> {{board.username}}
             <div class="d-flex">
-                {{#boardOwner}}
-                    <form action="/board/{id}/updateForm" method="get">
+                {{#board.boardOwner}}
+
                         <a href="/board/{{board.id}}/updateForm" class="btn btn-warning me-1">수정</a>
-                    </form>
+
                     <form action="/board/{{board.id}}/delete" method="post">
                         <button class="btn btn-danger">삭제</button>
                     </form>
-                {{/boardOwner}}
+                {{/board.boardOwner}}
             </div>
         </div>
     </div>
@@ -62,26 +62,26 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            e.preventDefault(); // 폼 제출 기본 동작 차단
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $('form').submit(function (e) {-->
+<!--            e.preventDefault(); // 폼 제출 기본 동작 차단-->
 
-            var form = $(this);
-            var url = form.attr('action');
+<!--            var form = $(this);-->
+<!--            var url = form.attr('action');-->
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: form.serialize(), // form 데이터 직렬화
-                success: function (data) {
-                    // 댓글이 성공적으로 등록되면 페이지 새로고침
-                    location.reload(); // 현재 페이지를 다시 불러오는 명령
-                }
-            });
-        });
-    });
-</script>
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: url,-->
+<!--                data: form.serialize(), // form 데이터 직렬화-->
+<!--                success: function (data) {-->
+<!--                    // 댓글이 성공적으로 등록되면 페이지 새로고침-->
+<!--                    location.reload(); // 현재 페이지를 다시 불러오는 명령-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
 
 {{> layout/footer}}
