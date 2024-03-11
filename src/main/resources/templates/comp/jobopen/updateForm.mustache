@@ -5,7 +5,7 @@
 <div class="container  mt-5">
 
     <!--채용공고 사진-->
-    <form id="UpdateForm" action="jobopen/update" method="post" enctype="multipart/form-data">
+    <form id="UpdateForm" action="/jobopen/update/{{id}}" method="post" enctype="multipart/form-data">
         <div class="card mb-3">
             <div class="card-body">
                 <!-- 회사 이미지 및 정보 -->
@@ -153,6 +153,30 @@
                         <input type="checkbox" name="skills" class="form-check-input" value="MySQL">
                         <div>MySQL</div>
                     </div>
+            <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
+                <div class="custom-control custom-checkbox ">
+                    <input type="checkbox" class="custom-control-input pr-3" id="java" name="skills">
+                    <label class="custom-control-label" for="Java">Java</label>
+                </div>
+                <div class="custom-control custom-checkbox ml-4">
+                    <input type="checkbox" class="custom-control-input" id="javascript" name="skills">
+                    <label class="custom-control-label" for="JavaScript">JavaScript</label>
+                </div>
+                <div class="custom-control custom-checkbox pr-3">
+                    <input type="checkbox" class="custom-control-input" id="spring" name="skills">
+                    <label class="custom-control-label" for="Spring">Spring</label>
+                </div>
+                <div class="custom-control custom-checkbox pr-3">
+                    <input type="checkbox" class="custom-control-input" id="html" name="skills">
+                    <label class="custom-control-label" for="HTML">HTML</label>
+                </div>
+                <div class="custom-control custom-checkbox pr-3">
+                    <input type="checkbox" class="custom-control-input" id="jquery" name="skills">
+                    <label class="custom-control-label" for="jQuery">jQuery</label>
+                </div>
+                <div class="custom-control custom-checkbox pr-3">
+                    <input type="checkbox" class="custom-control-input" id="Mysql" name="skills">
+                    <label class="custom-control-label" for="MySQL">MySQL</label>
                 </div>
             </div>
         </div>
@@ -228,7 +252,7 @@
 
         try {
             // 이미지를 서버로 전송
-            const response = await fetch('jobopen/update', {
+            const response = await fetch('/jobopen/update/{{id}}', {
                 method: 'POST',
                 body: formData
             });

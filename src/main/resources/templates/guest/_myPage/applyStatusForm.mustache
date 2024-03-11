@@ -30,25 +30,26 @@
             <div class="col">
                 <div class="applyBox">
                     <h2 class="text-left">지원 현황</h2>
-
-                    <table class="table" id="applicationTable">
-                        <thead>
-                        <tr>
-                            <th>공고 제목</th>
-                            <th>이력서 제목</th>
-                            <th>상태</th>
-                        </tr>
-                        </thead>
-                        {{#Apply}}
-                            <tbody>
+                    <div class="card shadow row">
+                        <table class="table p-3" style="margin-bottom: 0px;">
+                            <thead class="table-primary">
                             <tr>
-                                <td>{{jobopenTitle}}</td>
-                                <td>{{resumeTitle}}</td>
-                                <td>{{state}}</td>
+                                <th>공고 제목</th>
+                                <th>이력서 제목</th>
+                                <th>상태</th>
                             </tr>
-                            </tbody>
-                        {{/Apply}}
-                    </table>
+                            </thead>
+                            {{#Apply}}
+                                <tbody>
+                                <tr>
+                                    <td>{{jobopenTitle}}</td>
+                                    <td>{{resumeTitle}}</td>
+                                    <td>{{state}}</td>
+                                </tr>
+                                </tbody>
+                            {{/Apply}}
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
