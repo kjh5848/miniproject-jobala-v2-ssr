@@ -68,8 +68,8 @@ public class BoardController {
         }
         BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
         boardRepository.update(requestDTO, id);
+        return "redirect:/board/" + id ;
 
-        return "redirect:/board/" + id;
     }
 
     @GetMapping("/board/{id}/updateForm")
