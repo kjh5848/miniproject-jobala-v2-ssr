@@ -5,43 +5,57 @@
 
 
 <!--리펙토링 코드-->
-<div class="container d-flex justify-content-between">
-    <div class="card-body">
-        <div>
+<div>
+    <div class="container d-flex justify-content-center">
+        <div class="card-body">
             <h2>
                 총 <span id="totalJobs">00</span>건의 공고
             </h2>
-        </div>
-        <div>
-
-            <form id="searchForm" action="/guest/jobopenSearch" method="get">
-
+            <div>
                 <!-- 구직자 기술스택 매칭리스트 목록 -->
-
-                <div id="demo" class="mt-3 " style="height: 60px;">
+                <form id="searchForm" action="/guest/jobopenSearch" method="get" enctype="application/x-www-form-urlencoded">
                     <div class="card-body select-box border border-2 mb-5 rounded-3">
                         <div class="select-box ">
                             <div class="select-package bg-info p-3 m-2 rounded-3">
                                 <h4>기술스택</h4>
                                 <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" value="Java"
-                                           onchange="skillsFilter(this);"/>
-                                    Java
-                                    <input type="checkbox" class="checkbox" value="JavaScript"
-                                           onchange="skillsFilter(this);"/>JavaScript
-                                    <input type="checkbox" class="checkbox" value="Spring"
-                                           onchange="skillsFilter(this);"/>
-                                    Spring
-                                    <input type="checkbox" class="checkbox" value="HTML"
-                                           onchange="skillsFilter(this);"/>
-                                    HTML
-                                    <input type="checkbox" class="checkbox" value="jQuery"
-                                           onchange="skillsFilter(this);"/>
-                                    jQuery
-                                    <input type="checkbox" class="checkbox" value="MySQL"
-                                           onchange="skillsFilter(this);"/>
-                                    MySQL
+                                    <input type="checkbox" class="checkbox" value="Java" onchange="skillsFilter(this);" /> Java
+                                    <input type="checkbox" class="checkbox" value="JavaScript" onchange="skillsFilter(this);" />JavaScript
+                                    <input type="checkbox" class="checkbox" value="Spring" onchange="skillsFilter(this);" /> Spring
+                                    <input type="checkbox" class="checkbox" value="HTML" onchange="skillsFilter(this);" /> HTML
+                                    <input type="checkbox" class="checkbox" value="jQuery" onchange="skillsFilter(this);" /> jQuery
+                                    <input type="checkbox" class="checkbox" value="MySQL" onchange="skillsFilter(this);" /> MySQL
                                 </div>
+
+                                <script>
+                                    // 기술스택 필터 적용
+                                    var skillArr = new Array(); //필터 내용을 저장하는 배열
+
+                                    //필터 내용을 저장하는 function
+                                    function skillsFilter(target) {
+
+                                        var skillVal = target.value; //check value
+                                        var confirmCheck = target.checked; //check여부 확인
+                                        console.log("필터 선택값 : " + skillVal);
+                                        console.log("선택여부 : " + confirmCheck);
+
+                                        if (confirmCheck == true) { // check true
+                                            skillArr.push(skillVal); // check value filter 배열에 입력
+                                        } else { // check false
+                                            skillArr.splice(skillArr.indexOf(skillVal), 1); // check value filter 배열내용 삭제
+                                        }
+                                        console.log("필터입력값 출력 : " + skillArr);
+                                    }
+
+                                    function applyFilters() {
+
+                                        var skillString = JSON.stringify(skillArr); // JSON 문자열로 변환
+                                        document.getElementById("skillsInput").value = skillString; // 숨겨진 input에 값 설정
+
+                                        // 폼 제출
+                                        document.getElementById("searchForm").submit(); // 올바른 폼 ID를 사용
+                                    }
+                                </script>
 
                             </div>
 
@@ -56,6 +70,8 @@
                                 <h4>지역</h4>
                                 <div class="checkbox-package">
                                     <input type="checkbox" name="compLocation" class="checkbox" value="서울"/> 서울
+                                    <input type="checkbox" name="compLocation" class="checkbox" value="경기"/> 대전
+                                    <input type="checkbox" name="compLocation" class="checkbox" value="광주"/> 대구
                                     <input type="checkbox" name="compLocation" class="checkbox" value="부산"/> 부산
 
                                 </div>
@@ -69,18 +85,18 @@
                             </div>
                             <div class="select-package bg-info p-3 m-2 rounded-3">
                                 <h4>연봉</h4>
-                                <div class="checkbox-package">
+                                <div class="checkbox-package" >
                                     <input type="checkbox" name="salary" class="checkbox" value="협의"/>
                                     협의
-                                    <input type="checkbox" name="salary" class="checkbox" value="3,000만원 이하"/>
+                                    <input type="checkbox" name="salary" class="checkbox" value="3000만원 이하"/>
                                     3000만원 이상
-                                    <input type="checkbox" name="salary" class="checkbox" value="5,000만원 이상"/>
+                                    <input type="checkbox" name="salary" class="checkbox" value="5000만원 이상"/>
                                     5000만원 이상
                                 </div>
                             </div>
                             <div class="select-package bg-info p-3 m-2 rounded-3">
                                 <h4>희망 직무</h4>
-                                <div class="checkbox-package">
+                                <div class="checkbox-package" >
                                     <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
                                     프론트엔드
                                     <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
@@ -97,132 +113,62 @@
 
                             <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
                                 <input type="hidden" name="skills" id="skillsInput">
-                                <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()">
-                                    <!-- 좌우 여백만 추가 -->
+                                <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()"> <!-- 좌우 여백만 추가 -->
                                     필터 적용하기
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
-            <!-- 구직자 기술스택 매칭리스트 목록 -->
+                <!-- 구직자 기술스택 매칭리스트 목록 -->
 
-            <!-- 채용공고 목록 -->
-            <div class="row">
-                {{#jobopenList}}
-                    <div class="col-md-4 mb-4">
-                        <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
-                            <div class="card col-3 border-0 shadow" style="width: 100%;">
-                                <img src="/image/{{imgFilename}}" style="width: 400px; height: 200px; "
-                                     alt="이미지를 표시할 수 없습니다.">
-                                <div class="card-body text-start">
-                                    <br>
-                                    <h5 class="card-title">{{jobopenTitle}}</h5>
-                                    <hr>
-                                    <p class="card-text">{{compLocation}} {{career}} {{edu}}</p>
+                <!-- 채용공고 목록 -->
+                <!-- 채용공고 목록 -->
+                <div class="row">
+                    {{#jobopenList}}
+                        <div class="col-md-4 mb-4">
+                            <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                                <div class="card col-3 border-0 shadow" style="width: 100%;">
+                                    <img src="/image/{{imgFilename}}" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
+                                    <div class="card-body text-start">
+                                        <br>
+                                        <h5 class="card-title">{{jobopenTitle}}</h5>
+                                        <hr>
+                                        <p class="card-text">{{compLocation}} {{career}} {{edu}}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+                    {{/jobopenList}}
+                    <!-- 채용공고 목록 -->
+
+
+                    <!-- 페이징 -->
+                    <div class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled text-info bg-light border-dark">
+                                <a class="page-link text-info bg-light" href="#">Previous</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link text-info bg-light" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link text-info bg-light" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link text-info bg-light" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link text-info bg-light" href="#">Next</a>
+                            </li>
+                        </ul>
                     </div>
-                {{/jobopenList}}
+                    <!-- 페이징 -->
 
+                </div>
             </div>
-            <!-- 채용공고 목록 -->
-
-
-            <!-- 페이징 -->
-            <div class="mt-5">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled text-info bg-light border-dark">
-                        <a class="page-link text-info bg-light" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">Next</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- 페이징 -->
-
         </div>
+
     </div>
-</div>
-
-
-<script>
-
-    //기술스택 필터 적용
-    var skillArr = []; //필터 내용을 저장하는 배열
-
-    //필터 내용을 저장하는 function
-    function skillsFilter(target) {
-        var skillVal = target.value; // 버튼의 value 값
-        var index = skillArr.findIndex(skill => skill.name === skillVal); // 배열에서 해당 기술의 인덱스 찾기
-
-        // 버튼이 선택되었는지 확인
-        if (index === -1) { // 선택되지 않았다면 추가
-            skillArr.push({name: skillVal, selected: true});
-        } else { // 이미 선택되었다면 선택 취소(배열에서 제거)
-            skillArr.splice(index, 1);
-        }
-
-        console.log("필터 선택값 : ", JSON.stringify(skillArr));
-    }
-
-    function applyFilters() {
-        var skillString = JSON.stringify(skillArr.map(skill => skill.name)); // 선택된 기술들의 이름만 추출하여 JSON 문자열로 변환
-        document.getElementById("skillsInput").value = skillString; // 숨겨진 input에 값 설정
-
-        // 폼 제출
-        document.getElementById("searchForm").submit(); // 올바른 폼 ID를 사용
-    }
-
-    // // 이미지 수기로 집너넣기
-    // // 대체 이미지 URL을 사용자가 맞춤 설정할 수 있도록 함수를 정의합니다.
-    // function setResumeImageURL(resumeList) {
-    //     // jobopenList 엘리먼트를 가져옵니다. 셀렉터는 jobopenList를 감싸는 엘리먼트에 적용되어야 정확합니다.
-    //     var cards = document.querySelectorAll('.card img');
-    //
-    //     // 각 card에 대해 함수를 실행합니다.
-    //     cards.forEach(function (card, index) {
-    //         if (resumeList[index] && resumeList[index].imageURL) {
-    //             // imageURL을 제공된 URL로 설정합니다.
-    //             card.src = resumeList[index].imageURL;
-    //         } else {
-    //             // 이미지 URL이 존재하지 않으면 기본 이미지로 설정합니다.
-    //             card.src = '/path/to/default/image.jpg'; // 경로를 적절한 기본 이미지 경로로 대체
-    //         }
-    //     });
-    // }
-    //
-    // // 문서가 로드될 때 함수를 호출합니다.
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     // 모의 데이터: 실제 사용할 때는 서버에서 데이터를 가져오거나 다른 방식으로 구성하세요.
-    //     var mockResumeList = [
-    //         {id: 9, imageURL: '/image/getintherelogo.png'},
-    //         {id: 8, imageURL: '/image/hibelogo.png'},
-    //         {id: 7, imageURL: '/image/carrotlogo.png'},
-    //         {id: 6, imageURL: '/image/balogo.png'},
-    //         {id: 5, imageURL: '/image/linelogo.png'},
-    //         {id: 4, imageURL: '/image/toslogo.png'},
-    //         {id: 3, imageURL: '/image/kakaologo.svg'},
-    //         {id: 2, imageURL: '/image/naverlogo.png'},
-    //         {id: 1, imageURL: '/image/cupanglogo.png'}
-    //     ];
-    //
-    //     // 함수 호출
-    //     setResumeImageURL(mockResumeList);
-    // });
-</script>
-
 {{> layout/footer}}
