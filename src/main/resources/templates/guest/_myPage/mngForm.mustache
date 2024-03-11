@@ -29,28 +29,31 @@
             <div class="col">
                 <div class="applyBox">
                     <h2 class="text-left">이력서 관리</h2>
-                    <table class="table">
-                        <tr>
-                            <th>제목</th>
-                            <th>관리</th>
-                        </tr>
-                        </thead>
-                        <tbody id="resumeTable">
-                        {{#resumeList}}
+                    <div class="card shadow row">
+                        <table class="table p-3" style="margin-bottom: 0px;">
+                            <thead class="table-primary">
                             <tr>
-                                <td>
-                                    <a class="page-link" href="/guest/resume/{{id}}">{{resumeTitle}}</a>
-                                </td>
-                                <td class="d-flex">
-                                    <a href="/guest/resume/{{id}}/updateForm" class="btn btn-primary btn-sm">수정</a>
-                                    <form action="/resume/{{id}}/delete" method="post">
-                                        <button class="btn btn-danger btn-sm" style="margin-left: 5px;">삭제</button>
-                                    </form>
-                                </td>
+                                <th>제목</th>
+                                <th>관리</th>
                             </tr>
-                        {{/resumeList}}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="resumeTable">
+                            {{#resumeList}}
+                                <tr>
+                                    <td>
+                                        <a class="page-link" href="/guest/resume/{{id}}">{{resumeTitle}}</a>
+                                    </td>
+                                    <td class="d-flex">
+                                        <a href="/guest/resume/{{id}}/updateForm" class="btn btn-primary btn-sm">수정</a>
+                                        <form action="/resume/{{id}}/delete" method="post">
+                                            <button class="btn btn-danger btn-sm" style="margin-left: 5px;">삭제</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {{/resumeList}}
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="text-center"> <!-- Center the button -->
                         <a href="/guest/resume/saveForm" class="btn btn-primary">새로운 이력서 작성하기</a>
                         <!-- Styled in blue color -->

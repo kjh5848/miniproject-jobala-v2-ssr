@@ -41,11 +41,10 @@
 
     <div class="card border-0">
         <div class="profileBox" id="profileForm">
-
             <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-info" id="offerCount"></span>
             </h2>
             <div class="card shadow row">
-                <table class="table p-3">
+                <table class="table p-3" style="margin-bottom: 0px;">
                     <thead class="table-primary">
                     <tr>
                         <th></th>
@@ -71,12 +70,12 @@
             </div>
         </div>
 
-        <div id="applicantsList">
-            <h2 class="profileBox text-left mb-4 mt-4">내 공고 지원자 목록<span class="badge bg-info"
+        <div id="applicantsList" style="margin-top: -50px;">
+            <h2 class="profileBox text-left mt-5" style="margin-bottom:0px;">내 공고 지원자 목록<span class="badge bg-info"
                                                                         id="applyCount"></span>
             </h2>
             {{#ApplyComp}}
-                <div class="card shadow p-3 mb-3 bg-body rounded" style="position: relative;">
+                <div class="card shadow p-3 mb-3 bg-body rounded" style="position: relative; margin-top: -10px; margin-left:20px; width: 97.5%;">
 
                     <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
                         <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>

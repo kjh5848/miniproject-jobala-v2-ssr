@@ -1,4 +1,12 @@
 {{> layout/header}}
+<style>
+    .profileBox {
+        margin-top: 50px;
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 10px;
+    }
+</style>
 
 <!--개인 프로필 수정 페이지-->
 <div class="container">
@@ -11,7 +19,8 @@
                             <h1>마이페이지</h1>
                             <div class="btn-group btn-group-lg">
                                 <a href="/guest/profileForm">
-                                    <button type="button" class="btn btn-outline-dark m-1" id="profileBtn">프로필 관리</button>
+                                    <button type="button" class="btn btn-outline-dark m-1" id="profileBtn">프로필 관리
+                                    </button>
                                 </a>
                                 <a href="/guest/mngForm">
                                     <button type="button" class="btn btn-outline-dark m-1">이력서 관리</button>
@@ -28,31 +37,32 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="content">
+                <div class="content profileBox" style="margin-top: 20px;">
                     <h2>프로필 관리</h2>
-{{#guestProfile}}
-                    <form action="/guest/updateProfile" method="post">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">이름:</label>
-                            <input type="text" class="form-control" id="name" name="name" value={{name}}>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">비밀번호:</label>
-                            <input type="password" class="form-control" id="password" name="password" value={{password}}>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">전화번호:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">이메일:</label>
-                            <input type="email" class="form-control" id="email" name="email" value={{email}}>
-                        </div>
-                        <div class="text-center"> <!-- Centering the button -->
-                            <button type="submit" class="btn btn-primary">저장</button>
-                        </div>
-                    </form>
-{{/guestProfile}}
+                    {{#guestProfile}}
+                        <form action="/guest/updateProfile" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">이름:</label>
+                                <input type="text" class="form-control" id="name" name="name" value={{name}}>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">비밀번호:</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       value={{password}}>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">전화번호:</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">이메일:</label>
+                                <input type="email" class="form-control" id="email" name="email" value={{email}}>
+                            </div>
+                            <div class="text-center"> <!-- Centering the button -->
+                                <button type="submit" class="btn btn-primary">저장</button>
+                            </div>
+                        </form>
+                    {{/guestProfile}}
                 </div>
             </div>
         </div>
