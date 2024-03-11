@@ -6,14 +6,14 @@
         <!--                개인이 로그인을 할때 사용-->
         <form action="/guestJoin" method="post" onsubmit="return valid()">
             <input type="hidden" name="role" value="1">
-            <button id="btnActiveComp" type="button" class="btn btn-lg btn-light form-control"
+            <button id="btnActiveGuest" type="button" class="btn btn-lg btn-light form-control"
                     data-bs-toggle="collapse" data-bs-target="#demo2">개인
             </button>
         </form>
         <!--                기업이 로그인을 할때 사용-->
         <form action="/compJoin" method="post" onsubmit="return valid()">
             <input type="hidden" name="role" value="0">
-            <button id="btnActiveUser" type="button" class="btn btn-lg btn-light form-control"
+            <button id="btnActiveComp" type="button" class="btn btn-lg btn-light form-control"
                     data-bs-toggle="collapse" data-bs-target="#demo">기업
             </button>
         </form>
@@ -61,7 +61,7 @@
                                         <p>아이디</p>
                                         <div class="d-flex text-nowrap">
                                             <input type="text" class="form-control" id="username" name="username"
-                                                   placeholder="ENTER username" value="ssar" required>
+                                                   placeholder="ENTER username" value="" required>
                                             <button type="button" onclick="usernameSameCheck()"
                                                     class="btn btn-primary btn-block">중복
                                                 체크
@@ -80,7 +80,7 @@
                                     <div class="mb-3">
                                         <p>비밀번호</p>
                                         <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="ENTER password" value="1234" required>
+                                               placeholder="ENTER password" value="" required>
                                     </div>
                                 </div>
 
@@ -124,7 +124,7 @@
                                     <p>아이디</p>
                                     <div class="d-flex text-nowrap">
                                         <input type="text" class="form-control" id="username" name="username"
-                                               placeholder="ENTER username" value="ssar" required>
+                                               placeholder="ENTER username" value="" required>
                                         <button type="button" onclick="usernameSameCheck()"
                                                 class="btn btn-primary btn-block">중복
                                             체크
@@ -143,7 +143,7 @@
                                 <div class="mb-3">
                                     <p>비밀번호</p>
                                     <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="ENTER password" value="1234" required>
+                                           placeholder="ENTER password" value="" required>
                                 </div>
                                 <div class="mb-3">
                                     <p>거주지</p>
@@ -171,11 +171,8 @@
         </div>
     </div>
 </div>
-</div>
 
 <script>
-
-
     <!--  아이디 중복체크  -->
     let isSameCheck = false;
 
@@ -206,8 +203,9 @@
     }
 
     $(function () {
+        // 페이지 로드 시 자동 클릭 이벤트를 유발하는 부분을 주석 처리하거나 제거
+        $("#btnActiveGuest").click();
 
-        $("#btnActiveComp").click();
         // 개인/기업 버튼 클릭 이벤트 처리
         $(".btn-light").click(function () {
             // 현재 클릭된 버튼의 ID 가져오기
@@ -218,6 +216,9 @@
 
             // 현재 클릭된 버튼의 토글 열기/닫기
             $("#" + currentId + " .collapse").collapse("toggle");
+
+            // 기본 동작 계속 진행
+            return true;
         });
     });
 </script>

@@ -96,8 +96,6 @@ public class UserController {
         Integer role = isCheck;
         reqDTO.setRole(role);
         userRepository.compSave(reqDTO);
-
-
         return "/user/loginForm";
     }
 
