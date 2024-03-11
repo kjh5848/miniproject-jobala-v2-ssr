@@ -44,7 +44,7 @@ public class BoardRepository {
     public BoardResponse.BoardDetailDTO findById(int id) {
         String q = """
                 select b.id, b.title, b.content, b.user_id, u.username 
-                from board_tb b 
+                from board_tb b
                 inner join user_tb u on b.user_id = u.id 
                 where b.id = ?
                 """;
