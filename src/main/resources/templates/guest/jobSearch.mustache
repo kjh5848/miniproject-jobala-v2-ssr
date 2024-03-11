@@ -15,142 +15,96 @@
         <div>
 
             <form id="searchForm" action="/guest/jobopenSearch" method="get">
-                <div class="my-3">
-                    <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                            data-bs-target="#demo">
-                        공고필터
-                    </button>
-                </div>
+
                 <!-- 구직자 기술스택 매칭리스트 목록 -->
 
-                <div id="demo" class="mt-3 collapse " style="height: 60px;">
-                    <div class="select-box">
-                        <div class="select-package p-3 rounded-3 shadow d-flex align-items-center" style="margin-left:9.2px; width: 1280px;">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#skills">
-                                기술스택
-                            </button>
-                            <div id="skills" class="checkbox-package collapse">
-                                <input id="btn" type="button"
-                                       class="btn btn-lg btn-outline-info mx-1"
-                                       value="Java"
-                                       onclick="skillsFilter(this);"/>
-                                <input id="btn" type="button"
-                                       class="btn btn-lg btn-outline-info mx-1"
-                                       value="JavaScript"
-                                       onclick="skillsFilter(this);"/>
-                                <input id="btn" type="button" class="btn btn-outline-info btn-lg mx-1"
-                                       value="Spring"
-                                       onclick="skillsFilter(this);"/>
-                                <input id="btn" type="button" class="btn btn-outline-info btn-lg mx-1"
-                                       value="HTML"
-                                       onclick="skillsFilter(this);"/>
-                                <input id="btn" type="button" class="btn btn-outline-info btn-lg mx-1"
-                                       value="jQuery"
-                                       onclick="skillsFilter(this);"/>
-                                <input id="btn" type="button" class="btn btn-outline-info btn-lg mx-1"
-                                       value="MySQL"
-                                       onclick="skillsFilter(this);"/>
-                            </div>
-
-                        </div>
-
-                        <div class="select-package p-3 m-2 rounded-3 shadow d-flex align-items-center">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#career">
-                                경력
-                            </button>
-                            <div id="career" class="checkbox-package collapse">
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="career" value="신입"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="career" value="경력"/>
-                            </div>
-                        </div>
-                        <div class="select-package p-3 m-2 rounded-3 shadow d-flex align-items-center">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#compLocation">
-                                지역
-                            </button>
-                            <div id="compLocation" class="checkbox-package collapse">
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="compLocation" value="서울"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="compLocation" value="경기"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="compLocation" value="광주"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="compLocation" value="부산"/>
-                            </div>
-                        </div>
-                        <div class="select-package p-3 m-2 rounded-3 shadow d-flex align-items-center">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#edu">
-                                학력
-                            </button>
-                            <div id="edu" class="checkbox-package collapse">
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1" name="edu"
-                                       value="고등학교 졸업"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1" name="edu"
-                                       value="대학교 졸업"/>
-                            </div>
-                        </div>
-                        <div class="select-package p-3 m-2 rounded-3 shadow d-flex align-items-center">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#salary">
-                                연봉
-                            </button>
-                            <div id="salary" class="checkbox-package collapse">
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="salary" value="협의"/>
-
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="salary" value="3000만원 이하"/>
-
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="salary" value="5000만원 이상"/>
+                <div id="demo" class="mt-3 " style="height: 60px;">
+                    <div class="card-body select-box border border-2 mb-5 rounded-3">
+                        <div class="select-box ">
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>기술스택</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" class="checkbox" value="Java"
+                                           onchange="skillsFilter(this);"/>
+                                    Java
+                                    <input type="checkbox" class="checkbox" value="JavaScript"
+                                           onchange="skillsFilter(this);"/>JavaScript
+                                    <input type="checkbox" class="checkbox" value="Spring"
+                                           onchange="skillsFilter(this);"/>
+                                    Spring
+                                    <input type="checkbox" class="checkbox" value="HTML"
+                                           onchange="skillsFilter(this);"/>
+                                    HTML
+                                    <input type="checkbox" class="checkbox" value="jQuery"
+                                           onchange="skillsFilter(this);"/>
+                                    jQuery
+                                    <input type="checkbox" class="checkbox" value="MySQL"
+                                           onchange="skillsFilter(this);"/>
+                                    MySQL
+                                </div>
 
                             </div>
-                        </div>
-                        <div class="select-package p-3 m-2 rounded-3 shadow d-flex align-items-center">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#hopeJob">
-                                희망 직무
-                            </button>
-                            <div id="hopeJob" class="checkbox-package collapse">
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="hopeJob" value="프론트엔드"/>
 
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="hopeJob" value="백엔드"/>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>경력</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입
+                                    <input type="checkbox" name="career" class="checkbox" value="경력"/> 경력
+                                </div>
                             </div>
-                        </div>
-                        <div class="select-package p-3 m-2 rounded-3 shadow d-flex align-items-center">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
-                                    data-bs-target="#jobType">
-                                고용형태
-                            </button>
-                            <div id="jobType" class="p-3 checkbox-package collapse">
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="jobType" value="정규직"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="jobType" value="계약직"/>
-                                <input type="button" id="btn" class="btn btn-outline-info btn-lg mx-1"
-                                       name="jobType" value="인턴"/>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>지역</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="compLocation" class="checkbox" value="서울"/> 서울
+                                    <input type="checkbox" name="compLocation" class="checkbox" value="부산"/> 부산
+
+                                </div>
                             </div>
-                        </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>학력</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="edu" class="checkbox" value="고졸"/> 고졸
+                                    <input type="checkbox" name="edu" class="checkbox" value="대졸"/> 대졸
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>연봉</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="salary" class="checkbox" value="협의"/>
+                                    협의
+                                    <input type="checkbox" name="salary" class="checkbox" value="3,000만원 이하"/>
+                                    3000만원 이상
+                                    <input type="checkbox" name="salary" class="checkbox" value="5,000만원 이상"/>
+                                    5000만원 이상
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>희망 직무</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
+                                    프론트엔드
+                                    <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>고용형태</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="jobType" class="checkbox" value="정규직"/> 정규직
+                                    <input type="checkbox" name="jobType" class="checkbox" value="계약직"/> 계약직
+                                    <input type="checkbox" name="jobType" class="checkbox" value="인턴"/> 인턴
+                                </div>
+                            </div>
 
-
-                        <div class="text-center my-5"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
-                            <input type="hidden" name="skills" id="skillsInput">
-                            <button type="submit" class="btn btn-lg btn-primary mx-2" onclick="applyFilters()">
-                                <!-- 좌우 여백만 추가 -->
-                                필터 적용하기
-                            </button>
+                            <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
+                                <input type="hidden" name="skills" id="skillsInput">
+                                <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()">
+                                    <!-- 좌우 여백만 추가 -->
+                                    필터 적용하기
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </form>
 
             <!-- 구직자 기술스택 매칭리스트 목록 -->
@@ -161,7 +115,8 @@
                     <div class="col-md-4 mb-4">
                         <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
                             <div class="card col-3 border-0 shadow" style="width: 100%;">
-                                <img src="/image/{{imgFilename}}" style="width: 400px; height: 200px; " alt="이미지를 표시할 수 없습니다.">
+                                <img src="/image/{{imgFilename}}" style="width: 400px; height: 200px; "
+                                     alt="이미지를 표시할 수 없습니다.">
                                 <div class="card-body text-start">
                                     <br>
                                     <h5 class="card-title">{{jobopenTitle}}</h5>
@@ -205,9 +160,7 @@
 
 
 <script>
-    $(".btn").click(function () {
-        $(this).toggleClass("active");
-    })
+
     //기술스택 필터 적용
     var skillArr = []; //필터 내용을 저장하는 배열
 
