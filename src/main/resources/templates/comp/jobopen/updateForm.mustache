@@ -133,27 +133,27 @@
             <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
                 <div class="custom-control custom-checkbox ">
                     <input type="checkbox" class="custom-control-input pr-3" id="java" name="skills">
-                    <label class="custom-control-label" for="java">Java</label>
+                    <label class="custom-control-label" for="Java">Java</label>
                 </div>
                 <div class="custom-control custom-checkbox ml-4">
                     <input type="checkbox" class="custom-control-input" id="javascript" name="skills">
-                    <label class="custom-control-label" for="javascript">JavaScript</label>
+                    <label class="custom-control-label" for="JavaScript">JavaScript</label>
                 </div>
                 <div class="custom-control custom-checkbox pr-3">
                     <input type="checkbox" class="custom-control-input" id="spring" name="skills">
-                    <label class="custom-control-label" for="spring">Spring</label>
+                    <label class="custom-control-label" for="Spring">Spring</label>
                 </div>
                 <div class="custom-control custom-checkbox pr-3">
                     <input type="checkbox" class="custom-control-input" id="html" name="skills">
-                    <label class="custom-control-label" for="html">HTML</label>
+                    <label class="custom-control-label" for="HTML">HTML</label>
                 </div>
                 <div class="custom-control custom-checkbox pr-3">
                     <input type="checkbox" class="custom-control-input" id="jquery" name="skills">
-                    <label class="custom-control-label" for="jquery">jQuery</label>
+                    <label class="custom-control-label" for="jQuery">jQuery</label>
                 </div>
                 <div class="custom-control custom-checkbox pr-3">
                     <input type="checkbox" class="custom-control-input" id="Mysql" name="skills">
-                    <label class="custom-control-label" for="jquery">Mysql</label>
+                    <label class="custom-control-label" for="MySQL">MySQL</label>
                 </div>
             </div>
         </div>
@@ -232,7 +232,7 @@
 
         try {
             // 이미지를 서버로 전송
-            const response = await fetch('jobopen/update', {
+            const response = await fetch('/jobopen/update/{{id}}', {
                 method: 'POST',
                 body: formData
             });
