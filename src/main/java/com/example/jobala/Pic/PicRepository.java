@@ -62,7 +62,7 @@ public class PicRepository {
     }
 
     @Transactional
-    public void jobopenUpdate(String title, String imgFilename, int id) {
+    public void jobopenUpdate(String title, String imgFilename, Integer id) {
         Query query2 = em.createNativeQuery("UPDATE pic_tb SET title = ?, img_filename = ? WHERE jobopen_id = ?;");
         query2.setParameter(1, title);
         query2.setParameter(2, imgFilename);

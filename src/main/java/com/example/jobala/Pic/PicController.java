@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -107,8 +108,8 @@ public class PicController {
         }
     }
 
-    @PostMapping("/jobopen/update")
-    public ResponseEntity<String> jobopenUpdate(PicRequest.UpdateDTO reqDTO, @RequestParam int id) {
+    @PostMapping("/jobopen/update/{id}")
+    public ResponseEntity<String> jobopenUpdate(PicRequest.UpdateDTO reqDTO, @PathVariable Integer id) {
         String title = reqDTO.getTitle();
         MultipartFile imgFile = reqDTO.getImgFile();
 

@@ -29,6 +29,7 @@ public class JobopenRequest {
         private String compLocation; //근무지역
         private String content; //내용
         private String endTime; //내용
+        private List<String> skills = new ArrayList<>();
     }
 
 
