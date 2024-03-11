@@ -29,30 +29,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="applyBox">
+            <div class="col" style="margin-top: 30px;">
+                <div class="applyBox" >
                     <h2 class="text-left">스크랩한 인재</h2>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">이름</th>
-                            <th scope="col">이력서 제목</th>
-                            <th scope="col">학력</th>
-                            <th scope="col">경력</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{#resumeList}}
-                            <tr onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer;">
+                    <div class="card shadow row">
+                        <table class="table p-3" style="margin-bottom: 0px;">
+                            <thead class="table-primary">
+                            <tr>
+                                <th scope="col">이름</th>
+                                <th scope="col">이력서 제목</th>
+                                <th scope="col">학력</th>
+                                <th scope="col">경력</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#resumeList}}
+                                <tr onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer;">
                                     <td>{{name}}</td>
                                     <td>{{resumeTitle}}</td>
                                     <td>{{edu}}</td>
                                     <td>{{career}}</td>
-                            </tr>
-                        {{/resumeList}}
-                        <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
+                                </tr>
+                            {{/resumeList}}
+                            <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
