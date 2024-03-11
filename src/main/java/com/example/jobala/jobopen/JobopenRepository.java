@@ -72,10 +72,6 @@ public class JobopenRepository {
 
     }
 
-    @Transactional
-    public void update(Integer id, JobopenRequest.UpdateDTO reqDTO) {
-        return;
-    }
 
     @Transactional
     public void delete(int id) {
@@ -111,7 +107,7 @@ public class JobopenRepository {
     }
 
     @Transactional
-    public void update(Jobopen jobopenId, JobopenRequest.UpdateDTO reqDTO) {
+    public void update(Integer jobopenId, JobopenRequest.UpdateDTO reqDTO) {
         String a = """
                 update jobopen_tb set compname = ? ,jobopen_title=? , career=?, edu=?, job_type=?,salary=?, comp_location=?, content=? , end_time = ? where id = ?
                 """;
@@ -128,7 +124,7 @@ public class JobopenRepository {
         query.setParameter(10, jobopenId);
         query.executeUpdate();
 
-        Query query2 = em.createNativeQuery("select id from skill_tb where jobopen_tb = ?");
+        Query query2 = em.createNativeQuery("select id from skill_tb where jobopen_id = ?");
         query2.setParameter(1,jobopenId);
         Integer skillId = (Integer) query2.getSingleResult();
 
