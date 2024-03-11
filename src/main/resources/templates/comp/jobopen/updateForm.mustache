@@ -22,24 +22,6 @@
                             <button type="button" onclick="uploadImage()">사진 저장</button>
                         </div>
                     </div>
-                    <div class="p-3 align-middle">
-                        <table class="table" style="margin-left: 30px; margin-top: 40px;">
-                            <tbody style="font-size: 15px;">
-                            <tr>
-                                <th>회사명</th>
-                                <td>카카오</td>
-                            </tr>
-                            <tr>
-                                <th>대표자명</th>
-                                <td>박선규</td>
-                            </tr>
-                            <tr>
-                                <th>홈페이지</th>
-                                <td>www.kakao.com</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>
@@ -62,6 +44,7 @@
                     <p><b>학력</b></p>
                 </div>
                 <select class="form-select form-select-lg">
+                    <option value="">선택</option>
                     <option value="">고등학교 졸업</option>
                     <option value="">대학교 졸업</option>
                     <option value="">학력 무관</option>
@@ -72,6 +55,7 @@
                     <p><b>경력</b></p>
                 </div>
                 <select class="form-select form-select-lg">
+                    <option value="">선택</option>
                     <option value="">신입</option>
                     <option value="">경력</option>
                 </select>
@@ -81,6 +65,7 @@
                     <p><b>고용형태</b></p>
                 </div>
                 <select class="form-select form-select-lg">
+                    <option value="">선택</option>
                     <option value="">정규직</option>
                     <option value="">계약직</option>
                     <option value="">인턴</option>
@@ -91,6 +76,7 @@
                     <p><b>급여</b></p>
                 </div>
                 <select class="form-select form-select-lg">
+                    <option value="">선택</option>
                     <option value="">협의</option>
                     <option value="">3000만원 이상</option>
                     <option value="">5000만원 이상</option>
@@ -101,6 +87,7 @@
                     <p><b>희망직무</b></p>
                 </div>
                 <select class="form-select form-select-lg">
+                    <option value="">선택</option>
                     <option value="">프론트엔드</option>
                     <option value="">백엔드</option>
                     <option value="">풀스택</option>
@@ -110,10 +97,10 @@
                 <div>
                     <p><b>근무지역</b></p>
                 </div>
-                <select class="form-select form-select-lg">
-                    <option value="">전체</option>
-                    <option value="">서울</option>
-                    <option value="">5000만원 이상</option>
+                <select class="form-select form-select-lg" name="compLocation">
+                    <option value="">선택</option>
+                    <option value="서울">서울</option>
+                    <option value="부산">부산</option>
                 </select>
             </div>
             <div class="card-body">
@@ -126,41 +113,50 @@
 
 
         <!-- 프로그램 기술 -->
-        <div class="card mt-5">
-            <div style="margin-left: 20px;">
-                <label>기술 스택</label>
+        <div class="card mb-2">
+            <div>
+                <h5 class="card-header">스킬</h5>
             </div>
-            <div class="d-flex justify-content-between" style="margin-left: 20px; margin-right: 20px;">
-                <div class="custom-control custom-checkbox ">
-                    <input type="checkbox" class="custom-control-input pr-3" id="java" name="skills">
-                    <label class="custom-control-label" for="java">Java</label>
+            <div class="row m-2">
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" name="skills" class="form-check-input" value="Java">
+                        <div>Java</div>
+                    </div>
                 </div>
-                <div class="custom-control custom-checkbox ml-4">
-                    <input type="checkbox" class="custom-control-input" id="javascript" name="skills">
-                    <label class="custom-control-label" for="javascript">JavaScript</label>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" name="skills" class="form-check-input" value="JavaScript">
+                        <div>JavaScript</div>
+                    </div>
                 </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="spring" name="skills">
-                    <label class="custom-control-label" for="spring">Spring</label>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" name="skills" class="form-check-input" value="Spring">
+                        <div>Spring</div>
+                    </div>
                 </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="html" name="skills">
-                    <label class="custom-control-label" for="html">HTML</label>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" name="skills" class="form-check-input" value="HTML">
+                        <div>HTML</div>
+                    </div>
                 </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="jquery" name="skills">
-                    <label class="custom-control-label" for="jquery">jQuery</label>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" name="skills" class="form-check-input" value="jQuery">
+                        <div>jQuery</div>
+                    </div>
                 </div>
-                <div class="custom-control custom-checkbox pr-3">
-                    <input type="checkbox" class="custom-control-input" id="Mysql" name="skills">
-                    <label class="custom-control-label" for="jquery">Mysql</label>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" name="skills" class="form-check-input" value="MySQL">
+                        <div>MySQL</div>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- 공고 상세 내용 -->
-        <div class="container" style="padding-top:50px;">
-            <textarea id="myEditor" class="form-control" cols="30" rows="10">{{jobopen.content}}</textarea>
-        </div>
         <!--        <script>-->
         <!--            $(document).ready(function () {-->
         <!--                $('#myEditor').summernote({-->
