@@ -33,6 +33,7 @@ public class BoardController {
         System.out.println("id = " + id);
 
         BoardResponse.BoardDetailDTO boardDetailDTO = boardRepository.findById(id);
+        System.out.println(boardDetailDTO);
 
         List<ReplyResponse.ReplyDTO> replyList = replyRepository.findByBoardId(id, sessionUser);
         System.out.println("replyList = " + replyList);
@@ -68,7 +69,7 @@ public class BoardController {
         BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
         boardRepository.update(requestDTO, id);
 
-        return "redirect:/board/" + id + "/detailForm";
+        return "redirect:/board/" + id;
     }
 
     @GetMapping("/board/{id}/updateForm")
@@ -115,14 +116,15 @@ public class BoardController {
 
 
     @PostMapping("/board/{id}/delete")
-    public String delete(@PathVariable int id, HttpServletRequest request) {
+    public String delete(@PathVariable int id) {
+        System.out.println(id);
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) { // 401
             return "redirect:/loginForm";
         }
 
         boardRepository.deleteById(id);
-
+        System.out.println(id);
         return "redirect:/board/mainForm";
     }
 }
