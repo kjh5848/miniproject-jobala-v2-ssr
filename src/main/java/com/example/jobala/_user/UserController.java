@@ -81,20 +81,14 @@ public class UserController {
         System.out.println(reqDTO);
 
         //     개인 회원가입
-        Integer isCheck;
+
         if (reqDTO.getCompname() == null) {
-            isCheck = 0;
-            Integer role = isCheck;
-            reqDTO.setRole(role);
             userRepository.userSave(reqDTO);
 
             return "/user/loginForm";
         }
 
         //      기업 회원가입
-        isCheck = 1;
-        Integer role = isCheck;
-        reqDTO.setRole(role);
         userRepository.compSave(reqDTO);
         return "/user/loginForm";
     }
