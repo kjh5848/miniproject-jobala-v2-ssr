@@ -19,7 +19,7 @@ public class User {
     private String compNum; //
     private String password;
 
-    @Column(unique = true, length = 15)
+    @Column(length = 15)
     private String name;
     private String compname;
 
