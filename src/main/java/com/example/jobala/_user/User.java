@@ -19,10 +19,7 @@ public class User {
     private String compNum; //
     private String password;
 
-<<<<<<< HEAD
-=======
     @Column(length = 15)
->>>>>>> f3e7b74dd4db9ca71b134beae820da0913c946f0
     private String name;
     private String compname;
 
