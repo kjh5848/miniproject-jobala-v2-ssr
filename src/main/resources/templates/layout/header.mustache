@@ -44,7 +44,36 @@
         .active:active {
             background-color: #0056b3;
         }
+        body {
+            margin-bottom: 300px; /* 푸터의 높이만큼 하단 여백 추가 */
+        }
 
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #333; /* 배경색 변경 가능 */
+            color: #fff; /* 텍스트 색상 변경 가능 */
+            text-align: center;
+            padding: 20px 0; /* 상하로 20px의 패딩 추가 */
+        }
+
+        .footer h4 {
+            font-size: 20px; /* 가격 제목 폰트 크기 조정 */
+            margin-bottom: 5px; /* 가격 제목 아래 여백 조정 */
+        }
+
+        .footer p {
+            font-size: 20px; /* 가격 정보 폰트 크기 조정 */
+            padding : 0px;
+            margin-bottom: 5px; /* 가격 제목 아래 여백 조정 */
+        }
+
+        .footer p:last-child {
+            margin-bottom: 0; /* 마지막 가격 정보의 여백 제거 */
+            font-size: 20px; /* 저작권 정보 폰트 크기 조정 */
+        }
     </style>
 </head>
 
