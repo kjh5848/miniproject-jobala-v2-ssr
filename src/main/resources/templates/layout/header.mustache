@@ -30,11 +30,31 @@
             background: linear-gradient(to right, #CDFFD8, #94B9FF);
         }
 
-        footer.footer {
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        .footer {
             width: 100%;
-            background: #6C757D !important;
+            background-color: #343a40;
             color: white;
-            font-size: 10px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto; /* 페이지 내용이 적을 때도 푸터가 아래에 위치하도록 설정합니다. */
+        }
+
+
+        .footer.bg-dark.text-white.mt-5.border-top {
+            background-color: #9E9E9E !important;
         }
 
         .btn-light:hover {
@@ -44,7 +64,30 @@
         .active:active {
             background-color: #0056b3;
         }
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
+        .footer {
+
+        }
+
+        .footer h4 {
+            font-size: 20px; /* 가격 제목 폰트 크기 조정 */
+            margin-bottom: 5px; /* 가격 제목 아래 여백 조정 */
+        }
+
+        .footer p {
+            font-size: 20px; /* 가격 정보 폰트 크기 조정 */
+            padding : 0px;
+            margin-bottom: 5px; /* 가격 제목 아래 여백 조정 */
+        }
+
+        .footer p:last-child {
+            margin-bottom: 0; /* 마지막 가격 정보의 여백 제거 */
+            font-size: 20px; /* 저작권 정보 폰트 크기 조정 */
+        }
     </style>
 </head>
 
