@@ -30,11 +30,31 @@
             background: linear-gradient(to right, #CDFFD8, #94B9FF);
         }
 
-        footer.footer {
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        .footer {
             width: 100%;
-            background: #6C757D !important;
+            background-color: #343a40;
             color: white;
-            font-size: 10px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto; /* 페이지 내용이 적을 때도 푸터가 아래에 위치하도록 설정합니다. */
+        }
+
+
+        .footer.bg-dark.text-white.mt-5.border-top {
+            background-color: #9E9E9E !important;
         }
 
         .btn-light:hover {
@@ -45,18 +65,12 @@
             background-color: #0056b3;
         }
         body {
-            margin-bottom: 300px; /* 푸터의 높이만큼 하단 여백 추가 */
+            margin: 0;
+            padding: 0;
         }
 
         .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #333; /* 배경색 변경 가능 */
-            color: #fff; /* 텍스트 색상 변경 가능 */
-            text-align: center;
-            padding: 20px 0; /* 상하로 20px의 패딩 추가 */
+
         }
 
         .footer h4 {

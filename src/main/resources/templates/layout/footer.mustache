@@ -1,4 +1,4 @@
-<footer class="footer bg-dark text-white mt-5">
+<footer class="footer bg-dark text-white mt-5 border-top">
     <div class="container text-center">
         <h4>(주)Jobara</h4>
         <p>주소: 서울시 강남구 삼성로 1234번지</p>
@@ -7,3 +7,19 @@
         <p>© 2024 (주)Jobara. All rights reserved.</p>
     </div>
 </footer>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        let footer = document.getElementById('footer');
+
+        function toggleFooter() {
+            if (window.innerHeight >= document.body.offsetHeight) {
+                footer.style.display = 'block';
+            } else {
+                footer.style.display = 'none';
+            }
+        }
+
+        toggleFooter();
+        window.addEventListener('resize', toggleFooter);
+    });
+</script>
