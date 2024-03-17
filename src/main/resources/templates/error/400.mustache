@@ -1,13 +1,9 @@
-﻿<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>클라이언트가 요청을 잘못함 400</h1>
-</body>
-</html>
+﻿{{> /layout/header}}
+
+<div class="container my-3">
+    <h1>BadRequest 400</h1>
+    <hr>
+    <h4>{{msg}}</h4>
+</div>
+
+{{> /layout/footer}}
