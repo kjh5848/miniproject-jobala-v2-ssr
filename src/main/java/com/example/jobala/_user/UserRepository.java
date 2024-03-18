@@ -1,6 +1,5 @@
 package com.example.jobala._user;
 
-import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -39,7 +38,7 @@ public class UserRepository {
     }
 
     @Transactional
-    public void userSave(UserRequst.joinDTO reqDTO) {
+    public void userSave(UserRequest.joinDTO reqDTO) {
         Query query = em.createNativeQuery("insert into  user_tb(name, username, email, password, address, age, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getName());
         query.setParameter(2,reqDTO.getUsername());
@@ -53,7 +52,7 @@ public class UserRepository {
     }
 
     @Transactional
-    public void compSave(UserRequst.joinDTO reqDTO) {
+    public void compSave(UserRequest.joinDTO reqDTO) {
         Query query = em.createNativeQuery("insert into  user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getCompNum());
         query.setParameter(2,reqDTO.getCeo());
@@ -68,18 +67,11 @@ public class UserRepository {
         query.executeUpdate();
     }
 
-    public User findByUsernameAndPassword(UserRequst.loginDTO reqDTO) {
-        Query query = em.createNativeQuery("select * from user_tb where username=? and password=?", User.class);
-        query.setParameter(1, reqDTO.getUsername());
-        query.setParameter(2, reqDTO.getPassword());
-
-
-        try {
-           User user = (User) query.getSingleResult();
-            return user;
-        } catch (Exception e) {
-            return null;
-        }
+    public User findByUsernameAndPassword(UserRequest.loginDTO reqDTO) {
+        Query query = em.createQuery("select u from User u where u.username = :username and u.password = :password", User.class);
+        query.setParameter("username", reqDTO.getUsername());
+        query.setParameter("password", reqDTO.getPassword());
+        return (User) query.getSingleResult();
     }
 
     @Transactional

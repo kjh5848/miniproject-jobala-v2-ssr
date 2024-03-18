@@ -3,16 +3,17 @@ package com.example.jobala._user;
 import com.example.jobala.Pic.PicRepository;
 import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenRepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.jobala._core.errors.exception.Exception401;
 
 import java.util.List;
 
@@ -41,34 +42,33 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserRequst.loginDTO reqDTO) {
-        System.out.println(reqDTO);
-
-        //유효성 검사(아이디가 15자 이상일때)       `
+    public String login(UserRequest.loginDTO reqDTO) {
+        // 유효성 검사
         if (reqDTO.getUsername().length() > 15) {
-            System.out.println(1);
-            return "/user/joinForm";
-        }
-        User user = userRepository.findByUsernameAndPassword(reqDTO);
-
-        //권한체크(user=null 경우)
-        if (user == null) {
-            return "/user/joinForm";
+            // 유효하지 않은 경우 에러 페이지나 로그인 폼으로 리다이렉션
+            return "redirect:/user/loginForm";
         }
 
-        //권한체크(개인 로그인 했을때, 기업 로그인 했을 때 nav바 다르게 노출)
-        Boolean isCheck = false;
-        if (user.getRole() == 0) {
-            isCheck = true;
+        try {
+            // userRepository에서 username과 password를 사용하여 사용자 검색
+            User user = userRepository.findByUsernameAndPassword(reqDTO);
 
+            // 권한 체크
+            Boolean isCheck = false;
+            if (user.getRole() == 0) { // 가정: 역할 0이 개인 사용자
+                isCheck = true;
+            }
+
+            // 세션에 사용자 정보 및 권한 체크 결과 설정
             session.setAttribute("isCheck", isCheck);
             session.setAttribute("sessionUser", user);
-            return "redirect:/";
-        }
 
-        session.setAttribute("isCheck", isCheck);
-        session.setAttribute("sessionUser", user);
-        return "redirect:/";
+            // 로그인 성공 후 리다이렉트
+            return "redirect:/";
+        } catch (EmptyResultDataAccessException e) {
+            // username 또는 password가 잘못된 경우 예외 처리
+            throw new Exception401("유저네임 혹은 비밀번호가 틀렸어요");
+        }
     }
 
     @GetMapping("/joinForm")
@@ -77,7 +77,7 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(UserRequst.joinDTO reqDTO) {
+    public String join(UserRequest.joinDTO reqDTO) {
         System.out.println(reqDTO);
 
         //     개인 회원가입

@@ -1,11 +1,10 @@
 package com.example.jobala._user;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
-public class UserRequst {
+public class UserRequest {
     @Data
     public static class joinDTO {
         private String compNum;

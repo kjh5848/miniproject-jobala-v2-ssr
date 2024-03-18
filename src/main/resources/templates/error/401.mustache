@@ -1,13 +1,9 @@
-﻿<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>인증되지 않았습니다. username 혹은 password가 틀림. 401</h1>
-</body>
-</html>
+﻿{{> /layout/header}}
+
+<div class="container my-3">
+    <h1>Unauthorized 401</h1>
+    <hr>
+    <h4>{{msg}}</h4>
+</div>
+
+{{> /layout/footer}}
