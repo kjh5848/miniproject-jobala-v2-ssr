@@ -1,7 +1,7 @@
 # JOBARA 이력서 홈페이지
 
 > ## 시연영상
-
+<https://www.youtube.com/watch?v=naFTFuDls_g&t=3s>
 
 > ## 발표자료
 
