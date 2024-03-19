@@ -106,6 +106,8 @@ JOBARA 이력서 플랫폼을 통해 당신만의 독특한 경험과 능력을 
  
 
 > ## 사용자 시나리오
+ 
+- 브라우저로 보기[바로가기](https://www.canva.com/design/DAF_729hKrI/k744ZxnE_iwlpjigoLMexQ/view?utm_content=DAF_729hKrI&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 
 > ## 후기
