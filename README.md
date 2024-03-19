@@ -1,7 +1,8 @@
 # JOBARA 이력서 홈페이지
 
 > ## 시연영상
-<a href = "https://www.youtube.com/watch?v=naFTFuDls_g&t=3s">![image](https://www.canva.com/design/DAF_72DULsE/4mIfxKvUPCIiD3ked4X8Rw/view?utm_content=DAF_72DULsE&utm_campaign=designshare&utm_medium=link&utm_source=editor) </a>
+<a href = "https://www.youtube.com/watch?v=naFTFuDls_g&t=3s">![JObala자바라](https://github.com/kjh5848/miniproject-JOBALR/assets/153582123/b865354f-ac5e-4e35-97bb-57d3236aa196)
+
 
 > ## 발표자료
 
@@ -9,7 +10,7 @@
 
 
 PPT 파일 다운로드[바로가기](https://github.com/kjh5848/miniproject-JOBALR/files/14646973/JObala.pdf)
-PPT 브라우저로 보기[바로가기]([https://www.canva.com/design/DAF_HI7NqS0/mR4NTpjy9W_F1-MbCzo4UA/edit?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://www.canva.com/design/DAF_HI7NqS0/q4sPPCKaMPlK14mIjdzc-w/view?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link&utm_source=editor))
+PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAF_HI7NqS0/q4sPPCKaMPlK14mIjdzc-w/view?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 
 > ## 프로젝트 소개
