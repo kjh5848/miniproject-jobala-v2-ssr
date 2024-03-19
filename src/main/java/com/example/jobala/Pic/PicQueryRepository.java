@@ -1,17 +1,14 @@
 package com.example.jobala.Pic;
 
-import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Repository
-public class PicRepository {
+public class PicQueryRepository {
     private final EntityManager em;
 
     public Pic resumeFindByPic(int id) {

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
-public class SkillRepository {
+public class SkillQueryRepository {
     private final EntityManager em;
 
     public Skill findByResumeId(Integer id) {

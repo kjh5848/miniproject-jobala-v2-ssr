@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ScrapRepository {
+public class ScrapQueryRepository {
     private final EntityManager em;
 
     public List<Resume> findResumeAll(Integer userId) {

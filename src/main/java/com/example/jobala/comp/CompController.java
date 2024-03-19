@@ -2,7 +2,7 @@ package com.example.jobala.comp;
 
 
 import com.example.jobala._user.User;
-import com.example.jobala.apply.ApplyRepository;
+import com.example.jobala.apply.ApplyQueryRepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
@@ -20,8 +20,8 @@ import java.util.List;
 public class CompController {
 
     private final HttpSession session;
-    private final CompRepository compRepository;
-    private final ApplyRepository applyRepository;
+    private final CompQueryRepository compRepository;
+    private final ApplyQueryRepository applyRepository;
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {

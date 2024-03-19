@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class BoardRepository {
+public class BoardQueryRepository {
     private final EntityManager em;
 
     @Transactional

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class ReplyRepository {
+public class ReplyQueryRepository {
     private final EntityManager em;
 
     public Reply findById(int id) {

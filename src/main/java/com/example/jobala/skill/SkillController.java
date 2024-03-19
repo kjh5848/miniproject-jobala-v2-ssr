@@ -6,6 +6,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequiredArgsConstructor
 public class SkillController {
-    private final SkillRepository skillRepository;
+    private final SkillQueryRepository skillRepository;
 
 }

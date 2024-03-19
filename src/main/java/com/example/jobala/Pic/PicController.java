@@ -20,7 +20,7 @@ import java.util.UUID;
 @Controller
 public class PicController {
 
-    private final PicRepository picRepository;
+    private final PicQueryRepository picRepository;
     private final HttpSession session;
 
     @PostMapping("/resume/upload")

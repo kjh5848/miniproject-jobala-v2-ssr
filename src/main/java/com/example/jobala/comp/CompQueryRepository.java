@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class CompRepository {
+public class CompQueryRepository {
     private final EntityManager em;
 
     @Transactional

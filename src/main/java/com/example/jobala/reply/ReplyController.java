@@ -1,7 +1,7 @@
 package com.example.jobala.reply;
 
 import com.example.jobala._user.User;
-import com.example.jobala.board.BoardRepository;
+import com.example.jobala.board.BoardQueryRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class ReplyController {
-    private final ReplyRepository replyRepository;
-    private final BoardRepository boardRepository;
+    private final ReplyQueryRepository replyRepository;
+    private final BoardQueryRepository boardRepository;
     private final HttpSession session;
 
 

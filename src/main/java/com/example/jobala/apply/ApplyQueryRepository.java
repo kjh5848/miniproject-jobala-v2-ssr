@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ApplyRepository {
+public class ApplyQueryRepository {
 
     private final EntityManager em;
 
