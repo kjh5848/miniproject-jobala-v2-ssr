@@ -1,10 +1,13 @@
 # JOBARA 이력서 홈페이지
 
 > ## 시연영상
-<https://www.youtube.com/watch?v=naFTFuDls_g&t=3s>
+[]<https://www.youtube.com/watch?v=naFTFuDls_g&t=3s>
 
 > ## 발표자료
 
+[JObala자바라.pdf](https://github.com/kjh5848/miniproject-JOBALR/files/14646973/JObala.pdf)
+
+<https://www.canva.com/design/DAF_HI7NqS0/mR4NTpjy9W_F1-MbCzo4UA/edit?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton>
 
 > ## 프로젝트 소개
 <img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
