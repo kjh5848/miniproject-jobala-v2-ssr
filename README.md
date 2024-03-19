@@ -5,7 +5,10 @@
 
 > ## 발표자료
 
-https://github.com/kjh5848/miniproject-JOBALR/assets/153582123/c1a0de8a-bdd1-4b38-b4c9-10604d19d82a(https://www.canva.com/design/DAF_HI7NqS0/mR4NTpjy9W_F1-MbCzo4UA/edit?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+https://github.com/kjh5848/miniproject-JOBALR/assets/153582123/c1a0de8a-bdd1-4b38-b4c9-10604d19d82a
+
+
+(https://www.canva.com/design/DAF_HI7NqS0/mR4NTpjy9W_F1-MbCzo4UA/edit?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 [JObala자바라.pdf](https://github.com/kjh5848/miniproject-JOBALR/files/14646973/JObala.pdf)
 
