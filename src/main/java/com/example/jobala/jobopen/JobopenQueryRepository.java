@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class JobopenRepository {
+public class JobopenQueryRepository {
     private final EntityManager em;
 
     public List<Resume> findResumeById(User user) {

@@ -1,12 +1,8 @@
 package com.example.jobala.guest;
 
-import com.example.jobala._user.User;
-import com.example.jobala.apply.ApplyResponse;
-import com.example.jobala.board.BoardRequest;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +14,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class GuestRepository {
+public class GuestQueryRepository {
     private final EntityManager em;
 
     @Transactional

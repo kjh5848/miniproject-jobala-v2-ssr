@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepository {
+public class UserQueryRepository {
     private final EntityManager em;
 
     public List<JobopenResponse.ListDTO> findAll() {

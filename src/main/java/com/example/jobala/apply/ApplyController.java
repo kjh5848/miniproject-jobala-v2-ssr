@@ -18,7 +18,7 @@ import java.util.List;
 public class ApplyController {
 
     private final HttpSession session;
-    private final ApplyRepository applyRepository;
+    private final ApplyQueryRepository applyRepository;
 
     @PostMapping("comp/applyStatus/update")
     public String updateCompApplicationStatus(

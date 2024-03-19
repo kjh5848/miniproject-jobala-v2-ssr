@@ -1,15 +1,15 @@
 package com.example.jobala.resume;
 
 import com.example.jobala.Pic.Pic;
-import com.example.jobala.Pic.PicRepository;
+import com.example.jobala.Pic.PicQueryRepository;
 import com.example.jobala._user.User;
-import com.example.jobala._user.UserRepository;
+import com.example.jobala._user.UserQueryRepository;
 import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.jobopen.JobopenRepository;
+import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.scrap.Scrap;
-import com.example.jobala.scrap.ScrapRepository;
+import com.example.jobala.scrap.ScrapQueryRepository;
 import com.example.jobala.skill.Skill;
-import com.example.jobala.skill.SkillRepository;
+import com.example.jobala.skill.SkillQueryRepository;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,13 +27,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResumeController {
 
-    private final SkillRepository skillRepository;
-    private final ResumeRepository resumeRepository;
+    private final SkillQueryRepository skillRepository;
+    private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
-    private final UserRepository userRepository;
-    private final PicRepository picRepository;
-    private final ScrapRepository scrapRepository;
-    private final JobopenRepository jobopenRepository;
+    private final UserQueryRepository userRepository;
+    private final PicQueryRepository picRepository;
+    private final ScrapQueryRepository scrapRepository;
+    private final JobopenQueryRepository jobopenRepository;
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {

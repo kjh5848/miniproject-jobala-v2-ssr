@@ -1,7 +1,7 @@
 package com.example.jobala.board;
 
 import com.example.jobala._user.User;
-import com.example.jobala.reply.ReplyRepository;
+import com.example.jobala.reply.ReplyQueryRepository;
 import com.example.jobala.reply.ReplyResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -19,8 +19,8 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
-    private final BoardRepository boardRepository;
-    private final ReplyRepository replyRepository;
+    private final BoardQueryRepository boardRepository;
+    private final ReplyQueryRepository replyRepository;
 
     private final HttpSession session;
 

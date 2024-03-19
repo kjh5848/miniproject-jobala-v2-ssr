@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ResumeRepository {
+public class ResumeQueryRepository {
     private final EntityManager em;
 
     public Resume findByUserId(Integer userId) {

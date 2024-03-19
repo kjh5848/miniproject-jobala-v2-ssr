@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class ScrapController {
-    private final ScrapRepository scrapRepository;
+    private final ScrapQueryRepository scrapRepository;
     private final HttpSession session;
 
 

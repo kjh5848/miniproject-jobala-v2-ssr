@@ -1,9 +1,9 @@
 package com.example.jobala._user;
 
-import com.example.jobala.Pic.PicRepository;
+import com.example.jobala.Pic.PicQueryRepository;
 import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.jobopen.JobopenRepository;
+import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,9 +20,9 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
-    private final JobopenRepository jobopenRepository;
-    private final PicRepository picRepository;
+    private final UserQueryRepository userRepository;
+    private final JobopenQueryRepository jobopenRepository;
+    private final PicQueryRepository picRepository;
 
     private final HttpSession session;
 

@@ -1,10 +1,8 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
-import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,7 @@ import java.util.List;
 public class GuestController {
 
     private final HttpSession session;
-    private final GuestRepository guestRepository;
+    private final GuestQueryRepository guestRepository;
 
     // DEL: mainForm 삭제
     @GetMapping("/guest/jobopenSearch")
