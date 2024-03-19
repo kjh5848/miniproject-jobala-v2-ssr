@@ -8,8 +8,8 @@
 
 
 
-![PPT 파일 다운로드](https://github.com/kjh5848/miniproject-JOBALR/files/14646973/JObala.pdf)
-![PPT 브라우저로 보기](https://www.canva.com/design/DAF_HI7NqS0/mR4NTpjy9W_F1-MbCzo4UA/edit?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+PPT 파일 다운로드[바로가기](https://github.com/kjh5848/miniproject-JOBALR/files/14646973/JObala.pdf)
+PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAF_HI7NqS0/mR4NTpjy9W_F1-MbCzo4UA/edit?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 
 > ## 프로젝트 소개
