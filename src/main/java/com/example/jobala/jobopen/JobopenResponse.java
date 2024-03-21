@@ -37,6 +37,7 @@ public class JobopenResponse {
         private Integer role; // 역할 0 -> guest, 1 -> comp
         private int count;
 
+
         public DTO(Jobopen jobopen) {
             this.id = id;
             this.userId = userId;
