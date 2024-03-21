@@ -2,7 +2,9 @@ package com.example.jobala.jobopen;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -32,25 +34,30 @@ public class JobopenResponse {
         private String jobType; // 고용형태
         private String salary; //연봉
         private java.sql.Date endTime; // 마감일
-        private LocalDateTime createdAt; //생성일
         private Integer role; // 역할 0 -> guest, 1 -> comp
         private int count;
 
         public DTO(Jobopen jobopen) {
-            this.id = jobopen.getId();
-            this.compname = jobopen.getCompname();
-            this.jobopenTitle = jobopen.getJobopenTitle();
-            this.content = jobopen.getContent();
-            this.career = jobopen.getCareer();
-            this.edu = jobopen.getEdu();
-            this.hopeJob = jobopen.getHopeJob();
-            this.compLocation = jobopen.getCompLocation();
-            this.jobType = jobopen.getJobType();
-            this.salary = jobopen.getSalary();
-            this.endTime = jobopen.getEndTime();
-            this.createdAt = jobopen.getCreatedAt();
-            this.role = jobopen.getRole();
+            this.id = id;
+            this.userId = userId;
+            this.compname = compname;
+            this.jobopenTitle = jobopenTitle;
+            this.content = content;
+            this.career = career;
+            this.edu = edu;
+            this.hopeJob = hopeJob;
+            this.compLocation = compLocation;
+            this.jobType = jobType;
+            this.salary = salary;
+            this.endTime = endTime;
+            this.role = role;
+            this.count = count;
         }
+
+        @CreationTimestamp
+        private Timestamp createdAt; //생성일
+
+
     }
 
     @AllArgsConstructor

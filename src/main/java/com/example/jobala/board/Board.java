@@ -2,7 +2,9 @@ package com.example.jobala.board;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -20,5 +22,7 @@ public class Board {
     private String content;
     private Integer role; // 0 -> guest, 1 -> comp
     private Integer userId;
-    private LocalDateTime createdAt;
+
+    @CreationTimestamp
+    private Timestamp createdAt;
 }
