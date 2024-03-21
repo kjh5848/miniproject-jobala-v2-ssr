@@ -39,8 +39,13 @@ public class User {
     private String phone;
     private String ceo;
     private String address;
-    private Date age;
+
+
     private Integer role; // 0 -> guest, 1 -> comp
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Date age;
 
     @CreationTimestamp
     private Timestamp createdAt;

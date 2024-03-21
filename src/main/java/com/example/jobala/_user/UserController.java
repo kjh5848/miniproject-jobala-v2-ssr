@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.jobala._core.errors.exception.Exception401;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
+    private final UserService userService;
     private final UserQueryRepository userRepository;
     private final JobopenQueryRepository jobopenRepository;
     private final PicQueryRepository picRepository;
-    private final UserJPARepository userJPARepository;
     private final HttpSession session;
+
 
     @GetMapping("/")
     public String mainForm(HttpServletRequest req, PicRequest.UploadDTO reqDTO) {
@@ -35,38 +37,36 @@ public class UserController {
 
     // DEL: mainForm 삭제
 
-    // DEL: loginFrorm 삭제
+    // TODO: loginFrorm 삭제예정
+    @GetMapping("/loginForm")
+    public String loginForm() {
+        return "/user/loginForm";
+    }
 
+    //서비스 변경 완료
     @PostMapping("/login")
     public String login(UserRequest.loginDTO reqDTO) {
-        // 유효성 검사
-        if (reqDTO.getUsername().length() > 15) {
-            // 유효하지 않은 경우 에러 페이지나 로그인 폼으로 리다이렉션
-            return "redirect:/user/loginForm";
-        }
 
         try {
             // userRepository에서 username과 password를 사용하여 사용자 검색
-            User user = userRepository.findByUsernameAndPassword(reqDTO);
-
+            User user = userService.로그인(reqDTO);
+            User sessionUser = (User) session.getAttribute("sessionUser");
             // 권한 체크
             Boolean isCheck = false;
-            if (user.getRole() == 0) { // 가정: 역할 0이 개인 사용자
+            if (sessionUser.getRole() == 0) {
                 isCheck = true;
             }
 
-            // 세션에 사용자 정보 및 권한 체크 결과 설정
             session.setAttribute("isCheck", isCheck);
             session.setAttribute("sessionUser", user);
 
-            // 로그인 성공 후 리다이렉트
             return "redirect:/";
         } catch (EmptyResultDataAccessException e) {
-            // username 또는 password가 잘못된 경우 예외 처리
             throw new Exception401("유저네임 혹은 비밀번호가 틀렸어요");
         }
     }
 
+    //TODO: joinForm추후 삭제예정
     @GetMapping("/joinForm")
     public String joinForm() {
         return "/user/joinForm";
@@ -74,24 +74,19 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(UserRequest.joinDTO reqDTO) {
-        System.out.println(reqDTO);
-
-        //     개인 회원가입
-
+        User sessionUser = (User) session.getAttribute("sessionUser");
         if (reqDTO.getCompname() == null) {
-            userRepository.userSave(reqDTO);
+            userService.회원가입(reqDTO,sessionUser.getId());
 
             return "/user/loginForm";
         }
-
-        //      기업 회원가입
-        userRepository.compSave(reqDTO);
+        userService.회원가입(reqDTO,sessionUser.getId());
         return "/user/loginForm";
     }
 
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
-        User user = userRepository.findByUsername(username);
+        Optional<User> user = userService.중복체크(username);
         if (user == null) { // 회원가입 해도 된다.
             return new ApiUtil<>(true);
         } else { // 회원가입 하면 안된다.
@@ -99,11 +94,9 @@ public class UserController {
         }
     }
 
-
     @GetMapping("/logout")
     public String logout() {
         session.invalidate();
-
         return "redirect:/";
     }
 

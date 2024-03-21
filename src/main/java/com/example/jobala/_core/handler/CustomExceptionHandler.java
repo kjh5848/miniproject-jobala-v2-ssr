@@ -36,6 +36,7 @@ public class CustomExceptionHandler {
         request.setAttribute("msg", e.getMessage());
         return "err/404";
     }
+
     @ExceptionHandler(Exception500.class)
     public String ex500(RuntimeException e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());

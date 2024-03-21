@@ -39,13 +39,12 @@ public class UserQueryRepository {
 
     @Transactional
     public void userSave(UserRequest.joinDTO reqDTO) {
-        Query query = em.createNativeQuery("insert into  user_tb(name, username, email, password, address, age, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, now()) ");
+        Query query = em.createNativeQuery("insert into  user_tb(name, username, email, password, address, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getName());
         query.setParameter(2,reqDTO.getUsername());
         query.setParameter(3,reqDTO.getEmail());
         query.setParameter(4,reqDTO.getPassword());
         query.setParameter(5,reqDTO.getAddress());
-        query.setParameter(6,reqDTO.getAge());
         query.setParameter(7,reqDTO.getPhone());
         query.setParameter(8,0);
         query.executeUpdate();

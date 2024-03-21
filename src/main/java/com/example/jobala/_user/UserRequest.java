@@ -1,5 +1,6 @@
 package com.example.jobala._user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,16 +16,31 @@ public class UserRequest {
         private String email;
         private String password;
         private String name;
-        private String age;
         private String phone;
         private Integer role; // 0 -> guest, 1 -> comp
-        private LocalDateTime createdAt;
+
+        public User toEntity() {
+            return User.builder()
+                    .compname(compname)
+                    .ceo(ceo)
+                    .compNum(compNum)
+                    .address(address)
+                    .username(username)
+                    .email(email)
+                    .password(password)
+                    .name(name)
+                    .phone(phone)
+                    .role(role)
+                    .build();
+
+        }
     }
 
+    @AllArgsConstructor
     @Data
     public static class loginDTO {
         private String username;
         private String password;
-        private Integer role;
+
     }
 }
