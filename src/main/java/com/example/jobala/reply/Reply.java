@@ -2,7 +2,9 @@ package com.example.jobala.reply;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,5 +19,7 @@ public class Reply {
     private Integer boardId;//외래키.
     private String comment;
     private String username;
-    private LocalDateTime createdAt;
+
+    @CreationTimestamp
+    private Timestamp createdAt;
 }

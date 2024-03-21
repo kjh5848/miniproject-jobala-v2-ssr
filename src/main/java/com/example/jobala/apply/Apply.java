@@ -4,12 +4,15 @@ import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "apply_tb")
@@ -23,5 +26,8 @@ public class Apply {
     private Integer jobopenId;
     private String state; // 열람전, 합격, 불합격
     private Integer role; // 0 -> guest, 1 -> comp
+
+    @CreationTimestamp
     private Timestamp createdAt;
+
 }

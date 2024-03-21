@@ -1,10 +1,13 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,10 +30,16 @@ public class Jobopen {
     private String salary; //연봉
     private Date endTime; // 마감일
 
-    private LocalDateTime createdAt; //생성일
+    @CreationTimestamp
+    private Timestamp createdAt; //생성일
 
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Skill skill;
+
+
 
 //    @Transient
 //    private Integer count;

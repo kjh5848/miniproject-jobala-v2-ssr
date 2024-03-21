@@ -23,7 +23,7 @@ public class UserController {
     private final UserQueryRepository userRepository;
     private final JobopenQueryRepository jobopenRepository;
     private final PicQueryRepository picRepository;
-
+    private final UserJPARepository userJPARepository;
     private final HttpSession session;
 
     @GetMapping("/")
@@ -35,11 +35,7 @@ public class UserController {
 
     // DEL: mainForm 삭제
 
-    @GetMapping("/loginForm")
-    public String loginForm() {
-
-        return "/user/loginForm";
-    }
+    // DEL: loginFrorm 삭제
 
     @PostMapping("/login")
     public String login(UserRequest.loginDTO reqDTO) {
