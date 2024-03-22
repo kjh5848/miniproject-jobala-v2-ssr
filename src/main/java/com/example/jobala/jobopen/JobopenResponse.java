@@ -5,7 +5,6 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class JobopenResponse {
@@ -57,8 +56,6 @@ public class JobopenResponse {
 
         @CreationTimestamp
         private Timestamp createdAt; //생성일
-
-
     }
 
     @AllArgsConstructor
@@ -78,8 +75,6 @@ public class JobopenResponse {
         private String edu;
         private Date endTime;
     }
-
-
 }
 
 

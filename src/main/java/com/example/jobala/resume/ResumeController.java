@@ -2,6 +2,7 @@ package com.example.jobala.resume;
 
 import com.example.jobala.Pic.Pic;
 import com.example.jobala.Pic.PicQueryRepository;
+import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserQueryRepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -15,7 +16,9 @@ import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +37,7 @@ public class ResumeController {
     private final PicQueryRepository picRepository;
     private final ScrapQueryRepository scrapRepository;
     private final JobopenQueryRepository jobopenRepository;
+    private final ResumeService resumeService;
 
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
@@ -103,7 +107,6 @@ public class ResumeController {
             req.setAttribute("jobopenList", jobopenList);
         }
 
-
         int userId = resume.getUser().getId();
 //        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
         User user = userRepository.findById(userId);
@@ -135,12 +138,12 @@ public class ResumeController {
     }
 
     @PostMapping("/resume/{id}/delete")
-    public String delete(ResumeRequest.DeleteDTO deleteDTO) {
+    public String delete(@PathVariable int id, ResumeRequest.DeleteDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        resumeRepository.delete(deleteDTO.getId());
+        resumeService.resumeDelete(id, reqDTO.getId());
         return "redirect:/guest/mngForm";
     }
 }

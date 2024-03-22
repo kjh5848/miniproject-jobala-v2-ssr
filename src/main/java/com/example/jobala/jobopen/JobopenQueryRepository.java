@@ -54,7 +54,7 @@ public class JobopenQueryRepository {
 
         //스킬 insert
         String q3 = """
-                insert into skill_tb(user_id, role, jobopen_id, name) values (?,?,?,?)
+                insert into skill_tb(role, jobopen_id, name) values (?,?,?)
                 """;
         Query query3 = em.createNativeQuery(q3);
 
@@ -63,35 +63,11 @@ public class JobopenQueryRepository {
         String json = new Gson().toJson(skills);
         System.out.println("제이슨 결과 = " + json);
 
-
-        query3.setParameter(1, sessionUser.getId());
-        query3.setParameter(2, sessionUser.getRole());
-        query3.setParameter(3, jobopenId);
-        query3.setParameter(4, json);
+        query3.setParameter(1, sessionUser.getRole());
+        query3.setParameter(2, jobopenId);
+        query3.setParameter(3, json);
         query3.executeUpdate();
 
-    }
-
-
-    @Transactional
-    public void delete(int id) {
-        Query query = em.createNativeQuery("delete from jobopen_tb where id = ?");
-        query.setParameter(1, id);
-        query.executeUpdate();
-    }
-
-    public Jobopen findByIdWithUser(int id) {
-        String a = """
-                select * from jobopen_tb where id =?
-                """;
-        Query query = em.createNativeQuery(a, Jobopen.class);
-        query.setParameter(1, id);
-        try {
-            Jobopen jobopen = (Jobopen) query.getSingleResult();
-            return jobopen;
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     public Jobopen findById(Integer id) {

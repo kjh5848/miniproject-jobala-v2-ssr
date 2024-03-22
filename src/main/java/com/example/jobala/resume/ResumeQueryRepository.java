@@ -112,13 +112,6 @@ public class ResumeQueryRepository {
         query3.executeUpdate();
     }
 
-    @Transactional
-    public void delete(int resumeId) {
-        Query query = em.createNativeQuery("delete from resume_tb where id = ?");
-        query.setParameter(1, resumeId);
-        query.executeUpdate();
-    }
-
     public Resume findByResumeId(Integer id) {
         Query query = em.createNativeQuery("select * from resume_tb where id = ?", Resume.class);
         query.setParameter(1, id);
