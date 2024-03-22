@@ -4,11 +4,9 @@ import com.example.jobala._user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -29,7 +27,7 @@ class JobopenJPARepositoryTest {
         String compLocation = "서울";
         Date endTime = Date.valueOf("2024-03-28");
         String content = null;
-        List<String> skills= new ArrayList<>();
+        List<String> skills = new ArrayList<>();
         skills.add("Spring");
         skills.add("HTML");
         skills.add("jQuery");
@@ -49,8 +47,20 @@ class JobopenJPARepositoryTest {
                 .build();
         // when
         jobopenJPARepository.save(reqDTO.toEntity(sessionUser));
-        // then
+
 
     }
 
+    @Test
+    public void deleteById_test() {
+        // given
+        int id = 1;
+
+        // when
+        jobopenJPARepository.deleteById(id);
+
+
+        // then
+
+    }
 }
