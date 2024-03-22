@@ -19,27 +19,27 @@ public class CustomExceptionHandler {
     @ExceptionHandler(Exception400.class)
     public String ex400(Exception400 e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());
-        return "error/400";
+        return "err/400";
     }
     @ExceptionHandler(Exception401.class)
     public String ex401(Exception401 e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());
-        return "error/401";
+        return "err/401";
     }
     @ExceptionHandler(Exception403.class)
     public String ex403(RuntimeException e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());
-        return "error/403";
+        return "err/403";
     }
     @ExceptionHandler(Exception404.class)
     public String ex404(RuntimeException e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());
-        return "error/404";
+        return "err/404";
     }
 
     @ExceptionHandler(Exception500.class)
     public String ex500(RuntimeException e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());
-        return "error/500";
+        return "err/500";
     }
 }

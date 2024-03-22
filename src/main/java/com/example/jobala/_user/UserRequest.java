@@ -3,14 +3,22 @@ package com.example.jobala._user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class UserRequest {
 
+
     @Data
-    public static class joinDTO {
+    public static class LoginDTO {
+        private String username;
+        private String password;
+    }
+
+    @Data
+    public static class JoinDTO {
         private String compNum;
         private String ceo;
         private String compname;
@@ -55,11 +63,5 @@ public class UserRequest {
         }
     }
 
-    @AllArgsConstructor
-    @Data
-    public static class loginDTO {
-        private String username;
-        private String password;
 
-    }
 }
