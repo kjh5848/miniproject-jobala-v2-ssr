@@ -54,6 +54,5 @@ public class UserRequest {
     public static class loginDTO {
         private String username;
         private String password;
-
     }
 }

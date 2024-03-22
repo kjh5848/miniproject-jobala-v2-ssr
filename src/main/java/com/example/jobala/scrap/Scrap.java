@@ -1,5 +1,6 @@
 package com.example.jobala.scrap;
 
+import com.example.jobala._user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,7 +14,8 @@ public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
     private Integer jobopenId;
     private Integer resumeId;
     private Integer role; // 0 -> guest, 1 -> comp

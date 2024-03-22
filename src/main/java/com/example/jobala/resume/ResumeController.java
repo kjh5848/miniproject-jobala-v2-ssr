@@ -104,7 +104,7 @@ public class ResumeController {
         }
 
 
-        int userId = resume.getUserId();
+        int userId = resume.getUser().getId();
 //        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
         User user = userRepository.findById(userId);
 

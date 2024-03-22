@@ -94,28 +94,28 @@ VALUES (1, 10, 1, 1, '검토중', NOW()),
 
 
 -- -- 이력서 스킬 더미
-INSERT INTO SKILL_TB(RESUME_ID, ROLE, USER_ID, NAME)
-VALUES (1, 0, 1, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
-       (2, 0, 2, '["Java","JavaScript","Spring"]'),
-       (3, 0, 3, '["Java","HTML","jQuery"]'),
-       (4, 0, 4, '["Java","HTML","MySQL"]'),
-       (5, 0, 5, '["Java","Spring","jQuery","MySQL"]'),
-       (6, 0, 6, '["JavaScript","HTML","MySQL"]'),
-       (7, 0, 7, '["Java"]'),
-       (8, 0, 8, '["Java","Spring"]'),
-       (9, 0, 9, '["Java","Spring","MySQL"]');
+INSERT INTO SKILL_TB(RESUME_ID, ROLE, NAME)
+VALUES (1, 0, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
+       (2, 0, '["Java","JavaScript","Spring"]'),
+       (3, 0, '["Java","HTML","jQuery"]'),
+       (4, 0, '["Java","HTML","MySQL"]'),
+       (5, 0, '["Java","Spring","jQuery","MySQL"]'),
+       (6, 0, '["JavaScript","HTML","MySQL"]'),
+       (7, 0, '["Java"]'),
+       (8, 0, '["Java","Spring"]'),
+       (9, 0, '["Java","Spring","MySQL"]');
 
 -- 공고 스킬 더미
-INSERT INTO SKILL_TB(jobopen_id, role, user_id, name)
-VALUES (1, 1, 10, '["Java","JavaScript","Spring","HTML","jQuery"]'),
-       (2, 1, 11, '["Java","JavaScript","Spring","MySQL"]'),
-       (3, 1, 12, '["JavaScript","Spring","HTML","jQuery"]'),
-       (4, 1, 13, '["Java","Spring","HTML","MySQL"]'),
-       (5, 1, 14, '["JavaScript","HTML","jQuery"]'),
-       (6, 1, 15, '["Java","Spring","MySQL"]'),
-       (7, 1, 16, '["JavaScript","Spring","HTML"]'),
-       (8, 1, 17, '["Java","JavaScript","HTML"]'),
-       (9, 1, 18, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
+INSERT INTO SKILL_TB(jobopen_id, role, name)
+VALUES (1, 1, '["Java","JavaScript","Spring","HTML","jQuery"]'),
+       (2, 1, '["Java","JavaScript","Spring","MySQL"]'),
+       (3, 1, '["JavaScript","Spring","HTML","jQuery"]'),
+       (4, 1, '["Java","Spring","HTML","MySQL"]'),
+       (5, 1, '["JavaScript","HTML","jQuery"]'),
+       (6, 1, '["Java","Spring","MySQL"]'),
+       (7, 1, '["JavaScript","Spring","HTML"]'),
+       (8, 1, '["Java","JavaScript","HTML"]'),
+       (9, 1, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
 
 
 -- 개인이 공고를 스트랩한 더미

@@ -1,5 +1,6 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala._user.User;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class Jobopen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
     private String compname; //회사명
     private String jobopenTitle; //공고제목
     private String content; //내용
@@ -36,7 +38,7 @@ public class Jobopen {
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Skill skill;
 
 
