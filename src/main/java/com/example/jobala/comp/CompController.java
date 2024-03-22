@@ -109,5 +109,4 @@ public class CompController {
         compRepository.updateProfile(profileDto);
         return "redirect:/comp/profileForm";
     }
-
 }
