@@ -54,7 +54,7 @@ public class JobopenQueryRepository {
 
         //스킬 insert
         String q3 = """
-                insert into skill_tb(user_id, role, jobopen_id, name) values (?,?,?,?)
+                insert into skill_tb(role, jobopen_id, name) values (?,?,?)
                 """;
         Query query3 = em.createNativeQuery(q3);
 
@@ -63,11 +63,9 @@ public class JobopenQueryRepository {
         String json = new Gson().toJson(skills);
         System.out.println("제이슨 결과 = " + json);
 
-
-        query3.setParameter(1, sessionUser.getId());
-        query3.setParameter(2, sessionUser.getRole());
-        query3.setParameter(3, jobopenId);
-        query3.setParameter(4, json);
+        query3.setParameter(1, sessionUser.getRole());
+        query3.setParameter(2, jobopenId);
+        query3.setParameter(3, json);
         query3.executeUpdate();
 
     }
