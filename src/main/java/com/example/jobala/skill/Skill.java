@@ -4,11 +4,14 @@ import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "skill_tb")
@@ -24,4 +27,13 @@ public class Skill {
     @OneToOne(fetch = FetchType.LAZY)
     private Jobopen jobopen; // 1
     private String name; // 스킬 이름
+
+    @Builder
+    public Skill(Integer id, Integer role, Resume resume, Jobopen jobopen, String name) {
+        this.id = id;
+        this.role = role;
+        this.resume = resume;
+        this.jobopen = jobopen;
+        this.name = name;
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala._user.User;
+import com.example.jobala.skill.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -47,6 +49,22 @@ public class JobopenRequest {
         private Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
 
+        public Jobopen toEntity(User user) {
+            return Jobopen.builder()
+                    .user(user)
+                    .edu(edu)
+                    .jobopenTitle(jobopenTitle)
+                    .career(career)
+                    .jobType(jobType)
+                    .salary(salary)
+                    .hopeJob(hopeJob)
+                    .compLocation(compLocation)
+                    .content(content)
+                    .endTime(endTime)
+                    .compname(null)
+                    .skill(Skill.builder().role(1).name(String.join(",", skills)).build())
+                    .build();
+        }
 
     }
 
