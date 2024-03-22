@@ -35,13 +35,14 @@ public class User {
 
     private Integer role; // 0 -> guest, 1 -> comp
 
-    private Timestamp age;
+    private Date age;
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role) {
+
+    public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role, Date age) {
         this.id = id;
         this.username = username;
         this.compNum = compNum;
@@ -53,5 +54,6 @@ public class User {
         this.ceo = ceo;
         this.address = address;
         this.role = role;
+        this.age = age;
     }
 }
