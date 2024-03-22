@@ -3,9 +3,14 @@ package com.example.jobala._user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 public class UserRequest {
 
-    @AllArgsConstructor
+
     @Data
     public static class LoginDTO {
         private String username;
@@ -23,6 +28,7 @@ public class UserRequest {
         private String password;
         private String name;
         private String phone;
+        private Date age;
         private Integer role; // 0 -> guest, 1 -> comp
 
         //개인이 회원가입할때
@@ -34,6 +40,7 @@ public class UserRequest {
                     .password(password)
                     .name(name)
                     .phone(phone)
+                    .age(age)
                     .role(role)
                     .build();
         }
@@ -50,6 +57,7 @@ public class UserRequest {
                     .password(password)
                     .name(name)
                     .phone(phone)
+                    .age(age)
                     .role(role)
                     .build();
         }

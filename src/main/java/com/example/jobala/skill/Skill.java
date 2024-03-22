@@ -22,9 +22,9 @@ public class Skill {
 
     @ColumnDefault("1")
     private Integer role; // 0 -> guest, 1 -> comp
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.LAZY)
     private Resume resume; // 개인 null
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.LAZY)
     private Jobopen jobopen; // 1
 
     private String name; // 스킬 이름
