@@ -23,12 +23,10 @@ public class JobopenService {
         return jobopen;
     }
 
-}
 
-
-public Jobopen jobopenDetail(Integer jobopenId) {
-    Jobopen jobopen = jobopenJPARepository.findByIdWithUser(jobopenId)
-            .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
-    return jobopen;
-}
+    public Jobopen jobopenDetail(Integer jobopenId) {
+        Jobopen jobopen = jobopenJPARepository.findByIdWithUser(jobopenId)
+                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
+        return jobopen;
+    }
 }
