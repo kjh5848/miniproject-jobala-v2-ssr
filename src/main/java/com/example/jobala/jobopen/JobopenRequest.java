@@ -74,7 +74,7 @@ public class JobopenRequest {
                     .compLocation(compLocation)
                     .content(content)
                     .endTime(endTime)
-                    .compname(null)
+                    .skill(Skill.builder().role(1).name(String.join(",", skills)).build())
                     .build();
         }
     }

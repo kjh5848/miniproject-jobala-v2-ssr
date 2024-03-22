@@ -44,7 +44,7 @@ public class Jobopen {
     private Skill skill;
 
     @Builder
-    public Jobopen(Integer id, User user, String compname, String jobopenTitle, String content, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String content, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -56,10 +56,6 @@ public class Jobopen {
         this.jobType = jobType;
         this.salary = salary;
         this.endTime = endTime;
-        this.createdAt = createdAt;
         this.role = role;
-        this.skill = skill;
     }
-    //    @Transient
-//    private Integer count;
 }
