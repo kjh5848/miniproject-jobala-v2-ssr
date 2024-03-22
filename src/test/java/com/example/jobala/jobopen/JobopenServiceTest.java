@@ -7,21 +7,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class JobopenJPARepositoryTest {
+class JobopenServiceTest {
+    @Autowired
+    private JobopenService jobopenService;
 
     @Autowired
     private JobopenJPARepository jobopenJPARepository;
-
-    @Test
-    public void deleteById_test(){
-        // given
-        int id = 1;
-
-        // when
-        jobopenJPARepository.deleteById(id);
-
-        // then
-
-    }
 
 }

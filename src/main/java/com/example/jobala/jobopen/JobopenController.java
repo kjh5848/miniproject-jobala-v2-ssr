@@ -34,6 +34,7 @@ public class JobopenController {
     private final PicQueryRepository picRepository;
     private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
+    private final JobopenService jobopenService;
     private Pic pic;
 
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -42,7 +43,7 @@ public class JobopenController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        jobopenRepository.delete(id);
+        jobopenService.공고삭제(id,sessionUser.getId());
         return "redirect:/comp/mngForm";
     }
 

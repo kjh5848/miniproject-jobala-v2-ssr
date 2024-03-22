@@ -23,5 +23,6 @@ public class Skill {
     private Resume resume; // 개인 null
     @OneToOne(fetch = FetchType.LAZY)
     private Jobopen jobopen; // 1
+
     private String name; // 스킬 이름
 }
