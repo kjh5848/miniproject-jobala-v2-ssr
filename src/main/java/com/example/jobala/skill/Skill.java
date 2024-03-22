@@ -1,5 +1,8 @@
 package com.example.jobala.skill;
 
+import com.example.jobala._user.User;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
@@ -13,11 +16,12 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer userId; // 세션 값
 
     @ColumnDefault("1")
     private Integer role; // 0 -> guest, 1 -> comp
-    private Integer resumeId; // 개인 null
-    private Integer jobopenId; // 1
+    @OneToOne(fetch = FetchType.LAZY)
+    private Resume resume; // 개인 null
+    @OneToOne(fetch = FetchType.LAZY)
+    private Jobopen jobopen; // 1
     private String name; // 스킬 이름
 }
