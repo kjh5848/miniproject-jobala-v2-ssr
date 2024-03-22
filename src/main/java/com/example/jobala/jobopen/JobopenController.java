@@ -80,9 +80,8 @@ public class JobopenController {
     public String jobopenSave(JobopenRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         System.out.println("응애 : "+reqDTO);
-//        jobopenRepository.save(reqDTO, sessionUser);
         jobopenService.공고등록(reqDTO, sessionUser);
-        return "redirect:/join"; //comp/mngForm
+        return "redirect:/comp/mngForm";
     }
 
     @GetMapping("/comp/jobopen/saveForm")
