@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +19,29 @@ public class JobopenService {
 
     private final JobopenJPARepository jobopenJPARepository;
     private final SkillJPARepository skillJPARepository;
+
+    @Transactional
+    public Jobopen 공고수정하기(int jobOpenId, int sessionUser, JobopenRequest.UpdateDTO reqDTO) {
+        //1.조회 및 예외 처리
+        Jobopen jobopen = jobopenJPARepository.findById(jobOpenId)
+                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
+        //2.권한 처리
+        if (sessionUser != jobopen.getUser().getId()) {
+            throw new Exception403("게시글을 수정할 권한이 없습니다.");
+        }
+
+        //3.공고 수정
+        jobopen.setJobopenTitle(reqDTO.getJobopenTitle());
+        jobopen.setCareer(reqDTO.getCareer());
+        jobopen.setEdu(reqDTO.getEdu());
+        jobopen.setJobType(reqDTO.getJobType());
+        jobopen.setSalary(reqDTO.getSalary());
+        jobopen.setHopeJob(reqDTO.getHopeJob());
+        jobopen.setCompLocation(reqDTO.getCompLocation());
+        jobopen.setEndTime(Date.valueOf(reqDTO.getEndTime()));
+
+        return jobopen;
+    }
 
     @Transactional
     public Jobopen 공고등록(JobopenRequest.SaveDTO reqDTO, User sessionUser) {

@@ -61,5 +61,6 @@ public class Jobopen {
         this.salary = salary;
         this.endTime = endTime;
         this.role = role;
+        this.skill = skill;
     }
 }

@@ -82,39 +82,6 @@ public class JobopenQueryRepository {
         }
     }
 
-    @Transactional
-    public void update(Integer jobopenId, JobopenRequest.UpdateDTO reqDTO) {
-        String a = """
-                update jobopen_tb set compname = ? ,jobopen_title=? , career=?, edu=?, job_type=?,salary=?, comp_location=?, content=? , end_time = ? where id = ?
-                """;
-        Query query = em.createNativeQuery(a);
-        query.setParameter(1, reqDTO.getCompname());
-        query.setParameter(2, reqDTO.getJobopenTitle());
-        query.setParameter(3, reqDTO.getCareer());
-        query.setParameter(4, reqDTO.getEdu());
-        query.setParameter(5, reqDTO.getJobType());
-        query.setParameter(6, reqDTO.getSalary());
-        query.setParameter(7, reqDTO.getCompLocation());
-        query.setParameter(8, reqDTO.getContent());
-        query.setParameter(9, reqDTO.getEndTime());
-        query.setParameter(10, jobopenId);
-        query.executeUpdate();
-
-        Query query2 = em.createNativeQuery("select id from skill_tb where jobopen_id = ?");
-        query2.setParameter(1,jobopenId);
-        Integer skillId = (Integer) query2.getSingleResult();
-
-        Query query3 = em.createNativeQuery("update skill_tb set name= ? where id = ?");
-
-        // List -> JSON
-        List<String> skills = reqDTO.getSkills();
-        String json = new Gson().toJson(skills);
-        System.out.println("제이슨 결과 = " + json);
-        query3.setParameter(1,json);
-        query3.setParameter(2,skillId);
-        query3.executeUpdate();
-    }
-
 
     public List<Jobopen> findAllDesc() {
         String q = """
