@@ -3,9 +3,6 @@ package com.example.jobala.resume;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
-import com.example.jobala.board.Board;
-import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.jobopen.JobopenRequest;
 import com.example.jobala.skill.Skill;
 import com.example.jobala.skill.SkillJPARepository;
 import com.google.gson.Gson;
@@ -46,7 +43,31 @@ public class ResumeService {
         if (sessionUserId != resume.getUser().getId()) {
             throw new Exception403("게시글을 삭제할 권한이 없습니다");
         }
-            resumeJPARepository.deleteById(resumeId);
+        resumeJPARepository.deleteById(resumeId);
         return resume;
+    }
+
+    @Transactional
+    public Resume 이력서수정(int resumeId, ResumeRequest.UpdateDTO reqDTO) {
+        Resume resume = resumeJPARepository.findById(resumeId)
+                .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
+        resume.setResumeTitle(reqDTO.getResumeTitle());
+        resume.setHopeJob(reqDTO.getHopeJob());
+        resume.setCareer(reqDTO.getCareer());
+        resume.setLicense(reqDTO.getLicense());
+        resume.setContent(reqDTO.getContent());
+        resume.setEdu(reqDTO.getEdu());
+
+        List<String> skills = reqDTO.getSkills();
+        String json = new Gson().toJson(skills);
+        System.out.println("제이슨 결과 = " + json);
+
+        resume.getSkill().setName(json);
+        return resume;
+    }
+
+    public Resume 이력서조회(Integer id) {
+        return resumeJPARepository.findById(id)
+                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
     }
 }

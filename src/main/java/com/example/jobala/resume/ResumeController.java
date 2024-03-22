@@ -2,7 +2,6 @@ package com.example.jobala.resume;
 
 import com.example.jobala.Pic.Pic;
 import com.example.jobala.Pic.PicQueryRepository;
-import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserQueryRepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -16,9 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,14 +50,11 @@ public class ResumeController {
     //이력서 업데이트
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        Resume resume = resumeRepository.findById(id);
-        resumeRepository.update(resume.getId(), reqDTO);
+        resumeService.이력서수정(id, reqDTO);
+        System.out.println("이력서 수정 실행");
         return "redirect:/guest/mngForm";
     }
+
 
     // TODO: 글조회로 변경예정
     @GetMapping("/guest/resume/{id}/updateForm")
@@ -69,11 +63,12 @@ public class ResumeController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        Resume resume = resumeRepository.findById(id);
+        Resume resume = resumeService.이력서조회(id);
 
         // 이력서에 저장된 이미지 파일 정보 가져오기
-        Pic pic = picRepository.resumeFindByPic(id);
-        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
+
+//        Pic pic = picRepository.resumeFindByPic(id);
+//        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
 

@@ -76,11 +76,11 @@ public class JobopenController {
     @PostMapping("/comp/jobopen/save")
     public String jobopenSave(JobopenRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        System.out.println("응애 : "+reqDTO);
         jobopenService.공고등록(reqDTO, sessionUser);
         return "redirect:/comp/mngForm";
     }
 
+    // TODO : 삭제 예정
     @GetMapping("/comp/jobopen/saveForm")
     public String saveForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
