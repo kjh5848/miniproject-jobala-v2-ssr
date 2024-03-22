@@ -133,9 +133,6 @@ public class ResumeController {
     @PostMapping("/guest/resume/save")
     public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         resumeService.이력서등록(resumeSaveDTO, sessionUser);
         return "redirect:/guest/mngForm";
     }
