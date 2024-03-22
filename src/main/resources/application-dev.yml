@@ -8,6 +8,7 @@ server:
   port: 8080
 
 spring:
+#  TODO: 머스태치 삭제예정
   mustache:
     servlet:
       expose-session-attributes: true
@@ -33,3 +34,5 @@ spring:
         format_sql: true
         default_batch_fetch_size: 10
     defer-datasource-initialization: true
+#    TODO: 오픈인뷰 DTO 만들고 추가
+#    open-in-view: false

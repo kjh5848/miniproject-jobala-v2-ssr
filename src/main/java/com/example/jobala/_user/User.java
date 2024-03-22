@@ -27,32 +27,29 @@ public class User {
 
     @Column(unique = true, length = 15)
     private String username; // 아이디
-    private String compNum; //
-    private String password;
+    private String compNum; // 사업자 번호
+    private String password; //패스워드
 
     @Column(length = 15)
-    private String name;
-    private String compname;
+    private String name; // 이름
+    private String compname; // 회사명
 
     @Column(nullable = false)//널 값 허용 안하는 어노테이션
-    private String email;
-    private String phone;
-    private String ceo;
-    private String address;
-
+    private String email; //이메일
+    private String phone; //폰번호
+    private String ceo; // 기업 대표명
+    private String address; //주소
 
     private Integer role; // 0 -> guest, 1 -> comp
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Date age;
+    private Timestamp age;
 
     @CreationTimestamp
     private Timestamp createdAt;
 
-
     @Builder
-    public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Date age, Integer role) {
+
+    public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role) {
         this.id = id;
         this.username = username;
         this.compNum = compNum;
@@ -63,7 +60,6 @@ public class User {
         this.phone = phone;
         this.ceo = ceo;
         this.address = address;
-        this.age = age;
         this.role = role;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.jobala._user;
 
+import com.example.jobala._core.errors.exception.Exception400;
 import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._core.errors.exception.Exception404;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,19 @@ public class UserService {
     }
 
     @Transactional
-    public void 회원가입(UserRequest.joinDTO reqDTO, Integer sessionUserId) {
-        User user = userJPARepository.findById(sessionUserId)
-                .orElseThrow(() -> new Exception404("회원정보를 찾을 수 없습니다."));
-        user.setPassword(reqDTO.getPassword());
-        user.setEmail(reqDTO.getEmail());
+    public User 회원가입(UserRequest.joinDTO reqDTO) {
+        Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
+        if (userOP.isPresent()) {
+            throw new Exception400("중복된 유저네임입니다.");
+        }
+
+        User user = null;
+        if (reqDTO.getRole() == 1) {
+            user = userJPARepository.save(reqDTO.toCompEntity());
+        } else if (reqDTO.getRole() == 0) {
+            user = userJPARepository.save(reqDTO.toGuestEntity());
+        }
+        return user;
     }
 
     public Optional<User> 중복체크(String username) {

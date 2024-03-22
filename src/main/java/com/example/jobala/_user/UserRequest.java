@@ -19,7 +19,21 @@ public class UserRequest {
         private String phone;
         private Integer role; // 0 -> guest, 1 -> comp
 
-        public User toEntity() {
+        //개인이 회원가입할때
+        public User toGuestEntity() {
+            return User.builder()
+                    .address(address)
+                    .username(username)
+                    .email(email)
+                    .password(password)
+                    .name(name)
+                    .phone(phone)
+                    .role(role)
+                    .build();
+        }
+
+        //기업이 회원가입할때
+        public User toCompEntity() {
             return User.builder()
                     .compname(compname)
                     .ceo(ceo)
@@ -32,7 +46,6 @@ public class UserRequest {
                     .phone(phone)
                     .role(role)
                     .build();
-
         }
     }
 
