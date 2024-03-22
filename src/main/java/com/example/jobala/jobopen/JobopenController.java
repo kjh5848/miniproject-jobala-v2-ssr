@@ -51,10 +51,7 @@ public class JobopenController {
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         System.out.println("id = " + id);
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        Jobopen jobopen = jobopenRepository.findById(id);
+        jobopenService.공고수정하기(id,sessionUser.getId(),reqDTO);
 
         return "redirect:/comp/mngForm";
     }

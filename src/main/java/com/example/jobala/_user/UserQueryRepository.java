@@ -38,7 +38,7 @@ public class UserQueryRepository {
     }
 
     @Transactional
-    public void userSave(UserRequest.joinDTO reqDTO) {
+    public void userSave(UserRequest.JoinDTO reqDTO) {
         Query query = em.createNativeQuery("insert into  user_tb(name, username, email, password, address, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getName());
         query.setParameter(2,reqDTO.getUsername());
@@ -51,7 +51,7 @@ public class UserQueryRepository {
     }
 
     @Transactional
-    public void compSave(UserRequest.joinDTO reqDTO) {
+    public void compSave(UserRequest.JoinDTO reqDTO) {
         Query query = em.createNativeQuery("insert into  user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ");
         query.setParameter(1,reqDTO.getCompNum());
         query.setParameter(2,reqDTO.getCeo());
@@ -66,7 +66,7 @@ public class UserQueryRepository {
         query.executeUpdate();
     }
 
-    public User findByUsernameAndPassword(UserRequest.loginDTO reqDTO) {
+    public User findByUsernameAndPassword(UserRequest.LoginDTO reqDTO) {
         Query query = em.createQuery("select u from User u where u.username = :username and u.password = :password", User.class);
         query.setParameter("username", reqDTO.getUsername());
         query.setParameter("password", reqDTO.getPassword());
