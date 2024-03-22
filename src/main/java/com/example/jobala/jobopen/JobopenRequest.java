@@ -74,7 +74,6 @@ public class JobopenRequest {
                     .compLocation(compLocation)
                     .content(content)
                     .endTime(endTime)
-                    .compname(null)
                     .build();
         }
     }

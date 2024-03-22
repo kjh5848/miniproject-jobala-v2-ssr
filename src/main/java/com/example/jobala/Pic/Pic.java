@@ -12,10 +12,7 @@ public class Pic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToOne(fetch = FetchType.LAZY)
-    private Resume resume;
-    @OneToOne(fetch = FetchType.LAZY)
-    private Jobopen jobopen;
+
     private String title;
     private String imgFilename; // 파일 패스
 }
