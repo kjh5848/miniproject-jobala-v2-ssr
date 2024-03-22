@@ -60,7 +60,6 @@ class JobopenJPARepositoryTest {
         // when
         jobopenJPARepository.deleteById(id);
 
-
         // then
 
     }
