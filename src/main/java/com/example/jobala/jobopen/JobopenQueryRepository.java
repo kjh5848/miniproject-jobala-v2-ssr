@@ -80,19 +80,7 @@ public class JobopenQueryRepository {
         query.executeUpdate();
     }
 
-    public Jobopen findByIdWithUser(int id) {
-        String a = """
-                select * from jobopen_tb where id =?
-                """;
-        Query query = em.createNativeQuery(a, Jobopen.class);
-        query.setParameter(1, id);
-        try {
-            Jobopen jobopen = (Jobopen) query.getSingleResult();
-            return jobopen;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+
 
     public Jobopen findById(Integer id) {
         Query query = em.createNativeQuery("select * from jobopen_tb where id = ?", Jobopen.class);

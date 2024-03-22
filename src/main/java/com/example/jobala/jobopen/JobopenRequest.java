@@ -15,6 +15,20 @@ public class JobopenRequest {
         private int id;
     }
 
+    @AllArgsConstructor
+    @Data
+    public static class JobopenDetailDTO {
+        private String edu;
+        private String jobopenTitle;
+        private String career;
+        private String jobType;
+        private String salary;
+        private String hopeJob;
+        private String compLocation;
+        private String content;
+        private Date endTime;
+        private List<String> skills = new ArrayList<>(); //내용
+    }
 
     @AllArgsConstructor
     @Data
@@ -46,8 +60,6 @@ public class JobopenRequest {
         private String content;
         private Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
-
-
     }
 
 }

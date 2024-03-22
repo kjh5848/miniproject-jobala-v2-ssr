@@ -21,7 +21,6 @@ public class Jobopen {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    private String compname; //회사명
     private String jobopenTitle; //공고제목
     private String content; //내용
     private String career;// 경력
@@ -41,8 +40,25 @@ public class Jobopen {
     @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Skill skill;
 
-
-
+    // findByIdWithUser_test에서 무한 참조 해결용
+    @Override
+    public String toString() {
+        return "Jobopen{" +
+                "id=" + id +
+                ", jobopenTitle='" + jobopenTitle + '\'' +
+                ", content='" + content + '\'' +
+                ", career='" + career + '\'' +
+                ", edu='" + edu + '\'' +
+                ", hopeJob='" + hopeJob + '\'' +
+                ", compLocation='" + compLocation + '\'' +
+                ", jobType='" + jobType + '\'' +
+                ", salary='" + salary + '\'' +
+                ", endTime=" + endTime +
+                ", createdAt=" + (createdAt != null ? createdAt.toString() : null) +
+                ", role=" + role +
+                // ", skill=" + skill + // Skill 객체는 출력하지 않음
+                '}';
+    }
 //    @Transient
 //    private Integer count;
 }
