@@ -82,8 +82,8 @@ public class ResumeController {
 
         Resume resume = resumeRepository.findById(id);
         // 이력서 상세보기에 이미지 불러오기
-        Pic pic = picRepository.resumeFindByPic(id);
-        req.setAttribute("pic", pic);
+//        Pic pic = picRepository.resumeFindByPic(id);
+//        req.setAttribute("pic", pic);
 
         boolean isGuestScrap = false;
         User sessionUser = null;

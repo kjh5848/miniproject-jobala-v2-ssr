@@ -2,6 +2,7 @@ package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
 import com.example.jobala.apply.Apply;
+import com.example.jobala.scrap.Scrap;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -41,6 +42,9 @@ public class Resume {
 
     @OneToMany(mappedBy = "resume",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Scrap> scraps;
 
     @CreationTimestamp
     private Timestamp createdAt;

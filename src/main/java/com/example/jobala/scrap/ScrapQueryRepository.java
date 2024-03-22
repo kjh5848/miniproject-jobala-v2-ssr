@@ -28,7 +28,7 @@ public class ScrapQueryRepository {
 
     public Scrap findCompScrapById(Integer resumeId, Integer userId) {
         String q = """
-                select * from scrap_tb where role = 1 AND resume_id = ? AND user_id = ?; 
+                select * from scrap_tb where resume_id = ? AND user_id = ?; 
                 """;
         Query query = em.createNativeQuery(q, Scrap.class);
         query.setParameter(1, resumeId);

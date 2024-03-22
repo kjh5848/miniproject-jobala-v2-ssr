@@ -2,6 +2,7 @@ package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
 import com.example.jobala.apply.Apply;
+import com.example.jobala.scrap.Scrap;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -47,6 +48,9 @@ public class Jobopen {
 
     @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Skill skill;
+
+    @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Scrap> scraps;
 
     @Builder
     public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
