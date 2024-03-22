@@ -39,20 +39,20 @@ public class JobopenResponse {
 
 
         public DTO(Jobopen jobopen) {
-            this.id = id;
-            this.userId = userId;
-            this.compname = compname;
-            this.jobopenTitle = jobopenTitle;
-            this.content = content;
-            this.career = career;
-            this.edu = edu;
-            this.hopeJob = hopeJob;
-            this.compLocation = compLocation;
-            this.jobType = jobType;
-            this.salary = salary;
-            this.endTime = endTime;
-            this.role = role;
-            this.count = count;
+            this.id = jobopen.getId();
+            this.userId = jobopen.getUser().getId();
+            this.compname = jobopen.getUser().getCompname();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.content = jobopen.getContent();
+            this.career = jobopen.getCareer();
+            this.edu = jobopen.getEdu();
+            this.hopeJob = jobopen.getHopeJob();
+            this.compLocation = jobopen.getCompLocation();
+            this.jobType = jobopen.getJobType();
+            this.salary = jobopen.getSalary();
+            this.endTime = jobopen.getEndTime();
+            this.role = jobopen.getRole();
+            this.count = jobopen.getId();
         }
 
         @CreationTimestamp
