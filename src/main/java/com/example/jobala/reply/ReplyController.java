@@ -42,12 +42,12 @@ public class ReplyController {
         if (reply == null) {
             return "error/404";
         }
-        if (reply.getUserId() != sessionUser.getId()) {
+        if (reply.getUser().getId() != sessionUser.getId()) {
             return "error/403";
         }
 
         replyRepository.deleteById(id);
 
-        return "redirect:/board/" + reply.getBoardId();
+        return "redirect:/board/" + reply.getBoard().getId();
     }
 }

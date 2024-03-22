@@ -1,5 +1,6 @@
 package com.example.jobala.resume;
 
+import com.example.jobala._user.User;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,7 +17,8 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
     private String name; // 지원자 이름
     private String resumeTitle;
     private String hopeJob;
@@ -31,6 +33,6 @@ public class Resume {
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "resume",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Skill skill;
 }

@@ -1,5 +1,6 @@
 package com.example.jobala.board;
 
+import com.example.jobala._user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,7 +22,8 @@ public class Board {
     private String title;
     private String content;
     private Integer role; // 0 -> guest, 1 -> comp
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @CreationTimestamp
     private Timestamp createdAt;

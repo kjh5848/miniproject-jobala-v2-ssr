@@ -1,11 +1,5 @@
 package com.example.jobala._user;
 
-import com.example.jobala.Pic.Pic;
-import com.example.jobala.apply.Apply;
-import com.example.jobala.board.Board;
-import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.resume.Resume;
-import com.example.jobala.scrap.Scrap;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Entity
@@ -43,8 +36,7 @@ public class User {
 
     private Integer role; // 0 -> guest, 1 -> comp
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
+//    @Temporal(TemporalType.TIMESTAMP)
     private Date age;
 
     @CreationTimestamp

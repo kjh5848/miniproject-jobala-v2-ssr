@@ -49,8 +49,8 @@ public class UserController {
 
         try {
             // userRepository에서 username과 password를 사용하여 사용자 검색
-            User user = userService.로그인(reqDTO);
-            User sessionUser = (User) session.getAttribute("sessionUser");
+            User sessionUser = userService.로그인(reqDTO);
+            session.setAttribute("sessionUser",sessionUser);
             // 권한 체크
             Boolean isCheck = false;
             if (sessionUser.getRole() == 0) {
@@ -58,7 +58,7 @@ public class UserController {
             }
 
             session.setAttribute("isCheck", isCheck);
-            session.setAttribute("sessionUser", user);
+            session.setAttribute("sessionUser", sessionUser);
 
             return "redirect:/";
         } catch (EmptyResultDataAccessException e) {
