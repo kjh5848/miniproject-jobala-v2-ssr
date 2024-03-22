@@ -3,7 +3,9 @@ package com.example.jobala.jobopen;
 import com.example.jobala._user.User;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -11,6 +13,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "jobopen_tb")
@@ -41,8 +44,23 @@ public class Jobopen {
     @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Skill skill;
 
+    @Builder
+    public Jobopen(Integer id, User user, String compname, String jobopenTitle, String content, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Integer role) {
+        this.id = id;
+        this.user = user;
+        this.compname = compname;
+        this.jobopenTitle = jobopenTitle;
+        this.content = content;
+        this.career = career;
+        this.edu = edu;
+        this.hopeJob = hopeJob;
+        this.compLocation = compLocation;
+        this.jobType = jobType;
+        this.salary = salary;
+        this.endTime = endTime;
+        this.role = role;
+    }
 
-
-//    @Transient
+    //    @Transient
 //    private Integer count;
 }
