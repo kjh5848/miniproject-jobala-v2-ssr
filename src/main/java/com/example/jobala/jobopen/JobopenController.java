@@ -35,6 +35,7 @@ public class JobopenController {
     private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
     private Pic pic;
+    private final JobopenService jobopenService;
 
     @PostMapping("/comp/jobopen/{id}/detete")
     public String delete(@PathVariable int id) {
@@ -42,7 +43,6 @@ public class JobopenController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        jobopenRepository.delete(id);
         return "redirect:/comp/mngForm";
     }
 
@@ -115,8 +115,8 @@ public class JobopenController {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
-
-        Jobopen jobopen = jobopenRepository.findByIdWithUser(id);
+        // jobopenDetail 수정 부분
+        Jobopen jobopen = jobopenService.jobopenDetail(id);
         JobopenResponse.JobopenDetailDTO JobopenRespDTO = jobopenRepository.findByUserAndJobopen(id);
 
 

@@ -19,9 +19,8 @@ public class Jobopen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private User user;
-    private String compname; //회사명
     private String jobopenTitle; //공고제목
     private String content; //내용
     private String career;// 경력
@@ -38,9 +37,8 @@ public class Jobopen {
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
-    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Skill skill;
-
+//    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private Skill skill;
 
 
 //    @Transient

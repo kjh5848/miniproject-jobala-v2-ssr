@@ -33,6 +33,8 @@ public class Resume {
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
 
-    @OneToOne(mappedBy = "resume",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Skill skill;
+
+
+//    @OneToOne(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private Skill skill;
 }
