@@ -15,17 +15,17 @@ import java.util.List;
 public class ResumeQueryRepository {
     private final EntityManager em;
 
-    public Resume findByUserId(Integer userId) {
+//    public Resume findByUserId(Integer userId) {
         // qlrm -> nativeQuery 수정
-        String q = """
-                SELECT r FROM Resume r WHERE r.id = (
-                    SELECT a.resumeId FROM Apply a WHERE a.userId = :userId
-                )
-                """;
-        return em.createQuery(q, Resume.class)
-                .setParameter("userId", userId)
-                .getSingleResult();
-    }
+//        String q = """
+//                SELECT r FROM Resume r WHERE r.id = (
+//                    SELECT a.resumeId FROM Apply a WHERE a.userId = :userId
+//                )
+//                """;
+//        return em.createQuery(q, Resume.class)
+//                .setParameter("userId", userId)
+//                .getSingleResult();
+//    }
 
 //이미지 받아와서 4
 //    public List<Resume> findAllLimt() {

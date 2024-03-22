@@ -72,7 +72,6 @@ public class JobopenRequest {
                     .salary(salary)
                     .hopeJob(hopeJob)
                     .compLocation(compLocation)
-                    .content(content)
                     .endTime(endTime)
                     .skill(Skill.builder().role(1).name(String.join(",", skills)).build())
                     .build();

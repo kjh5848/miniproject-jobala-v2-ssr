@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.Apply;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -12,6 +13,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -22,10 +25,9 @@ public class Jobopen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     private String jobopenTitle; //공고제목
-    private String content; //내용
     private String career;// 경력
     private String edu; // 학력
     private String hopeJob; //희망직종
@@ -40,15 +42,17 @@ public class Jobopen {
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
+    @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Apply> applies = new ArrayList<>();
+
     @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Skill skill;
 
     @Builder
-    public Jobopen(Integer id, User user, String jobopenTitle, String content, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
-        this.content = content;
         this.career = career;
         this.edu = edu;
         this.hopeJob = hopeJob;

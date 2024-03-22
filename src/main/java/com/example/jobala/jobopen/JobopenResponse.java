@@ -42,7 +42,6 @@ public class JobopenResponse {
             this.userId = jobopen.getUser().getId();
             this.compname = jobopen.getUser().getCompname();
             this.jobopenTitle = jobopen.getJobopenTitle();
-            this.content = jobopen.getContent();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
             this.hopeJob = jobopen.getHopeJob();

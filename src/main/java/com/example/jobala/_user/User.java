@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -41,7 +40,6 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-
     public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role, Date age) {
         this.id = id;
         this.username = username;

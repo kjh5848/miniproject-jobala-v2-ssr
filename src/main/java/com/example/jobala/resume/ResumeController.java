@@ -39,6 +39,7 @@ public class ResumeController {
     private final JobopenQueryRepository jobopenRepository;
     private final ResumeService resumeService;
 
+    //TODO: saveForm 삭제예정
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -49,6 +50,7 @@ public class ResumeController {
         return "/guest/resume/saveForm";
     }
 
+    //이력서 업데이트
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -60,6 +62,7 @@ public class ResumeController {
         return "redirect:/guest/mngForm";
     }
 
+    // TODO: 글조회로 변경예정
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -71,14 +74,13 @@ public class ResumeController {
         // 이력서에 저장된 이미지 파일 정보 가져오기
         Pic pic = picRepository.resumeFindByPic(id);
         req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
-
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
 
         return "/guest/resume/updateForm";
     }
 
-
+    //이력서 상세보기
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
 //        기업에서 이력서를 볼때 보이는 최근 이력서 4개 조인하는
@@ -127,13 +129,14 @@ public class ResumeController {
         return "/guest/resume/detailForm";
     }
 
+    //이력서 등록
     @PostMapping("/guest/resume/save")
     public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        resumeRepository.save(resumeSaveDTO, sessionUser);
+        resumeService.이력서등록(resumeSaveDTO, sessionUser);
         return "redirect:/guest/mngForm";
     }
 

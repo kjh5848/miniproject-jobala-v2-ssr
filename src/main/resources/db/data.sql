@@ -46,24 +46,16 @@ values (1, '김주혁', '도전적인 프론트엔드 개발자 지원서', '프
         '안녕하세요, 열정적인 프론트엔드 엔지니어 양세찬입니다. 최신 웹 기술에 대한 지식과 열정으로 사용자들에게 최고의 경험을 제공하고자 합니다.', '고등학교 졸업', now());
 
 -- --채용공고 더미
-INSERT INTO jobopen_tb(user_id, jobopen_title, content, career, edu, hope_job, comp_location, job_type,
-                       salary, end_time, created_at, role)
-VALUES (10, '소프트웨어 개발자 채용', '네이버에서 함께 일해보세요!', '신입', '고등학교 졸업', '백엔드', '서울', '정규직', '협의', '2024-12-31', now(), 1),
-       (11,  '데이터 분석가 채용', '카카오에서 데이터로 세상을 바꿔보세요!', '경력', '대학교 졸업', '백엔드', '부산', '정규직', '5000만원 이상', '2024-11-30',
-        now(), 1),
-       (12, 'UI/UX 디자이너 채용', '라인에서 사용자 경험을 디자인하세요!', '신입', '대학교 졸업', '프론트엔드', '서울', '정규직', '3000만원 이상',
-        '2024-10-31', now(), 1),
-       (13, '마케팅 전문가 채용', '토스에서 함께 성장하세요!', '경력', '대학교 졸업', '백엔드', '부산', '정규직', '협의', '2024-09-30', now(), 1),
-       (14, '운영 지원 인력 채용', '라인의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '프론트엔드', '부산', '정규직', '협의', '2024-09-11',
-        now(), 1),
-       (15,  '운영 지원 인력 채용', '배달의민족의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '프론트엔드', '서울', '계약직', '협의', '2024-08-31',
-        now(), 1),
-       (16, '소프트웨어 개발자 채용', '배달의민족의 성장을 함께 이끌어가세요!', '신입', '고등학교 졸업', '백엔드', '서울', '정규직', '5000만원 이상',
-        '2024-10-12', now(), 1),
-       (17, '마케팅 전문가 채용', '배달의민족의 성장을 함께 이끌어가세요!', '경력', '고등학교 졸업', '프론트엔드', '서울', '계약직', '협의', '2024-05-20',
-        now(), 1),
-       (18, 'UI/UX 디자이너 채용', '배달의민족의 성장을 함께 이끌어가세요!', '경력', '고등학교 졸업', '프론트엔드', '부산', '계약직', '3000만원 이상',
-        '2024-06-22', now(), 1);
+INSERT INTO jobopen_tb(user_id, jobopen_title, career, edu, hope_job, comp_location, job_type, salary, end_time, created_at, role)
+VALUES (10, '소프트웨어 개발자 채용', '신입', '고등학교 졸업', '백엔드', '서울', '정규직', '협의', '2024-12-31', now(), 1),
+       (11, '데이터 분석가 채용', '경력', '대학교 졸업', '백엔드', '부산', '정규직', '5000만원 이상', '2024-11-30', now(), 1),
+       (12, 'UI/UX 디자이너 채용', '신입', '대학교 졸업', '프론트엔드', '서울', '정규직', '3000만원 이상', '2024-10-31', now(), 1),
+       (13, '마케팅 전문가 채용', '경력', '대학교 졸업', '백엔드', '부산', '정규직', '협의', '2024-09-30', now(), 1),
+       (14, '운영 지원 인력 채용', '신입', '고등학교 졸업', '프론트엔드', '부산', '정규직', '협의', '2024-09-11', now(), 1),
+       (15, '운영 지원 인력 채용',  '신입', '고등학교 졸업', '프론트엔드', '서울', '계약직', '협의', '2024-08-31', now(), 1),
+       (16, '소프트웨어 개발자 채용', '신입', '고등학교 졸업', '백엔드', '서울', '정규직', '5000만원 이상', '2024-10-12', now(), 1),
+       (17, '마케팅 전문가 채용', '경력', '고등학교 졸업', '프론트엔드', '서울', '계약직', '협의', '2024-05-20', now(), 1),
+       (18, 'UI/UX 디자이너 채용', '경력', '고등학교 졸업', '프론트엔드', '부산', '계약직', '3000만원 이상', '2024-06-22', now(), 1);
 
 -- 개인이 기업공고를 보고 지원한 더미 9개
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, role, state, created_at)
@@ -155,29 +147,29 @@ VALUES ('1년차 개발자들', '1년차 개발자들 요즘 패기가 없더라
        ('너가 연봉올려줄게 했잖아?', '그럼 이직 이딴거 안했어', 0, 2, now());
 
 -- 이력서 사진 더미
-INSERT INTO pic_tb(resume_id, img_filename, title)
-VALUES (1, 'userImage.jpg', 'userImage.jpg'),
-       (3, 'userImage2.jpg', 'userImage2.jpg'),
-       (2, 'userImage3.jpg', 'userImage3.jpg'),
-       (4, 'userimage4.png', 'userimage4.png'),
-       (5, 'userimage5.png', 'userimage5.png'),
-       (6, 'userimage6.png', 'userimage6.png'),
-       (7, 'userimage7.png', 'userimage7.png'),
-       (8, 'userimage8.png', 'userimage8.png'),
-       (9, 'userimage9.png', 'userimage9.png');
+-- INSERT INTO pic_tb(resume_id, img_filename, title)
+-- VALUES (1, 'userImage.jpg', 'userImage.jpg'),
+--        (3, 'userImage2.jpg', 'userImage2.jpg'),
+--        (2, 'userImage3.jpg', 'userImage3.jpg'),
+--        (4, 'userimage4.png', 'userimage4.png'),
+--        (5, 'userimage5.png', 'userimage5.png'),
+--        (6, 'userimage6.png', 'userimage6.png'),
+--        (7, 'userimage7.png', 'userimage7.png'),
+--        (8, 'userimage8.png', 'userimage8.png'),
+--        (9, 'userimage9.png', 'userimage9.png');
 
 
 -- 채용 공고 사진 더미
-INSERT INTO pic_tb(jobopen_id, img_filename, title)
-VALUES (1, 'cupanglogo.png', 'cupanglogo.png'),
-       (2, 'naverlogo.png', 'naverlogo.png'),
-       (3, 'kakaologo.svg', 'kakaologo.svg'),
-       (4, 'toslogo.png', 'toslogo.png'),
-       (5, 'linelogo.png', 'linelogo.png'),
-       (6, 'balogo.png', 'balogo.png'),
-       (7, 'carrotlogo.png', 'carrotlogo.png'),
-       (8, 'hibelogo.png', 'hibelogo.png'),
-       (9, 'getintherelogo.png', 'getintherelogo.png');
+-- INSERT INTO pic_tb(jobopen_id, img_filename, title)
+-- VALUES (1, 'cupanglogo.png', 'cupanglogo.png'),
+--        (2, 'naverlogo.png', 'naverlogo.png'),
+--        (3, 'kakaologo.svg', 'kakaologo.svg'),
+--        (4, 'toslogo.png', 'toslogo.png'),
+--        (5, 'linelogo.png', 'linelogo.png'),
+--        (6, 'balogo.png', 'balogo.png'),
+--        (7, 'carrotlogo.png', 'carrotlogo.png'),
+--        (8, 'hibelogo.png', 'hibelogo.png'),
+--        (9, 'getintherelogo.png', 'getintherelogo.png');
 
 --댓글 더미
 Insert Into reply_tb(id, comment, board_id, username, created_at)
