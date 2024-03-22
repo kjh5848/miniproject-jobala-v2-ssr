@@ -11,6 +11,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -35,17 +36,17 @@ public class Resume {
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
 
-    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Apply> apply;
-
     @OneToOne(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Skill skill;
+
+    @OneToMany(mappedBy = "resume",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Apply> applies = new ArrayList<>();
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, Integer role, Skill skill) {
+    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, Integer role) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -56,8 +57,6 @@ public class Resume {
         this.content = content;
         this.edu = edu;
         this.role = role;
-        this.skill = skill;
     }
-    //    @OneToOne(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-//    private Skill skill;
+
 }

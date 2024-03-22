@@ -36,16 +36,15 @@ public class JobopenRequest {
     @Data
     public static class UpdateDTO {
         //compname = ? ,jobopenTitle=? , career=?, edu=?, jobType=?,salary=?,compLocation=?,content=? ,skills =?
-        private String compname; //대표명
         private String jobopenTitle; //공고제목
         private String career;// 경력
         private String edu; // 학력
         private String jobType; // 고용형태
         private String salary; //연봉
+        private String hopeJob;//희망직무
         private String compLocation; //근무지역
-        private String content; //내용
         private String endTime; //내용
-        private List<String> skills = new ArrayList<>();
+//        private List<String> skills = new ArrayList<>();
     }
 
     @AllArgsConstructor
@@ -73,7 +72,6 @@ public class JobopenRequest {
                     .hopeJob(hopeJob)
                     .compLocation(compLocation)
                     .endTime(endTime)
-                    .skill(Skill.builder().role(1).name(String.join(",", skills)).build())
                     .build();
         }
     }

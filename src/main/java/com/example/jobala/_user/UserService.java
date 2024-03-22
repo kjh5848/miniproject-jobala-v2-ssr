@@ -14,13 +14,13 @@ import java.util.Optional;
 public class UserService {
     private final UserJPARepository userJPARepository;
 
-    public User 로그인(UserRequest.loginDTO reqDTO) {
+    public User 로그인(UserRequest.LoginDTO reqDTO) {
         return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다."));
     }
 
     @Transactional
-    public User 회원가입(UserRequest.joinDTO reqDTO) {
+    public User 회원가입(UserRequest.JoinDTO reqDTO) {
         Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
         if (userOP.isPresent()) {
             throw new Exception400("중복된 유저네임입니다.");

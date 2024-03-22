@@ -56,9 +56,6 @@ class ResumeJPARepositoryTest {
         resumeJPARepository.save(reqDTO.toEntity(sessionUser));
 
 
-        // when
-
-
         // then
 
     }
