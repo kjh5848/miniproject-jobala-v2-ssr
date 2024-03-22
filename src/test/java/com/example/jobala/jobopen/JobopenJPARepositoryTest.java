@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -15,6 +16,9 @@ class JobopenJPARepositoryTest {
 
     @Autowired
     private JobopenJPARepository jobopenJPARepository;
+
+    @Autowired
+    private EntityManager em;
 
     @Test
     public void 공고등록_test() {
@@ -59,6 +63,7 @@ class JobopenJPARepositoryTest {
 
         // when
         jobopenJPARepository.deleteById(id);
+        em.flush();
 
         // then
 

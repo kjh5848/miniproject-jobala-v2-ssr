@@ -14,7 +14,7 @@ public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     private Integer jobopenId;
     private Integer resumeId;

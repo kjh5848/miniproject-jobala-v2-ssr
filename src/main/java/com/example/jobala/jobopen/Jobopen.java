@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.Apply;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -11,6 +12,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @NoArgsConstructor
 @Entity
@@ -21,7 +25,7 @@ public class Jobopen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     private String jobopenTitle; //공고제목
     private String content; //내용
@@ -39,11 +43,14 @@ public class Jobopen {
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
-    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Skill skill;
 
+    @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Apply> applies = new ArrayList<>();
+
     @Builder
-    public Jobopen(Integer id, User user, String compname, String jobopenTitle, String content, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String content, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -55,10 +62,6 @@ public class Jobopen {
         this.jobType = jobType;
         this.salary = salary;
         this.endTime = endTime;
-        this.createdAt = createdAt;
         this.role = role;
-        this.skill = skill;
     }
-    //    @Transient
-//    private Integer count;
 }
