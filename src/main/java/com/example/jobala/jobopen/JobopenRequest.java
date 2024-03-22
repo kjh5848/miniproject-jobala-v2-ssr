@@ -74,10 +74,6 @@ public class JobopenRequest {
                     .compLocation(compLocation)
                     .content(content)
                     .endTime(endTime)
-<<<<<<< HEAD
-                    .skill(Skill.builder().role(1).name(String.join(",", skills)).build())
-=======
->>>>>>> pch/jobopen/delete
                     .build();
         }
     }
