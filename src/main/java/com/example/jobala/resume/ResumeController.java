@@ -51,14 +51,11 @@ public class ResumeController {
 
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        Resume resume = resumeRepository.findById(id);
-        resumeRepository.update(resume.getId(), reqDTO);
+        resumeService.이력서수정(id, reqDTO);
+//        resumeRepository.update(id, reqDTO);
         return "redirect:/guest/mngForm";
     }
+
 
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
@@ -66,11 +63,11 @@ public class ResumeController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        Resume resume = resumeRepository.findById(id);
+        Resume resume = resumeService.이력서조회(id);
 
         // 이력서에 저장된 이미지 파일 정보 가져오기
-        Pic pic = picRepository.resumeFindByPic(id);
-        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
+//        Pic pic = picRepository.resumeFindByPic(id);
+//        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
 
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);

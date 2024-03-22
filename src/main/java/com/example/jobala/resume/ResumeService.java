@@ -4,14 +4,19 @@ import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala.board.Board;
 import com.example.jobala.skill.Skill;
+import com.example.jobala.skill.SkillJPARepository;
+import com.google.gson.Gson;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
+    private final SkillJPARepository skillJPARepository;
 
     @Transactional
     public Resume resumeDelete(int resumeId, Integer sessionUserId) {
@@ -22,5 +27,31 @@ public class ResumeService {
         }
             resumeJPARepository.deleteById(resumeId);
         return resume;
+    }
+
+    public Resume 이력서수정(int resumeId, ResumeRequest.UpdateDTO reqDTO) {
+        Resume resume = resumeJPARepository.findById(resumeId)
+                .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
+        resume.setResumeTitle(reqDTO.getResumeTitle());
+        resume.setHopeJob(reqDTO.getHopeJob());
+        resume.setCareer(reqDTO.getCareer());
+        resume.setLicense(reqDTO.getLicense());
+        resume.setContent(reqDTO.getContent());
+        resume.setEdu(reqDTO.getEdu());
+
+        Skill skill = skillJPARepository.findByResumeId(resumeId)
+                .orElseThrow(() -> new Exception404("기술스택 정보를 찾을 수 없습니다."));
+
+        List<String> skills = reqDTO.getSkills();
+        String json = new Gson().toJson(skills);
+        System.out.println("제이슨 결과 = " + json);
+
+        skill.setName(json);
+        return resume;
+    }
+
+    public Resume 이력서조회(Integer id) {
+        return resumeJPARepository.findById(id)
+                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
     }
 }
