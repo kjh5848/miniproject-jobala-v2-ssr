@@ -13,8 +13,47 @@ import java.util.Optional;
 @DataJpaTest
 class JobopenJPARepositoryTest {
 
+
     @Autowired
     private JobopenJPARepository jobopenJPARepository;
+
+    @Test
+    public void 공고수정_test(){
+        //given
+        int id = 1;
+
+        Jobopen jobopen = jobopenJPARepository.findById(id).get();
+        // UpdateDTO 인스턴스 생성
+
+        // 각 속성 설정
+        String jobopenTtile = "몰라";
+        String career = "Mid-level";
+        String edu = "Bachelor's degree";
+        String jobType = "Full-time";
+        String salary = "100000";
+        String hopeJob = "Software Engineer";
+        String compLocation = "Seoul";
+        String endTime = "2024-04-01";
+
+        JobopenRequest.UpdateDTO updateDTO = new JobopenRequest.UpdateDTO(jobopenTtile,career,edu,jobType,salary,hopeJob,compLocation,endTime);
+        // UpdateDTO 인스턴스에 각 속성 설정
+
+        jobopen.setJobopenTitle(updateDTO.getJobopenTitle());
+        jobopen.setCareer(updateDTO.getCareer());
+        jobopen.setEdu(updateDTO.getEdu());
+        jobopen.setJobType(updateDTO.getJobType());
+        jobopen.setSalary(updateDTO.getSalary());
+        jobopen.setHopeJob(updateDTO.getHopeJob());
+        jobopen.setCompLocation(updateDTO.getCompLocation());
+        jobopen.setEndTime(Date.valueOf(updateDTO.getEndTime()));
+
+            // 각 속성 값이 올바르게 설정되었는지 확인
+        Jobopen jobopen2 = jobopenJPARepository.findById(id).get();
+
+        System.out.println("jobopen2 = " + jobopen2);
+        //when
+        //then
+    }
 
     @Test
     public void 공고등록_test() {

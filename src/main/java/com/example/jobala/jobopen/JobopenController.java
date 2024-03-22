@@ -55,7 +55,7 @@ public class JobopenController {
             return "redirect:/loginForm";
         }
         Jobopen jobopen = jobopenRepository.findById(id);
-        jobopenRepository.update(jobopen.getId(), reqDTO);
+
         return "redirect:/comp/mngForm";
     }
 
