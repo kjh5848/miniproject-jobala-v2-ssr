@@ -43,7 +43,7 @@ public class Jobopen {
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
-    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Skill skill;
 
     @OneToMany(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
