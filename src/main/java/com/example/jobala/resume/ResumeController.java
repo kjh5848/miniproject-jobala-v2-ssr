@@ -2,7 +2,6 @@ package com.example.jobala.resume;
 
 import com.example.jobala.Pic.Pic;
 import com.example.jobala.Pic.PicQueryRepository;
-import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserQueryRepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -16,9 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +49,7 @@ public class ResumeController {
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
         resumeService.이력서수정(id, reqDTO);
-//        resumeRepository.update(id, reqDTO);
+        System.out.println("이력서 수정 실행");
         return "redirect:/guest/mngForm";
     }
 
