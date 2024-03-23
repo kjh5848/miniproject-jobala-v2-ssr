@@ -1,5 +1,7 @@
 package com.example.jobala._user;
 
+import com.example.jobala.comp.CompRequest;
+import com.example.jobala.guest.GuestRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +35,8 @@ public class User {
     private String ceo; // 기업 대표명
     private String address; //주소
 
+    private String imgTitle; // 이미지 이름
+    private String imgFilename; // 파일 패스
 
     private Integer role; // 0 -> guest, 1 -> comp
 
@@ -41,12 +45,11 @@ public class User {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    private String imgFilename; // 사진 파일명 추가
-
-    @PrePersist // 엔티티가 저장되기 실행되는 메서드, 필드에 기본값을 설정
+    // 사진이 null로 들어올때 디폴트 값 설정하기
+    @PrePersist // 엔티티가 저장되기 전에 실행되는 메서드, 필드에 기본값 설정
     public void setDefaultImgFilename() {
-        if (imgFilename == null) {
-            imgFilename = "default.jpg"; // 디폴트 파일명으로 설정
+        if(imgFilename == null) {
+            imgFilename = "default.png";
         }
     }
 
@@ -67,5 +70,23 @@ public class User {
         this.imgFilename = imgFilename; // 생성자에서 imgFilename을 설정할 수 있도록 추가
     }
 
-    
+    //프로필 업데이트 setter
+    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO, String webImgPath) {
+        this.name = reqDTO.getName();
+        this.password = reqDTO.getPassword();
+        this.phone = reqDTO.getPhone();
+        this.email = reqDTO.getEmail();
+        this.imgTitle = reqDTO.getImgTitle();
+        this.imgFilename = webImgPath;
+    }
+
+    public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO, String webImgPath) {
+        this.name = reqDTO.getName();
+        this.password = reqDTO.getPassword();
+        this.phone = reqDTO.getPhone();
+        this.email = reqDTO.getEmail();
+        this.address = reqDTO.getAddress();
+        this.imgTitle = reqDTO.getImgTitle();
+        this.imgFilename = webImgPath;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.jobala.comp;
 
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
@@ -20,21 +21,37 @@ public class CompQueryRepository {
     @Transactional
     public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
         System.out.println("profileDto = " + profileDto);
-        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ? WHERE id = ?");
+        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ?, img_filename =?, img_title = ?  WHERE id = ?");
         query.setParameter(1, profileDto.getName());
         query.setParameter(2, profileDto.getPassword());
         query.setParameter(3, profileDto.getPhone());
         query.setParameter(4, profileDto.getEmail());
         query.setParameter(5, profileDto.getAddress());
         query.setParameter(6, profileDto.getId());
+        query.setParameter(7, profileDto.getImgFilename());
+        query.setParameter(8, profileDto.getImgTitle());
         query.executeUpdate();
     }
 
     public List<CompResponse.CompProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
+        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num, img_filename, img_title  FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
         query.setParameter(1, userId);
 
         List<CompResponse.CompProfileDTO> CompProfile = query.getResultList();
+
+        // 이미지 파일 제목 경로가 NULL인 경우를 처리
+        for (CompResponse.CompProfileDTO profileDTO : CompProfile) {
+            if (profileDTO.getImgFilename() == null) {
+                profileDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
+                profileDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
+            } else {
+                // 파일 이름과 확장자를 분리
+                String[] parts = profileDTO.getImgFilename().split("_");
+                String imgTitle = parts[1]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+                profileDTO.setImgTitle(imgTitle);
+            }
+        }
+        System.out.println("CompProfile: " + CompProfile);
         return CompProfile;
     }
 
@@ -100,12 +117,12 @@ public class CompQueryRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery);
-        query.setParameter(1, "%"+skill[0]+"%");
-        query.setParameter(2, "%"+skill[1]+"%");
-        query.setParameter(3, "%"+skill[2]+"%");
-        query.setParameter(4, "%"+skill[3]+"%");
-        query.setParameter(5, "%"+skill[4]+"%");
-        query.setParameter(6, "%"+skill[5]+"%");
+        query.setParameter(1, "%" + skill[0] + "%");
+        query.setParameter(2, "%" + skill[1] + "%");
+        query.setParameter(3, "%" + skill[2] + "%");
+        query.setParameter(4, "%" + skill[3] + "%");
+        query.setParameter(5, "%" + skill[4] + "%");
+        query.setParameter(6, "%" + skill[5] + "%");
         query.setParameter(7, career[0]);
         query.setParameter(8, career[1]);
         query.setParameter(9, edu[0]);
