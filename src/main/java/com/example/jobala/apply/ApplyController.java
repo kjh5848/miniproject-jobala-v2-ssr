@@ -19,6 +19,7 @@ public class ApplyController {
 
     private final HttpSession session;
     private final ApplyQueryRepository applyRepository;
+    private final ApplyService applyService;
 
     //기업이 제안한 상태 업데이트
     @PostMapping("comp/applyStatus/update")
@@ -52,7 +53,7 @@ public class ApplyController {
             return "redirect:/loginForm";
         }
         System.out.println("지원하기 이력서, 공고 아이디 = " + reqDTO);
-        applyRepository.resumeApplySave(reqDTO, sessionUser);
+        applyService.이력서로지원후저장(reqDTO, sessionUser);
 
         return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
     }
@@ -64,7 +65,7 @@ public class ApplyController {
             return "redirect:/loginForm";
         }
         System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
-        applyRepository.jobopenApplySave(reqDTO, sessionUser);
+        applyService.공고로지원후저장(reqDTO, sessionUser);
 
         return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
@@ -76,7 +77,7 @@ public class ApplyController {
         return applicantProfiles;
     }
 
-
+// TODO: applyPositionForm, applyStatusForm 삭제 예정
     //기업이 지원받은 이력서의 상태 여부를 결정
     @GetMapping("/applyPositionForm")
     public String applyPositionForm(HttpServletRequest req) {
