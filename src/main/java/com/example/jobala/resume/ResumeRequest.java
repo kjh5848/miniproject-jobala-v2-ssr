@@ -18,6 +18,8 @@ public class ResumeRequest {
         private String content;
         private String edu;
         private List<String> skills = new ArrayList<>();
+
+
     }
 
     @AllArgsConstructor

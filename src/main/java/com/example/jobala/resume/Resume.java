@@ -3,12 +3,16 @@ package com.example.jobala.resume;
 import com.example.jobala._user.User;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "resume_tb")
@@ -26,15 +30,25 @@ public class Resume {
     private String license;
     private String content;
     private String edu;
-
-    @CreationTimestamp
-    private Timestamp createdAt;
+    private String skills;
 
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
 
+    @CreationTimestamp
+    private Timestamp createdAt;
 
-
-//    @OneToOne(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-//    private Skill skill;
+    @Builder
+    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, Integer role) {
+        this.id = id;
+        this.user = user;
+        this.name = name;
+        this.resumeTitle = resumeTitle;
+        this.hopeJob = hopeJob;
+        this.career = career;
+        this.license = license;
+        this.content = content;
+        this.edu = edu;
+        this.role = role;
+    }
 }
