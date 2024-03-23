@@ -31,6 +31,7 @@ public class GuestResponse {
         private String password;
         private String phone;
         private String email;
+        private String imgFilename;
     }
 
     @Data
@@ -41,6 +42,7 @@ public class GuestResponse {
         private String phone;
         private String email;
         private Integer id;
+        private String imgFilename;
     }
 }
 
