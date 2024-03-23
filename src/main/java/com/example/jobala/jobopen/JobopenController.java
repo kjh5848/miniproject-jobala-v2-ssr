@@ -35,6 +35,7 @@ public class JobopenController {
     private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
     private final JobopenService jobopenService;
+    private final JobopenJPARepository jobopenJPARepository;
     private Pic pic;
 
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -62,7 +63,8 @@ public class JobopenController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        Jobopen jobopen = jobopenRepository.findById(id);
+        Jobopen jobopen =jobopenJPARepository.findById(id)
+                .orElseThrow();
         req.setAttribute("jobopen", jobopen);
 
         // 이력서에 저장된 이미지 파일 정보 가져오기

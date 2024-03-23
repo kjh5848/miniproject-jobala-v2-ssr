@@ -38,7 +38,11 @@ public class JobopenService {
         jobopen.setSalary(reqDTO.getSalary());
         jobopen.setHopeJob(reqDTO.getHopeJob());
         jobopen.setCompLocation(reqDTO.getCompLocation());
-        jobopen.setEndTime(Date.valueOf(reqDTO.getEndTime()));
+        jobopen.setEndTime(reqDTO.getEndTime());
+
+        String json = new Gson().toJson(reqDTO.getSkills());
+        jobopen.getSkill().setName(json);
+
 
         return jobopen;
     }
@@ -48,6 +52,7 @@ public class JobopenService {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));
 
         List<String> skills = reqDTO.getSkills();
+        System.out.println(skills);
         String json = new Gson().toJson(skills);
         System.out.println("제이슨 결과 = " + json);
 
