@@ -21,19 +21,7 @@ public class ResumeService {
     //TODO: 포스트맨으로 권한체크하기
     @Transactional
     public Resume 이력서등록(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
-        Resume resume = resumeJPARepository.save(reqDTO.toEntity(sessionUser));
-
-        List<String> skills = reqDTO.getSkills();
-
-        String json = new Gson().toJson(skills);
-        Skill skill = Skill.builder()
-                .role(0)
-                .name(json)
-                .resume(resume)
-                .build();
-
-        skillJPARepository.save(skill);
-        return resume;
+        return resumeJPARepository.save(reqDTO.toEntity(sessionUser));
     }
 
     @Transactional
@@ -58,11 +46,7 @@ public class ResumeService {
         resume.setContent(reqDTO.getContent());
         resume.setEdu(reqDTO.getEdu());
 
-        List<String> skills = reqDTO.getSkills();
-        String json = new Gson().toJson(skills);
-        System.out.println("제이슨 결과 = " + json);
 
-        resume.getSkill().setName(json);
         return resume;
     }
 

@@ -33,6 +33,7 @@ public class User {
     private String ceo; // 기업 대표명
     private String address; //주소
 
+
     private Integer role; // 0 -> guest, 1 -> comp
 
     private Date age;
@@ -65,4 +66,6 @@ public class User {
         this.age = age;
         this.imgFilename = imgFilename; // 생성자에서 imgFilename을 설정할 수 있도록 추가
     }
+
+    
 }

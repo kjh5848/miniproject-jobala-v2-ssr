@@ -56,6 +56,8 @@ public class JobopenController {
         return "redirect:/comp/mngForm";
     }
 
+
+    //TODO: 글조회로 변경예정
     @GetMapping("/comp/jobopen/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -73,6 +75,7 @@ public class JobopenController {
         return "/comp/jobopen/updateForm";
     }
 
+    //공고 등록
     @PostMapping("/comp/jobopen/save")
     public String jobopenSave(JobopenRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");

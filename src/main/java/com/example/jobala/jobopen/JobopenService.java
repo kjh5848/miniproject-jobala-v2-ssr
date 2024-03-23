@@ -31,14 +31,7 @@ public class JobopenService {
         }
 
         //3.공고 수정
-        jobopen.setJobopenTitle(reqDTO.getJobopenTitle());
-        jobopen.setCareer(reqDTO.getCareer());
-        jobopen.setEdu(reqDTO.getEdu());
-        jobopen.setJobType(reqDTO.getJobType());
-        jobopen.setSalary(reqDTO.getSalary());
-        jobopen.setHopeJob(reqDTO.getHopeJob());
-        jobopen.setCompLocation(reqDTO.getCompLocation());
-        jobopen.setEndTime(Date.valueOf(reqDTO.getEndTime()));
+        jobopen.setJobopenUpdate(reqDTO);
 
         return jobopen;
     }
@@ -46,18 +39,6 @@ public class JobopenService {
     @Transactional
     public Jobopen 공고등록(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));
-
-        List<String> skills = reqDTO.getSkills();
-        String json = new Gson().toJson(skills);
-        System.out.println("제이슨 결과 = " + json);
-
-        Skill skill = Skill.builder()
-                .role(1)
-                .name(json)
-                .jobopen(jobopen)
-                .build();
-
-        skillJPARepository.save(skill);
         return jobopen;
     }
 

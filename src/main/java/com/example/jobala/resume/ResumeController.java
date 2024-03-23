@@ -132,12 +132,10 @@ public class ResumeController {
         return "redirect:/guest/mngForm";
     }
 
+    //이력서 삭제
     @PostMapping("/resume/{id}/delete")
     public String delete(@PathVariable int id, ResumeRequest.DeleteDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         resumeService.이력서삭제(id, reqDTO.getId());
         return "redirect:/guest/mngForm";
     }

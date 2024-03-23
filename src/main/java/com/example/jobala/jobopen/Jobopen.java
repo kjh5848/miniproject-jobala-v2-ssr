@@ -13,7 +13,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,24 +35,23 @@ public class Jobopen {
     private String jobType; // 고용형태
     private String salary; //연봉
     private Date endTime; // 마감일
-
-    @CreationTimestamp
-    private Timestamp createdAt; //생성일
+    private String skills;
 
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
+    @CreationTimestamp
+    private Timestamp createdAt; //생성일
+
+
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();
-
-    @OneToOne(mappedBy = "jobopen",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Skill skill;
 
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Scrap> scraps;
 
     @Builder
-    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, Skill skill) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, String skills) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -65,6 +63,18 @@ public class Jobopen {
         this.salary = salary;
         this.endTime = endTime;
         this.role = role;
-        this.skill = skill;
+        this.skills = skills;
+    }
+
+    public void setJobopenUpdate(JobopenRequest.UpdateDTO reqDTO) {
+        this.edu = reqDTO.getEdu();
+        this.jobopenTitle = reqDTO.getJobopenTitle();
+        this.career = reqDTO.getCareer();
+        this.jobType = reqDTO.getJobType();
+        this.salary = reqDTO.getSalary();
+        this.hopeJob = reqDTO.getHopeJob();
+        this.compLocation = reqDTO.getCompLocation();
+        this.endTime = Date.valueOf(reqDTO.getEndTime());
+        this.skills = reqDTO.getCareer();
     }
 }

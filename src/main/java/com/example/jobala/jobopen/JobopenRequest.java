@@ -57,13 +57,14 @@ public class JobopenRequest {
         private String salary;
         private String hopeJob;
         private String compLocation;
-        private String content;
         private Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
 
         public Jobopen toEntity(User user) {
             return Jobopen.builder()
+                    .skills(String.valueOf(skills))
                     .user(user)
+                    .role(user.getRole())
                     .edu(edu)
                     .jobopenTitle(jobopenTitle)
                     .career(career)
@@ -74,6 +75,8 @@ public class JobopenRequest {
                     .endTime(endTime)
                     .build();
         }
+
+
     }
 }
 

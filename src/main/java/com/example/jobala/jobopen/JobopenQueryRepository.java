@@ -25,50 +25,6 @@ public class JobopenQueryRepository {
         return resumeList2;
     }
 
-    @Transactional
-    public void save(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
-        // jobopen인설트
-        String q = """
-                insert into jobopen_tb(user_id, edu, career, job_type, salary, hope_job ,comp_location ,content , end_time , jobopen_title, created_at, role) values (?,?,?,?,?,?,?,?,?,?,now(),?)
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, sessionUser.getId());
-        query.setParameter(2, reqDTO.getEdu());
-        query.setParameter(3, reqDTO.getCareer());
-        query.setParameter(4, reqDTO.getJobType());
-        query.setParameter(5, reqDTO.getSalary());
-        query.setParameter(6, reqDTO.getHopeJob());
-        query.setParameter(7, reqDTO.getCompLocation());
-        query.setParameter(8, reqDTO.getContent());
-        query.setParameter(9, reqDTO.getEndTime());
-        query.setParameter(10, reqDTO.getJobopenTitle());
-        query.setParameter(11, sessionUser.getRole());
-        query.executeUpdate();
-
-        // jobopen id 받기
-        String q2 = """
-                select max(id) from jobopen_tb
-                """;
-        Query query2 = em.createNativeQuery(q2);
-        Integer jobopenId = (Integer) query2.getSingleResult();
-
-        //스킬 insert
-        String q3 = """
-                insert into skill_tb(role, jobopen_id, name) values (?,?,?)
-                """;
-        Query query3 = em.createNativeQuery(q3);
-
-        // List -> JSON
-        List<String> skills = reqDTO.getSkills();
-        String json = new Gson().toJson(skills);
-        System.out.println("제이슨 결과 = " + json);
-
-        query3.setParameter(1, sessionUser.getRole());
-        query3.setParameter(2, jobopenId);
-        query3.setParameter(3, json);
-        query3.executeUpdate();
-
-    }
 
     public Jobopen findById(Integer id) {
         Query query = em.createNativeQuery("select * from jobopen_tb where id = ?", Jobopen.class);

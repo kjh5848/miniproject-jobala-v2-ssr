@@ -26,6 +26,7 @@ public class UserController {
     private final UserQueryRepository userRepository;
     private final JobopenQueryRepository jobopenRepository;
     private final PicQueryRepository picRepository;
+    private final UserJPARepository userJPARepository;
     private final HttpSession session;
 
 
@@ -37,6 +38,7 @@ public class UserController {
     }
 
     // DEL: mainForm 삭제
+
 
     // TODO: loginFrorm 삭제예정
     @GetMapping("/loginForm")
