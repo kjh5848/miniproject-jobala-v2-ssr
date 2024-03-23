@@ -4,6 +4,7 @@ import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -38,4 +39,14 @@ public class Apply {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    @Builder
+    public Apply(Integer id, Resume resume, Jobopen jobopen, User user, String state, Integer role, Timestamp createdAt) {
+        this.id = id;
+        this.resume = resume;
+        this.jobopen = jobopen;
+        this.user = user;
+        this.state = state;
+        this.role = role;
+        this.createdAt = createdAt;
+    }
 }

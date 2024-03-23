@@ -112,6 +112,7 @@ public class ApplyQueryRepository {
         }
     }
 
+    // TODO: jobopenApplySave, resumeApplySave Service에서 구현 예정
     @Transactional
     public void jobopenApplySave(ApplyRequest.JobopenApplyDTO reqDTO, User sessionUser) {
         String q = """
@@ -125,6 +126,7 @@ public class ApplyQueryRepository {
         query.setParameter(5, "검토중");
         query.executeUpdate();
     }
+
 
     @Transactional
     public void resumeApplySave(ApplyRequest.ResumeApplyDTO reqDTO, User sessionUser) {
@@ -140,14 +142,8 @@ public class ApplyQueryRepository {
         query.executeUpdate();
     }
 
-
     @Transactional
     public void save() {
-        return;
-    }
-
-    @Transactional
-    public void upDate() {
         return;
     }
 
