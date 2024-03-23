@@ -1,5 +1,6 @@
 package com.example.jobala._user;
 
+import com.example.jobala.comp.CompRequest;
 import com.example.jobala.guest.GuestRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -74,6 +75,16 @@ public class User {
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
+        this.imgTitle = reqDTO.getImgTitle();
+        this.imgFilename = webImgPath;
+    }
+
+    public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO, String webImgPath) {
+        this.name = reqDTO.getName();
+        this.password = reqDTO.getPassword();
+        this.phone = reqDTO.getPhone();
+        this.email = reqDTO.getEmail();
+        this.address = reqDTO.getAddress();
         this.imgTitle = reqDTO.getImgTitle();
         this.imgFilename = webImgPath;
     }
