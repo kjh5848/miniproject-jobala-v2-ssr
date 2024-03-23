@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @Controller
-//@RequestMapping("/applys")
 @RequiredArgsConstructor
 public class ApplyController {
 

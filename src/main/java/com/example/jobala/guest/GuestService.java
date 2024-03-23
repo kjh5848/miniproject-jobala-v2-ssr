@@ -29,21 +29,18 @@ public class GuestService {
 
         // 이미지 파일의 저장 경로 설정
         String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
-        Path imgPath = Paths.get("./image/" + imgFilename);
+        Path imgPath = Paths.get("./image/" + GuestImgFilename);
 
         try {
             Files.write(imgPath, imgFilename.getBytes());
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setGuestProfileUpdateDTO(reqDTO);
+            user.setGuestProfileUpdateDTO(reqDTO,webImgPath);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
-        user.setGuestProfileUpdateDTO(reqDTO);
         return user;
     }
 }
