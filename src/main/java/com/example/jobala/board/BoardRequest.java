@@ -14,6 +14,7 @@ public class BoardRequest {
             Board board = Board.builder()
                     .title(title)
                     .content(content)
+                    //유저 객체 받아오기
                     .user(sessionUser)
                     .build();
             return board;
