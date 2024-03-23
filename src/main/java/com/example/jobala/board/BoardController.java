@@ -56,29 +56,18 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO) {
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO) {
 
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
-        boardRepository.update(requestDTO, id);
+        boardService.글수정(id,sessionUser.getId(),reqDTO);
         return "redirect:/board/" + id ;
 
     }
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable int id, HttpServletRequest request) {
-
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-
-        BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
-        request.setAttribute("board", board);
-
+        Board board = boardService.글조회(id);
+        request.setAttribute("board",board);
         return "board/updateForm";
     }
 
