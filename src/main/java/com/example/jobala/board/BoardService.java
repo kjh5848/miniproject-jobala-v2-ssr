@@ -52,4 +52,9 @@ public class BoardService {
         return board;
     }
 
+    @Transactional
+    public void 글쓰기(BoardRequest.SaveDTO reqDTO, User sessionUser){
+       boardJPARepository.save(reqDTO.toEntity(sessionUser));
+    }
+
 }

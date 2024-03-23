@@ -81,19 +81,12 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "redirect:/loginForm";
-        }
-
+    public String save(BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-
+        System.out.println(1);
         // 게시물 저장 로직
-        boardRepository.save(requestDTO, sessionUser.getId());
+        boardService.글쓰기(reqDTO,sessionUser);
+        System.out.println();
 
         // 메인 폼으로 리다이렉트
         return "redirect:/board/mainForm";
