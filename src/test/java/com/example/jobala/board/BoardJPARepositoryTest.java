@@ -1,5 +1,6 @@
 package com.example.jobala.board;
 
+import com.example.jobala._user.User;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class BoardJPARepositoryTest {
-
+    //기본
     @Autowired
     private BoardJPARepository boardJPARepository;
 
@@ -33,6 +34,23 @@ class BoardJPARepositoryTest {
 
 
     //then
+    }
+
+    @Test
+    public void save_test(){
+        //given
+        User sessionUser = User.builder().id(1).build();
+        Board board = Board.builder()
+                .title("hi")
+                .content("bi")
+                .user(sessionUser)
+                .build();
+        //when
+        boardJPARepository.save(board);
+
+
+        //then
+        System.out.println("save_test : id : "+board.getId());
     }
 
 }
