@@ -29,10 +29,11 @@ public class GuestQueryRepository {
     }
 
     public List<GuestResponse.GuestProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email FROM user_tb WHERE id = ?", GuestResponse.GuestProfileDTO.class);
+        Query query = em.createNativeQuery("SELECT name, password, phone, email, img_filename FROM user_tb WHERE id = ?", GuestResponse.GuestProfileDTO.class);
         query.setParameter(1, userId);
 
         List<GuestResponse.GuestProfileDTO> GuestProfile = query.getResultList();
+        System.out.println("GuestProfile: " + GuestProfile);
         return GuestProfile;
     }
 

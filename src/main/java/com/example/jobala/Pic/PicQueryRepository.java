@@ -12,7 +12,7 @@ public class PicQueryRepository {
     private final EntityManager em;
 
     public Pic resumeFindByPic(int id) {
-        Query query = em.createNativeQuery("SELECT * FROM pic_tb WHERE resume_id = ?", Pic.class);
+        Query query = em.createNativeQuery("SELECT * FROM user_tb WHERE resume_id = ?", Pic.class);
         query.setParameter(1, id);
         System.out.println(id);
         return (Pic) query.getSingleResult();
@@ -23,24 +23,22 @@ public class PicQueryRepository {
         Query query = em.createNativeQuery("select max(id+1) from resume_tb");
         Integer resumeId = (Integer) query.getSingleResult();
 
-        Query query2 = em.createNativeQuery("insert into pic_tb(title, img_filename, resume_id) values(?,?,?)");
-        query2.setParameter(1, title);
-        query2.setParameter(2, imgFilename);
-        query2.setParameter(3, resumeId);
+        Query query2 = em.createNativeQuery("insert into user_tb(img_filename, resume_id) values(?,?)");
+        query2.setParameter(1, imgFilename);
+        query2.setParameter(2, resumeId);
         query2.executeUpdate();
     }
 
     @Transactional
     public void resumeUpdate(String title, String imgFilename, int id) {
-        Query query2 = em.createNativeQuery("UPDATE pic_tb SET title = ?, img_filename = ? WHERE resume_id = ?;");
-        query2.setParameter(1, title);
-        query2.setParameter(2, imgFilename);
-        query2.setParameter(3, id);
+        Query query2 = em.createNativeQuery("UPDATE user_tb SET img_filename = ? WHERE resume_id = ?;");
+        query2.setParameter(1, imgFilename);
+        query2.setParameter(2, id);
         query2.executeUpdate();
     }
 
     public Pic jobopenFindByPic(int id) {
-        Query query = em.createNativeQuery("SELECT * FROM pic_tb WHERE jobopen_id = ?", Pic.class);
+        Query query = em.createNativeQuery("SELECT * FROM user_tb WHERE jobopen_id = ?", Pic.class);
         query.setParameter(1, id);
         System.out.println(id);
         return (Pic) query.getSingleResult();
@@ -51,7 +49,7 @@ public class PicQueryRepository {
         Query query = em.createNativeQuery("select max(id+1) from jobopen_tb");
         Integer jobopenId = (Integer) query.getSingleResult();
 
-        Query query2 = em.createNativeQuery("insert into pic_tb(title, img_filename, jobopen_id) values(?,?,?)");
+        Query query2 = em.createNativeQuery("insert into user_tb(img_filename, jobopen_id) values(?,?,?)");
         query2.setParameter(1, title);
         query2.setParameter(2, imgFilename);
         query2.setParameter(3, jobopenId);
@@ -60,10 +58,9 @@ public class PicQueryRepository {
 
     @Transactional
     public void jobopenUpdate(String title, String imgFilename, Integer id) {
-        Query query2 = em.createNativeQuery("UPDATE pic_tb SET title = ?, img_filename = ? WHERE jobopen_id = ?;");
-        query2.setParameter(1, title);
-        query2.setParameter(2, imgFilename);
-        query2.setParameter(3, id);
+        Query query2 = em.createNativeQuery("UPDATE pic_tb SET img_filename = ? WHERE jobopen_id = ?;");
+        query2.setParameter(1, imgFilename);
+        query2.setParameter(2, id);
         query2.executeUpdate();
     }
 }
