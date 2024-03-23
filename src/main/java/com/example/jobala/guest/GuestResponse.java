@@ -32,6 +32,7 @@ public class GuestResponse {
         private String phone;
         private String email;
         private String imgFilename;
+        private String imgTitle;
     }
 
     @Data
@@ -43,6 +44,7 @@ public class GuestResponse {
         private String email;
         private Integer id;
         private String imgFilename;
+        private String imgTitle;
     }
 }
 
