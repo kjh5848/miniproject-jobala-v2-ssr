@@ -29,15 +29,30 @@ public class GuestQueryRepository {
     }
 
     public List<GuestResponse.GuestProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email, img_filename FROM user_tb WHERE id = ?", GuestResponse.GuestProfileDTO.class);
+        Query query = em.createNativeQuery("select name, password, phone, email, img_filename, img_title from user_tb where id = ?", GuestResponse.GuestProfileDTO.class);
         query.setParameter(1, userId);
 
         List<GuestResponse.GuestProfileDTO> GuestProfile = query.getResultList();
+
+        // 이미지 파일 제목 경로가 NULL인 경우를 처리
+        for (GuestResponse.GuestProfileDTO profileDTO : GuestProfile) {
+            if (profileDTO.getImgFilename() == null) {
+                profileDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
+                profileDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
+            } else {
+                // 파일 이름과 확장자를 분리
+                String[] parts = profileDTO.getImgFilename().split("_");
+                String imgTitle = parts[1]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+                profileDTO.setImgTitle(imgTitle);
+            }
+        }
+
         System.out.println("GuestProfile: " + GuestProfile);
         return GuestProfile;
     }
 
-    public List<GuestResponse.JopOpenApplyDTO> findStateByUserId(int userId){
+
+    public List<GuestResponse.JopOpenApplyDTO> findStateByUserId(int userId) {
         String q = """
                 SELECT j.jobopen_title, r.resume_title, a.state
                 FROM apply_tb a
@@ -65,18 +80,18 @@ public class GuestQueryRepository {
     // 모든 필터를 선택해야 한다는 치명적 단점이 존재함
     public List<JobopenResponse.ListDTO> findAll(String skills, GuestResponse.SearchDTO resDTO) {
         String skillQuery = """
-               SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
-               (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename 
-               FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id 
-               where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
-               AND (jb.career IN (?, ?)) 
-               AND (jb.comp_location IN (?, ?, ?, ?)) 
-               AND (jb.edu IN (?, ?)) 
-               AND (jb.salary IN (?, ?, ?)) 
-               AND (jb.hope_job IN (?, ?)) 
-               AND (jb.job_type IN (?, ?, ?)) 
-               order by jb.id desc 
-               """;
+                SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
+                (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename 
+                FROM jobopen_tb jb INNER JOIN skill_tb sk ON jb.id = sk.jobopen_id 
+                where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
+                AND (jb.career IN (?, ?)) 
+                AND (jb.comp_location IN (?, ?, ?, ?)) 
+                AND (jb.edu IN (?, ?)) 
+                AND (jb.salary IN (?, ?, ?)) 
+                AND (jb.hope_job IN (?, ?)) 
+                AND (jb.job_type IN (?, ?, ?)) 
+                order by jb.id desc 
+                """;
         // skill 파싱
         String[] skill = {"", "", "", "", "", ""};
         String[] skillArr;
@@ -90,11 +105,11 @@ public class GuestQueryRepository {
 
 
         // career 파싱
-        String[] career = {null , null};
+        String[] career = {null, null};
         String[] careerArr;
         try {
             careerArr = resDTO.getCareer().split(",");
-            for (int i = 0; i < careerArr.length ; i++) {
+            for (int i = 0; i < careerArr.length; i++) {
                 career[i] = careerArr[i];
             }
         } catch (Exception e) {
@@ -107,7 +122,7 @@ public class GuestQueryRepository {
         String[] compLocationArr;
         try {
             compLocationArr = resDTO.getCompLocation().split(",");
-            for (int i = 0; i < compLocationArr.length ; i++) {
+            for (int i = 0; i < compLocationArr.length; i++) {
                 compLocation[i] = compLocationArr[i];
             }
         } catch (Exception e) {
@@ -122,7 +137,7 @@ public class GuestQueryRepository {
         String[] eduArr;
         try {
             eduArr = resDTO.getEdu().split(",");
-            for (int i = 0; i < eduArr.length ; i++) {
+            for (int i = 0; i < eduArr.length; i++) {
                 edu[i] = eduArr[i];
             }
         } catch (Exception e) {
@@ -135,7 +150,7 @@ public class GuestQueryRepository {
         String[] salaryArr;
         try {
             salaryArr = resDTO.getSalary().split(",");
-            for (int i = 0; i < salaryArr.length ; i++) {
+            for (int i = 0; i < salaryArr.length; i++) {
                 salary[i] = salaryArr[i];
             }
         } catch (Exception e) {
@@ -149,7 +164,7 @@ public class GuestQueryRepository {
         String[] hopeJobArr;
         try {
             hopeJobArr = resDTO.getHopeJob().split(",");
-            for (int i = 0; i < hopeJobArr.length ; i++) {
+            for (int i = 0; i < hopeJobArr.length; i++) {
                 hopeJob[i] = hopeJobArr[i];
             }
         } catch (Exception e) {
@@ -162,7 +177,7 @@ public class GuestQueryRepository {
         String[] jobTypeArr;
         try {
             jobTypeArr = resDTO.getJobType().split(",");
-            for (int i = 0; i < jobTypeArr.length ; i++) {
+            for (int i = 0; i < jobTypeArr.length; i++) {
                 jobType[i] = jobTypeArr[i];
             }
         } catch (Exception e) {
@@ -172,12 +187,12 @@ public class GuestQueryRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery);
-        query.setParameter(1, "%"+skill[0]+"%");
-        query.setParameter(2, "%"+skill[1]+"%");
-        query.setParameter(3, "%"+skill[2]+"%");
-        query.setParameter(4, "%"+skill[3]+"%");
-        query.setParameter(5, "%"+skill[4]+"%");
-        query.setParameter(6, "%"+skill[5]+"%");
+        query.setParameter(1, "%" + skill[0] + "%");
+        query.setParameter(2, "%" + skill[1] + "%");
+        query.setParameter(3, "%" + skill[2] + "%");
+        query.setParameter(4, "%" + skill[3] + "%");
+        query.setParameter(5, "%" + skill[4] + "%");
+        query.setParameter(6, "%" + skill[5] + "%");
         query.setParameter(7, career[0]);
         query.setParameter(8, career[1]);
         query.setParameter(9, compLocation[0]);
@@ -203,9 +218,9 @@ public class GuestQueryRepository {
 
     public List<JobopenResponse.ListDTO> findByJoboopenAll() {
         String q = """
-                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
-               (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename  from jobopen_tb jb order by id desc;      
-                """;
+                 select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
+                (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename  from jobopen_tb jb order by id desc;      
+                 """;
         Query query = em.createNativeQuery(q);
 
         JpaResultMapper rm = new JpaResultMapper();
