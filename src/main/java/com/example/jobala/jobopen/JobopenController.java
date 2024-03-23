@@ -37,16 +37,15 @@ public class JobopenController {
     private final JobopenService jobopenService;
     private Pic pic;
 
+    //공고 삭제
     @PostMapping("/comp/jobopen/{id}/detete")
     public String delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         jobopenService.공고삭제(id,sessionUser.getId());
         return "redirect:/comp/mngForm";
     }
 
+    //공고 수정
     @PostMapping("/comp/jobopen/{id}/update")
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         System.out.println("id = " + id);
@@ -56,22 +55,13 @@ public class JobopenController {
         return "redirect:/comp/mngForm";
     }
 
-
     //TODO: 글조회로 변경예정
     @GetMapping("/comp/jobopen/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        Jobopen jobopen = jobopenRepository.findById(id);
+
+        Jobopen jobopen = jobopenService.공고보기(id);
         req.setAttribute("jobopen", jobopen);
-
-        // 이력서에 저장된 이미지 파일 정보 가져오기
-        Pic pic = picRepository.jobopenFindByPic(id);
-        System.out.println(pic);
-        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
-
         return "/comp/jobopen/updateForm";
     }
 
@@ -93,6 +83,7 @@ public class JobopenController {
         return "/comp/jobopen/saveForm";
     }
 
+    //공고 보기
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         boolean isCompScrap = false;

@@ -4,6 +4,7 @@ import com.example.jobala._user.User;
 import com.example.jobala.skill.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.sql.Update;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -44,7 +45,8 @@ public class JobopenRequest {
         private String hopeJob;//희망직무
         private String compLocation; //근무지역
         private String endTime; //내용
-//        private List<String> skills = new ArrayList<>();
+        private List<String> skills = new ArrayList<>();//스킬
+
     }
 
     @AllArgsConstructor

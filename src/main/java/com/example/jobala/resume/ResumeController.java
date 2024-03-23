@@ -50,28 +50,20 @@ public class ResumeController {
     //이력서 업데이트
     @PostMapping("/guest/resume/{id}/update")
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
-        resumeService.이력서수정(id, reqDTO);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        resumeService.이력서수정(id, reqDTO,sessionUser.getId());
         System.out.println("이력서 수정 실행");
         return "redirect:/guest/mngForm";
     }
-
 
     // TODO: 글조회로 변경예정
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        Resume resume = resumeService.이력서조회(id);
+        Resume resume = resumeService.이력서보기(id);
 
-        // 이력서에 저장된 이미지 파일 정보 가져오기
-
-//        Pic pic = picRepository.resumeFindByPic(id);
-//        req.setAttribute("pic", pic); // 이미지 파일 경로를 request에 저장
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
-
         return "/guest/resume/updateForm";
     }
 

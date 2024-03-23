@@ -51,7 +51,7 @@ public class Jobopen {
     private List<Scrap> scraps;
 
     @Builder
-    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Timestamp createdAt, Integer role, String skills) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, Integer role, String skills) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -67,14 +67,14 @@ public class Jobopen {
     }
 
     public void setJobopenUpdate(JobopenRequest.UpdateDTO reqDTO) {
-        this.edu = reqDTO.getEdu();
         this.jobopenTitle = reqDTO.getJobopenTitle();
         this.career = reqDTO.getCareer();
+        this.edu = reqDTO.getEdu();
         this.jobType = reqDTO.getJobType();
         this.salary = reqDTO.getSalary();
         this.hopeJob = reqDTO.getHopeJob();
         this.compLocation = reqDTO.getCompLocation();
         this.endTime = Date.valueOf(reqDTO.getEndTime());
-        this.skills = reqDTO.getCareer();
+        this.skills = String.valueOf(reqDTO.getSkills());
     }
 }

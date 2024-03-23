@@ -54,4 +54,15 @@ public class Resume {
         this.skills = skills;
         this.role = role;
     }
+
+    public void setResumeUpdateDTO(ResumeRequest.UpdateDTO reqDTO) {
+        this.resumeTitle = reqDTO.getResumeTitle();
+        this.hopeJob = reqDTO.getHopeJob();
+        this.career = reqDTO.getCareer();
+        this.license = reqDTO.getLicense();
+        this.content = reqDTO.getContent();
+        this.edu = reqDTO.getEdu();
+        this.skills = String.valueOf(reqDTO.getSkills());
+    }
+
 }
