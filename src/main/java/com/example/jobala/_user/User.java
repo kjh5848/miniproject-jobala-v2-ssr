@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -39,8 +40,17 @@ public class User {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    private String imgFilename; // 사진 파일명 추가
+
+    @PrePersist // 엔티티가 저장되기 실행되는 메서드, 필드에 기본값을 설정
+    public void setDefaultImgFilename() {
+        if (imgFilename == null) {
+            imgFilename = "default.jpg"; // 디폴트 파일명으로 설정
+        }
+    }
+
     @Builder
-    public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role, Date age) {
+    public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role, Date age, String imgFilename) {
         this.id = id;
         this.username = username;
         this.compNum = compNum;
@@ -53,5 +63,6 @@ public class User {
         this.address = address;
         this.role = role;
         this.age = age;
+        this.imgFilename = imgFilename; // 생성자에서 imgFilename을 설정할 수 있도록 추가
     }
 }

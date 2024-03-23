@@ -8,9 +8,6 @@ import java.util.Optional;
 
 public interface JobopenJPARepository extends JpaRepository<Jobopen, Integer> {
 
-    @Query("select j from Jobopen j where j.id = :id")
-    Optional<Jobopen> findByIdWithUser(@Param("id") int id);
-
     //공고 찾아오기
     Optional<Jobopen> findJobopenById(@Param("id")int id);
 

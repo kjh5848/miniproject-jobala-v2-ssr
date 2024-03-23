@@ -138,7 +138,7 @@ public class ResumeController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        resumeService.resumeDelete(id, reqDTO.getId());
+        resumeService.이력서삭제(id, reqDTO.getId());
         return "redirect:/guest/mngForm";
     }
 }

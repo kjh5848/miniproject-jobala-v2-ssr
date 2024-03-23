@@ -37,7 +37,7 @@ public class ResumeService {
     }
 
     @Transactional
-    public Resume resumeDelete(int resumeId, Integer sessionUserId) {
+    public Resume 이력서삭제(int resumeId, Integer sessionUserId) {
         Resume resume = resumeJPARepository.findById(sessionUserId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
         if (sessionUserId != resume.getUser().getId()) {

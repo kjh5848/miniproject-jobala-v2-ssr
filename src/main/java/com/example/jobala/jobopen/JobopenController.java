@@ -112,7 +112,7 @@ public class JobopenController {
             req.setAttribute("resumeList2", resumeList2);
         }
         // jobopenDetail 수정 부분
-        Jobopen jobopen = jobopenService.jobopenDetail(id);
+        Jobopen jobopen = jobopenService.공고보기(id);
         JobopenResponse.JobopenDetailDTO JobopenRespDTO = jobopenRepository.findByUserAndJobopen(id);
 
 

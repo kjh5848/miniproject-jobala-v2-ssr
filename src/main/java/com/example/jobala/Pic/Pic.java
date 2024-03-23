@@ -1,13 +1,14 @@
 package com.example.jobala.Pic;
 
-import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.resume.Resume;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 
-@Data
-@Table(name = "pic_tb")
-@Entity
+//@Data
+//@Table(name = "pic_tb")
+//@Entity
 public class Pic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +17,3 @@ public class Pic {
     private String title;
     private String imgFilename; // 파일 패스
 }
-
