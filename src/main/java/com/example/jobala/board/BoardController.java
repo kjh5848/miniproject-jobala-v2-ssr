@@ -21,25 +21,21 @@ import java.util.List;
 public class BoardController {
     private final BoardQueryRepository boardRepository;
     private final ReplyQueryRepository replyRepository;
+    private final BoardService boardService;
 
     private final HttpSession session;
 
     @GetMapping("/board/{id}")
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        System.out.println("id = " + id);
+        Board board = boardService.글상세보기(id,sessionUser);
 
-        BoardResponse.BoardDetailDTO boardDetailDTO = boardRepository.findById(id);
-        System.out.println(boardDetailDTO);
 
         List<ReplyResponse.ReplyDTO> replyList = replyRepository.findByBoardId(id, sessionUser);
         System.out.println("replyList = " + replyList);
-        boardDetailDTO.isOwner(sessionUser);
 
-        req.setAttribute("board", boardDetailDTO);
+
+        req.setAttribute("board", board);
         req.setAttribute("replyList", replyList);
 
         return "/board/detailForm";

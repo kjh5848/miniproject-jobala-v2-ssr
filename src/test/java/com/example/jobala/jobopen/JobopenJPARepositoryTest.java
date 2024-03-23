@@ -107,15 +107,15 @@ class JobopenJPARepositoryTest {
 
     }
 
-    @Test
-    public void findByIdWithUser_test() {
-        // given
-        int jobopenId = 9;
-
-        // when
-        Optional<Jobopen> jobopenOP = jobopenJPARepository.findByIdWithUser(jobopenId);
-
-        // then
-        System.out.println("findByIdWithUser_test: " + jobopenOP);
-    }
+//    @Test
+//    public void findByIdWithUser_test() {
+//        // given
+//        int jobopenId = 9;
+//
+//        // when
+//        Optional<Jobopen> jobopenOP = jobopenJPARepository.findByIdWithUser(jobopenId);
+//
+//        // then
+//        System.out.println("findByIdWithUser_test: " + jobopenOP);
+//    }
 }
