@@ -56,35 +56,24 @@ public class ResumeQueryRepository {
         return resume;
     }
 
-    @Transactional
-    public void save(ResumeRequest.SaveDTO reqDTO, User user) {
-        Query query = em.createNativeQuery("insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, created_at, name) values (?,?,?,?,?,?,?,now(),?)");
-        query.setParameter(1, user.getId());
-        query.setParameter(2, reqDTO.getResumeTitle());
-        query.setParameter(3, reqDTO.getHopeJob());
-        query.setParameter(4, reqDTO.getCareer());
-        query.setParameter(5, reqDTO.getLicense());
-        query.setParameter(6, reqDTO.getContent());
-        query.setParameter(7, reqDTO.getEdu());
-        query.setParameter(8, user.getName());
-        query.executeUpdate();
-
-        Query query2 = em.createNativeQuery("select max(id) from resume_tb");
-        Integer resumeId = (Integer) query2.getSingleResult();
-
-        Query query3 = em.createNativeQuery("insert into skill_tb(user_id, role, resume_id, name) values (?,?,?,?)");
-
-        // List -> JSON
-        List<String> skills = reqDTO.getSkills();
-        String json = new Gson().toJson(skills);
-        System.out.println("제이슨 결과 = " + json);
-
-        query3.setParameter(1, user.getId());
-        query3.setParameter(2, user.getRole());
-        query3.setParameter(3, resumeId);
-        query3.setParameter(4, json);
-        query3.executeUpdate();
-    }
+//    @Transactional
+//    public void save(ResumeRequest.SaveDTO reqDTO, User user) {
+//        Query query = em.createNativeQuery("insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, name,skills, created_at) values (?,?,?,?,?,?,?,?,?,now())");
+//        query.setParameter(1, user.getId());
+//        query.setParameter(2, reqDTO.getResumeTitle());
+//        query.setParameter(3, reqDTO.getHopeJob());
+//        query.setParameter(4, reqDTO.getCareer());
+//        query.setParameter(5, reqDTO.getLicense());
+//        query.setParameter(6, reqDTO.getContent());
+//        query.setParameter(7, reqDTO.getEdu());
+//        query.setParameter(8, user.getName());
+//        query.setParameter(9, user.getS());
+//        query.executeUpdate();
+//
+//        Query query2 = em.createNativeQuery("select max(id) from resume_tb");
+//        Integer resumeId = (Integer) query2.getSingleResult();
+//
+//    }
 
     @Transactional
     public void update(int resumeId, ResumeRequest.UpdateDTO reqDTO) {

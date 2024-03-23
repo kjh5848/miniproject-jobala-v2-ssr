@@ -17,16 +17,16 @@ import java.util.List;
 public class GuestQueryRepository {
     private final EntityManager em;
 
-    @Transactional
-    public void updateProfile(GuestResponse.GProfileUpdateDTO profileDto) {
-        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ? WHERE id = ?");
-        query.setParameter(1, profileDto.getName());
-        query.setParameter(2, profileDto.getPassword());
-        query.setParameter(3, profileDto.getPhone());
-        query.setParameter(4, profileDto.getEmail());
-        query.setParameter(5, profileDto.getId());
-        query.executeUpdate();
-    }
+//    @Transactional
+//    public void updateProfile(GuestResponse.GProfileUpdateDTO profileDto) {
+//        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ? WHERE id = ?");
+//        query.setParameter(1, profileDto.getName());
+//        query.setParameter(2, profileDto.getPassword());
+//        query.setParameter(3, profileDto.getPhone());
+//        query.setParameter(4, profileDto.getEmail());
+//        query.setParameter(5, profileDto.getId());
+//        query.executeUpdate();
+//    }
 
     public List<GuestResponse.GuestProfileDTO> findProfileByUserId(int userId) {
         Query query = em.createNativeQuery("SELECT name, password, phone, email FROM user_tb WHERE id = ?", GuestResponse.GuestProfileDTO.class);

@@ -1,4 +1,4 @@
--- -- 개인 회원가입 더미 9개
+-- 개인 회원가입 더미 9개
 insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
 values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
        ('박찬혁', 'cos2', 'ssar@nate.com', '1234', '서울시 황학구', '1997-07-23', '01022223333', 0, now()),
@@ -24,7 +24,7 @@ values ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com
        ('177-546-7902', '김수현', '하이브', '서울특별시 강동구', 'com8', 'actor6@nate.com', '1234', '김수현', '01011112230', 1, now()),
        ('867-546-7903', '이민호', '겟인데어', '서울특별시 강남구', 'com9', 'actor7@nate.com', '1234', '이민호', '01011112231', 1, now());
 
--- -- 이력서 더미
+-- 이력서 더미
 insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
 values (1, '김주혁', '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사',
         '안녕하세요, 저는 신입 프론트엔드 개발자 김주혁입니다. 웹 개발에 관심이 많으며 새로운 기술을 배우고 싶습니다.', '대학교 졸업', now()),
@@ -90,30 +90,30 @@ VALUES (1, 10, 1, 1, '검토중', NOW()),
        (8, 17, 8, 1, '검토중', NOW()),
        (9, 18, 9, 1, '검토중', NOW());
 
-
--- -- 이력서 스킬 더미
-INSERT INTO SKILL_TB(RESUME_ID, ROLE, NAME)
-VALUES (1, 0, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
-       (2, 0, '["Java","JavaScript","Spring"]'),
-       (3, 0, '["Java","HTML","jQuery"]'),
-       (4, 0, '["Java","HTML","MySQL"]'),
-       (5, 0, '["Java","Spring","jQuery","MySQL"]'),
-       (6, 0, '["JavaScript","HTML","MySQL"]'),
-       (7, 0, '["Java"]'),
-       (8, 0, '["Java","Spring"]'),
-       (9, 0, '["Java","Spring","MySQL"]');
-
--- 공고 스킬 더미
-INSERT INTO SKILL_TB(jobopen_id, role, name)
-VALUES (1, 1, '["Java","JavaScript","Spring","HTML","jQuery"]'),
-       (2, 1, '["Java","JavaScript","Spring","MySQL"]'),
-       (3, 1, '["JavaScript","Spring","HTML","jQuery"]'),
-       (4, 1, '["Java","Spring","HTML","MySQL"]'),
-       (5, 1, '["JavaScript","HTML","jQuery"]'),
-       (6, 1, '["Java","Spring","MySQL"]'),
-       (7, 1, '["JavaScript","Spring","HTML"]'),
-       (8, 1, '["Java","JavaScript","HTML"]'),
-       (9, 1, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
+--
+-- -- -- 이력서 스킬 더미
+-- INSERT INTO SKILL_TB(RESUME_ID, ROLE, NAME)
+-- VALUES (1, 0, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
+--        (2, 0, '["Java","JavaScript","Spring"]'),
+--        (3, 0, '["Java","HTML","jQuery"]'),
+--        (4, 0, '["Java","HTML","MySQL"]'),
+--        (5, 0, '["Java","Spring","jQuery","MySQL"]'),
+--        (6, 0, '["JavaScript","HTML","MySQL"]'),
+--        (7, 0, '["Java"]'),
+--        (8, 0, '["Java","Spring"]'),
+--        (9, 0, '["Java","Spring","MySQL"]');
+--
+-- -- 공고 스킬 더미
+-- INSERT INTO SKILL_TB(jobopen_id, role, name)
+-- VALUES (1, 1, '["Java","JavaScript","Spring","HTML","jQuery"]'),
+--        (2, 1, '["Java","JavaScript","Spring","MySQL"]'),
+--        (3, 1, '["JavaScript","Spring","HTML","jQuery"]'),
+--        (4, 1, '["Java","Spring","HTML","MySQL"]'),
+--        (5, 1, '["JavaScript","HTML","jQuery"]'),
+--        (6, 1, '["Java","Spring","MySQL"]'),
+--        (7, 1, '["JavaScript","Spring","HTML"]'),
+--        (8, 1, '["Java","JavaScript","HTML"]'),
+--        (9, 1, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
 
 
 -- 개인이 공고를 스트랩한 더미
@@ -154,34 +154,34 @@ VALUES ('1년차 개발자들', '1년차 개발자들 요즘 패기가 없더라
        ('책 추천 해주세요', '개발자라면 꼭 읽어야 할 책 추천해주세요. 이유도 같이 적어주시면 감사하겠습니다! ㅎㅎ', 0, 1, now()),
        ('너가 연봉올려줄게 했잖아?', '그럼 이직 이딴거 안했어', 0, 2, now());
 
--- 이력서 사진 더미
-INSERT INTO pic_tb(resume_id, img_filename, title)
-VALUES (1, 'userImage.jpg', 'userImage.jpg'),
-       (3, 'userImage2.jpg', 'userImage2.jpg'),
-       (2, 'userImage3.jpg', 'userImage3.jpg'),
-       (4, 'userimage4.png', 'userimage4.png'),
-       (5, 'userimage5.png', 'userimage5.png'),
-       (6, 'userimage6.png', 'userimage6.png'),
-       (7, 'userimage7.png', 'userimage7.png'),
-       (8, 'userimage8.png', 'userimage8.png'),
-       (9, 'userimage9.png', 'userimage9.png');
-
-
--- 채용 공고 사진 더미
-INSERT INTO pic_tb(jobopen_id, img_filename, title)
-VALUES (1, 'cupanglogo.png', 'cupanglogo.png'),
-       (2, 'naverlogo.png', 'naverlogo.png'),
-       (3, 'kakaologo.svg', 'kakaologo.svg'),
-       (4, 'toslogo.png', 'toslogo.png'),
-       (5, 'linelogo.png', 'linelogo.png'),
-       (6, 'balogo.png', 'balogo.png'),
-       (7, 'carrotlogo.png', 'carrotlogo.png'),
-       (8, 'hibelogo.png', 'hibelogo.png'),
-       (9, 'getintherelogo.png', 'getintherelogo.png');
+-- -- 이력서 사진 더미
+-- INSERT INTO pic_tb(resume_id, img_filename, title)
+-- VALUES (1, 'userImage.jpg', 'userImage.jpg'),
+--        (3, 'userImage2.jpg', 'userImage2.jpg'),
+--        (2, 'userImage3.jpg', 'userImage3.jpg'),
+--        (4, 'userimage4.png', 'userimage4.png'),
+--        (5, 'userimage5.png', 'userimage5.png'),
+--        (6, 'userimage6.png', 'userimage6.png'),
+--        (7, 'userimage7.png', 'userimage7.png'),
+--        (8, 'userimage8.png', 'userimage8.png'),
+--        (9, 'userimage9.png', 'userimage9.png');
+--
+--
+-- -- 채용 공고 사진 더미
+-- INSERT INTO pic_tb(jobopen_id, img_filename, title)
+-- VALUES (1, 'cupanglogo.png', 'cupanglogo.png'),
+--        (2, 'naverlogo.png', 'naverlogo.png'),
+--        (3, 'kakaologo.svg', 'kakaologo.svg'),
+--        (4, 'toslogo.png', 'toslogo.png'),
+--        (5, 'linelogo.png', 'linelogo.png'),
+--        (6, 'balogo.png', 'balogo.png'),
+--        (7, 'carrotlogo.png', 'carrotlogo.png'),
+--        (8, 'hibelogo.png', 'hibelogo.png'),
+--        (9, 'getintherelogo.png', 'getintherelogo.png');
 
 --댓글 더미
 Insert Into reply_tb(id, comment, board_id, username, created_at)
-values (1, '꼰대임?', 1, 'cos2', now()),       --cos2이 1번 게시물에 댓글을 작성했다.
+values (1, '꼰대임?', 1, 'cos2', now()),   --cos2이 1번 게시물에 댓글을 작성했다.
        (2, '넌 몇년차인데?ㅋㅋ', 1, 'cos3', now()), --cos3가 1번 게시물에 댓글을 작성했다.
        (3, '관심 받고 싶니?', 2, 'cos1', now()),  --cos1이 2번 게시물에 댓글을 작성했다.
        (4, '너가 주면 난 내 전재산 준다', 2, 'cos3', now()); --cos3가 2번 게시물에 댓글을 작성했다.

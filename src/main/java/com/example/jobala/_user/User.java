@@ -1,5 +1,6 @@
 package com.example.jobala._user;
 
+import com.example.jobala.guest.GuestRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,9 @@ public class User {
     private String ceo; // 기업 대표명
     private String address; //주소
 
+    private String imgTitle; // 이미지 이름
+    private String imgFilename; // 파일 패스
+
     private Integer role; // 0 -> guest, 1 -> comp
 
     private Date age;
@@ -41,7 +45,6 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-
     public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role, Date age) {
         this.id = id;
         this.username = username;
@@ -55,5 +58,15 @@ public class User {
         this.address = address;
         this.role = role;
         this.age = age;
+    }
+
+    //프로필 업데이트 setter
+    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO) {
+        this.name = reqDTO.getName();
+        this.password = reqDTO.getPassword();
+        this.phone = reqDTO.getPhone();
+        this.email = reqDTO.getEmail();
+        this.imgTitle = reqDTO.getImgTitle();
+        this.imgFilename = String.valueOf(reqDTO.getImgFilename());
     }
 }

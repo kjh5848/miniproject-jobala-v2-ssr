@@ -33,14 +33,6 @@ public class GuestResponse {
         private String email;
     }
 
-    @Data
-    @AllArgsConstructor
-    public static class GProfileUpdateDTO {
-        private String name;
-        private String password;
-        private String phone;
-        private String email;
-        private Integer id;
-    }
+
 }
 

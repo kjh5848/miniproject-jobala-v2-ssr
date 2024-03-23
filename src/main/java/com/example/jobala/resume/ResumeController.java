@@ -37,6 +37,7 @@ public class ResumeController {
     private final PicQueryRepository picRepository;
     private final ScrapQueryRepository scrapRepository;
     private final JobopenQueryRepository jobopenRepository;
+    private final ResumeJPARepository resumeJPARepository;
     private final ResumeService resumeService;
 
     @GetMapping("/guest/resume/saveForm")
@@ -128,12 +129,10 @@ public class ResumeController {
     }
 
     @PostMapping("/guest/resume/save")
-    public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
+    public String save(ResumeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        resumeRepository.save(resumeSaveDTO, sessionUser);
+        resumeJPARepository.save(reqDTO.toEntity(sessionUser));
+
         return "redirect:/guest/mngForm";
     }
 

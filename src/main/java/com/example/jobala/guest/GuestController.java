@@ -6,11 +6,13 @@ import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Mutability;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class GuestController {
 
     private final HttpSession session;
     private final GuestQueryRepository guestRepository;
+    private final GuestJPARepository guestJPARepository;
+    private final GuestService guestService;
 
     // DEL: mainForm 삭제
     @GetMapping("/guest/jobopenSearch")
@@ -75,13 +79,15 @@ public class GuestController {
     }
 
     @PostMapping("/guest/updateProfile")
-    public String updateProfile(@ModelAttribute GuestResponse.GProfileUpdateDTO profileDto) {
+    public String updateProfile(@RequestParam MultipartFile imgFilename, GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/login";
-        }
-        profileDto.setId(sessionUser.getId());
-        guestRepository.updateProfile(profileDto);
+
+        System.out.println("reqDTO = " + reqDTO);
+        System.out.println("imgFilename = " + imgFilename);
+        System.out.println("imgFilename = " + imgFilename);
+        String img = String.valueOf(imgFilename);
+        System.out.println("img = " + img);
+        guestService.프로필업데이트(reqDTO,sessionUser);
         return "redirect:/guest/profileForm";
     }
 }
