@@ -18,29 +18,15 @@ public class ApplyService {
     private final JobopenJPARepository jobopenJPARepository;
     private final ResumeJPARepository resumeJPARepository;
 
+
+
     @Transactional
-    public void 이력서로지원후저장(ApplyRequest.ResumeApplyDTO reqDTO, User sessionUser) {
+    public void 지원후저장(ApplyRequest.ApplyDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
 
-        Apply apply = Apply.builder()
-                .user(sessionUser)
-                .jobopen(jobopen)
-                .resume(resume)
-                .state("검토중")
-                .build();
-
-        applyJPARepository.save(apply);
-    }
-
-    @Transactional
-    public void 공고로지원후저장(ApplyRequest.JobopenApplyDTO reqDTO, User sessionUser) {
-        Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
-                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
-        Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
-                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
 
         Apply apply = Apply.builder()
                 .user(sessionUser)

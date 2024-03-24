@@ -1,28 +1,28 @@
 -- -- 개인 회원가입 더미 9개
-insert into user_tb(name, username, email, password, address, age, phone, role, created_at)
-values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
-       ('박찬혁', 'cos2', 'ssar@nate.com', '1234', '서울시 황학구', '1997-07-23', '01022223333', 0, now()),
-       ('송민경', 'cos3', 'gook@nate.com', '1234', '부산광역시 해운대구', '1992-05-19', '01012345678', 0, now()),
-       ('강호동', 'cos4', 'dong@nate.com', '1234', '부산광역시 기장군', '1995-04-17', '01012345678', 0, now()),
-       ('유재석', 'cos5', 'seok@nate.com', '1234', '부산광역시 ', '2000-04-25', '01012345678', 0, now()),
-       ('지석진', 'cos6', 'jin@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
-       ('송지효', 'cos7', 'ji@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
-       ('김종국', 'cos8', 'jong@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now()),
-       ('양세찬', 'cos9', 'chan@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, now());
+insert into user_tb(name, username, email, password, address, age, phone, role,img_filename, img_title, created_at)
+values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, 'userImage1.jpg', 'userImage1.jpg',now()),
+       ('박찬혁', 'cos2', 'ssar@nate.com', '1234', '서울시 황학구', '1997-07-23', '01022223333', 0, 'userImage2.jpg', 'userImage2.jpg',now()),
+       ('송민경', 'cos3', 'gook@nate.com', '1234', '부산광역시 해운대구', '1992-05-19', '01012345678', 0, 'userImage3.jpg', 'userImage3.jpg',now()),
+       ('강호동', 'cos4', 'dong@nate.com', '1234', '부산광역시 기장군', '1995-04-17', '01012345678', 0, 'userImage4.jpg', 'userImage4.jpg',now()),
+       ('유재석', 'cos5', 'seok@nate.com', '1234', '부산광역시 ', '2000-04-25', '01012345678', 0, 'userImage5.jpg', 'userImage5.jpg',now()),
+       ('지석진', 'cos6', 'jin@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage6.jpg', 'userImage6.jpg', now()),
+       ('송지효', 'cos7', 'ji@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage7.jpg', 'userImage7.jpg', now()),
+       ('김종국', 'cos8', 'jong@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage8.jpg', 'userImage8.jpg',now()),
+       ('양세찬', 'cos9', 'chan@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage9.jpg', 'userImage9.jpg', now());
 
 
 -- -- 기업 회원가입 더미 9개
-insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, created_at)
-values ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com1', 'actor1@nate.com', '1234', '이병헌', '01011112223', 1, now()),
-       ('737-546-7196', '송중기', '네이버', '서울특별시 종로구', 'com2', 'actor2@nate.com', '1234', '송중기', '01011112224', 1, now()),
-       ('657-546-2897', '전지현', '카카오', '서울특별시 강동구', 'com3', 'actor3@nate.com', '1234', '전지현', '01011112225', 1, now()),
-       ('567-543-7898', '아이유', '토스', '서울특별시 용산구', 'com4', 'singer1@nate.com', '1234', '아이유', '01011112226', 1, now()),
-       ('467-546-7899', '지드래곤', '배달의민족', '서울특별시 마포구', 'com5', 'singer2@nate.com', '1234', '지드래곤', '01011112227', 1,
+insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role,img_filename, img_title, created_at)
+values ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com1', 'actor1@nate.com', '1234', '이병헌', '01011112223', 1, 'cupanglogo.png', 'cupanglogo.png', now()),
+       ('737-546-7196', '송중기', '네이버', '서울특별시 종로구', 'com2', 'actor2@nate.com', '1234', '송중기', '01011112224', 1,'naverlogo.png', 'naverlogo.png', now()),
+       ('657-546-2897', '전지현', '카카오', '서울특별시 강동구', 'com3', 'actor3@nate.com', '1234', '전지현', '01011112225', 1, 'kakaologo.svg', 'kakaologo.svg', now()),
+       ('567-543-7898', '아이유', '토스', '서울특별시 용산구', 'com4', 'singer1@nate.com', '1234', '아이유', '01011112226', 1,'toslogo.png', 'toslogo.png', now()),
+       ('467-546-7899', '지드래곤', '배달의민족', '서울특별시 마포구', 'com5', 'singer2@nate.com', '1234', '지드래곤', '01011112227', 1, 'balogo.png', 'balogo.png',
         now()),
-       ('367-546-7900', '수지', '라인', '서울특별시 서초구', 'com6', 'actor4@nate.com', '1234', '수지', '01011112228', 1, now()),
-       ('266-546-7901', '박보검', '당근마켓', '서울특별시 강남구', 'com7', 'actor5@nate.com', '1234', '박보검', '01011112229', 1, now()),
-       ('177-546-7902', '김수현', '하이브', '서울특별시 강동구', 'com8', 'actor6@nate.com', '1234', '김수현', '01011112230', 1, now()),
-       ('867-546-7903', '이민호', '겟인데어', '서울특별시 강남구', 'com9', 'actor7@nate.com', '1234', '이민호', '01011112231', 1, now());
+       ('367-546-7900', '수지', '라인', '서울특별시 서초구', 'com6', 'actor4@nate.com', '1234', '수지', '01011112228', 1,'linelogo.png', 'linelogo.png', now()),
+       ('266-546-7901', '박보검', '당근마켓', '서울특별시 강남구', 'com7', 'actor5@nate.com', '1234', '박보검', '01011112229', 1, 'carrotlogo.png', 'carrotlogo.png', now()),
+       ('177-546-7902', '김수현', '하이브', '서울특별시 강동구', 'com8', 'actor6@nate.com', '1234', '김수현', '01011112230', 1,  'hibelogo.png', 'hibelogo.png', now()),
+       ('867-546-7903', '이민호', '겟인데어', '서울특별시 강남구', 'com9', 'actor7@nate.com', '1234', '이민호', '01011112231', 1, 'getintherelogo.png', 'getintherelogo.png',now());
 
 -- -- 이력서 더미
 insert into resume_tb(user_id, name, resume_title, hope_job, career, license, content, edu, created_at)
@@ -146,30 +146,6 @@ VALUES ('1년차 개발자들', '1년차 개발자들 요즘 패기가 없더라
        ('책 추천 해주세요', '개발자라면 꼭 읽어야 할 책 추천해주세요. 이유도 같이 적어주시면 감사하겠습니다! ㅎㅎ', 0, 1, now()),
        ('너가 연봉올려줄게 했잖아?', '그럼 이직 이딴거 안했어', 0, 2, now());
 
--- 이력서 사진 더미
--- INSERT INTO pic_tb(resume_id, img_filename, title)
--- VALUES (1, 'userImage.jpg', 'userImage.jpg'),
---        (3, 'userImage2.jpg', 'userImage2.jpg'),
---        (2, 'userImage3.jpg', 'userImage3.jpg'),
---        (4, 'userimage4.png', 'userimage4.png'),
---        (5, 'userimage5.png', 'userimage5.png'),
---        (6, 'userimage6.png', 'userimage6.png'),
---        (7, 'userimage7.png', 'userimage7.png'),
---        (8, 'userimage8.png', 'userimage8.png'),
---        (9, 'userimage9.png', 'userimage9.png');
-
-
--- 채용 공고 사진 더미
--- INSERT INTO pic_tb(jobopen_id, img_filename, title)
--- VALUES (1, 'cupanglogo.png', 'cupanglogo.png'),
---        (2, 'naverlogo.png', 'naverlogo.png'),
---        (3, 'kakaologo.svg', 'kakaologo.svg'),
---        (4, 'toslogo.png', 'toslogo.png'),
---        (5, 'linelogo.png', 'linelogo.png'),
---        (6, 'balogo.png', 'balogo.png'),
---        (7, 'carrotlogo.png', 'carrotlogo.png'),
---        (8, 'hibelogo.png', 'hibelogo.png'),
---        (9, 'getintherelogo.png', 'getintherelogo.png');
 
 --댓글 더미
 Insert Into reply_tb(id, comment, board_id, username, created_at)

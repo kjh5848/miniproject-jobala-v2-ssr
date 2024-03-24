@@ -3,6 +3,8 @@ package com.example.jobala._user;
 import com.example.jobala.Pic.PicQueryRepository;
 import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,12 +29,13 @@ public class UserController {
     private final JobopenQueryRepository jobopenRepository;
     private final PicQueryRepository picRepository;
     private final UserJPARepository userJPARepository;
+    private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
 
 
     @GetMapping("/")
     public String mainForm(HttpServletRequest req, PicRequest.UploadDTO reqDTO) {
-        List<JobopenResponse.ListDTO> jobopenList = userRepository.findAll();
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }

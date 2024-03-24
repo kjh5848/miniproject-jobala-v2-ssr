@@ -113,34 +113,7 @@ public class ApplyQueryRepository {
     }
 
     // TODO: jobopenApplySave, resumeApplySave Service에서 구현 예정
-    @Transactional
-    public void jobopenApplySave(ApplyRequest.JobopenApplyDTO reqDTO, User sessionUser) {
-        String q = """
-                insert into apply_tb(user_id, role, resume_id, jobopen_id,state, created_at)values (?,?,?,?,?,now())
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, sessionUser.getId());
-        query.setParameter(2, sessionUser.getRole());
-        query.setParameter(3, reqDTO.getResumeId());
-        query.setParameter(4, reqDTO.getJobopenId());
-        query.setParameter(5, "검토중");
-        query.executeUpdate();
-    }
 
-
-    @Transactional
-    public void resumeApplySave(ApplyRequest.ResumeApplyDTO reqDTO, User sessionUser) {
-        String q = """
-                insert into apply_tb(user_id, role, resume_id, jobopen_id,state, created_at)values (?,?,?,?,?,now())
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, sessionUser.getId());
-        query.setParameter(2, sessionUser.getRole());
-        query.setParameter(3, reqDTO.getResumeId());
-        query.setParameter(4, reqDTO.getJobopenId());
-        query.setParameter(5, "검토중");
-        query.executeUpdate();
-    }
 
     @Transactional
     public void save() {

@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,20 +38,13 @@ class JobopenJPARepositoryTest {
         String hopeJob = "Software Engineer";
         String compLocation = "Seoul";
         String endTime = "2024-04-01";
-
-        JobopenRequest.UpdateDTO updateDTO = new JobopenRequest.UpdateDTO(jobopenTtile,career,edu,jobType,salary,hopeJob,compLocation,endTime);
+        List<String> skills = Arrays.asList("스킬1" ,"스킬2", "스킬3");
+        JobopenRequest.UpdateDTO reqDTO = new JobopenRequest.UpdateDTO(jobopenTtile,career,edu,jobType,salary,hopeJob,compLocation,endTime,skills);
         // UpdateDTO 인스턴스에 각 속성 설정
 
-        jobopen.setJobopenTitle(updateDTO.getJobopenTitle());
-        jobopen.setCareer(updateDTO.getCareer());
-        jobopen.setEdu(updateDTO.getEdu());
-        jobopen.setJobType(updateDTO.getJobType());
-        jobopen.setSalary(updateDTO.getSalary());
-        jobopen.setHopeJob(updateDTO.getHopeJob());
-        jobopen.setCompLocation(updateDTO.getCompLocation());
-        jobopen.setEndTime(Date.valueOf(updateDTO.getEndTime()));
+        jobopen.setJobopenUpdate(reqDTO);
 
-            // 각 속성 값이 올바르게 설정되었는지 확인
+        // 각 속성 값이 올바르게 설정되었는지 확인
         Jobopen jobopen2 = jobopenJPARepository.findById(id).get();
 
         System.out.println("jobopen2 = " + jobopen2);
@@ -74,7 +68,7 @@ class JobopenJPARepositoryTest {
         skills.add("Spring");
         skills.add("HTML");
         skills.add("jQuery");
-        JobopenRequest.SaveDTO reqDTO = new JobopenRequest.SaveDTO(edu, jobopenTitle, career, jobType, salary, hopeJob, compLocation, content, endTime, skills);
+        JobopenRequest.SaveDTO reqDTO = new JobopenRequest.SaveDTO(edu, jobopenTitle, career, jobType, salary, hopeJob, compLocation, endTime, skills);
         User sessionUser = User.builder()
                 .id(1)
                 .compNum("827-546-7895")
