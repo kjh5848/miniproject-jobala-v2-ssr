@@ -2,6 +2,7 @@ package com.example.jobala.comp;
 
 
 import com.example.jobala._user.User;
+import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.apply.ApplyQueryRepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
@@ -24,6 +25,7 @@ public class CompController {
     private final CompQueryRepository compRepository;
     private final ApplyQueryRepository applyRepository;
     private final CompService compService;
+    private final UserJPARepository userJPARepository;
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
@@ -93,10 +95,8 @@ public class CompController {
     @GetMapping("/comp/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        List<CompResponse.CompProfileDTO> compProfile = compRepository.findProfileByUserId(sessionUser.getId());
+
+        User compProfile = userJPARepository.findById(sessionUser.getId()).get();
         req.setAttribute("compProfile", compProfile);
         return "/comp/_myPage/profileForm";
     }
