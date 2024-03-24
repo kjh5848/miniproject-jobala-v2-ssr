@@ -1,6 +1,7 @@
 package com.example.jobala.apply;
 
 import com.example.jobala._user.User;
+import com.example.jobala.jobopen.Jobopen;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -34,29 +36,15 @@ class ApplyJPARepositoryTest {
     }
 
     @Test
-    public void 지원한모든목록조회_test() {
-        // given
+    public void countJobopenApplyById_test() {
 
-        // when
+        int jobopenId = 1;
 
-        // then
-    }
+        int count = applyJPARepository.countJobopenApplyById(jobopenId);
 
-    @Test
-    public void 상태별지원목록조회_test() {
-        // given
+        int expectedCount = 1;
+        assertThat(count).isEqualTo(expectedCount);
 
-        // when
-
-        // then
-    }
-
-    @Test
-    public void 제안받은공고조회_test() {
-        // given
-
-        // when
-
-        // then
+        System.out.println("예상 count " + expectedCount + " 실제 count " + count);
     }
 }

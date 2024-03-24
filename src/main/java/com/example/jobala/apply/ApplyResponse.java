@@ -1,10 +1,28 @@
 package com.example.jobala.apply;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 public class ApplyResponse {
+
+    @Data
+    public static class ApplyStatusFormResponse {
+        private List<ApplyResponse.ApplyDTO> appliedPositions;
+        private List<ApplyResponse.ApplyDTO2> receivedOffersReviewing;
+        private List<ApplyResponse.ApplyDTO2> receivedOffersAccepted;
+        private List<ApplyResponse.ApplyDTO2> receivedOffersRejected;
+
+        public ApplyStatusFormResponse(List<ApplyResponse.ApplyDTO> appliedPositions, List<ApplyResponse.ApplyDTO2> receivedOffersReviewing, List<ApplyResponse.ApplyDTO2> receivedOffersAccepted, List<ApplyResponse.ApplyDTO2> receivedOffersRejected) {
+            this.appliedPositions = appliedPositions;
+            this.receivedOffersReviewing = receivedOffersReviewing;
+            this.receivedOffersAccepted = receivedOffersAccepted;
+            this.receivedOffersRejected = receivedOffersRejected;
+        }
+    }
 
 
     @Data
@@ -50,23 +68,6 @@ public class ApplyResponse {
             this.endTime = endTime;
             this.state = state;
             this.jobopenId = jobopenId;
-        }
-    }
-
-    @Data
-    public static class HireDTO {
-        private Integer id;
-        private String jobopenTitle;
-        private String resumeTitle;
-        private String name;
-        private String state;
-
-        public HireDTO(Integer id, String jobopenTitle, String resumeTitle, String name, String state) {
-            this.id = id;
-            this.jobopenTitle = jobopenTitle;
-            this.resumeTitle = resumeTitle;
-            this.name = name;
-            this.state = state;
         }
     }
 }
