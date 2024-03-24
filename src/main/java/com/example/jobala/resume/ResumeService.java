@@ -43,8 +43,8 @@ public class ResumeService {
         return resume;
     }
 
-    public Resume 이력서보기(Integer resumId) {
-        Resume resume = resumeJPARepository.findById(resumId)
+    public Resume 이력서보기(Integer resumeId) {
+        Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
 
         List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();

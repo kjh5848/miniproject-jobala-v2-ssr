@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -52,6 +53,11 @@ public class JobopenService {
     public Jobopen 공고보기(Integer jobopenId) {
         Jobopen jobopen = jobopenJPARepository.findById(jobopenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
+
+        List<String> skills = Arrays.stream(jobopen.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
+        String skillsString = String.join(", ", skills);
+
+        jobopen.setSkills(skillsString);
         return jobopen;
     }
 }
