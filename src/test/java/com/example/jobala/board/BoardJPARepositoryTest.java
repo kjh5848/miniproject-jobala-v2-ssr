@@ -2,10 +2,12 @@ package com.example.jobala.board;
 
 import com.example.jobala._user.User;
 import jakarta.persistence.EntityManager;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,6 +21,20 @@ class BoardJPARepositoryTest {
     @Autowired
     private EntityManager em;
 
+    @Test
+    public void deleteById_test(){
+        // given
+        int id = 1;
+
+        // when
+        boardJPARepository.deleteById(id);
+        em.flush();
+
+        List<Board> boardList = boardJPARepository.findAll();
+
+        // then
+        Assertions.assertThat(boardList.size()).isEqualTo(9);
+    }
     //findById
     @Test
     public void findById_test(){
