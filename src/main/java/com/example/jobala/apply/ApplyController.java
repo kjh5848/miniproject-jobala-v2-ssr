@@ -29,7 +29,7 @@ public class ApplyController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        applyRepository.statusUpdate(applyId, status);
+        applyService.상태수정(applyId, status);
         return "redirect:/applyPositionForm";
     }
 
@@ -41,31 +41,19 @@ public class ApplyController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        applyRepository.statusUpdate(applyId, status);
+        applyService.상태수정(applyId, status);
 
         return "redirect:/applyStatusForm";
     }
 
-    @PostMapping("/resumeApplys")
-    public String apply(ApplyRequest.ResumeApplyDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        System.out.println("지원하기 이력서, 공고 아이디 = " + reqDTO);
-        applyService.이력서로지원후저장(reqDTO, sessionUser);
-
-        return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
-    }
-
-    @PostMapping("/jobopenApplys")
-    public String apply(ApplyRequest.JobopenApplyDTO reqDTO) {
+    @PostMapping("/Applys")
+    public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
         System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
-        applyService.공고로지원후저장(reqDTO, sessionUser);
+        applyService.지원후저장(reqDTO, sessionUser);
 
         return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
