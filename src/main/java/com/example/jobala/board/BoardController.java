@@ -28,7 +28,7 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Board board = boardService.글상세보기(id,sessionUser);
+        BoardResponse.DetailDTO board = boardService.글상세보기(id,sessionUser);
 
         req.setAttribute("board", board);
 

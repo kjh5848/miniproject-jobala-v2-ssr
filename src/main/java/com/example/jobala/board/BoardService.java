@@ -15,33 +15,11 @@ import java.util.List;
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
 
-    public Board 글상세보기(int boardId, User sessionUser){
+    public BoardResponse.DetailDTO 글상세보기(int boardId, User sessionUser) {
         Board board = boardJPARepository.findByIdJoinUser(boardId)
-                .orElseThrow(() ->  new Exception404("게시글을 찾을 수 없습니다"));
+                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
 
-        boolean isBoardOwner = false;
-        if (sessionUser != null){
-            if (sessionUser.getId() == board.getUser().getId()){
-                isBoardOwner = true;
-            }
-
-        }
-
-      board.setBoardOwner(isBoardOwner);
-
-        board.getReplies().forEach(reply -> {
-            boolean isReplyOwner = false;
-
-            if (sessionUser != null){
-                if (reply.getUser().getId() == sessionUser.getId()){
-                    isReplyOwner = true;
-                }
-            }
-            reply.setReplyOwner(isReplyOwner);
-        });
-
-        return board;
-
+        return new BoardResponse.DetailDTO(board, sessionUser);
     }
 
     @Transactional

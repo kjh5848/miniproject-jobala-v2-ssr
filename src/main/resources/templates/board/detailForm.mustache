@@ -7,15 +7,15 @@
             <h2><b>{{board.title}}</b></h2>
         </div>
         <div>
-            <b style="margin-left: 5px;">작성자</b> {{board.user.username}}
+            <b style="margin-left: 5px;">작성자</b> {{board.username}}
             <div class="d-flex">
-                {{#board.isBoardOwner}}
-                        <a href="/board/{{board.id}}/updateForm" class="btn btn-warning me-1">수정</a>
+                {{#board.isOwner}}
+                    <a href="/board/{{board.id}}/updateForm" class="btn btn-warning me-1">수정</a>
 
                     <form action="/board/{{board.id}}/delete" method="post">
                         <button class="btn btn-danger">삭제</button>
                     </form>
-                {{/board.isBoardOwner}}
+                {{/board.isOwner}}
             </div>
         </div>
     </div>
@@ -44,20 +44,20 @@
             <b>댓글리스트</b>
         </div>
         <div class="list-group">
-            {{#board.replyLies}}
+            {{#board.replies}}
                 <!-- 댓글아이템 -->
                 <div class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex">
-                        <div class="px-1 me-1 bg-primary text-white rounded">{{user.username}}</div>
+                        <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
                         <div>{{comment}}</div>
                     </div>
-                    {{#replyOwner}}
+                    {{#isOwner}}
                         <form action="/reply/{{id}}/delete" method="post">
                             <button class="btn"><i class="fa-solid fa-trash"></i></button>
                         </form>
-                    {{/replyOwner}}
+                    {{/isOwner}}
                 </div>
-            {{/board.replyLies}}
+            {{/board.replies}}
         </div>
     </div>
 </div>
