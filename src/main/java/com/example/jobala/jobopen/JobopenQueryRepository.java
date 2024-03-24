@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.resume.Resume;
 import com.google.gson.Gson;
 import jakarta.persistence.EntityManager;
@@ -65,17 +66,28 @@ public class JobopenQueryRepository {
 
     public JobopenResponse.JobopenDetailDTO findByUserAndJobopen(int id) {
         String q = """
-                SELECT j.jobopen_title, u.compname
-                FROM user_tb u join jobopen_tb j on u.id= j.user_id where j.id = ?
-                """;
+            SELECT j.jobopen_title, u.compname, u.img_title, u.img_filename
+            FROM user_tb u JOIN jobopen_tb j ON u.id = j.user_id WHERE j.id = ?
+            """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, id);
 
         JpaResultMapper rm = new JpaResultMapper();
         JobopenResponse.JobopenDetailDTO respDTO = rm.uniqueResult(query, JobopenResponse.JobopenDetailDTO.class);
+
+        // 이미지 파일 제목 경로가 NULL인 경우를 처리하면서 이미지 경로, 제목 디폴트로 변경하고 UUID로 저장되어있으면 분리해서 파일 이름으로 저장
+        if (respDTO.getImgFilename() == null) {
+            respDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
+            respDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
+        } else {
+            // 파일 이름과 확장자를 분리
+            String[] parts = respDTO.getImgFilename().split("_");
+            String imgTitle = parts[1]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+            respDTO.setImgTitle(imgTitle);
+        }
+
         return respDTO;
     }
-
 
     public List<Jobopen> findJobopenById(User user) {
         Query query = em.createNativeQuery("select * from jobopen_tb where user_id = ? order by id desc", Jobopen.class);

@@ -62,6 +62,8 @@ public class JobopenResponse {
     public static class JobopenDetailDTO {
         private String jobopenTitle;
         private String compname;
+        private String imgFilename;
+        private String imgTitle;
     }
 
     @AllArgsConstructor
