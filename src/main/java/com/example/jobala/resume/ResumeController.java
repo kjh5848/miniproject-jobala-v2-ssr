@@ -35,6 +35,7 @@ public class ResumeController {
     private final ScrapQueryRepository scrapRepository;
     private final JobopenQueryRepository jobopenRepository;
     private final ResumeService resumeService;
+    private final ResumeJPARepository resumeJPARepository;
 
     //TODO: saveForm 삭제예정
     @GetMapping("/guest/resume/saveForm")
@@ -72,10 +73,12 @@ public class ResumeController {
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
 //        기업에서 이력서를 볼때 보이는 최근 이력서 4개 조인하는
 
-        Resume resume = resumeRepository.findById(id);
+
+        Resume resume = resumeService.이력서보기(id);
         // 이력서 상세보기에 이미지 불러오기
 //        Pic pic = picRepository.resumeFindByPic(id);
 //        req.setAttribute("pic", pic);
+
 
         boolean isGuestScrap = false;
         User sessionUser = null;
@@ -91,25 +94,11 @@ public class ResumeController {
         } catch (Exception e) {
         }
 
-        if (sessionUser != null) {
-            List<Jobopen> jobopenList = jobopenRepository.findJobopenById(sessionUser);
-            req.setAttribute("jobopenList", jobopenList);
-        }
 
         int userId = resume.getUser().getId();
 //        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
         User user = userRepository.findById(userId);
 
-        // name은 JSON 이기 때문에 List 로 바꿔서 뿌려야 함.
-        Skill skills = skillRepository.findByResumeId(id);
-        String json = skills.getName();
-        // JSON -> List
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {
-        }.getType();
-        List<String> skillsList = gson.fromJson(json, type);
-        System.out.println("다시 바꾼 결과 = " + skillsList);
-        req.setAttribute("skillsList", skillsList);
 
         req.setAttribute("user", user);
         req.setAttribute("resume", resume);

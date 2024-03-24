@@ -1,6 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
+import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class GuestController {
     private final HttpSession session;
     private final GuestQueryRepository guestRepository;
     private final GuestService guestService;
+    private final UserJPARepository userJPARepository;
 
     // DEL: mainForm 삭제
     @GetMapping("/guest/jobopenSearch")
@@ -67,10 +71,8 @@ public class GuestController {
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        List<GuestResponse.GuestProfileDTO> guestProfile = guestRepository.findProfileByUserId(sessionUser.getId());
+
+        User guestProfile = userJPARepository.findById(sessionUser.getId()).get();
         req.setAttribute("guestProfile", guestProfile);
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }

@@ -43,14 +43,14 @@
                     <form action="/guest/updateProfile" method="post" enctype="multipart/form-data">
                         <div class="content profileBox" style="margin-top: 20px;">
                             <h2>프로필 관리</h2>
-                            <div>
-                                <div class="card-body row" style="width: 100%; margin-left: 1px;">
-                                    <div class="card mb-2" style="padding: 0px;">
-                                        <div style="margin-left: 160px; margin-top: 20px; margin-bottom: 20px;">
-                                            <input type="file" name="imgFilename" id="imgFilename" value={{imgFilename}}
-                                                   style="margin-bottom: 10px;">
-                                            <input type="text" name="imgTitle" id="imgTitle" value={{imgTitle}}>
-                                            <!-- 타이틀 입력란 -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="/image/{{imgFilename}}" class="rounded">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" id="inputGroupFile04"
+                                                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="imgFilename"
+                                                   value="{{imgFilename}}">
                                         </div>
                                     </div>
                                 </div>
@@ -85,6 +85,6 @@
 <br>
 <br>
 <br>
-</div>
+
 
 {{> layout/footer}}

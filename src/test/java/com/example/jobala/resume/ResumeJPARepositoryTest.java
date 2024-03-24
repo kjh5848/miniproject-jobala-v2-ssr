@@ -9,7 +9,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @DataJpaTest
 class ResumeJPARepositoryTest {
@@ -19,6 +21,23 @@ class ResumeJPARepositoryTest {
 
     @Autowired
     private EntityManager em;
+
+    @Test
+        public void 이력서보기_test(){
+            // given
+        int id = 1;
+            // when
+        Resume resume = resumeJPARepository.findById(id).get();
+        System.out.println("resume.getSkills() = " + resume.getSkills());
+
+        List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
+
+        String skillsString = String.join(", ", skills);
+        System.out.println("skills _tt = \"" + skillsString + "\"");
+
+        // then
+
+        }
 
     @Test
     public void 이력서등록_test() {

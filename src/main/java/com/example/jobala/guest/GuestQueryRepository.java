@@ -42,8 +42,15 @@ public class GuestQueryRepository {
             } else {
                 // 파일 이름과 확장자를 분리
                 String[] parts = profileDTO.getImgFilename().split("_");
-                String imgTitle = parts[1]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
-                profileDTO.setImgTitle(imgTitle);
+                if (parts.length >= 2) { // 배열의 길이가 2 이상이어야 함
+                    String imgTitle = parts[0]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+                    profileDTO.setImgTitle(imgTitle);
+                } else {
+                    // 적절한 처리를 수행하거나 예외 처리를 진행할 수 있음
+                    // 여기서는 기본 이미지로 설정
+                    profileDTO.setImgFilename("default.png");
+                    profileDTO.setImgTitle("default.png");
+                }
             }
         }
 

@@ -28,8 +28,8 @@
                 <div class=" crad">
                     <div class="card-body d-flex">
                         <div style="margin-left: 140px; width: 150px; height: 250px; margin-bottom: 10px;">
-<!--                            <img id="imgPreview" src="/image/{pic.ImgFilename}" alt="          "-->
-<!--                                 style="width:250px; height: 260px;">-->
+                            <img id="imgPreview" src="/image/{{user.ImgFilename}}"
+                                 style="width:250px; height: 260px;">
                         </div>
                         <table class="table" style="margin-left: 200px; margin-top: 80px; width: 600px; height: 100px;">
                             <tbody style="font-size: 20px;">
@@ -46,10 +46,8 @@
                                 <td>{{user.address}}</td>
                             </tr>
                             <tr>
-
                             </tr>
                             <tr>
-
                             </tr>
                             </tbody>
                         </table>
@@ -87,9 +85,7 @@
                     <tr>
                         <td>스킬</td>
                         <td>
-                            {{#skillsList}}
-                                <div>{{.}}</div>
-                            {{/skillsList}}
+                            <div>{{resume.skills}}</div>
                         </td>
                     </tr>
                     <tr>
@@ -116,7 +112,6 @@
     </div>
 
     {{#isGuestScrap}}
-
         <!-- 지원하기 버튼 -->
         <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
             <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">포지션
@@ -166,82 +161,9 @@
             </div>
         </div>
     </form>
-    <!-- 입사지원 클릭시 창띄우기 -->
-        <!--    {{#isGuestScrap}}-->
-    <!--        &lt;!&ndash; 맞춤형 공고 &ndash;&gt;-->
-    <!--        <h2>최근올린 이력서</h2>-->
-    <!--    <div class="d-flex justify-content-between mb-5 gap-2">-->
-        <!--        {{#resumeList}}-->
-        <!--            <div class="card flex-wrap: wrap " style="width:280px">-->
-        <!--                <img class="card-img-top" src="/image/userImage.jpg" alt="Card image"-->
-        <!--                     style="width:100%; height: 260px;">-->
-        <!--                <div class="card-body">-->
-        <!--                    <h4 class="card-title">{{name}}</h4>-->
-        <!--                    <p class="card-text">{{resumeTitle}}</p>-->
-        <!--                    <a href="/guest/resume/1" class="btn btn-primary">자세히 보기</a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-            <!--        {{/resumeList}}-->
-
-    <!-- 맞춤형 공고 -->
-
-
-    <!--        &lt;!&ndash; 버튼으로 넘겨서 보기 &ndash;&gt;-->
-    <!--        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">-->
-    <!--            <div class="carousel-inner">-->
-    <!--            <div class="carousel-item active">-->
-        <!--                {{#resumeList}}-->
-        <!--                    <div class="card mb-3">-->
-        <!--                        <div class="card-body">-->
-        <!--                            <div class="row">-->
-        <!--                                <div class="col-md-3">-->
-        <!--                                    <img src="/image/userimage5.png" alt="회사 이미지"-->
-        <!--                                         class="img-fluid rounded-start" style="width:100%; height: 300px;">-->
-        <!--                                </div>-->
-        <!--                                <div class="col-md-9">-->
-        <!--                                    <p class="card-title" style="margin-top: 120px;">{{name}}</p>-->
-        <!--                                    <h2>{{resumeTitle}}</h2>-->
-        <!--                                    <p class="card-text">-->
-        <!--                                        {{career}} / {{edu}}-->
-        <!--                                    </p>-->
-        <!--                                    <div class="d-flex justify-content-between">-->
-        <!--                                        <div>-->
-        <!--                                            <a href="/guest/resume/5" class="btn btn-primary">자세히 보기</a>-->
-        <!--                                        </div>-->
-        <!--                                    </div>-->
-        <!--                                </div>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-            <!--                {{/resumeList}}-->
-    <!--                <div class="carousel-item">-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div>-->
-    <!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"-->
-    <!--                        data-bs-slide="prev">-->
-    <!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-    <!--                    <span class="visually-hidden">Previous</span>-->
-    <!--                </button>-->
-    <!--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"-->
-    <!--                        data-bs-slide="next">-->
-    <!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-    <!--                    <span class="visually-hidden">Next</span>-->
-    <!--                </button>-->
-    <!--            </div>-->
-    <!--            <br><br><br>-->
-    <!--        </div>-->
-    <!--        &lt;!&ndash; 버튼으로 넘겨서 보기 &ndash;&gt;-->
-{{/isGuestScrap}}
 </div>
 
 <script>
-    // $(document).ready(() => {
-    //     $("#bookmark").click(() => {
-    //         $("#bookmark").toggleClass("fas far");
-    //     });
-    // });
 
     $("#bookmark").click(function () {
         $(this).closest("form").submit(); // submit 이벤트 발생
