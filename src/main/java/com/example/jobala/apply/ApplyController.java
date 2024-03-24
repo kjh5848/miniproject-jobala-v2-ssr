@@ -28,7 +28,7 @@ public class ApplyController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        applyRepository.statusUpdate(applyId, status);
+        applyService.상태수정(applyId, status);
         return "redirect:/applyPositionForm";
     }
 
@@ -40,24 +40,22 @@ public class ApplyController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        applyRepository.statusUpdate(applyId, status);
+        applyService.상태수정(applyId, status);
 
         return "redirect:/applyStatusForm";
     }
 
     @PostMapping("/Applys")
-    public String apply(ApplyRequest.ApplyDTO reqDTO) {
+    public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-        System.out.println("지원하기 이력서, 공고 아이디 = " + reqDTO);
+        System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
         applyService.지원후저장(reqDTO, sessionUser);
 
-        return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
+        return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
-
-
 
     // 핵심로직 : 지원 정보를 받아와서 상세보기
     @GetMapping("/applys/{applyId}")
