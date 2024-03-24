@@ -1,5 +1,6 @@
 package com.example.jobala.resume;
 
+import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.JobopenRequest;
 import jakarta.persistence.EntityManager;
@@ -21,6 +22,19 @@ class ResumeJPARepositoryTest {
 
     @Autowired
     private EntityManager em;
+
+    @Test
+    public void 스크랩한이력서보기_test(){
+        // given
+        int id = 10;
+        // when
+        List<ResumeResponse.ScrapDTO> resume = resumeJPARepository.findByUserIdJoinScrap(id);
+
+        System.out.println("findByUserIdJoinScrap_test : " + resume);
+
+        // then
+
+    }
 
     @Test
         public void 이력서보기_test(){

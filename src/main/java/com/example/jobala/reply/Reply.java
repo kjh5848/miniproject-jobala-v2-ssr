@@ -5,6 +5,7 @@ import com.example.jobala.board.Board;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "reply_tb")
-
+@NoArgsConstructor
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
