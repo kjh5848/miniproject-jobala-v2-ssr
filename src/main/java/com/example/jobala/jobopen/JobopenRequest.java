@@ -77,8 +77,6 @@ public class JobopenRequest {
                     .endTime(endTime)
                     .build();
         }
-
-
     }
 }
 
