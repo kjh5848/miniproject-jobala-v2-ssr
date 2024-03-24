@@ -14,16 +14,13 @@ public class ReplyController {
     private final ReplyQueryRepository replyRepository;
     private final BoardQueryRepository boardRepository;
     private final HttpSession session;
+    private final ReplyService replyService;
 
 
     @PostMapping("reply/save")
     public String repluSave(ReplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        replyRepository.save(reqDTO, sessionUser);
+        replyService.댓글쓰기(reqDTO,sessionUser);
         return "redirect:/board/" + reqDTO.getBoardId();
     }
 

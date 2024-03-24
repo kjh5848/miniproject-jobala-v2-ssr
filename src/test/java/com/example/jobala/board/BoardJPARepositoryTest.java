@@ -34,6 +34,7 @@ class BoardJPARepositoryTest {
 
     }
 
+    @Test
     public void deleteById_test(){
         // given
         int id = 1;
