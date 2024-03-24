@@ -46,6 +46,8 @@ public class Jobopen {
     private String imgFilename;
     private String imgTitle;
 
+    @OneToOne(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private  Skill skill;
 
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();

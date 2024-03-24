@@ -1,6 +1,8 @@
 package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
+import com.example.jobala.apply.Apply;
+import com.example.jobala.scrap.Scrap;
 import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -10,6 +12,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -39,6 +42,15 @@ public class Resume {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    @OneToOne(mappedBy = "resume",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Skill skill;
+
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Apply> applies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Scrap> scraps;
 
     @Builder
     public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, String skills, Integer role) {
