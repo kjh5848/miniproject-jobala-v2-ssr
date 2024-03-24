@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,5 +25,16 @@ class UserJPARepositoryTest {
 
 
         }
+
+        @Test
+            public void findById_test(){
+                // given
+            int id = 1;
+                // when
+            Optional<User> user = userJPARepository.findById(id);
+            System.out.println("user tt = " + user);
+                // then
+
+            }
 
 }

@@ -8,6 +8,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ResumeService {
@@ -41,8 +45,14 @@ public class ResumeService {
         return resume;
     }
 
-    public Resume 이력서보기(Integer id) {
-        return resumeJPARepository.findById(id)
+    public Resume 이력서보기(Integer resumId) {
+        Resume resume = resumeJPARepository.findById(resumId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
+
+        List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
+        String skillsString = String.join(", ", skills);
+
+        resume.setSkills(skillsString);
+        return resume;
     }
 }
