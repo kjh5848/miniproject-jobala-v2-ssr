@@ -25,26 +25,11 @@ public class ReplyController {
     }
 
 
-    @PostMapping("/reply/{id}/delete")
-    public String deleteReply(@PathVariable int id, HttpSession session) {
-        System.out.println("id = " + id);
-        // 댓글의 username과 세션의 username 비교해서 같으면 삭제 가능
+    @PostMapping("/board/{boardId}/reply/{replyId}/delete")
+    public String deleteReply(@PathVariable Integer boardId,@PathVariable Integer replyId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
+        replyService.댓글삭제(replyId,sessionUser.getId());
 
-        Reply reply = replyRepository.findById(id);
-
-        if (reply == null) {
-            return "error/404";
-        }
-        if (reply.getUser().getId() != sessionUser.getId()) {
-            return "error/403";
-        }
-
-        replyRepository.deleteById(id);
-
-        return "redirect:/board/" + reply.getBoard().getId();
+        return "redirect:/board/" + boardId;
     }
 }
