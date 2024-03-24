@@ -1,7 +1,6 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
-import com.example.jobala.skill.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.sql.Update;

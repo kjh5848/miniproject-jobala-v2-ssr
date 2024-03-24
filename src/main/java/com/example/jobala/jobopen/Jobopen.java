@@ -3,7 +3,6 @@ package com.example.jobala.jobopen;
 import com.example.jobala._user.User;
 import com.example.jobala.apply.Apply;
 import com.example.jobala.scrap.Scrap;
-import com.example.jobala.skill.Skill;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -43,12 +42,6 @@ public class Jobopen {
     @CreationTimestamp
     private Timestamp createdAt; //생성일
 
-    private String imgFilename;
-    private String imgTitle;
-
-    @OneToOne(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private  Skill skill;
-
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();
 
@@ -56,7 +49,7 @@ public class Jobopen {
     private List<Scrap> scraps;
 
     @Builder
-    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role, Timestamp createdAt, String imgFilename, String imgTitle, List<Apply> applies, List<Scrap> scraps) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -69,11 +62,6 @@ public class Jobopen {
         this.endTime = endTime;
         this.skills = skills;
         this.role = role;
-        this.createdAt = createdAt;
-        this.imgFilename = imgFilename;
-        this.imgTitle = imgTitle;
-        this.applies = applies;
-        this.scraps = scraps;
     }
 
     public void setJobopenUpdate(JobopenRequest.UpdateDTO reqDTO) {

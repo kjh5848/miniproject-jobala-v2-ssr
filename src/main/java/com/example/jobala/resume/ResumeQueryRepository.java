@@ -30,7 +30,7 @@ public class ResumeQueryRepository {
 //이미지 받아와서 4
 //    public List<Resume> findAllLimt() {
 //        String q = """
-//                select r.*, p.IMG_FILENAME from resume_tb r join pic_tb p on r.id = p.resume_id order by id desc Limit 4
+//                select r.*, p.IMG_FILENAME from resume_tb r join _tb p on r.id = p.resume_id order by id desc Limit 4
 //                """;
 //        Query query = em.createNativeQuery(q, Resume.class);
 //        return query.getResultList();

@@ -83,29 +83,29 @@ VALUES (1, 10, 1, 1, '검토중', NOW()),
        (9, 18, 9, 1, '검토중', NOW());
 
 
--- -- 이력서 스킬 더미
-INSERT INTO SKILL_TB(RESUME_ID, ROLE, NAME)
-VALUES (1, 0, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
-       (2, 0, '["Java","JavaScript","Spring"]'),
-       (3, 0, '["Java","HTML","jQuery"]'),
-       (4, 0, '["Java","HTML","MySQL"]'),
-       (5, 0, '["Java","Spring","jQuery","MySQL"]'),
-       (6, 0, '["JavaScript","HTML","MySQL"]'),
-       (7, 0, '["Java"]'),
-       (8, 0, '["Java","Spring"]'),
-       (9, 0, '["Java","Spring","MySQL"]');
-
--- 공고 스킬 더미
-INSERT INTO SKILL_TB(jobopen_id, role, name)
-VALUES (1, 1, '["Java","JavaScript","Spring","HTML","jQuery"]'),
-       (2, 1, '["Java","JavaScript","Spring","MySQL"]'),
-       (3, 1, '["JavaScript","Spring","HTML","jQuery"]'),
-       (4, 1, '["Java","Spring","HTML","MySQL"]'),
-       (5, 1, '["JavaScript","HTML","jQuery"]'),
-       (6, 1, '["Java","Spring","MySQL"]'),
-       (7, 1, '["JavaScript","Spring","HTML"]'),
-       (8, 1, '["Java","JavaScript","HTML"]'),
-       (9, 1, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
+-- -- -- 이력서 스킬 더미
+-- INSERT INTO SKILL_TB(RESUME_ID, ROLE, NAME)
+-- VALUES (1, 0, '["Java","JavaScript","HTML","jQuery","MySQL"]'),
+--        (2, 0, '["Java","JavaScript","Spring"]'),
+--        (3, 0, '["Java","HTML","jQuery"]'),
+--        (4, 0, '["Java","HTML","MySQL"]'),
+--        (5, 0, '["Java","Spring","jQuery","MySQL"]'),
+--        (6, 0, '["JavaScript","HTML","MySQL"]'),
+--        (7, 0, '["Java"]'),
+--        (8, 0, '["Java","Spring"]'),
+--        (9, 0, '["Java","Spring","MySQL"]');
+--
+-- -- 공고 스킬 더미
+-- INSERT INTO SKILL_TB(jobopen_id, role, name)
+-- VALUES (1, 1, '["Java","JavaScript","Spring","HTML","jQuery"]'),
+--        (2, 1, '["Java","JavaScript","Spring","MySQL"]'),
+--        (3, 1, '["JavaScript","Spring","HTML","jQuery"]'),
+--        (4, 1, '["Java","Spring","HTML","MySQL"]'),
+--        (5, 1, '["JavaScript","HTML","jQuery"]'),
+--        (6, 1, '["Java","Spring","MySQL"]'),
+--        (7, 1, '["JavaScript","Spring","HTML"]'),
+--        (8, 1, '["Java","JavaScript","HTML"]'),
+--        (9, 1, '["Java","JavaScript","Spring","HTML","jQuery","MySQL"]');
 
 
 -- 개인이 공고를 스트랩한 더미

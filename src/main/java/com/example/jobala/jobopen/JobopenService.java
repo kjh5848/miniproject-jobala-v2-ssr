@@ -3,8 +3,6 @@ package com.example.jobala.jobopen;
 import com.example.jobala._user.User;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
-import com.example.jobala.skill.Skill;
-import com.example.jobala.skill.SkillJPARepository;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,6 @@ import java.util.List;
 public class JobopenService {
 
     private final JobopenJPARepository jobopenJPARepository;
-    private final SkillJPARepository skillJPARepository;
 
     @Transactional
     public Jobopen 공고등록(JobopenRequest.SaveDTO reqDTO, User sessionUser) {

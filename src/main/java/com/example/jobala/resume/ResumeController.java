@@ -1,17 +1,10 @@
 package com.example.jobala.resume;
 
-import com.example.jobala.Pic.Pic;
-import com.example.jobala.Pic.PicQueryRepository;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserQueryRepository;
-import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapQueryRepository;
-import com.example.jobala.skill.Skill;
-import com.example.jobala.skill.SkillQueryRepository;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,18 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.lang.reflect.Type;
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class ResumeController {
 
-    private final SkillQueryRepository skillRepository;
     private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
     private final UserQueryRepository userRepository;
-    private final PicQueryRepository picRepository;
     private final ScrapQueryRepository scrapRepository;
     private final JobopenQueryRepository jobopenRepository;
     private final ResumeService resumeService;
@@ -71,14 +59,7 @@ public class ResumeController {
     //이력서 상세보기
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
-//        기업에서 이력서를 볼때 보이는 최근 이력서 4개 조인하는
-
-
         Resume resume = resumeService.이력서보기(id);
-        // 이력서 상세보기에 이미지 불러오기
-//        Pic pic = picRepository.resumeFindByPic(id);
-//        req.setAttribute("pic", pic);
-
 
         boolean isGuestScrap = false;
         User sessionUser = null;
@@ -94,11 +75,8 @@ public class ResumeController {
         } catch (Exception e) {
         }
 
-
         int userId = resume.getUser().getId();
-//        User user = (User) session.getAttribute("sessionUser"); 세션에서 가져오면 자기 밖에 정보를 못본다
         User user = userRepository.findById(userId);
-
 
         req.setAttribute("user", user);
         req.setAttribute("resume", resume);

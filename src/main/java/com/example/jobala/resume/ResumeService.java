@@ -3,7 +3,6 @@ package com.example.jobala.resume;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
-import com.example.jobala.skill.SkillJPARepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
-    private final SkillJPARepository skillJPARepository;
 
     @Transactional
     public Resume 이력서등록(ResumeRequest.SaveDTO reqDTO, User sessionUser) {

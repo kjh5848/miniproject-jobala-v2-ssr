@@ -58,7 +58,7 @@ public class CompQueryRepository {
     public List<ResumeResponse.ListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
-                (select img_filename from pic_tb where resume_id =  rt.id) img_filename 
+                (select img_filename from _tb where resume_id =  rt.id) img_filename 
                 FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id 
                 where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
                 AND (rt.career IN (?, ?)) 
