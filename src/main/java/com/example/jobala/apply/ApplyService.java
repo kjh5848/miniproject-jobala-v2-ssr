@@ -10,6 +10,8 @@ import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ApplyService {
@@ -19,24 +21,17 @@ public class ApplyService {
     private final ResumeJPARepository resumeJPARepository;
 
     @Transactional
-    public void 이력서로지원후저장(ApplyRequest.ResumeApplyDTO reqDTO, User sessionUser) {
-        Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
-                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
-        Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
-                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
+    public void 상태수정(Integer applyId, String status) {
+        Apply apply = applyJPARepository.findById(applyId).orElseThrow(() ->
+                new RuntimeException("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
 
-        Apply apply = Apply.builder()
-                .user(sessionUser)
-                .jobopen(jobopen)
-                .resume(resume)
-                .state("검토중")
-                .build();
+        apply.setState(status);
 
         applyJPARepository.save(apply);
     }
 
     @Transactional
-    public void 공고로지원후저장(ApplyRequest.JobopenApplyDTO reqDTO, User sessionUser) {
+    public void 지원후저장(ApplyRequest.ApplyRequestDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
