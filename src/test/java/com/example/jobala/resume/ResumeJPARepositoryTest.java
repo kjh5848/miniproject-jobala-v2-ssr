@@ -79,7 +79,7 @@ class ResumeJPARepositoryTest {
     }
 
     @Test
-    public void deleteById_test() {
+    public void 공고삭제_test() {
         // given
         int resumeId = 1;
 

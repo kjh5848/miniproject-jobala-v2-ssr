@@ -25,7 +25,8 @@ public class Scrap {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Jobopen jobopen;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Resume resume;
 
     private Integer role; // 0 -> guest, 1 -> comp
