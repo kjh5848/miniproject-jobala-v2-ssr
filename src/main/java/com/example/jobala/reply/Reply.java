@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "reply_tb")
-
+@NoArgsConstructor
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -75,6 +76,22 @@ public class JobopenResponse {
         private String career;
         private String edu;
         private Date endTime;
+    }
+
+    @AllArgsConstructor
+    @Data
+    public static class ScrapDTO{
+        private int id;
+        private String compname;
+        private String jobopenTitle;
+        private String career;
+
+        public ScrapDTO(Jobopen jobopen) {
+            this.id = jobopen.getId();
+            this.compname = jobopen.getUser().getCompname();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.career = jobopen.getCareer();
+        }
     }
 }
 

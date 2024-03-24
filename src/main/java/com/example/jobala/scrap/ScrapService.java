@@ -4,11 +4,15 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
+import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.reply.ReplyJPARepository;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
+import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +49,15 @@ public class ScrapService {
             scrapJPARepository.deleteById(scrap.getId());
             return null;
         }
+    }
+
+    public List<ResumeResponse.ScrapDTO> 회사가스크랩한이력서조회(Integer id) {
+        List<ResumeResponse.ScrapDTO> respDTO = resumeJPARepository.findByUserIdJoinScrap(id);
+        return respDTO;
+    }
+
+    public List<JobopenResponse.ScrapDTO> 게스트가스크랩한공고조회(Integer id) {
+        List<JobopenResponse.ScrapDTO> respDTO = jobopenJPARepository.findByUserIdJoinScrap(id);
+        return respDTO;
     }
 }
