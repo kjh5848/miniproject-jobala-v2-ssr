@@ -45,6 +45,18 @@ public class ScrapController {
         return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
 
+    @PostMapping("/guest/scrap")
+    public String scrapJobopen(ScrapRequest.GuestScrap reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
+        // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
+        scrapService.게스트가스크랩(reqDTO, sessionUser);
+        return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
+    }
+
 
     @GetMapping("/guest/scrapForm")
     public String guestScrapForm(HttpServletRequest req) {
@@ -59,28 +71,4 @@ public class ScrapController {
         return "/guest/_myPage/scrapForm";
     }
 
-
-    @PostMapping("/guest/scrap")
-    public String scrapJobopen(ScrapRequest.GuestScrap reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-
-        // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
-        Scrap scrap = null;
-        int jobopenId = reqDTO.getJobopenId();
-        int userId = sessionUser.getId();
-        try {
-            scrap = scrapRepository.findGuestScrapById(jobopenId, userId);
-        } catch (Exception e) {
-        }
-        if (scrap == null) {
-            scrapRepository.guestScrapSave(jobopenId, userId);
-        }
-        if (scrap != null) {
-            scrapRepository.guestScrapDelete(scrap.getId());
-        }
-        return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
-    }
 }
