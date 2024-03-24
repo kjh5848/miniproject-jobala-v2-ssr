@@ -2,6 +2,7 @@ package com.example.jobala.scrap;
 
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
 import com.example.jobala.resume.ResumeService;
@@ -65,9 +66,8 @@ public class ScrapController {
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
-
-        List<Jobopen> jobopenList = scrapRepository.findJobopenAll(sessionUser.getId());
-        req.setAttribute("jobopenList", jobopenList);
+        List<JobopenResponse.ScrapDTO> respDTO = scrapService.게스트가스크랩한공고조회(sessionUser.getId());
+        req.setAttribute("jobopenList", respDTO);
 
         return "/guest/_myPage/scrapForm";
     }
