@@ -82,7 +82,7 @@ public class JobopenQueryRepository {
         } else {
             // 파일 이름과 확장자를 분리
             String[] parts = respDTO.getImgFilename().split("_");
-            String imgTitle = parts[1]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+            String imgTitle = parts.length > 1 ? parts[1] : respDTO.getImgFilename();
             respDTO.setImgTitle(imgTitle);
         }
 
