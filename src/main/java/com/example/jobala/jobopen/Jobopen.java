@@ -39,17 +39,18 @@ public class Jobopen {
     @ColumnDefault("1")
     private Integer role; // 역할 0 -> guest, 1 -> comp
 
-    @CreationTimestamp
-    private Timestamp createdAt; //생성일
 
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();
 
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Scrap> scraps;
+    private List<Scrap> scraps= new ArrayList<>();
+
+    @CreationTimestamp
+    private Timestamp createdAt; //생성일
 
     @Builder
-    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role, List<Apply> applies, List<Scrap> scraps) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -63,6 +64,7 @@ public class Jobopen {
         this.skills = skills;
         this.role = role;
     }
+
 
     public void setJobopenUpdate(JobopenRequest.UpdateDTO reqDTO) {
         this.jobopenTitle = reqDTO.getJobopenTitle();

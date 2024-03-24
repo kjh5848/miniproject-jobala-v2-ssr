@@ -21,6 +21,10 @@ public class ApplyService {
     private final ResumeJPARepository resumeJPARepository;
     private final ApplyQueryRepository applyQueryRepository;
 
+//    public List<Apply> 지원자포지션현황(int userId, String state) {
+//        return applyJPARepository.findAppliesByUserIdAndState(userId, state);
+//    }
+
     public ApplyResponse.ApplyStatusFormResponse getApplyStatusForm(int userId) {
         // 내가 지원한 공고 현황
         List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findByUserId(userId);
@@ -38,10 +42,7 @@ public class ApplyService {
     public void 상태수정(Integer applyId, String status) {
         Apply apply = applyJPARepository.findById(applyId).orElseThrow(() ->
                 new RuntimeException("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
-
         apply.setState(status);
-
-        applyJPARepository.save(apply);
     }
 
     @Transactional
@@ -51,14 +52,7 @@ public class ApplyService {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
 
-        Apply apply = Apply.builder()
-                .user(sessionUser)
-                .jobopen(jobopen)
-                .resume(resume)
-                .state("검토중")
-                .build();
-
-        applyJPARepository.save(apply);
+        applyJPARepository.save(reqDTO.toEntity(resume, jobopen, sessionUser));
     }
 
 }

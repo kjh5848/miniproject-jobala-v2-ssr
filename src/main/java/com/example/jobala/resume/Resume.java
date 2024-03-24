@@ -34,13 +34,8 @@ public class Resume {
     private String edu;
     private String skills;
 
-
-
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
-
-    @CreationTimestamp
-    private Timestamp createdAt;
 
     @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();
@@ -48,8 +43,11 @@ public class Resume {
     @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Scrap> scraps;
 
+    @CreationTimestamp
+    private Timestamp createdAt;
+
     @Builder
-    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, String skills, Integer role) {
+    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, String skills, Integer role, List<Apply> applies, List<Scrap> scraps) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -62,6 +60,10 @@ public class Resume {
         this.skills = skills;
         this.role = role;
     }
+
+    @Builder
+
+
 
     public void setResumeUpdateDTO(ResumeRequest.UpdateDTO reqDTO) {
         this.resumeTitle = reqDTO.getResumeTitle();

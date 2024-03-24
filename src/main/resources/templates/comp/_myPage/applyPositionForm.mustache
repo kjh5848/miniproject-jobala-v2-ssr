@@ -56,11 +56,11 @@
                     </thead>
                     <tbody>
                     {{#Apply}}
-                        <tr onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">
+                        <tr onClick="location.href='/guest/resume/{{resume.id}}'" style="cursor:pointer">
                             <td></td>
-                            <td>{{name}}</td>
-                            <td>{{resumeTitle}}</td>
-                            <td>{{jobopenTitle}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{resume.resumeTitle}}</td>
+                            <td>{{jobopen.jobopenTitle}}</td>
                             <td>{{state}}</td>
                         </tr>
                     {{/Apply}}

@@ -70,7 +70,7 @@ VALUES (1, 1, 1, 0, '검토중', NOW()),
        (9, 9, 9, 0, '검토중', NOW());
 
 
----기업이 포지션 제안한 공고 현황 더미
+---기업이 포지션 제안한 더미 9개
 INSERT INTO apply_tb(resume_id, user_id, jobopen_id, role, state, created_at)
 VALUES (1, 10, 1, 1, '검토중', NOW()),
        (2, 11, 2, 1, '검토중', NOW()),

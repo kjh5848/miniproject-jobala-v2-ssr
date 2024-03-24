@@ -30,11 +30,9 @@ class ResumeJPARepositoryTest {
         Resume resume = resumeJPARepository.findById(id).get();
         System.out.println("resume.getSkills() = " + resume.getSkills());
 
-        List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
-
-        String skillsString = String.join(", ", skills);
-        System.out.println("skills _tt = \"" + skillsString + "\"");
-
+        String skillsString = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(","))
+                .collect(Collectors.joining(", "));
+        System.out.println("skills _tt = " + skillsString);
         // then
 
         }

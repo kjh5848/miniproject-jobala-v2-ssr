@@ -19,41 +19,36 @@ public class ApplyController {
     private final HttpSession session;
     private final ApplyQueryRepository applyRepository;
     private final ApplyService applyService;
+    private final ApplyJPARepository applyJPARepository;
 
     //기업이 제안한 상태 업데이트
     @PostMapping("comp/applyStatus/update")
     public String updateCompApplicationStatus(
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         applyService.상태수정(applyId, status);
         return "redirect:/applyPositionForm";
     }
 
-    //게스트가 제안
+    //게스트가 이력서로 기업에게 지원
     @PostMapping("guest/applyStatus/update")
     public String updateGuestApplicationStatus(@RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         applyService.상태수정(applyId, status);
-
         return "redirect:/applyStatusForm";
     }
 
     @PostMapping("/Applys")
     public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
+        System.out.println("reqDTO = " + reqDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
         applyService.지원후저장(reqDTO, sessionUser);
 
-        return "redirect:/guest/resume/" + reqDTO.getResumeId();
+        if (sessionUser.getRole() == 1) {
+            return "redirect:/guest/resume/" + reqDTO.getResumeId();
+        } else {
+            return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
+        }
     }
 
     // 핵심로직 : 지원 정보를 받아와서 상세보기
@@ -63,22 +58,24 @@ public class ApplyController {
         return applicantProfiles;
     }
 
-// TODO: applyPositionForm, applyStatusForm 삭제 예정
+    // TODO: applyPositionForm, applyStatusForm 삭제 예정
     //기업이 지원받은 이력서의 상태 여부를 결정
     @GetMapping("/applyPositionForm")
-    public String applyPositionForm(HttpServletRequest req) {
+    public String applyPositionForm(@RequestParam String state,HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
-        req.setAttribute("Apply", responseDTO);
+
+
+        Apply apply = applyJPARepository.findById(sessionUser.getId()).get();
+        req.setAttribute("Apply", apply);
+
         // 검토중
         List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "검토중");
         req.setAttribute("ApplyComp", responseDTO2);
+
         // 합격
         List<ApplyResponse.ApplyDTO> responseDTO3 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "합격");
         req.setAttribute("ApplyComp2", responseDTO3);
+
         // 불합격
         List<ApplyResponse.ApplyDTO> responseDTO4 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
         req.setAttribute("ApplyComp3", responseDTO4);

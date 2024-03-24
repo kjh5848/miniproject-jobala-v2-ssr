@@ -7,12 +7,9 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Entity
@@ -24,6 +21,9 @@ public class Apply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String state; // 열람전, 합격, 불합격
+    private Integer role; // 0 -> guest, 1 -> comp
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Resume resume;
 
@@ -33,20 +33,16 @@ public class Apply {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user; // 기업일수도 있고, 개인일 수도 있다.
 
-    private String state; // 열람전, 합격, 불합격
-    private Integer role; // 0 -> guest, 1 -> comp
-
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public Apply(Integer id, Resume resume, Jobopen jobopen, User user, String state, Integer role, Timestamp createdAt) {
+    public Apply(Integer id, String state, Integer role, Resume resume, Jobopen jobopen, User user) {
         this.id = id;
+        this.state = state;
+        this.role = role;
         this.resume = resume;
         this.jobopen = jobopen;
         this.user = user;
-        this.state = state;
-        this.role = role;
-        this.createdAt = createdAt;
     }
 }
