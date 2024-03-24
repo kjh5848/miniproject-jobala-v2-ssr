@@ -60,7 +60,6 @@ public class UserController {
             if (sessionUser.getRole() == 0) {
                 isCheck = true;
             }
-
             session.setAttribute("isCheck", isCheck);
             session.setAttribute("sessionUser", sessionUser);
 
