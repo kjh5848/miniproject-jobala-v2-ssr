@@ -83,7 +83,7 @@ public class ApplyController {
         List<ApplyResponse.ApplyDTO> responseDTO4 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
         req.setAttribute("ApplyComp3", responseDTO4);
 
-        return "/comp/_myPage/applyPositionForm";
+        return "applyForm";
     }
 
     @GetMapping("/applyStatusForm")
@@ -108,7 +108,7 @@ public class ApplyController {
         List<ApplyResponse.ApplyDTO2> respDTO4 = applyRepository.findJopOpenByUserId(userId, "거절");
         req.setAttribute("ApplyGuest3", respDTO4);
 
-        return "/guest/_myPage/applyStatusForm";
+        return "positionForm";
     }
 
 }
