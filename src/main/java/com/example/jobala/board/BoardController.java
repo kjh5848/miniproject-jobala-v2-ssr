@@ -30,13 +30,8 @@ public class BoardController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Board board = boardService.글상세보기(id,sessionUser);
 
-
-        List<ReplyResponse.ReplyDTO> replyList = replyRepository.findByBoardId(id, sessionUser);
-        System.out.println("replyList = " + replyList);
-
-
         req.setAttribute("board", board);
-        req.setAttribute("replyList", replyList);
+
 
         return "/board/detailForm";
     }
