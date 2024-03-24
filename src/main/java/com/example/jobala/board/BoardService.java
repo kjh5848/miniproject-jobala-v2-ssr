@@ -15,7 +15,21 @@ import java.util.List;
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
 
+<<<<<<< HEAD
     public BoardResponse.DetailDTO 글상세보기(int boardId, User sessionUser) {
+=======
+    public void 글삭제하기(int boardId, Integer sessionUserId) {
+        Board board = boardJPARepository.findById(boardId)
+                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
+
+        if (sessionUserId != board.getUser().getId()) {
+            throw new Exception403("게시글을 삭제 할 권한이 없습니다.");
+        }
+        boardJPARepository.deleteById(boardId);
+    }
+
+    public Board 글상세보기(int boardId, User sessionUser){
+>>>>>>> psk/board/deleteById
         Board board = boardJPARepository.findByIdJoinUser(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
 

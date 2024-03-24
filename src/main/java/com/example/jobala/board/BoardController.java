@@ -90,14 +90,11 @@ public class BoardController {
 
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id) {
-        System.out.println(id);
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) { // 401
             return "redirect:/loginForm";
         }
-
-        boardRepository.deleteById(id);
-        System.out.println(id);
+        boardService.글삭제하기(id, sessionUser.getId());
         return "redirect:/board/mainForm";
     }
 }
