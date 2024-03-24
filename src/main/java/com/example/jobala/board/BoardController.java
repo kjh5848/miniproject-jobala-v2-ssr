@@ -44,8 +44,8 @@ public class BoardController {
 
     @GetMapping("/board/mainForm")
     public String boardForm(HttpServletRequest req) {
-        List<BoardResponse.MainDetailDTO> respDTO = boardRepository.findAllWithUser();
-        req.setAttribute("boardList", respDTO);
+       List<Board> boardList = boardService.글목록조회();
+       req.setAttribute("boardList",boardList);
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

@@ -2,10 +2,13 @@ package com.example.jobala.board;
 
 import com.example.jobala._user.User;
 import jakarta.persistence.EntityManager;
+import net.bytebuddy.TypeCache;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +21,18 @@ class BoardJPARepositoryTest {
 
     @Autowired
     private EntityManager em;
+
+    @Test
+    public void findAll_test(){
+        //given
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        //when
+        List<Board> boardList = boardJPARepository.findAll(sort);
+
+        //then
+        System.out.println("findAll_test : " +boardList);
+
+    }
 
     //findById
     @Test

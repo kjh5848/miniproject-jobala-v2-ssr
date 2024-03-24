@@ -4,8 +4,11 @@ import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +58,11 @@ public class BoardService {
     @Transactional
     public void 글쓰기(BoardRequest.SaveDTO reqDTO, User sessionUser){
        boardJPARepository.save(reqDTO.toEntity(sessionUser));
+    }
+
+    public List<Board> 글목록조회(){
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        return boardJPARepository.findAll(sort);
     }
 
 }
