@@ -3,7 +3,7 @@ package com.example.jobala.comp;
 
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
-import com.example.jobala.apply.ApplyQueryRepository;
+import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
@@ -23,7 +23,7 @@ public class CompController {
 
     private final HttpSession session;
     private final CompQueryRepository compRepository;
-    private final ApplyQueryRepository applyRepository;
+    private final ApplyJPARepository applyJPARepository;
     private final CompService compService;
     private final UserJPARepository userJPARepository;
 
@@ -82,7 +82,7 @@ public class CompController {
         List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
 
         jobopenList.forEach(dto -> {
-            int count = applyRepository.countJobopenApplyById(dto.getId());
+            int count = applyJPARepository.countJobopenApplyById(dto.getId());
             dto.setCount(count);
         });
 

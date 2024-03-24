@@ -34,8 +34,7 @@ public class ApplyController {
 
     //게스트가 제안
     @PostMapping("guest/applyStatus/update")
-    public String updateGuestApplicationStatus(
-            @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
+    public String updateGuestApplicationStatus(@RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";

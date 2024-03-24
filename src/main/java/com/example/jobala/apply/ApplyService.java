@@ -19,6 +19,20 @@ public class ApplyService {
     private final ApplyJPARepository applyJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
     private final ResumeJPARepository resumeJPARepository;
+    private final ApplyQueryRepository applyQueryRepository;
+
+    public ApplyResponse.ApplyStatusFormResponse getApplyStatusForm(int userId) {
+        // 내가 지원한 공고 현황
+        List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findByUserId(userId);
+
+        // 기업으로부터 받은 공고 제안 현황
+        List<ApplyResponse.ApplyDTO2> receivedOffersReviewing = applyQueryRepository.findJopOpenByUserId(userId, "검토중");
+        List<ApplyResponse.ApplyDTO2> receivedOffersAccepted = applyQueryRepository.findJopOpenByUserId(userId, "수락");
+        List<ApplyResponse.ApplyDTO2> receivedOffersRejected = applyQueryRepository.findJopOpenByUserId(userId, "거절");
+
+        // 응답 객체 생성 및 반환
+        return new ApplyResponse.ApplyStatusFormResponse(appliedPositions, receivedOffersReviewing, receivedOffersAccepted, receivedOffersRejected);
+    }
 
     @Transactional
     public void 상태수정(Integer applyId, String status) {
