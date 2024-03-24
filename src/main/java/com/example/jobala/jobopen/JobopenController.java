@@ -1,6 +1,5 @@
 package com.example.jobala.jobopen;
 
-import com.example.jobala.Pic.Pic;
 import com.example.jobala.Pic.PicQueryRepository;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestQueryRepository;
@@ -35,7 +34,6 @@ public class JobopenController {
     private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
     private final JobopenService jobopenService;
-    private Pic pic;
 
     //공고 삭제
     @PostMapping("/comp/jobopen/{id}/detete")
@@ -105,7 +103,7 @@ public class JobopenController {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
-        // jobopenDetail 수정 부분
+
         Jobopen jobopen = jobopenService.공고보기(id);
         JobopenResponse.JobopenDetailDTO JobopenRespDTO = jobopenRepository.findByUserAndJobopen(id);
 
@@ -124,9 +122,9 @@ public class JobopenController {
         req.setAttribute("jobopen", jobopen);
         req.setAttribute("JobopenRespDTO", JobopenRespDTO);
 
-        // 이력서 상세보기에 이미지 불러오기
-        Pic pic = picRepository.jobopenFindByPic(id);
-        req.setAttribute("pic", pic);
+//       // 이력서 상세보기에 이미지 불러오기
+//        Pic pic = picRepository.jobopenFindByPic(id);
+//        req.setAttribute("pic", pic);
 
         return "/comp/jobopen/detailForm";
 
