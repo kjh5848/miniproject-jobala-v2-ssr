@@ -21,17 +21,23 @@ public class ApplyService {
     private final ResumeJPARepository resumeJPARepository;
     private final ApplyQueryRepository applyQueryRepository;
 
-    public ApplyResponse.ApplyStatusFormResponse getApplyStatusForm(int userId) {
-        // 내가 지원한 공고 현황
+    // 기업 사용자를 위한 메서드
+    public ApplyResponse.ApplyStatusDTO getCompanyApplyStatus(int userId) {
+        List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findApplyCompByUserId(userId);
+        // 기업 사용자에게 필요한 추가적인 데이터 조회 로직
+
+        // 필요한 데이터를 기반으로 응답 객체 생성
+        return new ApplyResponse.ApplyStatusDTO(appliedPositions, null, null, null);
+    }
+
+    // 개인 사용자를 위한 메서드
+    public ApplyResponse.ApplyStatusDTO getGuestApplyStatus(int userId) {
         List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findByUserId(userId);
+        List<ApplyResponse.ApplyDTO2> receivedOffers = applyQueryRepository.findJopOpenByUserId(userId);
+        // 개인 사용자에게 필요한 추가적인 데이터 조회 로직
 
-        // 기업으로부터 받은 공고 제안 현황
-        List<ApplyResponse.ApplyDTO2> receivedOffersReviewing = applyQueryRepository.findJopOpenByUserId(userId, "검토중");
-        List<ApplyResponse.ApplyDTO2> receivedOffersAccepted = applyQueryRepository.findJopOpenByUserId(userId, "수락");
-        List<ApplyResponse.ApplyDTO2> receivedOffersRejected = applyQueryRepository.findJopOpenByUserId(userId, "거절");
-
-        // 응답 객체 생성 및 반환
-        return new ApplyResponse.ApplyStatusFormResponse(appliedPositions, receivedOffersReviewing, receivedOffersAccepted, receivedOffersRejected);
+        // 필요한 데이터를 기반으로 응답 객체 생성
+        return new ApplyResponse.ApplyStatusDTO(appliedPositions, receivedOffers, null, null);
     }
 
     @Transactional
@@ -40,8 +46,6 @@ public class ApplyService {
                 new RuntimeException("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
 
         apply.setState(status);
-
-        applyJPARepository.save(apply);
     }
 
     @Transactional

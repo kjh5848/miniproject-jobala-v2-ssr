@@ -26,44 +26,6 @@ public class JobopenQueryRepository {
         return resumeList2;
     }
 
-
-    public Jobopen findById(Integer id) {
-        Query query = em.createNativeQuery("select * from jobopen_tb where id = ?", Jobopen.class);
-        query.setParameter(1, id);
-
-        try {
-            Jobopen jobopen = (Jobopen) query.getSingleResult();
-            return jobopen;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-
-    public List<Jobopen> findAllDesc() {
-        String q = """
-                select * from jobopen_tb order by id desc;              
-                """;
-        Query query = em.createNativeQuery(q, Jobopen.class);
-        return query.getResultList();
-    }
-
-    public List<Jobopen> findAll() {
-        String q = """
-                select * from jobopen_tb order by id desc;              
-                """;
-        Query query = em.createNativeQuery(q, Jobopen.class);
-        return query.getResultList();
-    }
-
-    public List<Resume> findByResumeAll() {
-        String q = """
-                select * from resume_tb order by id desc;              
-                """;
-        Query query = em.createNativeQuery(q, Resume.class);
-        return query.getResultList();
-    }
-
     public JobopenResponse.JobopenDetailDTO findByUserAndJobopen(int id) {
         String q = """
             SELECT j.jobopen_title, u.compname, u.img_title, u.img_filename
@@ -87,14 +49,6 @@ public class JobopenQueryRepository {
         }
 
         return respDTO;
-    }
-
-    public List<Jobopen> findJobopenById(User user) {
-        Query query = em.createNativeQuery("select * from jobopen_tb where user_id = ? order by id desc", Jobopen.class);
-        query.setParameter(1, user.getId());
-
-        List<Jobopen> jobopenList = query.getResultList();
-        return jobopenList;
     }
 
 //    public JobopenResponse.DetailDTO findByWithJobopen(int idx) {
