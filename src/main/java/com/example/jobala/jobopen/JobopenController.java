@@ -29,6 +29,7 @@ public class JobopenController {
     private final ScrapQueryRepository scrapRepository;
     private final HttpSession session;
     private final JobopenService jobopenService;
+    private final JobopenJPARepository jobopenJPARepository;
 
     //공고 삭제
     @PostMapping("/comp/jobopen/{id}/detete")
