@@ -27,8 +27,11 @@
                         <a href="/comp/mngForm">
                             <button type="button" class="btn btn-outline-dark m-1">채용공고 관리</button>
                         </a>
-                        <a href="/applyPositionForm">
-                            <button type="button" class="btn btn-outline-dark m-1">제안 / 지원자 관리</button>
+                        <a href="/applyForm">
+                            <button type="button" class="btn btn-outline-dark m-1">제안 관리</button>
+                        </a>
+                        <a href="/positionForm">
+                            <button type="button" class="btn btn-outline-dark m-1">지원자 관리</button>
                         </a>
                         <a href="/comp/scrapForm">
                             <button type="button" class="btn btn-outline-dark m-1">스크랩</button>
@@ -39,43 +42,14 @@
         </div>
     </div>
 
-    <div class="card border-0">
-        <div class="profileBox" id="profileForm">
-            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-info" id="offerCount"></span>
-            </h2>
-            <div class="card shadow row">
-                <table class="table p-3" style="margin-bottom: 0px;">
-                    <thead class="table-primary">
-                    <tr>
-                        <th></th>
-                        <th>이름</th>
-                        <th scope="col">이력서</th>
-                        <th scope="col">공고명</th>
-                        <th scope="col">상태</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#Apply}}
-                        <tr onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">
-                            <td></td>
-                            <td>{{name}}</td>
-                            <td>{{resumeTitle}}</td>
-                            <td>{{jobopenTitle}}</td>
-                            <td>{{state}}</td>
-                        </tr>
-                    {{/Apply}}
-                    <!-- 추가 제안 내용들 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+    <div class="container">
         <div id="applicantsList" style="margin-top: -50px;">
             <h2 class="profileBox text-left mt-5" style="margin-bottom:0px;">내 공고 지원자 목록<span class="badge bg-info"
-                                                                        id="applyCount"></span>
+                                                                                              id="applyCount"></span>
             </h2>
             {{#ApplyComp}}
-                <div class="card shadow p-3 mb-3 bg-body rounded" style="position: relative; margin-top: -10px; margin-left:20px; width: 97.5%;">
+                <div class="card shadow p-3 mb-3 bg-body rounded"
+                     style="position: relative; margin-top: -10px; margin-left:20px; width: 97.5%;">
 
                     <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
                         <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>
@@ -151,8 +125,6 @@
 
                 </div>
             {{/ApplyComp3}}
-
-
 
             <div class="container mt-3">
                 <ul
