@@ -10,13 +10,13 @@ import java.util.List;
 public class ApplyResponse {
 
     @Data
-    public static class ApplyStatusFormResponse {
+    public static class ApplyStatusDTO {
         private List<ApplyResponse.ApplyDTO> appliedPositions;
         private List<ApplyResponse.ApplyDTO2> receivedOffersReviewing;
         private List<ApplyResponse.ApplyDTO2> receivedOffersAccepted;
         private List<ApplyResponse.ApplyDTO2> receivedOffersRejected;
 
-        public ApplyStatusFormResponse(List<ApplyResponse.ApplyDTO> appliedPositions, List<ApplyResponse.ApplyDTO2> receivedOffersReviewing, List<ApplyResponse.ApplyDTO2> receivedOffersAccepted, List<ApplyResponse.ApplyDTO2> receivedOffersRejected) {
+        public ApplyStatusDTO(List<ApplyResponse.ApplyDTO> appliedPositions, List<ApplyResponse.ApplyDTO2> receivedOffersReviewing, List<ApplyResponse.ApplyDTO2> receivedOffersAccepted, List<ApplyResponse.ApplyDTO2> receivedOffersRejected) {
             this.appliedPositions = appliedPositions;
             this.receivedOffersReviewing = receivedOffersReviewing;
             this.receivedOffersAccepted = receivedOffersAccepted;

@@ -16,17 +16,17 @@ public class ApplyQueryRepository {
 
     private final EntityManager em;
 
-    public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId, String state) {
+    public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId) {
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
                 FROM apply_tb at 
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id 
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id 
-                WHERE jot.user_id = ? and at.role = 0 and at.state = ?;
+                WHERE jot.user_id = ? and at.role = 0;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
-        query.setParameter(2, state);
+
 
         JpaResultMapper mapper = new JpaResultMapper();
         List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
@@ -49,18 +49,17 @@ public class ApplyQueryRepository {
         return responseDTO;
     }
 
-    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId, String state) {
+    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId) {
         String q = """
                 SELECT at.id, jot.jobopen_title, rt.resume_title, ut.compname, rt.edu, jot.end_Time, at.state, jot.id
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
                 INNER JOIN user_tb ut ON jot.user_id = ut.id
-                WHERE rt.user_id = ? and at.role = 1 and at.state = ?;
+                WHERE rt.user_id = ? and at.role = 1;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
-        query.setParameter(2, state);
 
         JpaResultMapper mapper = new JpaResultMapper();
         List<ApplyResponse.ApplyDTO2> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO2.class);
