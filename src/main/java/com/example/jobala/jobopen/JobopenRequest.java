@@ -1,9 +1,9 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
-import com.example.jobala.skill.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.sql.Update;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -44,7 +44,8 @@ public class JobopenRequest {
         private String hopeJob;//희망직무
         private String compLocation; //근무지역
         private String endTime; //내용
-//        private List<String> skills = new ArrayList<>();
+        private List<String> skills = new ArrayList<>();//스킬
+
     }
 
     @AllArgsConstructor
@@ -57,13 +58,14 @@ public class JobopenRequest {
         private String salary;
         private String hopeJob;
         private String compLocation;
-        private String content;
         private Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
 
         public Jobopen toEntity(User user) {
             return Jobopen.builder()
+                    .skills(String.valueOf(skills))
                     .user(user)
+                    .role(user.getRole())
                     .edu(edu)
                     .jobopenTitle(jobopenTitle)
                     .career(career)
@@ -71,7 +73,6 @@ public class JobopenRequest {
                     .salary(salary)
                     .hopeJob(hopeJob)
                     .compLocation(compLocation)
-                    .content(content)
                     .endTime(endTime)
                     .build();
         }

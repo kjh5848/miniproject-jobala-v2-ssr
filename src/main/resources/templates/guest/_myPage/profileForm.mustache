@@ -10,6 +10,7 @@
 
 <!--개인 프로필 수정 페이지-->
 <div class="container">
+
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="card-body">
@@ -22,6 +23,7 @@
                                     <button type="button" class="btn btn-outline-dark m-1" id="profileBtn">프로필 관리
                                     </button>
                                 </a>
+
                                 <a href="/guest/mngForm">
                                     <button type="button" class="btn btn-outline-dark m-1">이력서 관리</button>
                                 </a>
@@ -37,10 +39,22 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="content profileBox" style="margin-top: 20px;">
-                    <h2>프로필 관리</h2>
-                    {{#guestProfile}}
-                        <form action="/guest/updateProfile" method="post">
+                {{#guestProfile}}
+                    <form action="/guest/updateProfile" method="post" enctype="multipart/form-data">
+                        <div class="content profileBox" style="margin-top: 20px;">
+                            <h2>프로필 관리</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="/image/{{imgFilename}}" class="rounded">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" id="inputGroupFile04"
+                                                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="imgFilename"
+                                                   value="{{imgFilename}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">이름:</label>
                                 <input type="text" class="form-control" id="name" name="name" value={{name}}>
@@ -61,15 +75,16 @@
                             <div class="text-center"> <!-- Centering the button -->
                                 <button type="submit" class="btn btn-primary">저장</button>
                             </div>
-                        </form>
-                    {{/guestProfile}}
-                </div>
+                        </div>
+                    </form>
+                {{/guestProfile}}
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
 </div>
+<br>
+<br>
+<br>
+
 
 {{> layout/footer}}

@@ -21,26 +21,17 @@ import java.util.List;
 public class BoardController {
     private final BoardQueryRepository boardRepository;
     private final ReplyQueryRepository replyRepository;
+    private final BoardService boardService;
 
     private final HttpSession session;
 
     @GetMapping("/board/{id}")
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        System.out.println("id = " + id);
+        BoardResponse.DetailDTO board = boardService.글상세보기(id,sessionUser);
 
-        BoardResponse.BoardDetailDTO boardDetailDTO = boardRepository.findById(id);
-        System.out.println(boardDetailDTO);
+        req.setAttribute("board", board);
 
-        List<ReplyResponse.ReplyDTO> replyList = replyRepository.findByBoardId(id, sessionUser);
-        System.out.println("replyList = " + replyList);
-        boardDetailDTO.isOwner(sessionUser);
-
-        req.setAttribute("board", boardDetailDTO);
-        req.setAttribute("replyList", replyList);
 
         return "/board/detailForm";
     }
@@ -48,8 +39,8 @@ public class BoardController {
 
     @GetMapping("/board/mainForm")
     public String boardForm(HttpServletRequest req) {
-        List<BoardResponse.MainDetailDTO> respDTO = boardRepository.findAllWithUser();
-        req.setAttribute("boardList", respDTO);
+       List<Board> boardList = boardService.글목록조회();
+       req.setAttribute("boardList",boardList);
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -60,29 +51,18 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO) {
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO) {
 
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
-        boardRepository.update(requestDTO, id);
+        boardService.글수정(id,sessionUser.getId(),reqDTO);
         return "redirect:/board/" + id ;
 
     }
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable int id, HttpServletRequest request) {
-
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-
-        BoardResponse.BoardDetailDTO board = boardRepository.findById(id);
-        request.setAttribute("board", board);
-
+        Board board = boardService.글조회(id);
+        request.setAttribute("board",board);
         return "board/updateForm";
     }
 
@@ -96,19 +76,12 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "redirect:/loginForm";
-        }
-
+    public String save(BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-
+        System.out.println(1);
         // 게시물 저장 로직
-        boardRepository.save(requestDTO, sessionUser.getId());
+        boardService.글쓰기(reqDTO,sessionUser);
+        System.out.println();
 
         // 메인 폼으로 리다이렉트
         return "redirect:/board/mainForm";
@@ -117,14 +90,11 @@ public class BoardController {
 
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id) {
-        System.out.println(id);
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) { // 401
             return "redirect:/loginForm";
         }
-
-        boardRepository.deleteById(id);
-        System.out.println(id);
+        boardService.글삭제하기(id, sessionUser.getId());
         return "redirect:/board/mainForm";
     }
 }

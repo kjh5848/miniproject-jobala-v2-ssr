@@ -2,7 +2,8 @@ package com.example.jobala.comp;
 
 
 import com.example.jobala._user.User;
-import com.example.jobala.apply.ApplyQueryRepository;
+import com.example.jobala._user.UserJPARepository;
+import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,7 +23,9 @@ public class CompController {
 
     private final HttpSession session;
     private final CompQueryRepository compRepository;
-    private final ApplyQueryRepository applyRepository;
+    private final ApplyJPARepository applyJPARepository;
+    private final CompService compService;
+    private final UserJPARepository userJPARepository;
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
@@ -78,7 +82,7 @@ public class CompController {
         List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
 
         jobopenList.forEach(dto -> {
-            int count = applyRepository.countJobopenApplyById(dto.getId());
+            int count = applyJPARepository.countJobopenApplyById(dto.getId());
             dto.setCount(count);
         });
 
@@ -91,22 +95,24 @@ public class CompController {
     @GetMapping("/comp/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        List<CompResponse.CompProfileDTO> compProfile = compRepository.findProfileByUserId(sessionUser.getId());
+
+        User compProfile = userJPARepository.findById(sessionUser.getId()).get();
         req.setAttribute("compProfile", compProfile);
         return "/comp/_myPage/profileForm";
     }
 
     @PostMapping("/comp/updateProfile")
-    public String updateProfile(@ModelAttribute CompResponse.CProfileUpdateDTO profileDto) {
+    public String updateProfile(@RequestParam MultipartFile imgFilename, CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/login";
         }
-        profileDto.setId(sessionUser.getId());
-        compRepository.updateProfile(profileDto);
+        // profileDto.setId(sessionUser.getId());
+        System.out.println("reqDTO = " + reqDTO);
+        System.out.println("imgFilename = " + imgFilename);
+        String img = String.valueOf(imgFilename);
+        System.out.println("img = " + img);
+        compService.프로필업데이트(reqDTO, sessionUser);
         return "redirect:/comp/profileForm";
     }
 }

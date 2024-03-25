@@ -29,10 +29,32 @@ public class GuestQueryRepository {
     }
 
     public List<GuestResponse.GuestProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email FROM user_tb WHERE id = ?", GuestResponse.GuestProfileDTO.class);
+        Query query = em.createNativeQuery("select name, password, phone, email, img_filename, img_title from user_tb where id = ?", GuestResponse.GuestProfileDTO.class);
         query.setParameter(1, userId);
 
         List<GuestResponse.GuestProfileDTO> GuestProfile = query.getResultList();
+
+        // 이미지 파일 제목 경로가 NULL인 경우를 처리
+        for (GuestResponse.GuestProfileDTO profileDTO : GuestProfile) {
+            if (profileDTO.getImgFilename() == null) {
+                profileDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
+                profileDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
+            } else {
+                // 파일 이름과 확장자를 분리
+                String[] parts = profileDTO.getImgFilename().split("_");
+                if (parts.length >= 2) { // 배열의 길이가 2 이상이어야 함
+                    String imgTitle = parts[0]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+                    profileDTO.setImgTitle(imgTitle);
+                } else {
+                    // 적절한 처리를 수행하거나 예외 처리를 진행할 수 있음
+                    // 여기서는 기본 이미지로 설정
+                    profileDTO.setImgFilename("default.png");
+                    profileDTO.setImgTitle("default.png");
+                }
+            }
+        }
+
+        System.out.println("GuestProfile: " + GuestProfile);
         return GuestProfile;
     }
 

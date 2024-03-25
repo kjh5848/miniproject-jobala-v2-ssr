@@ -5,15 +5,15 @@ import com.example.jobala.board.Board;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
 @Entity
 @Data
 @Table(name = "reply_tb")
-
+@NoArgsConstructor
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,9 @@ public class Reply {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    @Transient
+    private boolean isReplyOwner;
 
     @Builder
     public Reply(Integer id, User user, Board board, String comment, String username, Timestamp createdAt) {

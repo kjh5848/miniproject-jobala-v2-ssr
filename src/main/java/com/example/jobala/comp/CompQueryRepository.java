@@ -1,5 +1,6 @@
 package com.example.jobala.comp;
 
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
@@ -20,28 +21,50 @@ public class CompQueryRepository {
     @Transactional
     public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
         System.out.println("profileDto = " + profileDto);
-        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ? WHERE id = ?");
+        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ?, img_filename =?, img_title = ?  WHERE id = ?");
         query.setParameter(1, profileDto.getName());
         query.setParameter(2, profileDto.getPassword());
         query.setParameter(3, profileDto.getPhone());
         query.setParameter(4, profileDto.getEmail());
         query.setParameter(5, profileDto.getAddress());
         query.setParameter(6, profileDto.getId());
+        query.setParameter(7, profileDto.getImgFilename());
+        query.setParameter(8, profileDto.getImgTitle());
         query.executeUpdate();
     }
 
     public List<CompResponse.CompProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
+        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num, img_filename, img_title  FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
         query.setParameter(1, userId);
 
         List<CompResponse.CompProfileDTO> CompProfile = query.getResultList();
+
+        for (CompResponse.CompProfileDTO profileDTO : CompProfile) {
+            if (profileDTO.getImgFilename() == null) {
+                profileDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
+                profileDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
+            } else {
+                // 파일 이름과 확장자를 분리
+                String[] parts = profileDTO.getImgFilename().split("_");
+                if (parts.length >= 2) { // 배열의 길이가 2 이상이어야 함
+                    String imgTitle = parts[0]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
+                    profileDTO.setImgTitle(imgTitle);
+                } else {
+                    // 적절한 처리를 수행하거나 예외 처리를 진행할 수 있음
+                    // 여기서는 기본 이미지로 설정
+                    profileDTO.setImgFilename("default.png");
+                    profileDTO.setImgTitle("default.png");
+                }
+            }
+        }
+        System.out.println("CompProfile: " + CompProfile);
         return CompProfile;
     }
 
     public List<ResumeResponse.ListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
-                (select img_filename from pic_tb where resume_id =  rt.id) img_filename 
+                (select img_filename from _tb where resume_id =  rt.id) img_filename 
                 FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id 
                 where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
                 AND (rt.career IN (?, ?)) 
@@ -100,12 +123,12 @@ public class CompQueryRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery);
-        query.setParameter(1, "%"+skill[0]+"%");
-        query.setParameter(2, "%"+skill[1]+"%");
-        query.setParameter(3, "%"+skill[2]+"%");
-        query.setParameter(4, "%"+skill[3]+"%");
-        query.setParameter(5, "%"+skill[4]+"%");
-        query.setParameter(6, "%"+skill[5]+"%");
+        query.setParameter(1, "%" + skill[0] + "%");
+        query.setParameter(2, "%" + skill[1] + "%");
+        query.setParameter(3, "%" + skill[2] + "%");
+        query.setParameter(4, "%" + skill[3] + "%");
+        query.setParameter(5, "%" + skill[4] + "%");
+        query.setParameter(6, "%" + skill[5] + "%");
         query.setParameter(7, career[0]);
         query.setParameter(8, career[1]);
         query.setParameter(9, edu[0]);

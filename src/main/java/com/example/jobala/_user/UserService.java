@@ -25,7 +25,6 @@ public class UserService {
         if (userOP.isPresent()) {
             throw new Exception400("중복된 유저네임입니다.");
         }
-
         User user = null;
         if (reqDTO.getRole() == 1) {
             user = userJPARepository.save(reqDTO.toCompEntity());

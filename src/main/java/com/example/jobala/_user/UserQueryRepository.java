@@ -17,8 +17,8 @@ public class UserQueryRepository {
 
     public List<JobopenResponse.ListDTO> findAll() {
         String q = """
-                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, 
-               (select img_filename from pic_tb where jobopen_id =  jb.id) img_filename  from jobopen_tb jb order by id desc;              
+                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu 
+                from jobopen_tb jb order by id desc;              
                 """;
         Query query = em.createNativeQuery(q);
 

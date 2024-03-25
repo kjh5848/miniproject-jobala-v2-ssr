@@ -2,7 +2,7 @@ package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
 import com.example.jobala.apply.Apply;
-import com.example.jobala.skill.Skill;
+import com.example.jobala.scrap.Scrap;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -32,21 +32,24 @@ public class Resume {
     private String license;
     private String content;
     private String edu;
+    private String skills;
 
-    @CreationTimestamp
-    private Timestamp createdAt;
+
 
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
 
-    @OneToOne(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Skill skill;
+    @CreationTimestamp
+    private Timestamp createdAt;
 
-    @OneToMany(mappedBy = "resume",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Apply> applies = new ArrayList<>();
 
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Scrap> scraps;
+
     @Builder
-    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, Timestamp createdAt, Integer role, Skill skill, List<Apply> applies) {
+    public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, String skills, Integer role) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -56,9 +59,18 @@ public class Resume {
         this.license = license;
         this.content = content;
         this.edu = edu;
-        this.createdAt = createdAt;
+        this.skills = skills;
         this.role = role;
-        this.skill = skill;
-        this.applies = applies;
     }
+
+    public void setResumeUpdateDTO(ResumeRequest.UpdateDTO reqDTO) {
+        this.resumeTitle = reqDTO.getResumeTitle();
+        this.hopeJob = reqDTO.getHopeJob();
+        this.career = reqDTO.getCareer();
+        this.license = reqDTO.getLicense();
+        this.content = reqDTO.getContent();
+        this.edu = reqDTO.getEdu();
+        this.skills = String.valueOf(reqDTO.getSkills());
+    }
+
 }

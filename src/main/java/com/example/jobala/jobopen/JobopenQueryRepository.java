@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.resume.Resume;
 import com.google.gson.Gson;
 import jakarta.persistence.EntityManager;
@@ -25,50 +26,6 @@ public class JobopenQueryRepository {
         return resumeList2;
     }
 
-    @Transactional
-    public void save(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
-        // jobopen인설트
-        String q = """
-                insert into jobopen_tb(user_id, edu, career, job_type, salary, hope_job ,comp_location ,content , end_time , jobopen_title, created_at, role) values (?,?,?,?,?,?,?,?,?,?,now(),?)
-                """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, sessionUser.getId());
-        query.setParameter(2, reqDTO.getEdu());
-        query.setParameter(3, reqDTO.getCareer());
-        query.setParameter(4, reqDTO.getJobType());
-        query.setParameter(5, reqDTO.getSalary());
-        query.setParameter(6, reqDTO.getHopeJob());
-        query.setParameter(7, reqDTO.getCompLocation());
-        query.setParameter(8, reqDTO.getContent());
-        query.setParameter(9, reqDTO.getEndTime());
-        query.setParameter(10, reqDTO.getJobopenTitle());
-        query.setParameter(11, sessionUser.getRole());
-        query.executeUpdate();
-
-        // jobopen id 받기
-        String q2 = """
-                select max(id) from jobopen_tb
-                """;
-        Query query2 = em.createNativeQuery(q2);
-        Integer jobopenId = (Integer) query2.getSingleResult();
-
-        //스킬 insert
-        String q3 = """
-                insert into skill_tb(role, jobopen_id, name) values (?,?,?)
-                """;
-        Query query3 = em.createNativeQuery(q3);
-
-        // List -> JSON
-        List<String> skills = reqDTO.getSkills();
-        String json = new Gson().toJson(skills);
-        System.out.println("제이슨 결과 = " + json);
-
-        query3.setParameter(1, sessionUser.getRole());
-        query3.setParameter(2, jobopenId);
-        query3.setParameter(3, json);
-        query3.executeUpdate();
-
-    }
 
     public Jobopen findById(Integer id) {
         Query query = em.createNativeQuery("select * from jobopen_tb where id = ?", Jobopen.class);
@@ -109,17 +66,28 @@ public class JobopenQueryRepository {
 
     public JobopenResponse.JobopenDetailDTO findByUserAndJobopen(int id) {
         String q = """
-                SELECT j.jobopen_title, u.compname
-                FROM user_tb u join jobopen_tb j on u.id= j.user_id where j.id = ?
-                """;
+            SELECT j.jobopen_title, u.compname, u.img_title, u.img_filename
+            FROM user_tb u JOIN jobopen_tb j ON u.id = j.user_id WHERE j.id = ?
+            """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, id);
 
         JpaResultMapper rm = new JpaResultMapper();
         JobopenResponse.JobopenDetailDTO respDTO = rm.uniqueResult(query, JobopenResponse.JobopenDetailDTO.class);
+
+        // 이미지 파일 제목 경로가 NULL인 경우를 처리하면서 이미지 경로, 제목 디폴트로 변경하고 UUID로 저장되어있으면 분리해서 파일 이름으로 저장
+        if (respDTO.getImgFilename() == null) {
+            respDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
+            respDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
+        } else {
+            // 파일 이름과 확장자를 분리
+            String[] parts = respDTO.getImgFilename().split("_");
+            String imgTitle = parts.length > 1 ? parts[1] : respDTO.getImgFilename();
+            respDTO.setImgTitle(imgTitle);
+        }
+
         return respDTO;
     }
-
 
     public List<Jobopen> findJobopenById(User user) {
         Query query = em.createNativeQuery("select * from jobopen_tb where user_id = ? order by id desc", Jobopen.class);

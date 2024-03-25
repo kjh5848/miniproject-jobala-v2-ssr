@@ -1,8 +1,8 @@
 package com.example.jobala._user;
 
-import com.example.jobala.Pic.PicQueryRepository;
-import com.example.jobala.Pic.PicRequest;
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,18 +25,20 @@ public class UserController {
     private final UserService userService;
     private final UserQueryRepository userRepository;
     private final JobopenQueryRepository jobopenRepository;
-    private final PicQueryRepository picRepository;
+    private final UserJPARepository userJPARepository;
+    private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
 
 
     @GetMapping("/")
-    public String mainForm(HttpServletRequest req, PicRequest.UploadDTO reqDTO) {
-        List<JobopenResponse.ListDTO> jobopenList = userRepository.findAll();
+    public String mainForm(HttpServletRequest req) {
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }
 
     // DEL: mainForm 삭제
+
 
     // TODO: loginFrorm 삭제예정
     @GetMapping("/loginForm")
@@ -58,7 +60,6 @@ public class UserController {
             if (sessionUser.getRole() == 0) {
                 isCheck = true;
             }
-
             session.setAttribute("isCheck", isCheck);
             session.setAttribute("sessionUser", sessionUser);
 

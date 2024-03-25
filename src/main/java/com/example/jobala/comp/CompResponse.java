@@ -37,6 +37,8 @@ public class CompResponse {
         private String compname;
         private String address;
         private String compNum;
+        private String imgFilename;
+        private String imgTitle;
     }
 
     @Data
@@ -50,5 +52,7 @@ public class CompResponse {
         private String address;
         private String compNum;
         private Integer id;
+        private String imgFilename;
+        private String imgTitle;
     }
 }
