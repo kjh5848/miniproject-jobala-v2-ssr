@@ -109,7 +109,7 @@ public String positionForm(HttpServletRequest req) {
 
     // 서비스에서 기업 사용자의 지원 상태 및 제안 현황 정보를 가져옴
     var statusFormResponse = applyService.getCompanyApplyStatus(sessionUser.getId());
-    req.setAttribute("appliedPositions", statusFormResponse.getAppliedPositions());
+    req.setAttribute("Apply", statusFormResponse.getAppliedPositions());
 
     return "/comp/_myPage/positionForm";
 }

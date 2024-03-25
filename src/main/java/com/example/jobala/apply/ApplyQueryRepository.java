@@ -18,11 +18,12 @@ public class ApplyQueryRepository {
 
     public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId) {
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
-                FROM apply_tb at 
-                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id 
-                INNER JOIN resume_tb rt ON rt.id = at.resume_id 
-                WHERE jot.user_id = ? and at.role = 0;
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name AS resume_name, rt.edu, jot.end_Time, at.state, rt.id, ut.name AS user_name
+                FROM apply_tb at
+                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                INNER JOIN resume_tb rt ON rt.id = at.resume_id
+                INNER JOIN user_tb ut ON jot.user_id = ut.id
+                WHERE jot.user_id = ? AND at.role = 0;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
