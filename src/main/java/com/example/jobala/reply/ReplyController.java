@@ -1,7 +1,6 @@
 package com.example.jobala.reply;
 
 import com.example.jobala._user.User;
-import com.example.jobala.board.BoardQueryRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class ReplyController {
-    private final ReplyQueryRepository replyRepository;
-    private final BoardQueryRepository boardRepository;
     private final HttpSession session;
     private final ReplyService replyService;
 
@@ -24,24 +21,12 @@ public class ReplyController {
         return "redirect:/board/" + reqDTO.getBoardId();
     }
 
-
-    @PostMapping("/reply/{id}/delete")
-    public String deleteReply(@PathVariable int id, HttpSession session) {
-        System.out.println("id = " + id);
-        // 댓글의 username과 세션의 username 비교해서 같으면 삭제 가능
+    //댓글 삭제
+    @PostMapping("reply/{replyId}/delete")
+    public String deleteReply(@PathVariable Integer replyId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        replyService.댓글삭제(replyId,sessionUser.getId());
 
-        Reply reply = replyRepository.findById(id);
-
-        if (reply == null) {
-            return "error/404";
-        }
-        if (reply.getUser().getId() != sessionUser.getId()) {
-            return "error/403";
-        }
-
-        replyRepository.deleteById(id);
-
-        return "redirect:/board/" + reply.getBoard().getId();
+        return "redirect:/board/"+sessionUser.getId();
     }
 }

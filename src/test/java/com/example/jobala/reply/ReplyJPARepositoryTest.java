@@ -1,10 +1,12 @@
 package com.example.jobala.reply;
 
 
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class ReplyJPARepositoryTest {
     @Autowired
     private ReplyJPARepository replyJPARepository;
+    @Autowired
+    private EntityManager em;
+
+    @Test
+    public void deleteById(){
+
+            //given
+            int id = 1;
+
+            //when
+            replyJPARepository.deleteById(id);
+
+            //then
+            em.flush();
+
+
+    }
 
 
     @Test
