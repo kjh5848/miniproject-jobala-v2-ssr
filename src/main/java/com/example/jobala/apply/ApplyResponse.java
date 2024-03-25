@@ -24,6 +24,7 @@ public class ApplyResponse {
         }
     }
 
+    //뭐??
     @Data
     public static class ApplyDTO {
         private Integer id;
@@ -47,6 +48,7 @@ public class ApplyResponse {
         }
     }
 
+    //뭐??
     @Data
     public static class ApplyDTO2 {
         private Integer id;

@@ -28,7 +28,6 @@ public class ApplyQueryRepository {
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
 
-
         JpaResultMapper mapper = new JpaResultMapper();
         List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
         return responseDTO;
@@ -36,10 +35,11 @@ public class ApplyQueryRepository {
 
     public List<ApplyResponse.ApplyDTO> findByUserId(int sessionUserId) {
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_Time, at.state, rt.id
+                SELECT at.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_Time, at.state, rt.id
                 FROM apply_tb at
-                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
-                INNER JOIN resume_tb rt ON rt.id = at.resume_id
+                join user_tb ut on at.user_id = ut.id
+                join resume_tb rt on at.resume_id = rt.id
+                join jobopen_tb jt on at.jobopen_id = jt.id
                 WHERE at.user_id = ? order by id desc;
                 """;
         Query query = em.createNativeQuery(q);

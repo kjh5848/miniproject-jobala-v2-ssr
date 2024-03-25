@@ -19,6 +19,7 @@ public class ApplyController {
     private final HttpSession session;
     private final ApplyQueryRepository applyRepository;
     private final ApplyService applyService;
+    private final ApplyJPARepository applyJPARepository;
 
     //기업이 제안한 상태 업데이트
     @PostMapping("comp/applyStatus/update")
@@ -67,7 +68,11 @@ public class ApplyController {
         var statusFormResponse = applyService.getCompanyApplyStatus(sessionUser.getId());
         req.setAttribute("Apply", statusFormResponse.getAppliedPositions());
 
-        return "/comp/_myPage/positionForm";
+        if (sessionUser.getRole() == 1) {
+            return "/comp/_myPage/positionForm";
+        } else {
+            return "/guest/_myPage/positionForm";
+        }
     }
 
     // 개인 사용자의 지원 상태 및 받은 제안 페이지
@@ -84,7 +89,11 @@ public class ApplyController {
         req.setAttribute("ApplyGuest2", applyStatusFormResponse.getReceivedOffersAccepted());
         req.setAttribute("ApplyGuest3", applyStatusFormResponse.getReceivedOffersRejected());
 
-        return "/guest/_myPage/applyForm";
+        if (sessionUser.getRole() == 1) {
+            return "/comp/_myPage/applyForm";
+        } else {
+            return "/guest/_myPage/applyForm";
+        }
     }
 
 //// TODO: applyPositionForm, applyStatusForm 삭제 예정
