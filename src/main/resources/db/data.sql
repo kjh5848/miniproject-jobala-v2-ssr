@@ -1,14 +1,14 @@
 -- -- 개인 회원가입 더미 9개
 insert into user_tb(name, username, email, password, address, age, phone, role,img_filename, img_title, created_at)
-values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, 'userImage1.jpg', 'userImage1.jpg',now()),
-       ('박찬혁', 'cos2', 'ssar@nate.com', '1234', '서울시 황학구', '1997-07-23', '01022223333', 0, 'userImage2.jpg', 'userImage2.jpg',now()),
-       ('송민경', 'cos3', 'gook@nate.com', '1234', '부산광역시 해운대구', '1992-05-19', '01012345678', 0, 'userImage3.jpg', 'userImage3.jpg',now()),
-       ('강호동', 'cos4', 'dong@nate.com', '1234', '부산광역시 기장군', '1995-04-17', '01012345678', 0, 'userImage4.jpg', 'userImage4.jpg',now()),
-       ('유재석', 'cos5', 'seok@nate.com', '1234', '부산광역시 ', '2000-04-25', '01012345678', 0, 'userImage5.jpg', 'userImage5.jpg',now()),
-       ('지석진', 'cos6', 'jin@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage6.jpg', 'userImage6.jpg', now()),
-       ('송지효', 'cos7', 'ji@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage7.jpg', 'userImage7.jpg', now()),
-       ('김종국', 'cos8', 'jong@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage8.jpg', 'userImage8.jpg',now()),
-       ('양세찬', 'cos9', 'chan@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage9.jpg', 'userImage9.jpg', now());
+values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, 'userImage.jpg', 'userImage.jpg',now()),
+       ('송민경', 'cos2', 'gook@nate.com', '1234', '부산광역시 해운대구', '1992-05-19', '01012345678', 0, 'userImage2.jpg','userImage2.jpg',now()),
+       ('박찬혁', 'cos3', 'ssar@nate.com', '1234', '서울시 황학구', '1997-07-23', '01022223333', 0, 'userImage3.jpg', 'userImage3.jpg',now()),
+       ('강호동', 'cos4', 'dong@nate.com', '1234', '부산광역시 기장군', '1995-04-17', '01012345678', 0, 'userImage4.png', 'userImage4.png',now()),
+       ('유재석', 'cos5', 'seok@nate.com', '1234', '부산광역시 ', '2000-04-25', '01012345678', 0, 'userImage5.png', 'userImage5.png',now()),
+       ('지석진', 'cos6', 'jin@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage6.png', 'userImage6.png', now()),
+       ('송지효', 'cos7', 'ji@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage7.png', 'userImage7.png', now()),
+       ('김종국', 'cos8', 'jong@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage8.png', 'userImage8.png',now()),
+       ('양세찬', 'cos9', 'chan@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0,'userImage9.png', 'userImage9.png', now());
 
 
 -- -- 기업 회원가입 더미 9개
@@ -28,10 +28,10 @@ insert into resume_tb(user_id, name, resume_title, hope_job, career, license, co
 values
     (1, '김주혁', '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사',
      '안녕하세요, 저는 신입 프론트엔드 개발자 김주혁입니다. 웹 개발에 관심이 많으며 새로운 기술을 배우고 싶습니다.', '대학교 졸업', '["Java","JavaScript","HTML","jQuery","MySQL"]', now()),
-    (2, '박찬혁', '혁신적인 백엔드 엔지니어 이력서', '백엔드', '신입', 'SQLD',
-     '안녕하세요, 혁신적인 백엔드 엔지니어 지원자 박찬혁입니다. 데이터베이스 관리와 서버 구축에 대한 열정으로 새로운 기술을 개발하고자 합니다.', '고등학교 졸업', '["Java","JavaScript","Spring"]', now()),
-    (3, '송민경', '새로운 시각의 프론트엔드 엔지니어 지원서', '프론트엔드', '신입', 'SQLD',
+    (2, '송민경', '새로운 시각의 프론트엔드 엔지니어 지원서', '프론트엔드', '신입', 'SQLD',
      '안녕하세요, 프론트엔드 엔지니어 지원자 송민경입니다. 사용자 중심의 디자인과 웹 기술에 대한 열정으로 새로운 경험을 제공하고자 합니다.', '고등학교 졸업', '["Java","HTML","jQuery"]', now()),
+    (3, '박찬혁', '혁신적인 백엔드 엔지니어 이력서', '백엔드', '신입', 'SQLD',
+     '안녕하세요, 혁신적인 백엔드 엔지니어 지원자 박찬혁입니다. 데이터베이스 관리와 서버 구축에 대한 열정으로 새로운 기술을 개발하고자 합니다.', '고등학교 졸업', '["Java","JavaScript","Spring"]', now()),
     (4, '강호동', '데이터 전문가로서의 백엔드 엔지니어링 이력서', '백엔드', '신입', '정보처리기사',
      '안녕하세요, 데이터 전문가로서의 백엔드 엔지니어 강호동입니다. 데이터 처리와 보안에 대한 전문성으로 효율적인 시스템을 구축하고자 합니다.', '고등학교 졸업', '["Java","HTML","MySQL"]', now()),
     (5, '유재석', '창의적인 프론트엔드 개발자 자기소개서', '프론트엔드', '신입', '정보처리기사',

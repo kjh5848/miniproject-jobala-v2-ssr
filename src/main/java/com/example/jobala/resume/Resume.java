@@ -34,8 +34,6 @@ public class Resume {
     private String edu;
     private String skills;
 
-
-
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
 

@@ -30,9 +30,6 @@ public class ReplyController {
         System.out.println("id = " + id);
         // 댓글의 username과 세션의 username 비교해서 같으면 삭제 가능
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
 
         Reply reply = replyRepository.findById(id);
 

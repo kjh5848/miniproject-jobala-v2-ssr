@@ -29,9 +29,7 @@ public class ResumeController {
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
+
         req.setAttribute("user", sessionUser);
         return "/guest/resume/saveForm";
     }

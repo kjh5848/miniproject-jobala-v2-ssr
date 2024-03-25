@@ -1,12 +1,7 @@
 package com.example.jobala._user;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
-
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class UserRequest {
 

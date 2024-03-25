@@ -2,6 +2,8 @@ package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,31 +27,29 @@ public class GuestController {
     private final GuestQueryRepository guestRepository;
     private final GuestService guestService;
     private final UserJPARepository userJPARepository;
+    private final JobopenJPARepository jobopenJPARepository;
 
     // DEL: mainForm 삭제
+
+
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
+
         // [,]를 없애기위해 substring
         String slicedSkills = skills.substring(1, skills.length() - 1);
-        System.out.println(slicedSkills);
-        System.out.println(resDTO);
-        List<JobopenResponse.ListDTO> jobopenList = guestRepository.findAll(slicedSkills, resDTO);
-        req.setAttribute("jobopenList", jobopenList);
+
+        List<User> userList = userJPARepository.findAll();
+        req.setAttribute("jobopenList", userList);
 
         return "/guest/jobSearch";
     }
 
+
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-        List<JobopenResponse.ListDTO> jobopenList = guestRepository.findByJoboopenAll();
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "/guest/jobSearch";
     }
@@ -58,9 +58,6 @@ public class GuestController {
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         int userId = sessionUser.getId();
         System.out.println(userId);
         List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
