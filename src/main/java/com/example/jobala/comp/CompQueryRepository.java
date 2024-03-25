@@ -18,49 +18,6 @@ import java.util.List;
 public class CompQueryRepository {
     private final EntityManager em;
 
-    @Transactional
-    public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
-        System.out.println("profileDto = " + profileDto);
-        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ?, img_filename =?, img_title = ?  WHERE id = ?");
-        query.setParameter(1, profileDto.getName());
-        query.setParameter(2, profileDto.getPassword());
-        query.setParameter(3, profileDto.getPhone());
-        query.setParameter(4, profileDto.getEmail());
-        query.setParameter(5, profileDto.getAddress());
-        query.setParameter(6, profileDto.getId());
-        query.setParameter(7, profileDto.getImgFilename());
-        query.setParameter(8, profileDto.getImgTitle());
-        query.executeUpdate();
-    }
-
-    public List<CompResponse.CompProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num, img_filename, img_title  FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
-        query.setParameter(1, userId);
-
-        List<CompResponse.CompProfileDTO> CompProfile = query.getResultList();
-
-        for (CompResponse.CompProfileDTO profileDTO : CompProfile) {
-            if (profileDTO.getImgFilename() == null) {
-                profileDTO.setImgFilename("default.png"); // 기본 이미지 경로를 설정
-                profileDTO.setImgTitle("default.png"); // 기본 이미지 제목을 설정
-            } else {
-                // 파일 이름과 확장자를 분리
-                String[] parts = profileDTO.getImgFilename().split("_");
-                if (parts.length >= 2) { // 배열의 길이가 2 이상이어야 함
-                    String imgTitle = parts[0]; // UUID와 파일 이름을 분리하여 파일 이름만 추출
-                    profileDTO.setImgTitle(imgTitle);
-                } else {
-                    // 적절한 처리를 수행하거나 예외 처리를 진행할 수 있음
-                    // 여기서는 기본 이미지로 설정
-                    profileDTO.setImgFilename("default.png");
-                    profileDTO.setImgTitle("default.png");
-                }
-            }
-        }
-        System.out.println("CompProfile: " + CompProfile);
-        return CompProfile;
-    }
-
     public List<ResumeResponse.ListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
@@ -150,30 +107,6 @@ public class CompQueryRepository {
         return resumeList2;
     }
 
-    public List<CompResponse.ScoutListDTO> scoutList() {
-        String q = """
-                SELECT rt.name, rt.resume_title, ut.age, ut.address, rt.career
-                FROM user_tb ut
-                INNER JOIN (
-                select * 
-                from resume_tb
-                where id in (
-                select max(id)
-                from resume_tb
-                group by user_id
-                )
-                ) rt ON ut.id = rt.user_id
-                """;
-
-        Query query = em.createNativeQuery(q);
-
-        JpaResultMapper rm = new JpaResultMapper();
-        List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
-        System.out.println(results);
-
-        return results;
-    }
-
     public List<ResumeResponse.ListDTO> findResumeAll() {
         String q = """
                 select rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
@@ -192,24 +125,5 @@ public class CompQueryRepository {
         Query query = em.createNativeQuery(q, Jobopen.class);
         query.setParameter(1, id);
         return query.getResultList();
-    }
-
-    public void findById() {
-        return;
-    }
-
-    @Transactional
-    public void save() {
-        return;
-    }
-
-    @Transactional
-    public void upDate() {
-        return;
-    }
-
-    @Transactional
-    public void delete() {
-        return;
     }
 }
