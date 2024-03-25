@@ -1,5 +1,6 @@
 {{> layout/header}}
-<!--개인 이력서 관리 페이지-->
+
+<!--개인 지원현황 페이지-->
 <div class="container">
     <div class="card-body">
         <div class="row justify-content-center">
@@ -31,35 +32,26 @@
         <div class="row">
             <div class="col">
                 <div class="applyBox">
-                    <h2 class="text-left">이력서 관리</h2>
+                    <h2 class="text-left">지원 현황</h2>
                     <div class="card shadow row">
                         <table class="table p-3" style="margin-bottom: 0px;">
                             <thead class="table-primary">
                             <tr>
-                                <th>제목</th>
-                                <th>관리</th>
+                                <th>공고 제목</th>
+                                <th>이력서 제목</th>
+                                <th>상태</th>
                             </tr>
                             </thead>
-                            <tbody id="resumeTable">
-                            {{#resumeList}}
+                            {{#Apply}}
+                                <tbody>
                                 <tr>
-                                    <td>
-                                        <a class="page-link" href="/guest/resume/{{id}}">{{resumeTitle}}</a>
-                                    </td>
-                                    <td class="d-flex">
-                                        <a href="/guest/resume/{{id}}/updateForm" class="btn btn-primary btn-sm">수정</a>
-                                        <form action="/resume/{{id}}/delete" method="post">
-                                            <button class="btn btn-danger btn-sm" style="margin-left: 5px;">삭제</button>
-                                        </form>
-                                    </td>
+                                    <td>{{jobopenTitle}}</td>
+                                    <td>{{resumeTitle}}</td>
+                                    <td>{{state}}</td>
                                 </tr>
-                            {{/resumeList}}
-                            </tbody>
+                                </tbody>
+                            {{/Apply}}
                         </table>
-                    </div>
-                    <div class="text-center"> <!-- Center the button -->
-                        <a href="/guest/resume/saveForm" class="btn btn-primary">새로운 이력서 작성하기</a>
-                        <!-- Styled in blue color -->
                     </div>
                 </div>
             </div>
@@ -69,5 +61,4 @@
     <br>
     <br>
 </div>
-
 {{> layout/footer}}

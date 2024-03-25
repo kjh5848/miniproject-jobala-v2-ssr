@@ -14,8 +14,11 @@
                         <a href="/guest/mngForm">
                             <button type="button" class="btn btn-outline-dark m-1">이력서 관리</button>
                         </a>
-                        <a href="/applyStatusForm">
+                        <a href="/applyForm">
                             <button type="button" class="btn btn-outline-dark m-1">지원 관리</button>
+                        </a>
+                        <a href="/positionForm">
+                            <button type="button" class="btn btn-outline-dark m-1">포지션 관리</button>
                         </a>
                         <a href="/guest/scrapForm">
                             <button type="button" class="btn btn-outline-dark m-1">스크랩한 기업</button>
@@ -25,38 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <div class="applyBox">
-                    <h2 class="text-left">지원 현황</h2>
-                    <div class="card shadow row">
-                        <table class="table p-3" style="margin-bottom: 0px;">
-                            <thead class="table-primary">
-                            <tr>
-                                <th>공고 제목</th>
-                                <th>이력서 제목</th>
-                                <th>상태</th>
-                            </tr>
-                            </thead>
-                            {{#Apply}}
-                                <tbody>
-                                <tr>
-                                    <td>{{jobopenTitle}}</td>
-                                    <td>{{resumeTitle}}</td>
-                                    <td>{{state}}</td>
-                                </tr>
-                                </tbody>
-                            {{/Apply}}
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
+
     <div class="card border-0">
         <div id="applicantsList">
 
@@ -71,7 +43,6 @@
                         <p>{{state}}</p>
                         <p><small>{{endTime}}</small></p>
                     </a>
-
 
                     <div class="button-container d-flex flex-column justify-content-center align-items-end position-absolute top-50 end-0 translate-middle-y mt-3">
 
