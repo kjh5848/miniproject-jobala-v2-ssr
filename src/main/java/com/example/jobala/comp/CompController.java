@@ -45,7 +45,11 @@ public class CompController {
 
     @GetMapping("/resumeSearch")
     public String resumeSearch(@RequestParam(value = "resumeTitle", defaultValue = "") String resumeTitle) {
-        compService.이력서검색하기();
+        List<ResumeResponse.ListDTO> resumeList = compService.이력서검색하기(resumeTitle);
+        System.out.println("시작");
+        System.out.println(resumeList);
+        System.out.println("끝");
+        return "/comp/scoutList";
     }
 
     @GetMapping("/comp/scoutList")

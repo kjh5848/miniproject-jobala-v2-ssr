@@ -4,7 +4,10 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestJPARepository;
 import com.example.jobala.guest.GuestRequest;
+import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
+import com.example.jobala.resume.ResumeQueryRepository;
+import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +17,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class CompService {
     private final CompJPARepository compJPARepository;
-    private final ResumeJPARepository resumeJPARepository;
+    private final ResumeQueryRepository resumeQueryRepository;
 
     @Transactional
     public User 프로필업데이트(CompRequest.CompProfileUpdateDTO reqDTO, User sessionUser) {
@@ -46,7 +50,8 @@ public class CompService {
         return user;
     }
 
-    public void 이력서검색하기() {
-        resumeJPARepository.findByResumeTitle();
+    public List<ResumeResponse.ListDTO> 이력서검색하기(String resumeTitle) {
+        List<ResumeResponse.ListDTO> resumeList = resumeQueryRepository.findByResumeTitleLike(resumeTitle);
+        return resumeList;
     }
 }
