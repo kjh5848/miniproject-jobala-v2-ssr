@@ -28,13 +28,35 @@ public class ApplyQueryRepository {
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
 
+
         JpaResultMapper mapper = new JpaResultMapper();
         List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
         return responseDTO;
     }
 
-    public List<ApplyResponse.ApplyDTO> findByUserId(int sessionUserId) {
-        String q = """
+    /**
+     * role로 개인과 기업을 구분하고
+     * 기업이면 공고를 기준으로 지원받은 이력서를 조회
+     * 개인이면 어플라이를 기준으로 지원한 이력서를 조회
+     */
+    public List<ApplyResponse.ApplyDTO> findByUserId(int sessionUserId, int role) {
+        if (role == 1) {
+            String q = """
+                    SELECT at.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_Time, at.state, rt.id
+                FROM apply_tb at
+                join user_tb ut on at.user_id = ut.id
+                join resume_tb rt on at.resume_id = rt.id
+                join jobopen_tb jt on at.jobopen_id = jt.id
+                WHERE jt.user_id = ? order by id desc;
+                    """;
+            Query query = em.createNativeQuery(q)
+                    .setParameter(1, sessionUserId);
+
+            JpaResultMapper mapper = new JpaResultMapper();
+            List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
+            return responseDTO;
+        } else {
+            String q2 = """
                 SELECT at.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_Time, at.state, rt.id
                 FROM apply_tb at
                 join user_tb ut on at.user_id = ut.id
@@ -42,12 +64,14 @@ public class ApplyQueryRepository {
                 join jobopen_tb jt on at.jobopen_id = jt.id
                 WHERE at.user_id = ? order by id desc;
                 """;
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, sessionUserId);
+            Query query2 = em.createNativeQuery(q2)
+                    .setParameter(1, sessionUserId);
 
-        JpaResultMapper mapper = new JpaResultMapper();
-        List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
-        return responseDTO;
+            JpaResultMapper mapper = new JpaResultMapper();
+            List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query2, ApplyResponse.ApplyDTO.class);
+            return responseDTO;
+        }
+
     }
 
     public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId) {

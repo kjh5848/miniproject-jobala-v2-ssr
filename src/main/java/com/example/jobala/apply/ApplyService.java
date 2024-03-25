@@ -31,9 +31,9 @@ public class ApplyService {
     }
 
     // 개인 사용자를 위한 메서드
-    public ApplyResponse.ApplyStatusDTO getGuestApplyStatus(int userId) {
-        List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findByUserId(userId);
-        List<ApplyResponse.ApplyDTO2> receivedOffers = applyQueryRepository.findJopOpenByUserId(userId);
+    public ApplyResponse.ApplyStatusDTO getGuestApplyStatus(int sessionUserId, int role) {
+        List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findByUserId(sessionUserId,role);
+        List<ApplyResponse.ApplyDTO2> receivedOffers = applyQueryRepository.findJopOpenByUserId(sessionUserId);
         // 개인 사용자에게 필요한 추가적인 데이터 조회 로직
 
         // 필요한 데이터를 기반으로 응답 객체 생성
@@ -55,7 +55,14 @@ public class ApplyService {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
 
-        applyJPARepository.save(reqDTO.toEntity(resume,jobopen,sessionUser));
+        Apply apply = Apply.builder()
+                .user(sessionUser)
+                .jobopen(jobopen)
+                .resume(resume)
+                .state("검토중")
+                .build();
+
+        applyJPARepository.save(apply);
     }
 
 }

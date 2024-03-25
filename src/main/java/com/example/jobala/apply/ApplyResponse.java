@@ -25,7 +25,10 @@ public class ApplyResponse {
     }
 
     //뭐??
+
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ApplyDTO {
         private Integer id;
         private String jobopenTitle;
@@ -35,21 +38,11 @@ public class ApplyResponse {
         private Date endTime;
         private String state;
         private Integer resumeId;
-
-        public ApplyDTO(Integer id, String jobopenTitle, String resumeTitle, String name, String edu, Date endTime, String state, Integer resumeId) {
-            this.id = id;
-            this.jobopenTitle = jobopenTitle;
-            this.resumeTitle = resumeTitle;
-            this.name = name;
-            this.edu = edu;
-            this.endTime = endTime;
-            this.state = state;
-            this.resumeId = resumeId;
-        }
     }
 
     //뭐??
     @Data
+    @AllArgsConstructor
     public static class ApplyDTO2 {
         private Integer id;
         private String jobopenTitle;
@@ -60,15 +53,5 @@ public class ApplyResponse {
         private String state;
         private Integer jobopenId;
 
-        public ApplyDTO2(Integer id, String jobopenTitle, String resumeTitle, String compname, String edu, Date endTime, String state, Integer jobopenId) {
-            this.id = id;
-            this.jobopenTitle = jobopenTitle;
-            this.resumeTitle = resumeTitle;
-            this.compname = compname;
-            this.edu = edu;
-            this.endTime = endTime;
-            this.state = state;
-            this.jobopenId = jobopenId;
-        }
     }
 }

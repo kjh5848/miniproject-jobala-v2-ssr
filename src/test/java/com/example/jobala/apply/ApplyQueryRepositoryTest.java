@@ -21,9 +21,6 @@ class ApplyQueryRepositoryTest {
             // given
           int id = 1;
             // when
-        List<ApplyResponse.ApplyDTO> applyDTOList = applyQueryRepository.findApplyCompByUserId(id);
-        applyDTOList.forEach(System.out::println);
             // then
-
         }
 }

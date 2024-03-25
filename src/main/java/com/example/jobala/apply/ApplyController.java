@@ -27,7 +27,7 @@ public class ApplyController {
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.상태수정(applyId, status);
-        return "redirect:/applyPositionForm";
+        return "redirect:/positionForm";
     }
 
     //게스트가 제안
@@ -36,7 +36,7 @@ public class ApplyController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.상태수정(applyId, status);
 
-        return "redirect:/applyStatusForm";
+        return "redirect:/positionForm";
     }
 
     @PostMapping("/Applys")
@@ -80,11 +80,12 @@ public class ApplyController {
     public String applyForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        List<ApplyResponse.ApplyDTO> respDTO = applyRepository.findByUserId(sessionUser.getId());
+        List<ApplyResponse.ApplyDTO> respDTO = applyRepository.findByUserId(sessionUser.getId(),sessionUser.getRole());
         req.setAttribute("Apply", respDTO);
 
+
         // 서비스에서 개인 사용자의 지원 상태 및 제안 현황 정보를 가져옴
-        var applyStatusFormResponse = applyService.getGuestApplyStatus(sessionUser.getId());
+        var applyStatusFormResponse = applyService.getGuestApplyStatus(sessionUser.getId(),sessionUser.getRole());
         req.setAttribute("ApplyGuest", applyStatusFormResponse.getReceivedOffersReviewing());
         req.setAttribute("ApplyGuest2", applyStatusFormResponse.getReceivedOffersAccepted());
         req.setAttribute("ApplyGuest3", applyStatusFormResponse.getReceivedOffersRejected());
