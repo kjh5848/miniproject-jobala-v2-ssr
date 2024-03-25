@@ -65,8 +65,31 @@ public class ApplyController {
 
 // TODO: applyPositionForm, applyStatusForm 삭제 예정
     //기업이 지원받은 이력서의 상태 여부를 결정
-    @GetMapping("/applyPositionForm")
-    public String applyPositionForm(HttpServletRequest req) {
+    // del : 기존의 applyStatus 삭제
+
+    // 지원현황 -> 수정 필요
+    @GetMapping("/applyForm")
+    public String applyForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
+        req.setAttribute("Apply", responseDTO);
+        // 검토중
+        List<ApplyResponse.ApplyDTO> responseDTO2 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "검토중");
+        req.setAttribute("ApplyComp", responseDTO2);
+        // 합격
+        List<ApplyResponse.ApplyDTO> responseDTO3 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "합격");
+        req.setAttribute("ApplyComp2", responseDTO3);
+        // 불합격
+        List<ApplyResponse.ApplyDTO> responseDTO4 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
+        req.setAttribute("ApplyComp3", responseDTO4);return "/guest/_myPage/applyForm";
+    }
+
+    // 제안현황 -> 수정 필요
+    @GetMapping("/positionForm")
+    public String positionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
@@ -82,8 +105,7 @@ public class ApplyController {
         // 불합격
         List<ApplyResponse.ApplyDTO> responseDTO4 = applyRepository.findApplyCompByUserId(sessionUser.getId(), "불합격");
         req.setAttribute("ApplyComp3", responseDTO4);
-
-        return "/comp/_myPage/applyPositionForm";
+        return "/guest/_myPage/positionForm";
     }
 
     @GetMapping("/applyStatusForm")
@@ -108,7 +130,7 @@ public class ApplyController {
         List<ApplyResponse.ApplyDTO2> respDTO4 = applyRepository.findJopOpenByUserId(userId, "거절");
         req.setAttribute("ApplyGuest3", respDTO4);
 
-        return "/guest/_myPage/applyStatusForm";
+        return "applyForm";
     }
 
 }
