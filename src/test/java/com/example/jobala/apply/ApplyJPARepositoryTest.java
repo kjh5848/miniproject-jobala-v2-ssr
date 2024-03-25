@@ -23,6 +23,18 @@ class ApplyJPARepositoryTest {
     private EntityManager em;
 
     @Test
+        public void findByUserId_test(){
+            // given
+            int id = 1;
+            // when
+        List<Apply> applies = applyJPARepository.findApplyCompByUserId(id);
+        applies.forEach(System.out::println);
+
+            // then
+
+        }
+
+    @Test
     public void findById_test() {
         // given
         int id = 1;
