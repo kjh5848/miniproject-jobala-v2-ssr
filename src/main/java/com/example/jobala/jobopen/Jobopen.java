@@ -49,7 +49,7 @@ public class Jobopen {
     private List<Scrap> scraps;
 
     @Builder
-    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role) {
+    public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role, Timestamp createdAt, List<Apply> applies, List<Scrap> scraps) {
         this.id = id;
         this.user = user;
         this.jobopenTitle = jobopenTitle;
@@ -62,6 +62,9 @@ public class Jobopen {
         this.endTime = endTime;
         this.skills = skills;
         this.role = role;
+        this.createdAt = createdAt;
+        this.applies = applies;
+        this.scraps = scraps;
     }
 
     public void setJobopenUpdate(JobopenRequest.UpdateDTO reqDTO) {

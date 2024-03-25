@@ -51,7 +51,7 @@ public class JobopenService {
     }
 
     public Jobopen 공고보기(Integer jobopenId) {
-        Jobopen jobopen = jobopenJPARepository.findById(jobopenId)
+        Jobopen jobopen = jobopenJPARepository.findByJobopenIdWithUser(jobopenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
 
         List<String> skills = Arrays.stream(jobopen.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();

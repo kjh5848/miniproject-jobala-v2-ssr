@@ -81,29 +81,29 @@ public class JobopenController {
         User user = null;
         try {
             user = (User) session.getAttribute("sessionUser");
-            if (user.getRole() == 0) {
+            if (user != null && user.getRole() == 0) {
                 isCompScrap = true;
                 req.setAttribute("isCompScrap", isCompScrap);
                 Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
                 req.setAttribute("scrap", scrap);
             }
         } catch (Exception e) {
+            // 예외 처리
+            e.printStackTrace();
         }
-        req.setAttribute("user", user);
 
-        // resumeList 메소드를 호출할 때 사용자 ID를 매개변수로 전달
+        // 사용자가 있을 경우 이력서 목록 설정
         if (user != null) {
             List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
             req.setAttribute("resumeList2", resumeList2);
         }
 
+        // 채용공고 정보 가져오기
         Jobopen jobopen = jobopenService.공고보기(id);
-        JobopenResponse.JobopenDetailDTO JobopenRespDTO = jobopenRepository.findByUserAndJobopen(id);
 
         req.setAttribute("jobopen", jobopen);
-        req.setAttribute("JobopenRespDTO", JobopenRespDTO);
 
         return "/comp/jobopen/detailForm";
-
     }
+
 }
