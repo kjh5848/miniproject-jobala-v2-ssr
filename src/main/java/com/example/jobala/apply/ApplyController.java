@@ -62,10 +62,10 @@ public class ApplyController {
     @GetMapping("/positionForm")
     public String positionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        int companyId = sessionUser.getId();
 
-        // 서비스에서 기업 사용자의 지원 상태 및 제안 현황 정보를 가져옴
-        var statusFormResponse = applyService.getCompanyApplyStatus(sessionUser.getId());
-        req.setAttribute("Apply", statusFormResponse.getAppliedPositions());
+        ApplyResponse.ApplyStatusDTO respDTO = applyService.getCompanyApplyStatus(companyId);
+        req.setAttribute("ApplyGuest", respDTO.getAppliedPositions());
 
         return "/comp/_myPage/positionForm";
     }
@@ -90,9 +90,9 @@ public class ApplyController {
 //// TODO: applyPositionForm, applyStatusForm 삭제 예정
 
     //    기업이 지원받은 이력서의 상태 여부를 결정
-//    @GetMapping("/applyPositionForm")
-//    public String applyPositionForm(HttpServletRequest req) {
-//        User sessionUser = (User) session.getAttribute("sessionUser");
+////    @GetMapping("/applyPositionForm")
+////    public String applyPositionForm(HttpServletRequest req) {
+////        User sessionUser = (User) session.getAttribute("sessionUser");
 //
 //        List<ApplyResponse.ApplyDTO> responseDTO = applyRepository.findByUserId(sessionUser.getId());
 //        req.setAttribute("Apply", responseDTO);
