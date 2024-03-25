@@ -55,14 +55,7 @@ public class ApplyService {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
 
-        Apply apply = Apply.builder()
-                .user(sessionUser)
-                .jobopen(jobopen)
-                .resume(resume)
-                .state("검토중")
-                .build();
-
-        applyJPARepository.save(apply);
+        applyJPARepository.save(reqDTO.toEntity(resume,jobopen,sessionUser));
     }
 
 }

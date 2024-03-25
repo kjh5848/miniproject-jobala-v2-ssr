@@ -45,7 +45,11 @@ public class ApplyController {
         System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
         applyService.지원후저장(reqDTO, sessionUser);
 
-        return "redirect:/guest/resume/" + reqDTO.getResumeId();
+        if (sessionUser.getRole() == 1) {
+            return "redirect:/guest/resume/" + reqDTO.getResumeId();
+        } else {
+            return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
+        }
     }
 
     // 핵심로직 : 지원 정보를 받아와서 상세보기
@@ -55,9 +59,37 @@ public class ApplyController {
         return applicantProfiles;
     }
 
+    @GetMapping("/positionForm")
+    public String positionForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        // 서비스에서 기업 사용자의 지원 상태 및 제안 현황 정보를 가져옴
+        var statusFormResponse = applyService.getCompanyApplyStatus(sessionUser.getId());
+        req.setAttribute("Apply", statusFormResponse.getAppliedPositions());
+
+        return "/comp/_myPage/positionForm";
+    }
+
+    // 개인 사용자의 지원 상태 및 받은 제안 페이지
+    @GetMapping("/applyForm")
+    public String applyForm(HttpServletRequest req) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        List<ApplyResponse.ApplyDTO> respDTO = applyRepository.findByUserId(sessionUser.getId());
+        req.setAttribute("Apply", respDTO);
+
+        // 서비스에서 개인 사용자의 지원 상태 및 제안 현황 정보를 가져옴
+        var applyStatusFormResponse = applyService.getGuestApplyStatus(sessionUser.getId());
+        req.setAttribute("ApplyGuest", applyStatusFormResponse.getReceivedOffersReviewing());
+        req.setAttribute("ApplyGuest2", applyStatusFormResponse.getReceivedOffersAccepted());
+        req.setAttribute("ApplyGuest3", applyStatusFormResponse.getReceivedOffersRejected());
+
+        return "/guest/_myPage/applyForm";
+    }
+
 //// TODO: applyPositionForm, applyStatusForm 삭제 예정
 
-//    기업이 지원받은 이력서의 상태 여부를 결정
+    //    기업이 지원받은 이력서의 상태 여부를 결정
 //    @GetMapping("/applyPositionForm")
 //    public String applyPositionForm(HttpServletRequest req) {
 //        User sessionUser = (User) session.getAttribute("sessionUser");
@@ -100,34 +132,6 @@ public class ApplyController {
 //        return "/guest/_myPage/applyStatusForm";
 //    }
 // 기업 사용자의 공고 관리 및 지원자 상태 페이지
-@GetMapping("/positionForm")
-public String positionForm(HttpServletRequest req) {
-    User sessionUser = (User) session.getAttribute("sessionUser");
-    if (sessionUser == null) {
-        return "redirect:/loginForm";
-    }
 
-    // 서비스에서 기업 사용자의 지원 상태 및 제안 현황 정보를 가져옴
-    var statusFormResponse = applyService.getCompanyApplyStatus(sessionUser.getId());
-    req.setAttribute("Apply", statusFormResponse.getAppliedPositions());
 
-    return "/comp/_myPage/positionForm";
-}
-
-    // 개인 사용자의 지원 상태 및 받은 제안 페이지
-    @GetMapping("/applyForm")
-    public String applyForm(HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
-
-        // 서비스에서 개인 사용자의 지원 상태 및 제안 현황 정보를 가져옴
-        var applyStatusFormResponse = applyService.getGuestApplyStatus(sessionUser.getId());
-        req.setAttribute("ApplyGuest", applyStatusFormResponse.getReceivedOffersReviewing());
-        req.setAttribute("ApplyGuest2", applyStatusFormResponse.getReceivedOffersAccepted());
-        req.setAttribute("ApplyGuest3", applyStatusFormResponse.getReceivedOffersRejected());
-
-        return "/guest/_myPage/applyForm";
-    }
 }

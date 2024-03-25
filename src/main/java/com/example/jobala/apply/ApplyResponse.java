@@ -24,7 +24,6 @@ public class ApplyResponse {
         }
     }
 
-
     @Data
     public static class ApplyDTO {
         private Integer id;
