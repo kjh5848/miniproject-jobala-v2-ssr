@@ -43,6 +43,11 @@ public class CompController {
         return "/comp/scoutList";
     }
 
+    @GetMapping("/resumeSearch")
+    public String resumeSearch(@RequestParam(value = "resumeTitle", defaultValue = "") String resumeTitle) {
+        compService.이력서검색하기();
+    }
+
     @GetMapping("/comp/scoutList")
     public String scoutList(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");

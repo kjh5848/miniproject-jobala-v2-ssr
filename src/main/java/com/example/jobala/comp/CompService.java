@@ -4,6 +4,7 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestJPARepository;
 import com.example.jobala.guest.GuestRequest;
+import com.example.jobala.resume.ResumeJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CompService {
     private final CompJPARepository compJPARepository;
+    private final ResumeJPARepository resumeJPARepository;
 
     @Transactional
     public User 프로필업데이트(CompRequest.CompProfileUpdateDTO reqDTO, User sessionUser) {
@@ -42,5 +44,9 @@ public class CompService {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    public void 이력서검색하기() {
+        resumeJPARepository.findByResumeTitle();
     }
 }
