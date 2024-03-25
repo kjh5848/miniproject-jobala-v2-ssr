@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class ReplyController {
-    private final ReplyQueryRepository replyRepository;
-    private final BoardQueryRepository boardRepository;
     private final HttpSession session;
     private final ReplyService replyService;
 
@@ -24,12 +22,15 @@ public class ReplyController {
         return "redirect:/board/" + reqDTO.getBoardId();
     }
 
-
-    @PostMapping("/board/{boardId}/reply/{replyId}/delete")
-    public String deleteReply(@PathVariable Integer boardId,@PathVariable Integer replyId) {
+    //댓글 삭제
+    @PostMapping("reply/{replyId}/delete")
+    public String deleteReply(@PathVariable Integer replyId) {
+        System.out.println(1);
         User sessionUser = (User) session.getAttribute("sessionUser");
+        System.out.println(2);
         replyService.댓글삭제(replyId,sessionUser.getId());
+        System.out.println(3);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/board/"+sessionUser.getId();
     }
 }
