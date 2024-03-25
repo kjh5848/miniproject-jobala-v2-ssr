@@ -10,6 +10,7 @@ import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +22,6 @@ public class ApplyService {
     private final ResumeJPARepository resumeJPARepository;
     private final ApplyQueryRepository applyQueryRepository;
 
-    // 기업 사용자를 위한 메서드
     public ApplyResponse.ApplyStatusDTO getCompanyApplyStatus(int userId) {
         List<ApplyResponse.ApplyDTO> appliedPositions = applyQueryRepository.findApplyCompByUserId(userId);
         // 기업 사용자에게 필요한 추가적인 데이터 조회 로직
