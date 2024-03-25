@@ -66,12 +66,10 @@ public class BoardController {
         return "board/updateForm";
     }
 
+    //TODO: saveForm삭제 예정
     @GetMapping("/board/saveForm")
     public String saveForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         return "/board/saveForm";
     }
 

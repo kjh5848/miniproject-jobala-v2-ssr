@@ -7,6 +7,7 @@ import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,13 +27,11 @@ public class CompController {
     private final ApplyJPARepository applyJPARepository;
     private final CompService compService;
     private final UserJPARepository userJPARepository;
+    private final ResumeJPARepository resumeJPARepository;
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         // [,]를 없애기위해 substring
         String slicedSkills = skills.substring(1, skills.length() - 1);
         System.out.println(slicedSkills);
@@ -47,11 +46,10 @@ public class CompController {
     @GetMapping("/comp/scoutList")
     public String scoutList(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         List<ResumeResponse.ListDTO> resumeList = compRepository.findResumeAll();
         req.setAttribute("resumeList", resumeList);
+
+        List<Resume> resumeList2 = resumeJPARepository.findAll();
         return "/comp/scoutList";
     }
 
@@ -59,9 +57,6 @@ public class CompController {
     public String scoutDetail(@PathVariable int id, HttpServletRequest req) {
         //1. 기업 정보 꺼내오기 (인증 체크)
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
         Resume resume = (Resume) compRepository.findResumeById(id);
 
@@ -75,9 +70,6 @@ public class CompController {
     public String mngForm(HttpServletRequest req) {
         // 채용 공고 목록 조회
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         List<Jobopen> temp = compRepository.findJobopenById(sessionUser.getId());
         List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
 

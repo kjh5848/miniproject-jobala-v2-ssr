@@ -66,13 +66,10 @@ public class JobopenController {
         return "redirect:/comp/mngForm";
     }
 
-    // TODO : 삭제 예정
+    // TODO : saveForm 삭제 예정
     @GetMapping("/comp/jobopen/saveForm")
     public String saveForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
         return "/comp/jobopen/saveForm";
     }
 
