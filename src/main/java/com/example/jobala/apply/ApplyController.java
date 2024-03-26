@@ -65,8 +65,11 @@ public class ApplyController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         int companyId = sessionUser.getId();
 
-        ApplyResponse.ApplyStatusDTO respDTO = applyService.getCompanyApplyStatus(companyId);
-        req.setAttribute("ApplyGuest", respDTO.getAppliedPositions());
+        List<ApplyResponse.ApplyDTO> respDTO = applyRepository.findByUserId(sessionUser.getId(),sessionUser.getRole());
+        req.setAttribute("Apply", respDTO);
+
+        ApplyResponse.ApplyStatusDTO respDTO2 = applyService.getCompanyApplyStatus(companyId);
+        req.setAttribute("ApplyGuest", respDTO2.getAppliedPositions());
 
         if (sessionUser.getRole() == 1) {
             return "comp/_myPage/positionForm";
