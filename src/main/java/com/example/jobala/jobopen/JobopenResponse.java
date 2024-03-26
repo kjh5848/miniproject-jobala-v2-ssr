@@ -1,9 +1,11 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class JobopenResponse {
@@ -32,15 +34,15 @@ public class JobopenResponse {
         private String jobType; // 고용형태
         private String salary; //연봉
         private java.sql.Date endTime; // 마감일
-        private LocalDateTime createdAt; //생성일
         private Integer role; // 역할 0 -> guest, 1 -> comp
         private int count;
 
+
         public DTO(Jobopen jobopen) {
             this.id = jobopen.getId();
-            this.compname = jobopen.getCompname();
+            this.userId = jobopen.getUser().getId();
+            this.compname = jobopen.getUser().getCompname();
             this.jobopenTitle = jobopen.getJobopenTitle();
-            this.content = jobopen.getContent();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
             this.hopeJob = jobopen.getHopeJob();
@@ -48,9 +50,12 @@ public class JobopenResponse {
             this.jobType = jobopen.getJobType();
             this.salary = jobopen.getSalary();
             this.endTime = jobopen.getEndTime();
-            this.createdAt = jobopen.getCreatedAt();
             this.role = jobopen.getRole();
+            this.count = jobopen.getId();
         }
+
+        @CreationTimestamp
+        private Timestamp createdAt; //생성일
     }
 
     @AllArgsConstructor
@@ -58,6 +63,8 @@ public class JobopenResponse {
     public static class JobopenDetailDTO {
         private String jobopenTitle;
         private String compname;
+        private String imgFilename;
+        private String imgTitle;
     }
 
     @AllArgsConstructor
@@ -71,8 +78,23 @@ public class JobopenResponse {
         private Date endTime;
     }
 
+    @AllArgsConstructor
+    @Data
+    public static class ScrapDTO{
+        private int id;
+        private String compname;
+        private String jobopenTitle;
+        private String career;
 
+        public ScrapDTO(Jobopen jobopen) {
+            this.id = jobopen.getId();
+            this.compname = jobopen.getUser().getCompname();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.career = jobopen.getCareer();
+        }
+    }
 }
+
 
 
 

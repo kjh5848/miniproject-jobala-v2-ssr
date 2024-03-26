@@ -33,8 +33,11 @@
                         <a href="/comp/mngForm">
                             <button type="button" class="btn btn-outline-dark m-1">채용공고 관리</button>
                         </a>
-                        <a href="/applyPositionForm">
+                        <a href="/applyForm">
                             <button type="button" class="btn btn-outline-dark m-1">지원자 관리</button>
+                        </a>
+                        <a href="/positionForm">
+                            <button type="button" class="btn btn-outline-dark m-1">제안 관리</button>
                         </a>
                         <a href="/comp/scrapForm">
                             <button type="button" class="btn btn-outline-dark m-1">스크랩</button>
@@ -53,7 +56,13 @@
             {{#compProfile}}
                 <script src="script.js"></script>
                 <div class="line"></div>
-                <form action="/comp/updateProfile" method="post">
+                <form action="/comp/updateProfile" method="post" enctype="multipart/form-data">
+                    <div style="margin-left: 160px; margin-top: 20px; margin-bottom: 20px;">
+                        <input type="file" name="imgFilename" id="imgFilename" value={{imgFilename}}
+                               style="margin-bottom: 10px;">
+                        <input type="text" name="imgTitle" id="imgTitle" value={{imgTitle}}>
+                        <!-- 타이틀 입력란 -->
+                    </div>
                     <div class="mb-3">
                         <span for="companyName" class="form-label">회사명 : </span>
                         <span>{{compname}}</span>

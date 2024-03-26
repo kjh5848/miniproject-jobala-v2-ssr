@@ -1,0 +1,74 @@
+{{> layout/header}}
+
+<style>
+    .text-left {
+        text-align: left;
+    }
+
+    .profileBox {
+        margin-top: 50px;
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 10px;
+        border: none;
+    }
+</style>
+
+<div class="container">
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="upMenu text-center mb-4">
+                    <h1>마이페이지</h1>
+                    <div class="btn-group btn-group-lg">
+                        <a href="/comp/profileForm">
+                            <button type="button" class="btn btn-outline-dark m-1">프로필 관리</button>
+                        </a>
+                        <a href="/comp/mngForm">
+                            <button type="button" class="btn btn-outline-dark m-1">채용공고 관리</button>
+                        </a>
+                        <a href="/applyForm">
+                            <button type="button" class="btn btn-outline-dark m-1">지원자 관리</button>
+                        </a>
+                        <a href="/positionForm">
+                            <button type="button" class="btn btn-outline-dark m-1">제안 관리</button>
+                        </a>
+                        <a href="/comp/scrapForm">
+                            <button type="button" class="btn btn-outline-dark m-1">스크랩</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0">
+        <div class="profileBox" id="profileForm">
+            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-info" id="offerCount"></span>
+            </h2>
+            <div class="card shadow row">
+                <table class="table p-3" style="margin-bottom: 0px;">
+                    <thead class="table-primary">
+                    <tr>
+                        <th></th>
+                        <th scope="col">이력서</th>
+                        <th scope="col">공고명</th>
+                        <th scope="col">상태</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#Apply}}
+                        <tr onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">
+                            <td></td>
+                            <td>{{resumeTitle}}</td>
+                            <td>{{jobopenTitle}}</td>
+                            <td>{{state}}</td>
+                        </tr>
+                    {{/Apply}}
+                    <!-- 추가 제안 내용들 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+{{> layout/footer}}

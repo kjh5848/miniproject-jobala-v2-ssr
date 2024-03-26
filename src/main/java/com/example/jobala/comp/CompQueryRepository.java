@@ -1,5 +1,6 @@
 package com.example.jobala.comp;
 
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
@@ -17,31 +18,10 @@ import java.util.List;
 public class CompQueryRepository {
     private final EntityManager em;
 
-    @Transactional
-    public void updateProfile(CompResponse.CProfileUpdateDTO profileDto) {
-        System.out.println("profileDto = " + profileDto);
-        Query query = em.createNativeQuery("UPDATE user_tb SET name = ?, password = ?, phone = ?, email = ?, address = ? WHERE id = ?");
-        query.setParameter(1, profileDto.getName());
-        query.setParameter(2, profileDto.getPassword());
-        query.setParameter(3, profileDto.getPhone());
-        query.setParameter(4, profileDto.getEmail());
-        query.setParameter(5, profileDto.getAddress());
-        query.setParameter(6, profileDto.getId());
-        query.executeUpdate();
-    }
-
-    public List<CompResponse.CompProfileDTO> findProfileByUserId(int userId) {
-        Query query = em.createNativeQuery("SELECT name, password, phone, email, compname, address, comp_num FROM user_tb WHERE id = ?", CompResponse.CompProfileDTO.class);
-        query.setParameter(1, userId);
-
-        List<CompResponse.CompProfileDTO> CompProfile = query.getResultList();
-        return CompProfile;
-    }
-
     public List<ResumeResponse.ListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
-                (select img_filename from pic_tb where resume_id =  rt.id) img_filename 
+                (select img_filename from _tb where resume_id =  rt.id) img_filename 
                 FROM resume_tb rt INNER JOIN skill_tb sk ON rt.id = sk.resume_id 
                 where (sk.name Like ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ? AND sk.name LIKE ?) 
                 AND (rt.career IN (?, ?)) 
@@ -100,12 +80,12 @@ public class CompQueryRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery);
-        query.setParameter(1, "%"+skill[0]+"%");
-        query.setParameter(2, "%"+skill[1]+"%");
-        query.setParameter(3, "%"+skill[2]+"%");
-        query.setParameter(4, "%"+skill[3]+"%");
-        query.setParameter(5, "%"+skill[4]+"%");
-        query.setParameter(6, "%"+skill[5]+"%");
+        query.setParameter(1, "%" + skill[0] + "%");
+        query.setParameter(2, "%" + skill[1] + "%");
+        query.setParameter(3, "%" + skill[2] + "%");
+        query.setParameter(4, "%" + skill[3] + "%");
+        query.setParameter(5, "%" + skill[4] + "%");
+        query.setParameter(6, "%" + skill[5] + "%");
         query.setParameter(7, career[0]);
         query.setParameter(8, career[1]);
         query.setParameter(9, edu[0]);
@@ -127,34 +107,10 @@ public class CompQueryRepository {
         return resumeList2;
     }
 
-    public List<CompResponse.ScoutListDTO> scoutList() {
-        String q = """
-                SELECT rt.name, rt.resume_title, ut.age, ut.address, rt.career
-                FROM user_tb ut
-                INNER JOIN (
-                select * 
-                from resume_tb
-                where id in (
-                select max(id)
-                from resume_tb
-                group by user_id
-                )
-                ) rt ON ut.id = rt.user_id
-                """;
-
-        Query query = em.createNativeQuery(q);
-
-        JpaResultMapper rm = new JpaResultMapper();
-        List<CompResponse.ScoutListDTO> results = rm.list(query, CompResponse.ScoutListDTO.class);
-        System.out.println(results);
-
-        return results;
-    }
-
     public List<ResumeResponse.ListDTO> findResumeAll() {
         String q = """
                 select rt.id, rt.name, rt.resume_title, rt.edu, rt.career, 
-                (select img_filename from pic_tb where resume_id =  rt.id) img_filename from resume_tb rt order by id desc;              
+                (select img_filename from user_tb where id =  rt.id) img_filename from resume_tb rt order by id desc;              
                 """;
         Query query = em.createNativeQuery(q);
         JpaResultMapper rm = new JpaResultMapper();
@@ -169,24 +125,5 @@ public class CompQueryRepository {
         Query query = em.createNativeQuery(q, Jobopen.class);
         query.setParameter(1, id);
         return query.getResultList();
-    }
-
-    public void findById() {
-        return;
-    }
-
-    @Transactional
-    public void save() {
-        return;
-    }
-
-    @Transactional
-    public void upDate() {
-        return;
-    }
-
-    @Transactional
-    public void delete() {
-        return;
     }
 }

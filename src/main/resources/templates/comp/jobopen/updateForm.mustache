@@ -5,28 +5,6 @@
 <div class="container  mt-5">
 
     <!--채용공고 사진-->
-    <form id="UpdateForm" action="/jobopen/update/{{id}}" method="post" enctype="multipart/form-data">
-        <div class="card mb-3">
-            <div class="card-body">
-                <!-- 회사 이미지 및 정보 -->
-                <div class="d-flex ">
-                    <div style="margin-left: 160px; margin-top: 20px; margin-bottom: 20px;">
-                        <div style="width: 500px; height: 190px; border: 1px solid #ccc; margin-bottom: 10px;">
-                            <img id="imgPreview" src="/image/{{pic.ImgFilename}}" alt="          "
-                                 style="width:100%; height: 100%;">
-                        </div>
-                        <input type="file" name="imgFile" id="imgFile" onchange="previewImage(this);"
-                               style="margin-bottom: 10px;">
-                        <input type="hidden" name="title" id="title"> <!-- 타이틀 입력란 -->
-                        <div>
-                            <button type="button" onclick="uploadImage()">사진 저장</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
     <form action="/comp/jobopen/{{id}}/update" method="post">
         <!-- 공고 제목 -->
         <div class="card mt-5">
@@ -44,7 +22,7 @@
                     <p><b>학력</b></p>
                 </div>
 
-                <select class="form-select form-select-lg"  name="edu">
+                <select class="form-select form-select-lg" name="edu">
                     <option value="고등학교 졸업">고등학교 졸업</option>
                     <option value="대학교 졸업">대학교 졸업</option>
                     <option value="학력 무관">학력 무관</option>
@@ -177,83 +155,6 @@
 </div>
 
 
-<script>
-    const imgFileInput = document.getElementById('imgFile');
-    const imgPreview = document.getElementById('imgPreview');
-    const picTitleInput = document.getElementById('title'); // 타이틀 입력란 변경
-
-    imgFileInput.addEventListener('change', function (event) {
-        const file = event.target.files[0]; // 선택된 파일 가져오기
-        if (file) {
-            // 파일 이름을 타이틀로 자동 채우기
-            picTitleInput.value = file.name; // 타이틀 입력란에 파일 이름 설정
-        }
-    });
-
-    function previewImage(input) {
-        const file = input.files[0];
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            imgPreview.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
-
-    // "작성완료" 버튼 클릭 시 이벤트 핸들러
-    document.querySelector('#picUploadForm').addEventListener('submit', async function (event) {
-        event.preventDefault(); // 폼 기본 제출 이벤트 막기
-
-        const formData = new FormData(this);
-
-        try {
-            // 이력서 데이터를 서버로 전송
-            const response = await fetch('/comp/jobopen/{{jobopen.id}}/update', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('이력서를 제출하는 도중에 오류가 발생했습니다.');
-            }
-
-            // 페이지 이동
-            window.location.href = '/success'; // 성공 페이지로 이동
-        } catch (error) {
-            console.error(error);
-            // 오류 처리 로직 추가
-        }
-    });
-
-    // 사진 저장 버튼 클릭 시 이벤트 핸들러
-    async function uploadImage() {
-        const form = document.getElementById('UpdateForm');
-        const formData = new FormData(form);
-
-        try {
-            // 이미지를 서버로 전송
-            const response = await fetch('/jobopen/update/{{id}}', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('이미지를 업로드하는 도중에 오류가 발생했습니다.');
-            }
-
-            // 이미지 업로드가 성공하면 응답 데이터에서 이미지 경로 받아오기
-            const responseData = await response.json();
-            const imageUrl = responseData.imageUrl; // 서버에서 이미지 경로를 제공하는 경우
-
-            // 미리보기로 이미지 표시
-            const imgPreview = document.getElementById('imgPreview');
-            imgPreview.src = imageUrl;
-        } catch (error) {
-            console.error(error);
-            // 오류 처리 로직 추가
-        }
-    }
-
-</script>
 
 
 

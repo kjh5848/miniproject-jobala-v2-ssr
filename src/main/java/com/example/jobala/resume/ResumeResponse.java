@@ -7,6 +7,25 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 public class ResumeResponse {
+
+    @AllArgsConstructor
+    @Data
+    public static class ScrapDTO{
+        private int id;
+        private String name;
+        private String resumeTitle;
+        private String career;
+        private String edu;
+
+        public ScrapDTO(Resume resume) {
+            this.id = resume.getId();
+            this.name = resume.getUser().getName();
+            this.resumeTitle = resume.getResumeTitle();
+            this.career = resume.getCareer();
+            this.edu = resume.getEdu();
+        }
+    }
+
     @AllArgsConstructor
     @Data
     public static class ListDTO {
