@@ -1,7 +1,10 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.jobopen.*;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
+import com.example.jobala.jobopen.JobopenQueryRepository;
+import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +33,7 @@ public class UserController {
     //메인에서 공고목록보기
     @GetMapping("/")
     public String mainForm(HttpServletRequest req) {
-        List<Jobopen> jobopenList = jobopenService.공고목록보기();
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }
@@ -66,7 +69,6 @@ public class UserController {
         return "/user/loginForm";
     }
 
-    //username 중복체크
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
         Optional<User> user = userService.중복체크(username);
