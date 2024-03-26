@@ -52,6 +52,5 @@ public class ApplyResponse {
         private Date endTime;
         private String state;
         private Integer jobopenId;
-
     }
 }
