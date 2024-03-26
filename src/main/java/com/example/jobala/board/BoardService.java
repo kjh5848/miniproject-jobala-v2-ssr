@@ -4,11 +4,10 @@ import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,9 +60,8 @@ public class BoardService {
        boardJPARepository.save(reqDTO.toEntity(sessionUser));
     }
 
-    public List<Board> 글목록조회(){
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        return boardJPARepository.findAll(sort);
+    public Page<Board> 글목록조회(Pageable pageable){
+        return boardJPARepository.findAll(pageable);
     }
 
 }

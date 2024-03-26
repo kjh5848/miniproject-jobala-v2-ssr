@@ -1,26 +1,24 @@
 package com.example.jobala.board;
 
 import com.example.jobala._user.User;
-import com.example.jobala.reply.ReplyQueryRepository;
-import com.example.jobala.reply.ReplyResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
-    private final BoardQueryRepository boardRepository;
-    private final ReplyQueryRepository replyRepository;
     private final BoardService boardService;
 
     private final HttpSession session;
@@ -38,9 +36,15 @@ public class BoardController {
 
 
     @GetMapping("/board/mainForm")
-    public String boardForm(HttpServletRequest req) {
-       List<Board> boardList = boardService.글목록조회();
-       req.setAttribute("boardList",boardList);
+    public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "4") int size, HttpServletRequest req) {
+        Pageable pageable = (Pageable) PageRequest.of(page, size);
+        Page<Board> boardPage = boardService.글목록조회(pageable);
+
+        req.setAttribute("boardList",boardPage.getContent());
+        req.setAttribute("first", page == 0 ? true:false);
+        req.setAttribute("last",page < boardPage.getTotalPages() -1);
+        req.setAttribute("previousPage",page -1);
+        req.setAttribute("nextPage",page +1);
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
