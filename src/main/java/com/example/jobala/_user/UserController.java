@@ -88,7 +88,7 @@ public class UserController {
     public String loginForm() {
         return "user/loginForm";
     }
-
+//
     //TODO: joinForm추후 삭제예정
     @GetMapping("/joinForm")
     public String joinForm() {
