@@ -1,10 +1,7 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.jobopen.JobopenJPARepository;
-import com.example.jobala.jobopen.JobopenQueryRepository;
-import com.example.jobala.jobopen.JobopenResponse;
+import com.example.jobala.jobopen.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,30 +20,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final JobopenService jobopenService;
     private final UserQueryRepository userRepository;
     private final JobopenQueryRepository jobopenRepository;
     private final UserJPARepository userJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
 
-
+    //메인에서 공고목록보기
     @GetMapping("/")
     public String mainForm(HttpServletRequest req) {
-        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
+        List<Jobopen> jobopenList = jobopenService.공고목록보기();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }
 
     // DEL: mainForm 삭제
-
-
-    // TODO: loginFrorm 삭제예정
-    @GetMapping("/loginForm")
-    public String loginForm() {
-        return "/user/loginForm";
-    }
-
-
 
     //서비스 변경 완료
     @PostMapping("/login")
@@ -69,11 +58,6 @@ public class UserController {
         }
     }
 
-    //TODO: joinForm추후 삭제예정
-    @GetMapping("/joinForm")
-    public String joinForm() {
-        return "/user/joinForm";
-    }
 
     @PostMapping("/join")
     public String join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
@@ -82,6 +66,7 @@ public class UserController {
         return "/user/loginForm";
     }
 
+    //username 중복체크
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
         Optional<User> user = userService.중복체크(username);
@@ -98,5 +83,16 @@ public class UserController {
         return "redirect:/";
     }
 
+    // TODO: loginFrorm 삭제예정
+    @GetMapping("/loginForm")
+    public String loginForm() {
+        return "user/loginForm";
+    }
+
+    //TODO: joinForm추후 삭제예정
+    @GetMapping("/joinForm")
+    public String joinForm() {
+        return "/////////user/joinForm";
+    }
 }
  

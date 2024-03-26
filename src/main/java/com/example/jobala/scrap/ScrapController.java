@@ -28,7 +28,7 @@ public class ScrapController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<ResumeResponse.ScrapDTO> respDTO =  scrapService.회사가스크랩한이력서조회(sessionUser.getId());
         req.setAttribute("resumeList", respDTO);
-        return "/comp/_myPage/scrapForm";
+        return "comp/_myPage/scrapForm";
     }
 
     //기업 스크랩
@@ -47,7 +47,7 @@ public class ScrapController {
         List<JobopenResponse.ScrapDTO> respDTO = scrapService.게스트가스크랩한공고조회(sessionUser.getId());
         req.setAttribute("jobopenList", respDTO);
 
-        return "/guest/_myPage/scrapForm";
+        return "guest/_myPage/scrapForm";
     }
 
     //개인 스크랩

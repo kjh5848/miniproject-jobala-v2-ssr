@@ -33,7 +33,7 @@ public class BoardController {
         req.setAttribute("board", board);
 
 
-        return "/board/detailForm";
+        return "board/detailForm";
     }
 
 
@@ -47,7 +47,7 @@ public class BoardController {
         String dateStringWithoutTime = sdf.format(date);
         req.setAttribute("currentDate", dateStringWithoutTime);
 
-        return "/board/mainForm";
+        return "board/mainForm";
     }
 
     @PostMapping("/board/{id}/update")
@@ -70,7 +70,7 @@ public class BoardController {
     @GetMapping("/board/saveForm")
     public String saveForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        return "/board/saveForm";
+        return "board/saveForm";
     }
 
     @PostMapping("/board/save")

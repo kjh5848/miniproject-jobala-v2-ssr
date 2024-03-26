@@ -56,7 +56,7 @@ public class JobopenController {
 
         Jobopen jobopen = jobopenService.공고보기(id);
         req.setAttribute("jobopen", jobopen);
-        return "/comp/jobopen/updateForm";
+        return "comp/jobopen/updateForm";
     }
 
     //공고 등록
@@ -71,7 +71,7 @@ public class JobopenController {
     @GetMapping("/comp/jobopen/saveForm")
     public String saveForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        return "/comp/jobopen/saveForm";
+        return "comp/jobopen/saveForm";
     }
 
     //공고 보기
@@ -103,7 +103,7 @@ public class JobopenController {
 
         req.setAttribute("jobopen", jobopen);
 
-        return "/comp/jobopen/detailForm";
+        return "comp/jobopen/detailForm";
     }
 
 }

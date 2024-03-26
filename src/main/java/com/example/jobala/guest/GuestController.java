@@ -42,7 +42,7 @@ public class GuestController {
         List<User> userList = userJPARepository.findAll();
         req.setAttribute("jobopenList", userList);
 
-        return "/guest/jobSearch";
+        return "guest/jobSearch";
     }
 
 
@@ -51,7 +51,7 @@ public class GuestController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<Jobopen> jobopenList = jobopenJPARepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
-        return "/guest/jobSearch";
+        return "guest/jobSearch";
     }
 
 
@@ -62,7 +62,7 @@ public class GuestController {
         System.out.println(userId);
         List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
-        return "/guest/_myPage/mngForm";
+        return "guest/_myPage/mngForm";
     }
 
     @GetMapping("/guest/profileForm")
