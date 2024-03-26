@@ -1,10 +1,7 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.jobopen.JobopenJPARepository;
-import com.example.jobala.jobopen.JobopenQueryRepository;
-import com.example.jobala.jobopen.JobopenResponse;
+import com.example.jobala.jobopen.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -90,7 +87,7 @@ public class UserController {
     public String loginForm() {
         return "user/loginForm";
     }
-//
+
     //TODO: joinForm추후 삭제예정
     @GetMapping("/joinForm")
     public String joinForm() {
