@@ -18,6 +18,10 @@ public class JobopenService {
 
     private final JobopenJPARepository jobopenJPARepository;
 
+    public List<Jobopen> 공고목록보기() {
+        return  jobopenJPARepository.findAll();
+    }
+
     @Transactional
     public Jobopen 공고등록(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));

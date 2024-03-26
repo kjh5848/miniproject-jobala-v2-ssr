@@ -31,7 +31,7 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         req.setAttribute("user", sessionUser);
-        return "/guest/resume/saveForm";
+        return "guest/resume/saveForm";
     }
 
     //이력서 업데이트
@@ -51,7 +51,7 @@ public class ResumeController {
 
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
-        return "/guest/resume/updateForm";
+        return "guest/resume/updateForm";
     }
 
     //이력서 상세보기
@@ -78,7 +78,7 @@ public class ResumeController {
 
         req.setAttribute("user", user);
         req.setAttribute("resume", resume);
-        return "/guest/resume/detailForm";
+        return "guest/resume/detailForm";
     }
 
     //이력서 등록

@@ -3,16 +3,21 @@ package com.example.jobala._user;
 import com.example.jobala._core.errors.exception.Exception400;
 import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
+
 
     public User 로그인(UserRequest.LoginDTO reqDTO) {
         return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())

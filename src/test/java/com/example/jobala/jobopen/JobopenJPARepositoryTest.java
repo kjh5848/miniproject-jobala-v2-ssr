@@ -47,7 +47,7 @@ class JobopenJPARepositoryTest {
         // 각 속성 값이 올바르게 설정되었는지 확인
         Jobopen jobopen2 = jobopenJPARepository.findById(id).get();
 
-        System.out.println("jobopen2 = " + jobopen2);
+//        System.out.println("jobopen2 = " + jobopen2);
         //when
         //then
     }

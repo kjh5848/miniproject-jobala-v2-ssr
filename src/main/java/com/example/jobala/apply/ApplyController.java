@@ -69,9 +69,9 @@ public class ApplyController {
         req.setAttribute("ApplyGuest", respDTO.getAppliedPositions());
 
         if (sessionUser.getRole() == 1) {
-            return "/comp/_myPage/positionForm";
+            return "comp/_myPage/positionForm";
         } else {
-            return "/guest/_myPage/positionForm";
+            return "guest/_myPage/positionForm";
         }
     }
 
@@ -91,9 +91,9 @@ public class ApplyController {
         req.setAttribute("ApplyGuest3", applyStatusFormResponse.getReceivedOffersRejected());
 
         if (sessionUser.getRole() == 1) {
-            return "/comp/_myPage/applyForm";
+            return "comp/_myPage/applyForm";
         } else {
-            return "/guest/_myPage/applyForm";
+            return "guest/_myPage/applyForm";
         }
     }
 

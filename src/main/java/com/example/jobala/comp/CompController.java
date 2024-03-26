@@ -40,7 +40,7 @@ public class CompController {
 
         req.setAttribute("resumeList", resumeList);
 
-        return "/comp/scoutList";
+        return "comp/scoutList";
     }
 
     @GetMapping("/comp/scoutList")
@@ -50,7 +50,7 @@ public class CompController {
         req.setAttribute("resumeList", resumeList);
 
         List<Resume> resumeList2 = resumeJPARepository.findAll();
-        return "/comp/scoutList";
+        return "comp/scoutList";
     }
 
     @GetMapping("/comp/scoutList/{id}")
@@ -63,7 +63,7 @@ public class CompController {
         req.setAttribute("sessionUser", sessionUser);
         req.setAttribute("resume", resume);
 
-        return "/geust/resume/detailForm";
+        return "geust/resume/detailForm";
     }
 
     @GetMapping("/comp/mngForm")
@@ -81,7 +81,7 @@ public class CompController {
 
 //        req.setAttribute("count",countApplyList);
         req.setAttribute("jobopenList", jobopenList);
-        return "/comp/_myPage/mngForm";
+        return "comp/_myPage/mngForm";
     }
 
     @GetMapping("/comp/profileForm")
@@ -90,7 +90,7 @@ public class CompController {
 
         User compProfile = userJPARepository.findById(sessionUser.getId()).get();
         req.setAttribute("compProfile", compProfile);
-        return "/comp/_myPage/profileForm";
+        return "comp/_myPage/profileForm";
     }
 
     @PostMapping("/comp/updateProfile")
