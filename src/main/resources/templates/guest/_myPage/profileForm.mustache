@@ -42,14 +42,14 @@
             <div class="card-body">
                 {{#guestProfile}}
                     <form action="/guest/updateProfile" method="post" enctype="multipart/form-data">
-                        <div class="content profileBox" style="margin-top: 20px;">
+                        <div class="content profileBox">
                             <h2>프로필 관리</h2>
                             <div class="card">
                                 <div class="card-body">
-                                    <img class="card-img-top" src="/image/{{imgFilename}}" class="rounded">
+                                    <img class="card-img-top rounded" src="/image/{{imgFilename}}" style="width: 200px">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="file" class="form-control" id="inputGroupFile04"
+                                            <input type="file" id="inputGroupFile04"
                                                    aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="imgFilename"
                                                    value="{{imgFilename}}">
                                         </div>

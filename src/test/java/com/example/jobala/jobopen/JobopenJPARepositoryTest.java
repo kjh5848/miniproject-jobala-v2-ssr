@@ -22,6 +22,20 @@ class JobopenJPARepositoryTest {
     private EntityManager em;
 
     @Test
+    public void skill_test(){
+        // given
+        String skillName = "[Java]";
+
+        // when
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
+        String skills = String.valueOf(jobopenList.stream().map(jobopen -> jobopen.getSkills().equals(skillName)).toList());
+        System.out.println("skills = " + skills);
+
+        // then
+
+    }
+
+    @Test
     public void 공고수정_test(){
         //given
         int id = 1;

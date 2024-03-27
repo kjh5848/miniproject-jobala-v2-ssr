@@ -14,51 +14,55 @@ public class ApplyQueryRepository {
 
     private final EntityManager em;
 
-
-    public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId) { // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
+    // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
+    public List<ApplyResponse.GuestPositionDTO> findJopOpenByUserId(int userId) {
+        //개인이 제안받은 현황보기
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.edu, jot.end_Time, at.state, jot.id
-                FROM apply_tb at
-                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
-                INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE rt.user_id = ? and at.role = 1 and at.state = ?;
-                """;
+                    SELECT at.id, jot.id, rt.id, jot.jobopen_title, rt.resume_title, ut.name, rt.edu, jot.end_time, at.state
+                    FROM apply_tb at
+                    join user_tb ut on at.resume_id = ut.id
+                    INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                    INNER JOIN resume_tb rt ON rt.id = at.resume_id
+                    WHERE rt.user_id = ? and at.role = 1 ;
+                    """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, userId);
-        query.setParameter(2, "검토중");
 
         // qlrm 사용하기
         JpaResultMapper mapper = new JpaResultMapper();
-        List<ApplyResponse.ApplyDTO2> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO2.class);
+        List<ApplyResponse.GuestPositionDTO> responseDTO = mapper.list(query, ApplyResponse.GuestPositionDTO.class);
         return responseDTO;
     }
 
 
-    public List<ApplyResponse.ApplyDTO> findApplyCompByUserId(int compId) {
+    public List<ApplyResponse.CompPositionDTO> findApplyCompByUserId(int compId) {
+        //기업이 제안한 현황보기
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.name, rt.edu, jot.end_time, at.state, rt.id AS resumeId
+                SELECT at.id,jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
                 FROM apply_tb at
-                INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                join user_tb ut on at.resume_id = ut.id
+                INNER JOIN jobopen_tb jt ON at.jobopen_id = jt.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
-                WHERE jot.user_id = ? AND at.role = 0;
+                WHERE at.user_id = ? ;
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
 
         JpaResultMapper mapper = new JpaResultMapper();
-        List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
+        List<ApplyResponse.CompPositionDTO> responseDTO = mapper.list(query, ApplyResponse.CompPositionDTO.class);
         return responseDTO;
     }
+
 
     /**
      * role로 개인과 기업을 구분하고
      * 기업이면 공고를 기준으로 지원받은 이력서를 조회
      * 개인이면 어플라이를 기준으로 지원한 이력서를 조회
      */
-    public List<ApplyResponse.ApplyDTO> findByUserId(int sessionUserId, int role) {
-        if (role == 1) {
+    //기업 applyForm
+    public List<ApplyResponse.CompApplyDTO> findByUserId(int sessionUserId, int role) {
             String q = """
-                select at.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_Time, at.state, at.resume_id
+                select at.id, jot.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
                 from apply_tb at 
                 join user_tb ut on at.resume_id = ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id
@@ -69,25 +73,28 @@ public class ApplyQueryRepository {
                     .setParameter(1, sessionUserId);
 
             JpaResultMapper mapper = new JpaResultMapper();
-            List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
+            List<ApplyResponse.CompApplyDTO> responseDTO = mapper.list(query, ApplyResponse.CompApplyDTO.class);
             return responseDTO;
-        } else {
-            String q2 = """
-                select at.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_Time, at.state,  at.resume_id
+    }
+
+
+    //개인 applyForm
+    public List<ApplyResponse.GuestApplyDTO> findByCompUserId(int sessionUserId) {
+            //개인이 지원한 이력서 현황보기
+            String q = """
+                select at.id, rt.id, jt.id, jt.jobopen_title, rt.resume_title, ut.compname, jt.end_time, at.state
                 from apply_tb at
-                join user_tb ut on at.resume_id = ut.id
+                join user_tb ut on at.user_id= ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id
                 join resume_tb rt ON rt.id = at.resume_id
                 where at.user_id= ? order by id desc;
                 """;
-            Query query2 = em.createNativeQuery(q2)
+            Query query = em.createNativeQuery(q)
                     .setParameter(1, sessionUserId);
 
             JpaResultMapper mapper = new JpaResultMapper();
-            List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query2, ApplyResponse.ApplyDTO.class);
+            List<ApplyResponse.GuestApplyDTO> responseDTO = mapper.list(query, ApplyResponse.GuestApplyDTO.class);
             return responseDTO;
-        }
-
     }
 
 

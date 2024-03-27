@@ -58,15 +58,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{#Apply}}
-                        <tr onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">
+                    {{#CompPosition}}
+                        <tr  style="cursor:pointer">
                             <td></td>
                             <td>{{name}}</td>
-                            <td>{{resumeTitle}}</td>
-                            <td>{{jobopenTitle}}</td>
+                            <td onClick="location.href='/guest/resume/{{resumeId}}'"> {{resumeTitle}}</td>
+                            <td onClick="location.href='/comp/jobopen/{{jobopenId}}'">{{jobopenTitle}}</td>
                             <td>{{state}}</td>
                         </tr>
-                    {{/Apply}}
+                    {{/CompPosition}}
                     <!-- 추가 제안 내용들 -->
                     </tbody>
                 </table>
