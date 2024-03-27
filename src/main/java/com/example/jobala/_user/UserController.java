@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,14 +67,12 @@ public class UserController {
         return "/user/loginForm";
     }
 
+    // TODO : DTO시 삭제 예정
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
+        System.out.println(username);
         Optional<User> user = userService.중복체크(username);
-        if (user == null) { // 회원가입 해도 된다.
-            return new ApiUtil<>(true);
-        } else { // 회원가입 하면 안된다.
-            return new ApiUtil<>(false);
-        }
+        return user.isEmpty() ? new ApiUtil<>(true) : new ApiUtil<>(false);
     }
 
     @GetMapping("/logout")

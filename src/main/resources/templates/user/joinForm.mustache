@@ -61,7 +61,7 @@
                                     <div class="mb-3">
                                         <p>아이디</p>
                                         <div class="d-flex text-nowrap">
-                                            <input type="text" class="form-control" id="username" name="username"
+                                            <input type="text" class="form-control" id="compId" name="username"
                                                    placeholder="ENTER username" value="" required>
                                             <button type="button" onclick="usernameSameCheck()"
                                                     class="btn btn-primary btn-block">중복
@@ -98,7 +98,7 @@
 
 
                                 <div class="text-center mb-5 ">
-                                    <button type="submit" class="btn btn-primary btn-block">가입하기</button>
+                                    <button type="submit" onclick="valid()" class="btn btn-primary btn-block">가입하기</button>
                                 </div>
                             </form>
                         </div>
@@ -125,7 +125,7 @@
                                 <div class="mb-3">
                                     <p>아이디</p>
                                     <div class="d-flex text-nowrap">
-                                        <input type="text" class="form-control" id="username" name="username"
+                                        <input type="text" class="form-control" id="guestname" name="username"
                                                placeholder="ENTER username" value="" required>
                                         <button type="button" onclick="usernameSameCheck()"
                                                 class="btn btn-primary btn-block">중복
@@ -163,7 +163,7 @@
                                            placeholder="ENTER phoneNumber" value="01012345678" required>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block">회원가입</button>
+                                    <button type="submit" onclick="valid()" class="btn btn-primary btn-block">회원가입</button>
                                 </div>
                             </form>
                         </div>
@@ -186,7 +186,28 @@
     }
 
     function usernameSameCheck() {
-        let username = $("#username").val();
+        let username = $('#guestname').val();
+        console.log(username);
+        $.ajax({
+            url: "/api/username-same-check?username=" + username,
+            type: "get"
+        }).done((res) => {
+            console.log(res);
+            if (res.body == true) {
+                isSameCheck = true;
+                alert("회원가입 가능한 아이디 입니다.");
+            } else {
+                isSameCheck = false;
+                alert("동일한 아이디가 존재합니다");
+            }
+        }).fail((res) => {
+            alert(res.responseJSON.msg);
+        });
+    }
+
+    function compIdSameCheck() {
+        let username = $('#compId').val();
+        console.log(username);
         $.ajax({
             url: "/api/username-same-check?username=" + username,
             type: "get"
