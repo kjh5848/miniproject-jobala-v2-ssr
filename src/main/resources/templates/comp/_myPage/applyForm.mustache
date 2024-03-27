@@ -47,15 +47,17 @@
             <h2 class="profileBox text-left mt-5" style="margin-bottom:0px;">내 공고 지원자 목록<span class="badge bg-info"
                                                                                               id="applyCount"></span>
             </h2>
-            {{#Apply}}
-                <div class="card shadow p-3 mb-3 bg-body rounded"
-                     style="position: relative; margin-top: -10px; margin-left:20px; width: 97.5%;">
+            {{#CompApply}}
+            <div class="card shadow p-3 mb-3 bg-body rounded"
+                 style="position: relative; margin-top: -10px; margin-left:20px; width: 97.5%;">
 
-                    <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
-                        <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>
-                    <h3 onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">{{resumeTitle}}</h3>
-                    <p>{{name}}     {{state}}</p>
-                    <p><small>{{edu}}</small><br><small>{{endTime}}</small></p>
+                <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
+                    <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>
+                <h3 onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">{{resumeTitle}}</h3>
+                <p>{{name}}     {{state}}</p>
+                <p><small>{{edu}}</small><br><small>{{endTime}}</small></p>
+
+
                     <div class="button-container d-flex flex-column justify-content-center align-items-end position-absolute top-50 end-0 translate-middle-y mt-3">
 
                         <!--             합격                    -->
@@ -74,9 +76,10 @@
                             <button type="submit" class="btn btn-secondary m-2" style="width: 70px; height: 40px;">불합격
                             </button>
                         </form>
+            {{/CompApply}}
                     </div>
                 </div>
-            {{/Apply}}
+
         </div>
     </div>
 </div>
