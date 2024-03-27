@@ -18,7 +18,7 @@ public class ApplyQueryRepository {
     public List<ApplyResponse.GuestPositionDTO> findJopOpenByUserId(int userId) {
         //개인이 제안받은 현황보기
         String q = """
-                    SELECT at.id, jot.id, rt.id, jot.jobopen_title, rt.resume_title, ut.name, rt.edu, jot.end_time, at.state
+                    SELECT at.id, jot.id, rt.id, jot.jobopen_title, rt.resume_title, jot.end_time, at.state
                     FROM apply_tb at
                     join user_tb ut on at.resume_id = ut.id
                     INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
@@ -38,7 +38,7 @@ public class ApplyQueryRepository {
     public List<ApplyResponse.CompPositionDTO> findApplyCompByUserId(int compId) {
         //기업이 제안한 현황보기
         String q = """
-                SELECT at.id,jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
+                SELECT at.id,jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, at.state
                 FROM apply_tb at
                 join user_tb ut on at.resume_id = ut.id
                 INNER JOIN jobopen_tb jt ON at.jobopen_id = jt.id
@@ -96,7 +96,7 @@ public class ApplyQueryRepository {
     public List<ApplyResponse.GuestApplyDTO> findByCompUserId(int sessionUserId) {
             //개인이 지원한 이력서 현황보기
             String q = """
-                select at.id, rt.id, jt.id, jt.jobopen_title, rt.resume_title, ut.compname, jt.end_time, at.state
+                select at.id, rt.id, jt.id, jt.jobopen_title, rt.resume_title, jt.end_time, at.state
                 from apply_tb at
                 join user_tb ut on at.user_id= ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id
