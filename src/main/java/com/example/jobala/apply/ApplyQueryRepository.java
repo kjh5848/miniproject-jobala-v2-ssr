@@ -77,21 +77,6 @@ public class ApplyQueryRepository {
             return responseDTO;
     }
 
-    public List<ApplyResponse.CompApplyDTO> findByUserId2(int sessionUserId, int role) {
-        return em.createQuery("""
-        SELECT NEW ApplyResponse.CompApplyDTO(at.id, jt.id, r.id, jt.jobopenTitle, r.resumeTitle, ut.name, r.edu, jt.endTime, at.state) 
-        FROM Apply at 
-        JOIN at.resume resume r 
-        JOIN resume.user ut 
-        JOIN at.jobOpening jobOpen jt 
-        WHERE jobOpen.user.id = :sessionUserId AND at.role = :role 
-        ORDER BY at.id DESC
-    """, ApplyResponse.CompApplyDTO.class)
-                .setParameter("sessionUserId", sessionUserId)
-                .setParameter("role", role)
-                .getResultList();
-    }
-
     //개인 applyForm
     public List<ApplyResponse.GuestApplyDTO> findByCompUserId(int sessionUserId) {
             //개인이 지원한 이력서 현황보기
