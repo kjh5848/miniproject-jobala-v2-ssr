@@ -22,7 +22,6 @@ public class UserController {
     private final UserService userService;
     private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
-    private final UserQueryRepository userQueryRepository;
 
     //메인에서 공고목록보기
     @GetMapping("/")
@@ -63,16 +62,12 @@ public class UserController {
         return "/user/loginForm";
     }
 
+    // TODO : DTO시 삭제 예정
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
-        System.out.println("username = " + username);
-        User user = userQueryRepository.findByUsername(username);
-        System.out.println("user = " + user);
-        if (user == null) { // 회원가입 해도 된다.
-            return new ApiUtil<>(true);
-        } else { // 회원가입 하면 안된다.
-            return new ApiUtil<>(false);
-        }
+        System.out.println(username);
+        Optional<User> user = userService.중복체크(username);
+        return user.isEmpty() ? new ApiUtil<>(true) : new ApiUtil<>(false);
     }
 
     @GetMapping("/logout")
