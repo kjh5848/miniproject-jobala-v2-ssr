@@ -14,9 +14,10 @@ public class ApplyQueryRepository {
 
     private final EntityManager em;
 
+
     public List<ApplyResponse.ApplyDTO2> findJopOpenByUserId(int userId) { // 로그인한 User ID(제안 받은 공고 확인하는 쿼리)
         String q = """
-                SELECT at.id, jot.jobopen_title, rt.resume_title, jot.compname, rt.edu, jot.end_Time, at.state, jot.id
+                SELECT at.id, jot.jobopen_title, rt.resume_title, rt.edu, jot.end_Time, at.state, jot.id
                 FROM apply_tb at
                 INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
@@ -43,7 +44,6 @@ public class ApplyQueryRepository {
                 """;
         Query query = em.createNativeQuery(q);
         query.setParameter(1, compId);
-
 
         JpaResultMapper mapper = new JpaResultMapper();
         List<ApplyResponse.ApplyDTO> responseDTO = mapper.list(query, ApplyResponse.ApplyDTO.class);
@@ -74,7 +74,7 @@ public class ApplyQueryRepository {
         } else {
             String q2 = """
                 select at.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_Time, at.state,  at.resume_id
-                from apply_tb at 
+                from apply_tb at
                 join user_tb ut on at.resume_id = ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id
                 join resume_tb rt ON rt.id = at.resume_id

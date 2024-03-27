@@ -43,11 +43,11 @@ public class ApplyResponse {
     //뭐??
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class ApplyDTO2 {
         private Integer id;
         private String jobopenTitle;
         private String resumeTitle;
-        private String compname;
         private String edu;
         private Date endTime;
         private String state;

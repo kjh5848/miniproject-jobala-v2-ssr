@@ -1,6 +1,7 @@
 package com.example.jobala.apply;
 
-import com.example.jobala._user.*;
+
+import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +39,6 @@ public class ApplyController {
     @PostMapping("/Applys")
     public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        System.out.println("지원하기 공고, 이력서 아이디 = " + reqDTO);
         applyService.지원후저장(reqDTO, sessionUser);
 
         if (sessionUser.getRole() == 1) {

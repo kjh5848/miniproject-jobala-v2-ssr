@@ -20,12 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final JobopenService jobopenService;
-    private final UserQueryRepository userRepository;
-    private final JobopenQueryRepository jobopenRepository;
-    private final UserJPARepository userJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
+    private final UserQueryRepository userQueryRepository;
 
     //메인에서 공고목록보기
     @GetMapping("/")
@@ -68,7 +65,9 @@ public class UserController {
 
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
-        Optional<User> user = userService.중복체크(username);
+        System.out.println("username = " + username);
+        User user = userQueryRepository.findByUsername(username);
+        System.out.println("user = " + user);
         if (user == null) { // 회원가입 해도 된다.
             return new ApiUtil<>(true);
         } else { // 회원가입 하면 안된다.
