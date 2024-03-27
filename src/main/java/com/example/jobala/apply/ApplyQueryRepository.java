@@ -62,7 +62,7 @@ public class ApplyQueryRepository {
     //기업 applyForm
     public List<ApplyResponse.CompApplyDTO> findByUserId(int sessionUserId, int role) {
             String q = """
-                select at.id, jot.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
+                select at.id, jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
                 from apply_tb at 
                 join user_tb ut on at.resume_id = ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id
@@ -77,6 +77,20 @@ public class ApplyQueryRepository {
             return responseDTO;
     }
 
+    public List<ApplyResponse.CompApplyDTO> findByUserId2(int sessionUserId, int role) {
+        return em.createQuery("""
+        SELECT NEW ApplyResponse.CompApplyDTO(at.id, jt.id, r.id, jt.jobopenTitle, r.resumeTitle, ut.name, r.edu, jt.endTime, at.state) 
+        FROM Apply at 
+        JOIN at.resume resume r 
+        JOIN resume.user ut 
+        JOIN at.jobOpening jobOpen jt 
+        WHERE jobOpen.user.id = :sessionUserId AND at.role = :role 
+        ORDER BY at.id DESC
+    """, ApplyResponse.CompApplyDTO.class)
+                .setParameter("sessionUserId", sessionUserId)
+                .setParameter("role", role)
+                .getResultList();
+    }
 
     //개인 applyForm
     public List<ApplyResponse.GuestApplyDTO> findByCompUserId(int sessionUserId) {
