@@ -22,7 +22,7 @@ public class ApplyService {
     @Transactional
     public void 상태수정(Integer applyId, String status) {
         Apply apply = applyJPARepository.findById(applyId).orElseThrow(() ->
-                new RuntimeException("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
+                new Exception404("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
     
         apply.setState(status);
     }
