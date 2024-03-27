@@ -20,9 +20,8 @@ public class ResumeQueryRepository {
         Query query = em.createQuery("SELECT b FROM Resume b WHERE b.resumeTitle LIKE :resumeTitle");
         query.setParameter("resumeTitle", "%"+resumeTitle+"%");
 
-        List<ResumeResponse.ListDTO> resumeList = query.getResultList();
-        return resumeList;
+        List<Resume> resumeList = query.getResultList();
+        return resumeList.stream().map(resume -> new ResumeResponse.ListDTO(resume)).toList();
     }
 
 }
-

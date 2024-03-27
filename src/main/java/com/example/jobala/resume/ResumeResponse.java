@@ -35,6 +35,15 @@ public class ResumeResponse {
         private String edu;
         private String career;
         private String imgFilename;
+
+        public ListDTO(Resume resume) {
+            this.id = id;
+            this.name = resume.getUser().getName();
+            this.resumeTitle = resume.getResumeTitle();
+            this.edu = resume.getEdu();
+            this.career = resume.getCareer();
+            this.imgFilename = resume.getUser().getImgFilename();
+        }
     }
 
     @AllArgsConstructor

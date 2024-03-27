@@ -21,8 +21,7 @@ class ResumeQueryRepositoryTest {
     public void findByResumeTitleLike_test() {
         String resumeTitle = "프론트";
 
-//        List<Resume> resumeList = resumeQueryRepository.findByResumeTitleLike(resumeTitle);
-
-//        System.out.println("findByResumeTitleLike_test : "+resumeList.size());
+        List<ResumeResponse.ListDTO> boardList = resumeQueryRepository.findByResumeTitleLike(resumeTitle);
+        System.out.println("findByResumeTitleLike_test: "+boardList);
     }
 }
