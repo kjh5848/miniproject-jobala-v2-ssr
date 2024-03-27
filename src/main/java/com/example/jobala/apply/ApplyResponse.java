@@ -35,7 +35,6 @@ public class ApplyResponse {
         private Integer jobopenId;
         private String jobopenTitle;
         private String resumeTitle;
-        private String compname;
         private Date endTime;
         private String state;
     }
@@ -51,8 +50,6 @@ public class ApplyResponse {
         private String jobopenTitle;
         private String resumeTitle;
         private String name;
-        private String edu;
-        private Date endTime;
         private String state;
     }
 
@@ -66,8 +63,6 @@ public class ApplyResponse {
         private Integer resumeId;
         private String jobopenTitle;
         private String resumeTitle;
-        private String name;
-        private String edu;
         private Date endTime;
         private String state;
     }
