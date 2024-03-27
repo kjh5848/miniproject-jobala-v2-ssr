@@ -47,62 +47,66 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="profileBox mt-3" id="profileForm">
-            <h2 class="text-center mb-4">프로필 관리</h2>
-            <h3 class="text-left text-primary mb-4">회사 및 담당자 정보</h3>
-            <div class="profile-container">
+<div class="card-body">
+    {{#compProfile}}
+        <form action="/comp/updateProfile" method="post" enctype="multipart/form-data">
+            <div class="content profileBox">
+                <h2>프로필 관리</h2>
+                <h3>회사 및 담당자 정보</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top rounded" src="/image/{{imgFilename}}" style="width: 400px">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="file" id="inputGroupFile04"
+                                       aria-describedby="inputGroupFileAddon04" aria-label="Upload"
+                                       name="imgFilename"
+                                       value="{{imgFilename}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 타이틀 입력란 -->
+                <div class="mb-3">
+                    <span for="companyName" class="form-label">회사명 : </span>
+                    <span>{{compname}}</span>
+                </div>
+                <div class="mb-3">
+                    <span for="businessNumber" class="form-label">사업자 번호 : </span>
+                    <span>{{compNum}}</span>
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" value={{name}}>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호:</label>
+                    <input type="password" class="form-control" id="password" name="password" value={{password}}>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">전화번호</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" value={{email}}>
+                </div>
+
+                <div class="mb-3">
+                    <label for="scale" class="form-label">주소</label>
+                    <input type="text" class="form-control" id="address" name="address" value={{address}}>
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">저장</button>
+                </div>
+
             </div>
-            {{#compProfile}}
-                <script src="script.js"></script>
-                <div class="line"></div>
-                <form action="/comp/updateProfile" method="post" enctype="multipart/form-data">
-                    <div style="margin-left: 160px; margin-top: 20px; margin-bottom: 20px;">
-                        <input type="file" name="imgFilename" id="imgFilename" value={{imgFilename}}
-                               style="margin-bottom: 10px;">
-                        <input type="text" name="imgTitle" id="imgTitle" value={{imgTitle}}>
-                        <!-- 타이틀 입력란 -->
-                    </div>
-                    <div class="mb-3">
-                        <span for="companyName" class="form-label">회사명 : </span>
-                        <span>{{compname}}</span>
-                    </div>
-                    <div class="mb-3">
-                        <span for="businessNumber" class="form-label">사업자 번호 : </span>
-                        <span>{{compNum}}</span>
-                    </div>
-                    <hr>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">이름</label>
-                        <input type="text" class="form-control" id="name" name="name" value={{name}}>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">비밀번호:</label>
-                        <input type="password" class="form-control" id="password" name="password" value={{password}}>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">전화번호</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" value={{phone}}>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">이메일</label>
-                        <input type="email" class="form-control" id="email" name="email" value={{email}}>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="scale" class="form-label">주소</label>
-                        <input type="text" class="form-control" id="address" name="address" value={{address}}>
-                    </div>
-
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg">저장</button>
-                    </div>
-                </form>
-            {{/compProfile}}
-        </div>
+        </form>
     </div>
-    <br><br><br>
+    {{/compProfile}}
 </div>
 
 

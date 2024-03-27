@@ -39,18 +39,20 @@
                             <tr>
                                 <th>공고 제목</th>
                                 <th>이력서 제목</th>
+                                <th>마감일</th>
                                 <th>상태</th>
                             </tr>
                             </thead>
-                            {{#Apply}}
+                            {{#GuestApply}}
                                 <tbody>
                                 <tr>
-                                    <td>{{jobopenTitle}}</td>
-                                    <td>{{resumeTitle}}</td>
+                                    <td onClick="location.href='/comp/jobopen/{{resumeId}}'">{{resumeTitle}}</td>
+                                    <td onClick="location.href='/comp/jobopen/{{jobopenId}}'" >{{jobopenTitle}}</td>
+                                    <td>{{endTime}}</td>
                                     <td>{{state}}</td>
                                 </tr>
                                 </tbody>
-                            {{/Apply}}
+                            {{/GuestApply}}
                         </table>
                     </div>
                 </div>

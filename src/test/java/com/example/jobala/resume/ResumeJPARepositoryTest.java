@@ -23,6 +23,38 @@ class ResumeJPARepositoryTest {
     @Autowired
     private EntityManager em;
 
+
+    @Test
+    public void 이력서스킬_test(){
+        // given
+        String skillName = "HTML";
+
+        // when
+        List<Resume> resumeList = resumeJPARepository.findAll();
+        List<String> skillNames = resumeList.stream()
+                .map(resume -> resume.getSkills())
+                .toList();
+
+        StringBuilder queryBuilder = new StringBuilder("select * from user_tb where skills like '%");
+        for (int i = 0; i < skillNames.size(); i++) {
+            String skills = skillNames.get(i);
+            if (skills.contains(skillName) || skills.contains(",")) {
+                queryBuilder.append(skills);
+            }
+        }
+        String q2 = queryBuilder.toString();
+        System.out.println("_tt" + q2);
+
+
+//        List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
+
+//        String skillsString = String.join(", ", skills);
+//        System.out.println("skills _tt = \"" + skillsString + "\"");
+
+        // then
+
+    }
+
     @Test
     public void 스크랩한이력서보기_test(){
         // given
