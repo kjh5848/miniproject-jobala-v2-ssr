@@ -5,6 +5,7 @@ import com.example.jobala._user.User;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
+import com.example.jobala.jobopen.JobopenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
