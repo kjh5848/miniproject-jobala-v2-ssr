@@ -1,26 +1,28 @@
 package com.example.jobala.jobopen;
 
-import com.example.jobala._user.User;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
-import com.google.gson.Gson;
+import com.example.jobala._user.User;
+import com.example.jobala.scrap.Scrap;
+import com.example.jobala.scrap.ScrapJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class JobopenService {
 
     private final JobopenJPARepository jobopenJPARepository;
+    private final ScrapJPARepository scrapJPARepository;
 
     // 공고목록보기
     public List<Jobopen> jobopenFindAll() {
-        return  jobopenJPARepository.findAll();
+        return jobopenJPARepository.findAll();
     }
 
     // 공고등록
@@ -59,14 +61,18 @@ public class JobopenService {
     }
 
     // 공고보기
-    public Jobopen jobopenFindById(Integer jobopenId) {
+    public JobopenResponse.DetailDTO jobopenFindById(Integer jobopenId, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findByJobopenIdWithUser(jobopenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
 
         List<String> skills = Arrays.stream(jobopen.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
         String skillsString = String.join(", ", skills);
+        // isScrap
+        Optional<Scrap> scrap = scrapJPARepository.findCompScrapByResumeIdAndUserId(jobopenId, sessionUser.getId());
+        JobopenResponse.DetailDTO respDTO = new JobopenResponse.DetailDTO(jobopenId, sessionUser);
+        respDTO.setScrap(scrap.isPresent());
+        respDTO.setSkills(skillsString);
 
-        jobopen.setSkills(skillsString);
-        return jobopen;
+        return respDTO;
     }
 }

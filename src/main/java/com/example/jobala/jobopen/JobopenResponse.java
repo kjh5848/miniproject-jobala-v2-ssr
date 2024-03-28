@@ -1,6 +1,5 @@
 package com.example.jobala.jobopen;
 
-import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -60,7 +59,8 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
-    public static class JobopenDetailDTO {
+    public static class DetailDTO {
+        private Integer id;
         private String jobopenTitle;
         private String compname;
         private String imgFilename;
@@ -80,7 +80,7 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
-    public static class ScrapDTO{
+    public static class ScrapDTO {
         private int id;
         private String compname;
         private String jobopenTitle;

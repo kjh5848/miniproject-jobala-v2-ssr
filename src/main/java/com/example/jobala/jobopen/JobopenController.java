@@ -3,12 +3,8 @@ package com.example.jobala.jobopen;
 import com.example.jobala._user.User;
 import com.example.jobala.guest.GuestQueryRepository;
 import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeQueryRepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapQueryRepository;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Controller
@@ -35,7 +30,7 @@ public class JobopenController {
     @PostMapping("/comp/jobopen/{id}/detete")  // 주소 수정 필요
     public String delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenService.jobopenDelete(id,sessionUser.getId());
+        jobopenService.jobopenDelete(id, sessionUser.getId());
         return "redirect:/comp/mngForm";
     }
 
@@ -43,7 +38,7 @@ public class JobopenController {
     @PostMapping("/comp/jobopen/{id}/update")  // 주소 수정 필요
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenService.jobopenUpdate(id,sessionUser.getId(),reqDTO);
+        jobopenService.jobopenUpdate(id, sessionUser.getId(), reqDTO);
 
         return "redirect:/comp/mngForm";
     }
@@ -52,9 +47,8 @@ public class JobopenController {
     @GetMapping("/comp/jobopen/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        Jobopen jobopen = jobopenService.jobopenFindById(id);
-        req.setAttribute("jobopen", jobopen);
+        JobopenResponse.DetailDTO respDTO = jobopenService.jobopenFindById(id, sessionUser);
+        req.setAttribute("jobopen", respDTO);
         return "comp/jobopen/updateForm";
     }
 
