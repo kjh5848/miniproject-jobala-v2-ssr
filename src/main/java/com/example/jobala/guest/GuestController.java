@@ -59,7 +59,6 @@ public class GuestController {
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         int userId = sessionUser.getId();
-        System.out.println(userId);
         List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
