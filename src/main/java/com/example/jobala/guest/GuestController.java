@@ -76,11 +76,7 @@ public class GuestController {
     @PostMapping("/guest/updateProfile") // 주소 수정 필요!
     public String updateProfile(@RequestParam MultipartFile imgFilename, GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        System.out.println("reqDTO = " + reqDTO);
-        System.out.println("imgFilename = " + imgFilename);
         String img = String.valueOf(imgFilename);
-        System.out.println("img = " + img);
         guestService.guestUpdateProfile(reqDTO, sessionUser);
         return "redirect:/guest/profileForm";
     }

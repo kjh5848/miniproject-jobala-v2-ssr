@@ -40,7 +40,6 @@ public class ResumeController {
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
-        System.out.println("이력서 수정 실행");
         return "redirect:/guest/mngForm";
     }
 
@@ -60,7 +59,6 @@ public class ResumeController {
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-        System.out.println("테스트 : "+respDTO);
         req.setAttribute("resume", respDTO);
         return "guest/resume/detailForm";
     }

@@ -79,7 +79,6 @@ public class ApplyController {
             return "comp/_myPage/applyForm";
         } else {
             List<ApplyResponse.GuestApplyDTO> respDTO = applyQueryRepository.findByCompUserId(sessionUser.getId());
-            System.out.println("respDTO = " + respDTO);
             req.setAttribute("GuestApply", respDTO);
             return "guest/_myPage/applyForm";
         }
