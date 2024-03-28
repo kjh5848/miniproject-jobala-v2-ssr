@@ -9,4 +9,5 @@ public interface ScrapJPARepository extends JpaRepository<Scrap, Integer> {
 
     Optional<Scrap> findCompScrapByResumeIdAndUserId(@Param("resumeId") int resumeId, @Param("userId") int userId);
     Optional<Scrap> findGuestScrapByJobopenIdAndUserId(@Param("jobopenId") int jobopenId, @Param("userId") int userId);
+
 }

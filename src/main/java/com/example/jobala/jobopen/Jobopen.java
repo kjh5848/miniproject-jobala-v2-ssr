@@ -49,6 +49,11 @@ public class Jobopen {
     @OneToMany(mappedBy = "jobopen", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Scrap> scraps;
 
+    @Transient
+    private boolean isScrap;
+    @Transient
+    private boolean isGuestScrap;
+
     @Builder
     public Jobopen(Integer id, User user, String jobopenTitle, String career, String edu, String hopeJob, String compLocation, String jobType, String salary, Date endTime, String skills, Integer role, Timestamp createdAt, List<Apply> applies, List<Scrap> scraps) {
         this.id = id;

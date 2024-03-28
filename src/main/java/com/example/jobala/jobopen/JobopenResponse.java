@@ -1,5 +1,6 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -60,11 +61,53 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
-    public static class JobopenDetailDTO {
+    public static class DetailDTO {
+        private Integer id;
         private String jobopenTitle;
-        private String compname;
-        private String imgFilename;
-        private String imgTitle;
+        private String career;
+        private String edu;
+        private String jobType;
+        private String salary;
+        private String compLocation;
+        private String hopeJob;
+        private String skills;
+        private boolean isScrap;
+        private boolean isGuestScrap;
+        private UserDTO userDTO;
+
+        public DetailDTO(Jobopen jobopen, User sessionUser) {
+            this.id = jobopen.getId();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.career = jobopen.getCareer();
+            this.edu = jobopen.getEdu();
+            this.jobType = jobopen.getJobType();
+            this.salary = jobopen.getSalary();
+            this.compLocation = jobopen.getCompLocation();
+            this.hopeJob = jobopen.getHopeJob();
+            this.skills = jobopen.getSkills();
+            this.isScrap = false;
+            this.isGuestScrap = false;
+            this.userDTO = new UserDTO(jobopen.getUser());
+
+            if (sessionUser != null) {
+                if (sessionUser.getRole() == 0) {
+                    this.isGuestScrap = true;
+                }
+            }
+        }
+
+        @Data
+        public class UserDTO {
+            private Integer userId;
+            private String compname;
+            private String imgFilename;
+
+            public UserDTO(User user) {
+                this.userId = user.getId();
+                this.compname = user.getCompname();
+                this.imgFilename = user.getImgFilename();
+            }
+        }
     }
 
     @AllArgsConstructor
@@ -93,6 +136,7 @@ public class JobopenResponse {
             this.career = jobopen.getCareer();
         }
     }
+
 }
 
 

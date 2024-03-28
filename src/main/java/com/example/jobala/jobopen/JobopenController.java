@@ -51,8 +51,9 @@ public class JobopenController {
     //TODO: 글조회로 변경예정
     @GetMapping("/comp/jobopen/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
-        Jobopen jobopen = jobopenService.jobopenFindById(id);
-        req.setAttribute("jobopen", jobopen);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
+        req.setAttribute("jobopen", respDTO);
         return "comp/jobopen/updateForm";
     }
 
@@ -74,30 +75,20 @@ public class JobopenController {
     //TODO: 서비스 만들기
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
-        boolean isCompScrap = false;
-        User user = null;
-        try {
-            user = (User) session.getAttribute("sessionUser");
-            if (user != null && user.getRole() == 0) {
-                isCompScrap = true;
-                req.setAttribute("isCompScrap", isCompScrap);
-                Scrap scrap = scrapRepository.findGuestScrapById(id, user.getId());
-                req.setAttribute("scrap", scrap);
-            }
-        } catch (Exception e) {
-            // 예외 처리
-            e.printStackTrace();
-        }
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
 
         // 사용자가 있을 경우 이력서 목록 설정
-        if (user != null) {
-            List<Resume> applyResumeList = jobopenRepository.findResumeById(user);
+        if (sessionUser != null) {
+            List<Resume> applyResumeList = jobopenRepository.findResumeById(sessionUser);
             req.setAttribute("applyResumeList", applyResumeList);
         }
 
         // 채용공고 정보 가져오기
-        Jobopen jobopen = jobopenService.jobopenFindById(id);
-        req.setAttribute("jobopen", jobopen);
+        JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
+        System.out.println("응");
+        System.out.println(respDTO);
+        req.setAttribute("jobopen", respDTO);
 
         return "comp/jobopen/detailForm";
     }
