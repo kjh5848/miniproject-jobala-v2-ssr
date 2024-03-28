@@ -101,16 +101,17 @@
                 <!-- 채용공고 목록 -->
                 <div class="row">
                     {{#jobopenList}}
-                        <div class="col-md-4 mb-4">
-                            <a href="/comp/jobopen/{{id}}" class="btn">
-                                <div class="card col-3 border-0 shadow" style="width: 100%;">
-                                    <img src="/image/{{user.imgFilename}}" style="width: 400px; height: 200px; "
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                                <div class="card border-0 shadow" style="width: 100%;">
+                                    <img class="card-img-top img-fluid" src="/image/{{user.imgFilename}}"
                                          alt="이미지를 표시할 수 없습니다.">
                                     <div class="card-body text-start">
                                         <br>
                                         <h5 class="card-title">{{jobopenTitle}}</h5>
                                         <hr>
                                         <p class="card-text">{{compLocation}} {{career}} {{edu}} </p>
+                                        <hr>
                                         <p class="card-text">마감일 : {{endTime}}</p>
                                     </div>
                                 </div>

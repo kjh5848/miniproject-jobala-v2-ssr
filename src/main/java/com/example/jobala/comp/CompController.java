@@ -49,7 +49,6 @@ public class CompController {
     public String scoutList(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<ResumeResponse.ListDTO> resumeList = compRepository.findResumeAll();
-
         req.setAttribute("resumeList", resumeList);
         return "comp/scoutList";
     }
