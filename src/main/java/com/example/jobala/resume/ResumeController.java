@@ -45,35 +45,19 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Resume resume = resumeService.resumeFindById(id);
+        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
+
         req.setAttribute("user", sessionUser);
-        req.setAttribute("resume", resume);
+        req.setAttribute("resume", respDTO);
         return "guest/resume/updateForm";
     }
 
     //이력서 상세보기
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
-        Resume resume = resumeService.resumeFindById(id);
-        boolean isGuestScrap = false;
-        User sessionUser = null;
-        // 스크랩
-        try {
-            sessionUser = (User) session.getAttribute("sessionUser");
-            if (sessionUser.getRole() == 1) {
-                isGuestScrap = true;
-                req.setAttribute("isGuestScrap", isGuestScrap);
-                Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
-                req.setAttribute("scrap", scrap);
-            }
-        } catch (Exception e) {
-        }
-
-        int userId = resume.getUser().getId();
-        User user = userRepository.findById(userId);
-
-        req.setAttribute("user", user);
-        req.setAttribute("resume", resume);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
+        req.setAttribute("resume", respDTO);
         return "guest/resume/detailForm";
     }
 

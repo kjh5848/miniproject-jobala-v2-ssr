@@ -46,6 +46,11 @@ public class Resume {
     @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Scrap> scraps;
 
+    @Transient
+    private boolean isScrap;
+    @Transient
+    private boolean isGuestScrap;
+
     @Builder
     public Resume(Integer id, User user, String name, String resumeTitle, String hopeJob, String career, String license, String content, String edu, String skills, Integer role) {
         this.id = id;

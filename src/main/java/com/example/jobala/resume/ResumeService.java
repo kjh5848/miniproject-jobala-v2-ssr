@@ -3,18 +3,20 @@ package com.example.jobala.resume;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
+import com.example.jobala.scrap.Scrap;
+import com.example.jobala.scrap.ScrapJPARepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
+    private final ScrapJPARepository scrapJPARepository;
 
     // 이력서등록
     @Transactional
@@ -47,14 +49,18 @@ public class ResumeService {
     }
 
     // 이력서보기
-    public Resume resumeFindById(Integer resumeId) {
+    public ResumeResponse.DetailDTO resumeFindById(Integer resumeId, User sessionUser) {
         Resume resume = resumeJPARepository.findByIdWithUser(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
 
         List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
         String skillsString = String.join(", ", skills);
+        // isScrap
+        Optional<Scrap> scrap = scrapJPARepository.findCompScrapByResumeIdAndUserId(resumeId, sessionUser.getId());
+        ResumeResponse.DetailDTO respDTO = new ResumeResponse.DetailDTO(resume, sessionUser);
+        respDTO.setScrap(scrap.isPresent());
+        respDTO.setSkills(skillsString);
 
-        resume.setSkills(skillsString);
-        return resume;
+        return respDTO;
     }
 }

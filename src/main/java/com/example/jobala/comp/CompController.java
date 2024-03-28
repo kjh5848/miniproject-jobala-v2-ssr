@@ -38,8 +38,6 @@ public class CompController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // [,]를 없애기위해 substring
         String slicedSkills = skills.substring(1, skills.length() - 1);
-        System.out.println(slicedSkills);
-        System.out.println(resDTO);
         List<ResumeResponse.ListDTO> resumeList = compRepository.findAll(slicedSkills, resDTO);
 
         req.setAttribute("resumeList", resumeList);
@@ -109,10 +107,7 @@ public class CompController {
             return "redirect:/login";
         }
         // profileDto.setId(sessionUser.getId());
-        System.out.println("reqDTO = " + reqDTO);
-        System.out.println("imgFilename = " + imgFilename);
         String img = String.valueOf(imgFilename);
-        System.out.println("img = " + img);
         compService.compUpdateProfile(reqDTO, sessionUser);
         return "redirect:/comp/profileForm";
     }

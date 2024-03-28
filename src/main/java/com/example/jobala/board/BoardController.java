@@ -37,7 +37,7 @@ public class BoardController {
 
 
     @GetMapping("/board/mainForm")
-    public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "4") int size, HttpServletRequest req) {
+    public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
         Page<Board> boardPage = boardService.글목록조회(page,size);
 
         req.setAttribute("boardList",boardPage.getContent());

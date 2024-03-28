@@ -15,6 +15,7 @@ import java.util.List;
 public class ScrapQueryRepository {
     private final EntityManager em;
 
+    // 회사가 이력서를 스크랩 했나?
     public Scrap findCompScrapById(Integer resumeId, Integer userId) {
         String q = """
                 select * from scrap_tb where resume_id = ? AND user_id = ?; 

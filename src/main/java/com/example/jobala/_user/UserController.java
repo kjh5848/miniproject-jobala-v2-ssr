@@ -65,7 +65,6 @@ public class UserController {
     // TODO : DTO시 삭제 예정
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
-        System.out.println(username);
         Optional<User> user = userService.usernameSameCheck(username);
         return user.isEmpty() ? new ApiUtil<>(true) : new ApiUtil<>(false);
     }
