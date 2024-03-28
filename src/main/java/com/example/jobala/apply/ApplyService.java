@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.resume.ResumeJPARepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ApplyService {
@@ -39,4 +41,13 @@ public class ApplyService {
         applyJPARepository.save(reqDTO.toEntity(resume,jobopen,sessionUser));
     }
 
+    public List<ApplyResponse.CompPositionDTO> findApplyCompByUserId(Integer id) {
+        List<Apply> applyList = applyJPARepository.findByUserId(id);
+        return applyList.stream().map(apply -> new ApplyResponse.CompPositionDTO(apply)).toList();
+    }
+
+    public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id) {
+        List<Apply> applyList = applyJPARepository.findByUserId(id);
+        return applyList.stream().map(apply -> new ApplyResponse.GuestApplyDTO(apply)).toList();
+    }
 }

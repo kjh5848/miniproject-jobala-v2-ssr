@@ -42,7 +42,6 @@ public class JobopenController {
     //공고 수정
     @PostMapping("/comp/jobopen/{id}/update")  // 주소 수정 필요
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
-        System.out.println("id = " + id);
         User sessionUser = (User) session.getAttribute("sessionUser");
         jobopenService.jobopenUpdate(id,sessionUser.getId(),reqDTO);
 

@@ -13,87 +13,81 @@
             </h2>
             <div>
                 <!-- 구직자 기술스택 매칭리스트 목록 -->
-<!--                <form id="searchForm" action="/guest/jobopenSearch" method="get"-->
-<!--                      enctype="application/x-www-form-urlencoded">-->
-<!--                    <div class="card-body select-box border border-2 mb-5 rounded-3">-->
-<!--                        <div class="select-box ">-->
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>기술스택</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" class="checkbox" value="Java"-->
-<!--                                           onchange="skillsFilter(this);"/> Java-->
-<!--                                    <input type="checkbox" class="checkbox" value="JavaScript"-->
-<!--                                           onchange="skillsFilter(this);"/>JavaScript-->
-<!--                                    <input type="checkbox" class="checkbox" value="Spring"-->
-<!--                                           onchange="skillsFilter(this);"/> Spring-->
-<!--                                    <input type="checkbox" class="checkbox" value="HTML"-->
-<!--                                           onchange="skillsFilter(this);"/> HTML-->
-<!--                                    <input type="checkbox" class="checkbox" value="jQuery"-->
-<!--                                           onchange="skillsFilter(this);"/> jQuery-->
-<!--                                    <input type="checkbox" class="checkbox" value="MySQL"-->
-<!--                                           onchange="skillsFilter(this);"/> MySQL-->
-<!--                                </div>-->
-<!--                            </div>-->
+                <form id="searchForm" action="/guest/jobopenSearch" method="get"
+                      enctype="application/x-www-form-urlencoded">
+                    <div class="card-body select-box border border-2 mb-5 rounded-3">
+                        <div class="select-box ">
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>기술스택</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" class="checkbox" name="skills" value=Java > Java
+                                    <input type="checkbox" class="checkbox" name="skills" value=Java_Script >JavaScript
+                                    <input type="checkbox" class="checkbox" name="skills" value=Spring > Spring
+                                    <input type="checkbox" class="checkbox" name="skills" value=HTML > HTML
+                                    <input type="checkbox" class="checkbox" name="skills" value=jQuery > jQuery
+                                    <input type="checkbox" class="checkbox" name="skills" value=MySQL > MySQL
+                                </div>
+                            </div>
 
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>경력</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입-->
-<!--                                    <input type="checkbox" name="career" class="checkbox" value="경력"/> 경력-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>지역</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" name="compLocation" class="checkbox" value="서울"/> 서울-->
-<!--                                    <input type="checkbox" name="compLocation" class="checkbox" value="부산"/> 부산-->
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>경력</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입
+                                    <input type="checkbox" name="career" class="checkbox" value="경력"/> 경력
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>지역</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="compLocation" class="checkbox" value="서울"/> 서울
+                                    <input type="checkbox" name="compLocation" class="checkbox" value="부산"/> 부산
 
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>학력</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" name="edu" class="checkbox" value="고등학교 졸업"/> 고졸-->
-<!--                                    <input type="checkbox" name="edu" class="checkbox" value="대학교 졸업"/> 대졸-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>연봉</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" name="salary" class="checkbox" value="협의"/>-->
-<!--                                    협의-->
-<!--                                    <input type="checkbox" name="salary" class="checkbox" value="3000만원 이하"/>-->
-<!--                                    3000만원 이상-->
-<!--                                    <input type="checkbox" name="salary" class="checkbox" value="5000만원 이상"/>-->
-<!--                                    5000만원 이상-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>희망 직무</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>-->
-<!--                                    프론트엔드-->
-<!--                                    <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="select-package bg-info p-3 m-2 rounded-3">-->
-<!--                                <h4>고용형태</h4>-->
-<!--                                <div class="checkbox-package">-->
-<!--                                    <input type="checkbox" name="jobType" class="checkbox" value="정규직"/> 정규직-->
-<!--                                    <input type="checkbox" name="jobType" class="checkbox" value="계약직"/> 계약직-->
-<!--                                </div>-->
-<!--                            </div>-->
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>학력</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="edu" class="checkbox" value="고등학교 졸업"/> 고졸
+                                    <input type="checkbox" name="edu" class="checkbox" value="대학교 졸업"/> 대졸
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>연봉</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="salary" class="checkbox" value="협의"/>
+                                    협의
+                                    <input type="checkbox" name="salary" class="checkbox" value="3000만원 이하"/>
+                                    3000만원 이상
+                                    <input type="checkbox" name="salary" class="checkbox" value="5000만원 이상"/>
+                                    5000만원 이상
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>희망 직무</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
+                                    프론트엔드
+                                    <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
+                                </div>
+                            </div>
+                            <div class="select-package bg-info p-3 m-2 rounded-3">
+                                <h4>고용형태</h4>
+                                <div class="checkbox-package">
+                                    <input type="checkbox" name="jobType" class="checkbox" value="정규직"/> 정규직
+                                    <input type="checkbox" name="jobType" class="checkbox" value="계약직"/> 계약직
+                                </div>
+                            </div>
 
-<!--                            <div class="text-center my-3"> &lt;!&ndash; 가운데 정렬 및 위아래 여백 추가 &ndash;&gt;-->
-<!--                                <input type="hidden" name="skills" id="skillsInput">-->
-<!--                                <button type="submit" class="btn btn-primary mx-2" onclick="applyFilters()">-->
-<!--                                    &lt;!&ndash; 좌우 여백만 추가 &ndash;&gt;-->
-<!--                                    필터 적용하기-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </form>-->
+                            <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
+                                <!--                                <input type="hidden" name="skills" id="skillsInput">-->
+                                <button type="submit" class="btn btn-primary mx-2">
+                                    <!-- 좌우 여백만 추가 -->
+                                    필터 적용하기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 <!-- 구직자 기술스택 매칭리스트 목록 -->
 
@@ -101,17 +95,18 @@
                 <!-- 채용공고 목록 -->
                 <div class="row">
                     {{#jobopenList}}
-                        <div class="col-md-4 mb-4">
-                            <a href="/comp/jobopen/{{id}}" class="btn">
-                                <div class="card col-3 border-0 shadow" style="width: 100%;">
-                                    <img src="/image/{{user.imgFilename}}" style="width: 400px; height: 200px; "
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                                <div class="card border-0 shadow" style="width: 100%;">
+                                    <img class="card-img-top img-fluid" src="/image/{{imgFilename}}"
                                          alt="이미지를 표시할 수 없습니다.">
                                     <div class="card-body text-start">
                                         <br>
                                         <h5 class="card-title">{{jobopenTitle}}</h5>
                                         <hr>
                                         <p class="card-text">{{compLocation}} {{career}} {{edu}} </p>
-                                        <p class="card-text">마감일 : {{endTime}}</p>
+                                        <hr>
+                                        <!--                                        <p class="card-text">마감일 : </p>-->
                                     </div>
                                 </div>
                             </a>

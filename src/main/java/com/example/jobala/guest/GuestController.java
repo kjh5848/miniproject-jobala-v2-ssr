@@ -4,6 +4,7 @@ import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
+import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +28,8 @@ public class GuestController {
     private final GuestQueryRepository guestRepository;
     private final GuestService guestService;
     private final UserJPARepository userJPARepository;
+    private final GuestQueryRepository guestQueryRepository;
+    private final GuestJPARepository guestJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
 
     // DEL: mainForm 삭제
@@ -34,22 +37,19 @@ public class GuestController {
 
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-
-        // [,]를 없애기위해 substring
-        String slicedSkills = skills.substring(1, skills.length() - 1);
-
-        List<User> userList = userJPARepository.findAll();
-        req.setAttribute("jobopenList", userList);
-
+        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findAll(skills, resDTO);
+        System.out.println("시작");
+        System.out.println(skills);
+        System.out.println(resDTO);
+        System.out.println("끝");
+        req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
 
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
+        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findByJoboopenAll();
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -59,7 +59,7 @@ public class GuestController {
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         int userId = sessionUser.getId();
-        List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
+        List<Resume> resumeList = guestQueryRepository.findResumeById(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
     }
@@ -76,11 +76,7 @@ public class GuestController {
     @PostMapping("/guest/updateProfile") // 주소 수정 필요!
     public String updateProfile(@RequestParam MultipartFile imgFilename, GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        System.out.println("reqDTO = " + reqDTO);
-        System.out.println("imgFilename = " + imgFilename);
         String img = String.valueOf(imgFilename);
-        System.out.println("img = " + img);
         guestService.guestUpdateProfile(reqDTO, sessionUser);
         return "redirect:/guest/profileForm";
     }
