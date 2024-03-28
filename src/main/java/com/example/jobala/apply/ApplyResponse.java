@@ -42,7 +42,6 @@ public class ApplyResponse {
     //기업 positionForm 응답DTO
     @Data
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class CompPositionDTO {
         private Integer id;
         private Integer jobopenId;
@@ -51,6 +50,16 @@ public class ApplyResponse {
         private String resumeTitle;
         private String name;
         private String state;
+
+        public CompPositionDTO(Apply apply) {
+            this.id = apply.getId();
+            this.jobopenId = apply.getJobopen().getId();
+            this.resumeId = apply.getResume().getId();
+            this.jobopenTitle = apply.getJobopen().getJobopenTitle();
+            this.resumeTitle = apply.getResume().getResumeTitle();
+            this.name = apply.getResume().getUser().getName();
+            this.state = apply.getState();
+        }
     }
 
     //개인 positionForm 응답DTO
