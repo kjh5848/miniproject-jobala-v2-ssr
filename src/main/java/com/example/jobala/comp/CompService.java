@@ -20,8 +20,9 @@ import java.util.UUID;
 public class CompService {
     private final CompJPARepository compJPARepository;
 
+    // 프로필업데이트
     @Transactional
-    public User 프로필업데이트(CompRequest.CompProfileUpdateDTO reqDTO, User sessionUser) {
+    public User compUpdateProfile(CompRequest.CompProfileUpdateDTO reqDTO, User sessionUser) {
         User user = compJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다."));
 

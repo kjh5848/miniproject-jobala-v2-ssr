@@ -35,10 +35,10 @@ public class ResumeController {
     }
 
     //이력서 업데이트
-    @PostMapping("/guest/resume/{id}/update")
+    @PostMapping("/guest/resume/{id}/update")  // 주소 수정 필요
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.이력서수정(id, reqDTO,sessionUser.getId());
+        resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
         System.out.println("이력서 수정 실행");
         return "redirect:/guest/mngForm";
     }
@@ -47,7 +47,7 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Resume resume = resumeService.이력서보기(id);
+        Resume resume = resumeService.resumeFindById(id);
 
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
@@ -57,7 +57,7 @@ public class ResumeController {
     //이력서 상세보기
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
-        Resume resume = resumeService.이력서보기(id);
+        Resume resume = resumeService.resumeFindById(id);
 
         boolean isGuestScrap = false;
         User sessionUser = null;
@@ -82,18 +82,18 @@ public class ResumeController {
     }
 
     //이력서 등록
-    @PostMapping("/guest/resume/save")
+    @PostMapping("/guest/resume/save")  // 주소 수정 필요
     public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.이력서등록(resumeSaveDTO, sessionUser);
+        resumeService.resumeSave(resumeSaveDTO, sessionUser);
         return "redirect:/guest/mngForm";
     }
 
     //이력서 삭제
-    @PostMapping("/resume/{id}/delete")
+    @PostMapping("/resume/{id}/delete")  // 주소 수정 필요
     public String delete(@PathVariable int id, ResumeRequest.DeleteDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.이력서삭제(id, reqDTO.getId());
+        resumeService.resumeDelete(id, reqDTO.getId());
         return "redirect:/guest/mngForm";
     }
 }

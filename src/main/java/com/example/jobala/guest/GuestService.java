@@ -19,8 +19,9 @@ public class GuestService {
 
     private final GuestJPARepository guestJPARepository;
 
+    // 프로필업데이트
     @Transactional
-    public User 프로필업데이트(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
+    public User guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다."));
 

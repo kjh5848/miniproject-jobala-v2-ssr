@@ -14,18 +14,18 @@ public class ReplyController {
     private final ReplyService replyService;
 
 
-    @PostMapping("reply/save")
-    public String repluSave(ReplyRequest.SaveDTO reqDTO) {
+    @PostMapping("reply/save")   // 주소 수정 필요
+    public String replySave(ReplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        replyService.댓글쓰기(reqDTO,sessionUser);
+        replyService.replySave(reqDTO,sessionUser);
         return "redirect:/board/" + reqDTO.getBoardId();
     }
 
     //댓글 삭제
-    @PostMapping("reply/{replyId}/delete")
+    @PostMapping("reply/{replyId}/delete")  // 주소 수정 필요
     public String deleteReply(@PathVariable Integer replyId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        replyService.댓글삭제(replyId,sessionUser.getId());
+        replyService.replyDelete(replyId,sessionUser.getId());
 
         return "redirect:/board/"+sessionUser.getId();
     }
