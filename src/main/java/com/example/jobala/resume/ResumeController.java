@@ -3,7 +3,7 @@ package com.example.jobala.resume;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserQueryRepository;
 import com.example.jobala.jobopen.JobopenQueryRepository;
-import com.example.jobala.scrap.Scrap;
+import com.example.jobala.scrap.ScrapJPARepository;
 import com.example.jobala.scrap.ScrapQueryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +24,7 @@ public class ResumeController {
     private final JobopenQueryRepository jobopenRepository;
     private final ResumeService resumeService;
     private final ResumeJPARepository resumeJPARepository;
+    private final ScrapJPARepository scrapJPARepository;
 
     //TODO: saveForm 삭제예정
     @GetMapping("/guest/resume/saveForm")
@@ -47,37 +48,20 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Resume resume = resumeService.resumeFindById(id);
+        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
 
         req.setAttribute("user", sessionUser);
-        req.setAttribute("resume", resume);
+        req.setAttribute("resume", respDTO);
         return "guest/resume/updateForm";
     }
 
     //이력서 상세보기
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
-        Resume resume = resumeService.resumeFindById(id);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
 
-        boolean isGuestScrap = false;
-        User sessionUser = null;
-        // 스크랩
-        try {
-            sessionUser = (User) session.getAttribute("sessionUser");
-            if (sessionUser.getRole() == 1) {
-                isGuestScrap = true;
-                req.setAttribute("isGuestScrap", isGuestScrap);
-                Scrap scrap = scrapRepository.findCompScrapById(id, sessionUser.getId());
-                req.setAttribute("scrap", scrap);
-            }
-        } catch (Exception e) {
-        }
-
-        int userId = resume.getUser().getId();
-        User user = userRepository.findById(userId);
-
-        req.setAttribute("user", user);
-        req.setAttribute("resume", resume);
+        req.setAttribute("resume", respDTO);
         return "guest/resume/detailForm";
     }
 
