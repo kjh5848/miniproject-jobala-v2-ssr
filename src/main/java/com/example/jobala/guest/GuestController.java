@@ -28,15 +28,16 @@ public class GuestController {
     private final GuestQueryRepository guestRepository;
     private final GuestService guestService;
     private final UserJPARepository userJPARepository;
-    private final GuestQueryRepository getGuestRepository;
+    private final GuestQueryRepository guestQueryRepository;
+    private final GuestJPARepository guestJPARepository;
+    private final JobopenJPARepository jobopenJPARepository;
 
     // DEL: mainForm 삭제
 
 
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
-        List<JobopenResponse.ListDTO> jobopenList = guestRepository.findAll(skills, resDTO);
-        System.out.println(skills);
+        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findAll(skills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -44,7 +45,7 @@ public class GuestController {
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        List<JobopenResponse.ListDTO> jobopenList = getGuestRepository.findByJoboopenAll();
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -54,7 +55,7 @@ public class GuestController {
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         int userId = sessionUser.getId();
-        List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
+        List<Resume> resumeList = guestQueryRepository.findResumeById(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
     }

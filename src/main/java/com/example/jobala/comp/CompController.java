@@ -42,8 +42,7 @@ public class CompController {
 
     @GetMapping("/comp/scoutList")
     public String scoutList(HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        List<ResumeResponse.ListDTO> resumeList = compRepository.findResumeAll();
+        List<Resume> resumeList = resumeJPARepository.findAll();
         req.setAttribute("resumeList", resumeList);
         return "comp/scoutList";
     }

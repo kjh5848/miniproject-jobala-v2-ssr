@@ -19,4 +19,6 @@ public interface JobopenJPARepository extends JpaRepository<Jobopen, Integer> {
     // 사용자 ID를 이용하여 채용공고 정보와 함께 사용자 정보를 가져오는 쿼리
     @Query("SELECT j FROM Jobopen j JOIN FETCH j.user WHERE j.id = :jobopenId")
     Optional<Jobopen> findByJobopenIdWithUser(@Param("jobopenId") int jobopenId);
+
+
 }
