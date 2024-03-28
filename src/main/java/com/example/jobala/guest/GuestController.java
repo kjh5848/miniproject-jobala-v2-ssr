@@ -45,7 +45,7 @@ public class GuestController {
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
+        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findByJoboopenAll();
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }

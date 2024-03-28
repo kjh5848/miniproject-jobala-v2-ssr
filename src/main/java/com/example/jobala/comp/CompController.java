@@ -27,7 +27,7 @@ import java.util.List;
 public class CompController {
 
     private final HttpSession session;
-    private final CompQueryRepository compRepository;
+    private final CompQueryRepository compQueryRepository;
     private final ApplyJPARepository applyJPARepository;
     private final CompService compService;
     private final UserJPARepository userJPARepository;
@@ -35,14 +35,15 @@ public class CompController {
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
-        List<ResumeResponse.ListDTO> resumeList = compRepository.findAll(skills, resDTO);
+        List<ResumeResponse.ListDTO> resumeList = compQueryRepository.findAll(skills, resDTO);
         req.setAttribute("resumeList", resumeList);
         return "comp/scoutList";
     }
 
     @GetMapping("/comp/scoutList")
     public String scoutList(HttpServletRequest req) {
-        List<Resume> resumeList = resumeJPARepository.findAll();
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<ResumeResponse.ListDTO> resumeList = compQueryRepository.findResumeAll();
         req.setAttribute("resumeList", resumeList);
         return "comp/scoutList";
     }
@@ -52,7 +53,7 @@ public class CompController {
         //1. 기업 정보 꺼내오기 (인증 체크)
         User sessionUser = (User) session.getAttribute("sessionUser");
         //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
-        Resume resume = (Resume) compRepository.findResumeById(id);
+        Resume resume = (Resume) compQueryRepository.findResumeById(id);
 
         req.setAttribute("sessionUser", sessionUser);
         req.setAttribute("resume", resume);
@@ -70,7 +71,7 @@ public class CompController {
     public String mngForm(HttpServletRequest req) {
         // 채용 공고 목록 조회
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Jobopen> temp = compRepository.findJobopenById(sessionUser.getId());
+        List<Jobopen> temp = compQueryRepository.findJobopenById(sessionUser.getId());
         List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
 
         jobopenList.forEach(dto -> {
