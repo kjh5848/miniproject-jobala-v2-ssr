@@ -23,7 +23,18 @@ class ResumeJPARepositoryTest {
     @Autowired
     private EntityManager em;
 
+    @Test
+    public void findByUserId_test(){
+        // given
+        int userId = 1;
+        // when
+        List<Resume> resume = resumeJPARepository.findByUserId(userId);
 
+        System.out.println("findByUserIdJoinScrap_test : " + resume.size());
+
+        // then
+
+    }
     @Test
     public void 이력서스킬_test(){
         // given

@@ -45,4 +45,8 @@ public class UserService {
         return userJPARepository.findByUsername(username);
     }
 
+    public User guestInfo(Integer id) {
+        return userJPARepository.findById(id).orElseThrow(() -> new Exception404("유저의 정보를 찾을 수 없습니다."));
+    }
+
 }

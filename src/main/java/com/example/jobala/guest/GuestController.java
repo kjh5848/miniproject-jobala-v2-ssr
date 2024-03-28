@@ -2,6 +2,7 @@ package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
+import com.example.jobala._user.UserService;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenQueryRepository;
@@ -31,6 +32,7 @@ public class GuestController {
     private final GuestQueryRepository guestQueryRepository;
     private final GuestJPARepository guestJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
+    private final UserService userService;
 
     // DEL: mainForm 삭제
 
@@ -38,11 +40,7 @@ public class GuestController {
     //TODO: 서비스 만들기
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
-        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findAll(skills, resDTO);
-        System.out.println("시작");
-        System.out.println(skills);
-        System.out.println(resDTO);
-        System.out.println("끝");
+        List<JobopenResponse.ListDTO> jobopenList = guestService.jobopenSearch(skills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -50,7 +48,7 @@ public class GuestController {
     //TODO: 서비스 만들기
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findByJoboopenAll();
+        List<JobopenResponse.ListDTO> jobopenList = guestService.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -59,8 +57,7 @@ public class GuestController {
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        int userId = sessionUser.getId();
-        List<Resume> resumeList = guestQueryRepository.findResumeById(sessionUser.getId());
+        List<Resume> resumeList = guestService.findResumeByUserId(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
     }
@@ -70,7 +67,7 @@ public class GuestController {
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        User guestProfile = userJPARepository.findById(sessionUser.getId()).get();
+        User guestProfile = userService.guestInfo(sessionUser.getId());
         req.setAttribute("guestProfile", guestProfile);
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }
