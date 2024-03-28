@@ -84,7 +84,7 @@ public class ResumeResponse {
         @Data
         public class UserDTO {
             private Integer userId;
-            private String userimgFilename;
+            private String imgFilename;
             private String name;
             private Date age;
             private String email;
@@ -92,7 +92,7 @@ public class ResumeResponse {
 
             public UserDTO(User user) {
                 this.userId = user.getId();
-                this.userimgFilename = user.getImgFilename();
+                this.imgFilename = user.getImgFilename();
                 this.name = user.getName();
                 this.age = user.getAge();
                 this.email = user.getEmail();
