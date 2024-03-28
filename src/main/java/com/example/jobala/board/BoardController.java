@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +38,7 @@ public class BoardController {
 
     @GetMapping("/board/mainForm")
     public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "4") int size, HttpServletRequest req) {
-        Pageable pageable = (Pageable) PageRequest.of(page, size);
-        Page<Board> boardPage = boardService.글목록조회(pageable);
+        Page<Board> boardPage = boardService.글목록조회(page,size);
 
         req.setAttribute("boardList",boardPage.getContent());
         req.setAttribute("first", page == 0 ? true:false);

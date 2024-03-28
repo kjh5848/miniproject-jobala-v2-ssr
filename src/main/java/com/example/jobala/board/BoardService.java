@@ -5,7 +5,9 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +62,9 @@ public class BoardService {
        boardJPARepository.save(reqDTO.toEntity(sessionUser));
     }
 
-    public Page<Board> 글목록조회(Pageable pageable){
+    public Page<Board> 글목록조회(int page, int size){
+        Pageable pageable = (Pageable) PageRequest.of(page, size,Sort.by(Sort.Direction.DESC,"id"));
+
         return boardJPARepository.findAll(pageable);
     }
 
