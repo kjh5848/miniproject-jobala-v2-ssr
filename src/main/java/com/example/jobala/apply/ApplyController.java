@@ -16,7 +16,6 @@ public class ApplyController {
 
     private final HttpSession session;
     private final ApplyService applyService;
-    private final ApplyJPARepository applyJPARepository;
     private final ApplyQueryRepository applyQueryRepository;
 
     //기업이 제안한 상태 업데이트
@@ -31,7 +30,6 @@ public class ApplyController {
     @PostMapping("guest/applyStatus/update")  // 주소 수정 필요
     public String updateGuestApplicationStatus(@RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         applyService.statusUpdate(applyId, status);
-
         return "redirect:/positionForm";
     }
 
@@ -40,7 +38,6 @@ public class ApplyController {
     public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.saveAfterApply(reqDTO, sessionUser);
-
         if (sessionUser.getRole() == 1) {
             return "redirect:/guest/resume/" + reqDTO.getResumeId();
         } else {
@@ -55,6 +52,8 @@ public class ApplyController {
         return applicantProfiles;
     }
 
+    //기업 - 포지션 제안한 현황보기
+    //개인 - 포지션 제안 받은 현황보기
     @GetMapping("/positionForm")
     public String positionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -69,7 +68,8 @@ public class ApplyController {
         }
     }
 
-    // 개인 사용자의 지원 상태 및 받은 제안 페이지
+    //기업 - 이력서 지원받은 현황보기
+    //개인 - 이력서 지원 현황보기
     @GetMapping("/applyForm")
     public String applyForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
