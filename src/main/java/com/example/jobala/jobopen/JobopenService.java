@@ -21,10 +21,6 @@ public class JobopenService {
 
     private final JobopenJPARepository jobopenJPARepository;
     private final ScrapJPARepository scrapJPARepository;
-    // 공고목록보기
-    public List<Jobopen> jobopenFindAll() {
-        return  jobopenJPARepository.findAll();
-    }
 
     // 공고등록
     @Transactional

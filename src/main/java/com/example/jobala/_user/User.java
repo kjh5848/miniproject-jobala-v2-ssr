@@ -42,15 +42,13 @@ public class User {
 
     private Date age;
 
-
-
     @CreationTimestamp
     private Timestamp createdAt;
 
     // 사진이 null로 들어올때 디폴트 값 설정하기
     @PrePersist // 엔티티가 저장되기 전에 실행되는 메서드, 필드에 기본값 설정
     public void setDefaultImgFilename() {
-        if(imgFilename == null) {
+        if (imgFilename == null) {
             imgFilename = "default.png";
         }
     }
@@ -72,23 +70,30 @@ public class User {
         this.imgFilename = imgFilename; // 생성자에서 imgFilename을 설정할 수 있도록 추가
     }
 
-    //프로필 업데이트 setter
-    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO, String webImgPath) {
+    //개인 프로필 업데이트 setter
+    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO, String imgFilename) {
         this.name = reqDTO.getName();
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
         this.imgTitle = reqDTO.getImgTitle();
-        this.imgFilename = webImgPath;
+        if (imgFilename != null) {
+            this.imgFilename = imgFilename;
+        }
+
     }
 
-    public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO, String webImgPath) {
+    // 기업 프로필 업데이트 setter
+    public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO, String imgFilename) {
         this.name = reqDTO.getName();
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
         this.address = reqDTO.getAddress();
         this.imgTitle = reqDTO.getImgTitle();
-        this.imgFilename = webImgPath;
+        if (imgFilename != null) {
+            this.imgFilename = imgFilename;
+        }
+
     }
 }

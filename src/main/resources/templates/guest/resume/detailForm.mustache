@@ -6,9 +6,9 @@
 
     <!-- 회사 기본정보 -->
 
-    <div class="card mb-3">
+    <div class="card ">
         <div class="card-body">
-            <div class="d-flex justify-content-between">
+            <div class="">
                 <div>
                     <form action="/comp/scrap" method="post" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="resumeId" value="{{resume.id}}">
@@ -24,35 +24,34 @@
                     <h2 class="card-title">{{resume.resumeTitle}}</h2>
                 </div>
             </div>
-            <div class="card border-0">
+            <div class="card py-5 px-5 border-0">
                 <div class=" crad">
                     <div class="card-body d-flex">
-                        <div style="margin-left: 140px; width: 150px; height: 250px; margin-bottom: 10px;">
-                            <img id="imgPreview" src="/image/{{resume.userDTO.ImgFilename}}"
-                                 style="width:250px; height: 260px;">
-                        </div>
-                        <table class="table" style="margin-left: 200px; margin-top: 80px; width: 600px; height: 100px;">
-                            <tbody style="font-size: 20px;">
-                            <tr>
-                                <th>이름</th>
-                                <td>{{resume.userDTO.name}}</td>
-                                <th>나이</th>
-                                <td>{{resume.userDTO.age}}</td>
-                            </tr>
-                            <tr>
-                                <th>이메일</th>
-                                <td>{{resume.userDTO.email}}</td>
-                                <th>주소</th>
-                                <td>{{resume.userDTO.address}}</td>
-                            </tr>
-                            <tr>
-                            </tr>
-                            <tr>
-                            </tr>
-                            </tbody>
-                        </table>
+                            <img id="card-img-top imgPreview" style="width: 25%" src="/image/{{resume.userDTO.ImgFilename}}">
                     </div>
                 </div>
+            </div>
+            <div>
+                <table class="table" style="margin-left: 200px; margin-top: 80px; width: 600px; height: 100px;">
+                    <tbody style="font-size: 20px;">
+                    <tr>
+                        <th>이름</th>
+                        <td>{{resume.userDTO.name}}</td>
+                        <th>나이</th>
+                        <td>{{resume.userDTO.age}}</td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td>{{resume.userDTO.email}}</td>
+                        <th>주소</th>
+                        <td>{{resume.userDTO.address}}</td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

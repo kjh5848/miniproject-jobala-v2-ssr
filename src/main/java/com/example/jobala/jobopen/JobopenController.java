@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Controller
@@ -50,7 +49,7 @@ public class JobopenController {
 
     //TODO: 글조회로 변경예정
     @GetMapping("/comp/jobopen/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+    public String updateForm(Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
         req.setAttribute("jobopen", respDTO);
@@ -76,13 +75,11 @@ public class JobopenController {
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-
         // 사용자가 있을 경우 이력서 목록 설정
-        if (sessionUser != null) {
+
             List<Resume> applyResumeList = jobopenRepository.findResumeById(sessionUser);
             req.setAttribute("applyResumeList", applyResumeList);
-        }
+
 
         // 채용공고 정보 가져오기
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);

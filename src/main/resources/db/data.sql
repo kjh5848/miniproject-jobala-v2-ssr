@@ -1,4 +1,4 @@
--- -- 개인 회원가입 더미 9개
+-- -- 개인 회원가입 더미 11개
 insert into user_tb(name, username, email, password, address, age, phone, role, img_filename, img_title, created_at)
 values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구', '2000-04-25', '01012345678', 0, 'userImage (1).png',
         'userImage (1).png', now()),
@@ -46,7 +46,23 @@ values ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com
        ('867-546-7903', '이민호', '겟인데어', '서울특별시 강남구', 'com9', 'actor7@nate.com', '1234', '이민호', '01011112231', 1,
         'getinthere.png', 'getinthere.png', now()),
        ('664-236-7893', '송강호', 'NH농협은행', '서울특별시 강남구', 'com10', 'actor8@nate.com', '1234', '송강호', '01011112231', 1,
-        'nh.png', 'nh.png', now());
+        'nh.png', 'nh.png', now()),
+       ('665-987-1234', '김태리', '신한은행', '서울특별시 강서구', 'com11', 'actress9@naver.com', '5678', '김태리', '01022223333', 2,
+        'shinhan.png', 'shinhan.png', now()),
+       ('672-345-6789', '손석구', 'KB국민은행', '서울특별시 송파구', 'com12', 'actor10@gmail.com', '91011', '이병헌', '01033334444', 3,
+        'kb.png', 'kb.png', now()),
+       ('678-901-2345', '전지현', '사람인', '서울특별시 강북구', 'com13', 'actress11@yahoo.com', '1213', '전지현', '01044445555', 4,
+        'saramin.png', 'saramin.png', now()),
+       ('687-345-6789', '송중기', '하나은행', '서울특별시 중랑구', 'com14', 'actor12@hotmail.com', '1415', '송중기', '01055556666', 5,
+        'hana.png', 'hana.png', now()),
+       ('690-123-4567', '한효주', 'IBK기업은행', '서울특별시 동대문구', 'com15', 'actress13@naver.com', '1617', '한효주', '01066667777', 6,
+        'ibk.png', 'ibk.png', now()),
+       ('699-234-5678', '공유', 'KEB하나은행', '서울특별시 관악구', 'com16', 'actor14@gmail.com', '1819', '공유', '01077778888', 7,
+        'hana.png', 'hana.png', now()),
+       ('600-987-6543', '김고은', 'BNK부산은행', '부산광역시 해운대구', 'com17', 'actress15@yahoo.com', '2021', '김고은', '01088889999', 8,
+        'bnk.png', 'bnk.png', now());
+
+
 
 insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, skills, created_at)
 values (1, '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사',

@@ -7,6 +7,7 @@ import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.apply.ApplyRequest;
 import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
@@ -31,7 +32,7 @@ public class CompController {
     private final ApplyJPARepository applyJPARepository;
     private final CompService compService;
     private final UserJPARepository userJPARepository;
-    private final ResumeJPARepository resumeJPARepository;
+    private final JobopenJPARepository jobopenJPARepository;
 
 
     // TODO: 서비스 만들기
@@ -72,8 +73,8 @@ public class CompController {
     public String mngForm(HttpServletRequest req) {
         // 채용 공고 목록 조회
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Jobopen> temp = compQueryRepository.findJobopenById(sessionUser.getId());
-        List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
+        List<Jobopen> temp = jobopenJPARepository.findJobopenById(sessionUser.getId());
+        List<JobopenResponse.DTO> jobopenList = temp.stream().map(JobopenResponse.DTO::new).toList();
 
         jobopenList.forEach(dto -> {
             int count = applyJPARepository.countJobopenApplyById(dto.getId());
