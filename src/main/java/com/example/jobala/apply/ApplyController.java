@@ -58,12 +58,12 @@ public class ApplyController {
     public String positionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) {
-            List<ApplyResponse.CompPositionDTO> respCompDTO = applyQueryRepository.findApplyCompByUserId(sessionUser.getId());
-            req.setAttribute("CompPosition", respCompDTO);
+            List<ApplyResponse.CompPositionDTO> respDTO = applyService.findApplyCompByUserId(sessionUser.getId());
+            req.setAttribute("CompPosition", respDTO);
             return "comp/_myPage/positionForm";
         } else {
-            List<ApplyResponse.GuestPositionDTO> respDTO2 = applyQueryRepository.findJopOpenByUserId(sessionUser.getId());
-            req.setAttribute("GuestPosition", respDTO2);
+            List<ApplyResponse.GuestPositionDTO> respDTO = applyQueryRepository.findJopOpenByUserId(sessionUser.getId());
+            req.setAttribute("GuestPosition", respDTO);
             return "guest/_myPage/positionForm";
         }
     }
@@ -78,7 +78,8 @@ public class ApplyController {
             req.setAttribute("CompApply", respDTO);
             return "comp/_myPage/applyForm";
         } else {
-            List<ApplyResponse.GuestApplyDTO> respDTO = applyQueryRepository.findByCompUserId(sessionUser.getId());
+            List<ApplyResponse.GuestApplyDTO> respDTO = applyService.findApplyGuestByUserId(sessionUser.getId());
+//            List<ApplyResponse.GuestApplyDTO> respDTO = applyQueryRepository.findApplyCompByUserId(sessionUser.getId());
             req.setAttribute("GuestApply", respDTO);
             return "guest/_myPage/applyForm";
         }
