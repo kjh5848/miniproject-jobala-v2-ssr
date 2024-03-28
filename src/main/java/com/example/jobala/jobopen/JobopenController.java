@@ -51,8 +51,6 @@ public class JobopenController {
     //TODO: 글조회로 변경예정
     @GetMapping("/comp/jobopen/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-
         Jobopen jobopen = jobopenService.jobopenFindById(id);
         req.setAttribute("jobopen", jobopen);
         return "comp/jobopen/updateForm";
@@ -69,11 +67,11 @@ public class JobopenController {
     // TODO : saveForm 삭제 예정
     @GetMapping("/comp/jobopen/saveForm")
     public String saveForm() {
-        User sessionUser = (User) session.getAttribute("sessionUser");
         return "comp/jobopen/saveForm";
     }
 
     //공고 보기
+    //TODO: 서비스 만들기
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         boolean isCompScrap = false;
@@ -93,13 +91,12 @@ public class JobopenController {
 
         // 사용자가 있을 경우 이력서 목록 설정
         if (user != null) {
-            List<Resume> resumeList2 = jobopenRepository.findResumeById(user);
-            req.setAttribute("resumeList2", resumeList2);
+            List<Resume> applyResumeList = jobopenRepository.findResumeById(user);
+            req.setAttribute("applyResumeList", applyResumeList);
         }
 
         // 채용공고 정보 가져오기
         Jobopen jobopen = jobopenService.jobopenFindById(id);
-
         req.setAttribute("jobopen", jobopen);
 
         return "comp/jobopen/detailForm";

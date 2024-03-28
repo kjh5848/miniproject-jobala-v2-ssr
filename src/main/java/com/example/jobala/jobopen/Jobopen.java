@@ -26,6 +26,7 @@ public class Jobopen {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
     private String jobopenTitle; //공고제목
     private String career;// 경력
     private String edu; // 학력

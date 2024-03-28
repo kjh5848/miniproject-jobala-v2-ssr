@@ -33,6 +33,8 @@ public class CompController {
     private final UserJPARepository userJPARepository;
     private final ResumeJPARepository resumeJPARepository;
 
+
+    // TODO: 서비스 만들기
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
         List<ResumeResponse.ListDTO> resumeList = compQueryRepository.findAll(skills, resDTO);
@@ -40,6 +42,7 @@ public class CompController {
         return "comp/scoutList";
     }
 
+    // TODO: 서비스 만들기
     @GetMapping("/comp/scoutList")
     public String scoutList(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -48,6 +51,7 @@ public class CompController {
         return "comp/scoutList";
     }
 
+    // TODO: 서비스 만들기
     @GetMapping("/comp/scoutList/{id}")
     public String scoutDetail(@PathVariable Integer id, HttpServletRequest req) {
         //1. 기업 정보 꺼내오기 (인증 체크)
@@ -61,12 +65,9 @@ public class CompController {
         return "geust/resume/detailForm";
     }
 
-//    @GetMapping("/comp/scoutList/{id}")
-//    public @ResponseBody List<ResumeRequest> getResumeList(@PathVariable Integer resumeId) {
-//        List<ResumeRequest> resumeList = new ArrayList<>();
-//        return resumeList;
-//    }
+    // DEL: getResumeList 삭제
 
+    // TODO: 서비스 만들기
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
         // 채용 공고 목록 조회
@@ -79,12 +80,13 @@ public class CompController {
             dto.setCount(count);
         });
 
-
 //        req.setAttribute("count",countApplyList);
         req.setAttribute("jobopenList", jobopenList);
         return "comp/_myPage/mngForm";
     }
 
+
+    // TODO: 서비스 만들기
     @GetMapping("/comp/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -94,14 +96,10 @@ public class CompController {
         return "comp/_myPage/profileForm";
     }
 
+
     @PostMapping("/comp/updateProfile") // 주소 수정 필요!
     public String updateProfile(@RequestParam MultipartFile imgFilename, CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/login";
-        }
-        // profileDto.setId(sessionUser.getId());
-        String img = String.valueOf(imgFilename);
         compService.compUpdateProfile(reqDTO, sessionUser);
         return "redirect:/comp/profileForm";
     }

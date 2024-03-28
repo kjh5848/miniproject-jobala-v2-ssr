@@ -23,6 +23,7 @@ public class UserController {
     private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
 
+    //TODO: 서비스 만들기
     //메인에서 공고목록보기
     @GetMapping("/")
     public String mainForm(HttpServletRequest req) {
@@ -30,8 +31,6 @@ public class UserController {
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }
-
-    // DEL: mainForm 삭제
 
     //서비스 변경 완료
     @PostMapping("/login")
@@ -53,7 +52,6 @@ public class UserController {
             throw new Exception401("유저네임 혹은 비밀번호가 틀렸어요");
         }
     }
-
 
     @PostMapping("/join")
     public String join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {

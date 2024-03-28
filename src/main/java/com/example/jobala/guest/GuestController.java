@@ -35,6 +35,7 @@ public class GuestController {
     // DEL: mainForm 삭제
 
 
+    //TODO: 서비스 만들기
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
         List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findAll(skills, resDTO);
@@ -46,7 +47,7 @@ public class GuestController {
         return "guest/jobSearch";
     }
 
-
+    //TODO: 서비스 만들기
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
         List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findByJoboopenAll();
@@ -54,7 +55,7 @@ public class GuestController {
         return "guest/jobSearch";
     }
 
-
+    //TODO: 서비스 만들기
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -64,6 +65,7 @@ public class GuestController {
         return "guest/_myPage/mngForm";
     }
 
+    //TODO: 서비스 만들기
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");

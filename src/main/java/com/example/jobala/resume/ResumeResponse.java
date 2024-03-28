@@ -1,14 +1,13 @@
 package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
-import com.example.jobala.scrap.Scrap;
-import com.example.jobala.scrap.ScrapJPARepository;
+import com.example.jobala.jobopen.Jobopen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ResumeResponse {
@@ -56,10 +55,9 @@ public class ResumeResponse {
         private boolean isScrap;
         private boolean isGuestScrap;
         private UserDTO userDTO;
+        private List<JobopenDTO> applyJobopenList = new ArrayList<>();
 
-
-
-        public DetailDTO(Resume resume, User sessionUser) {
+        public DetailDTO(Resume resume, User sessionUser ,List<Jobopen> jobopenList) {
             this.id = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
@@ -73,11 +71,27 @@ public class ResumeResponse {
 
             this.userDTO = new UserDTO(resume.getUser());
 
+            //기업 제안하기 - 모달창 공고 목록
+            this.applyJobopenList = jobopenList.stream().map(j -> new JobopenDTO(j)).toList();
+
             // 회사만 이력서를 스크랩 할 수 있다.
             if (sessionUser != null) {
                 if (sessionUser.getRole() == 1) {
                     this.isGuestScrap = true;
                 }
+            }
+        }
+
+        @Data
+        public class JobopenDTO {
+            private String jobopenTitle;
+            private String hopeJob;
+            private String career;
+
+            public JobopenDTO(Jobopen jobopen) {
+                this.jobopenTitle = jobopen.getJobopenTitle();
+                this.hopeJob = jobopen.getHopeJob();
+                this.career = jobopen.getCareer();
             }
         }
 

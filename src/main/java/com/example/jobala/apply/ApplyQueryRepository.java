@@ -35,7 +35,7 @@ public class ApplyQueryRepository {
     }
 
 
-    public List<ApplyResponse.CompPositionDTO> findApplyCompByUserId(int compId) {
+    public List<ApplyResponse.CompPositionDTO> findCompByUserId(int compId) {
         //기업이 제안한 현황보기
         String q = """
                 SELECT at.id,jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, at.state

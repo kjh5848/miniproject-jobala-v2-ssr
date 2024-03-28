@@ -18,7 +18,7 @@ public class ApplyController {
     private final ApplyService applyService;
     private final ApplyQueryRepository applyQueryRepository;
 
-    //기업이 제안한 상태 업데이트
+    //기업 - 지원받은 이력서 합격, 불합격 상태 업데이트
     @PostMapping("comp/applyStatus/update")  // 주소 수정 필요
     public String updateCompApplicationStatus(
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
@@ -26,14 +26,14 @@ public class ApplyController {
         return "redirect:/applyForm";
     }
 
-    //게스트가 제안
+    //개인 - 제안받은 공고 수락, 거절 상태 업데이트
     @PostMapping("guest/applyStatus/update")  // 주소 수정 필요
     public String updateGuestApplicationStatus(@RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
         applyService.statusUpdate(applyId, status);
         return "redirect:/positionForm";
     }
 
-    //개인이 이력서 지원하기
+    //개인 - 이력서 지원하기
     @PostMapping("/Applys") // 주소 수정 필요
     public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -43,13 +43,6 @@ public class ApplyController {
         } else {
             return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
         }
-    }
-
-    // 핵심로직 : 지원 정보를 받아와서 상세보기
-    @GetMapping("/applys/{applyId}")
-    public @ResponseBody List<ApplyRequest> getApplicantProfile(@PathVariable Integer applyId) {
-        List<ApplyRequest> applicantProfiles = new ArrayList<>();
-        return applicantProfiles;
     }
 
     //기업 - 포지션 제안한 현황보기

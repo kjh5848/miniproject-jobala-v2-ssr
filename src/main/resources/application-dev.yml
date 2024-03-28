@@ -35,4 +35,4 @@ spring:
         default_batch_fetch_size: 10
     defer-datasource-initialization: true
 #    TODO: 오픈인뷰 DTO 만들고 추가
-    open-in-view: true
+#    open-in-view: true

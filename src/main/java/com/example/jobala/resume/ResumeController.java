@@ -13,23 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ResumeController {
 
-    private final ResumeQueryRepository resumeRepository;
     private final HttpSession session;
-    private final UserQueryRepository userRepository;
-    private final ScrapQueryRepository scrapRepository;
-    private final JobopenQueryRepository jobopenRepository;
     private final ResumeService resumeService;
-    private final ResumeJPARepository resumeJPARepository;
 
     //TODO: saveForm 삭제예정
     @GetMapping("/guest/resume/saveForm")
-    public String saveForm(HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        req.setAttribute("user", sessionUser);
+    public String saveForm() {
         return "guest/resume/saveForm";
     }
 
@@ -46,7 +41,6 @@ public class ResumeController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", respDTO);
         return "guest/resume/updateForm";

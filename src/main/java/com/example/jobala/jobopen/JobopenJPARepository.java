@@ -1,5 +1,6 @@
 package com.example.jobala.jobopen;
 
+import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,8 @@ import java.util.Optional;
 public interface JobopenJPARepository extends JpaRepository<Jobopen, Integer> {
 
     //공고 찾아오기
-    Optional<Jobopen> findJobopenById(@Param("id")int id);
+    @Query("select j from Jobopen j where j.user.id=:userId")
+    List<Jobopen> findJobopenById(@Param("userId")int userId);
 
     @Query("SELECT j FROM Jobopen j JOIN fetch j.scraps s WHERE s.user.id = :userId")
     List<JobopenResponse.ScrapDTO> findByUserIdJoinScrap(@Param("userId") int userId);

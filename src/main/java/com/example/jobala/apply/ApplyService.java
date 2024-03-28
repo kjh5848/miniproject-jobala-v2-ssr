@@ -3,12 +3,12 @@ package com.example.jobala.apply;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.resume.Resume;
-import jakarta.transaction.Transactional;
+import com.example.jobala.resume.ResumeJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.example.jobala.jobopen.JobopenJPARepository;
-import com.example.jobala.resume.ResumeJPARepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class ApplyService {
     // 상태수정
     @Transactional
     public void statusUpdate(Integer applyId, String status) {
-        Apply apply = applyJPARepository.findById(applyId).orElseThrow(() ->
-                new Exception404("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
+        Apply apply = applyJPARepository.findById(applyId)
+                .orElseThrow(() -> new Exception404("해당 정보를 찾을 수 없습니다."));
     
         apply.setState(status);
     }

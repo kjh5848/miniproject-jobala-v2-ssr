@@ -3,6 +3,9 @@ package com.example.jobala.resume;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
+import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapJPARepository;
 import jakarta.transaction.Transactional;
@@ -16,6 +19,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
+    private final JobopenJPARepository jobopenJPARepository;
+    private final JobopenQueryRepository jobopenQueryRepository;
     private final ScrapJPARepository scrapJPARepository;
 
     // 이력서등록
@@ -53,14 +58,17 @@ public class ResumeService {
         Resume resume = resumeJPARepository.findByIdWithUser(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
 
+        //모달 공고목록 조회
+        List<Jobopen> jobopen = jobopenJPARepository.findJobopenById(sessionUser.getId());
+
         List<String> skills = Arrays.stream(resume.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
         String skillsString = String.join(", ", skills);
+
         // isScrap
         Optional<Scrap> scrap = scrapJPARepository.findCompScrapByResumeIdAndUserId(resumeId, sessionUser.getId());
-        ResumeResponse.DetailDTO respDTO = new ResumeResponse.DetailDTO(resume, sessionUser);
+        ResumeResponse.DetailDTO respDTO = new ResumeResponse.DetailDTO(resume, sessionUser,jobopen);
         respDTO.setScrap(scrap.isPresent());
         respDTO.setSkills(skillsString);
-
         return respDTO;
     }
 }

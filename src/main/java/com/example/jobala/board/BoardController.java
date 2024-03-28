@@ -28,13 +28,9 @@ public class BoardController {
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.DetailDTO board = boardService.boardDetail(id,sessionUser);
-
         req.setAttribute("board", board);
-
-
         return "board/detailForm";
     }
-
 
     @GetMapping("/board/mainForm")
     public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
@@ -50,13 +46,11 @@ public class BoardController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateStringWithoutTime = sdf.format(date);
         req.setAttribute("currentDate", dateStringWithoutTime);
-
         return "board/mainForm";
     }
 
     @PostMapping("/board/{id}/update") // 주소 수정 필요
     public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO) {
-
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.boardUpdate(id,sessionUser.getId(),reqDTO);
         return "redirect:/board/" + id ;
@@ -80,21 +74,14 @@ public class BoardController {
     @PostMapping("/board/save") // 주소 수정 필요
     public String save(BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        System.out.println(1);
-        // 게시물 저장 로직
         boardService.boardSave(reqDTO,sessionUser);
         System.out.println();
-
-        // 메인 폼으로 리다이렉트
         return "redirect:/board/mainForm";
     }
 
     @PostMapping("/board/{id}/delete") // 주소 수정 필요
     public String delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) { // 401
-            return "redirect:/loginForm";
-        }
         boardService.boardDelete(id, sessionUser.getId());
         return "redirect:/board/mainForm";
     }
