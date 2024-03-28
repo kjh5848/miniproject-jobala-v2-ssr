@@ -2,6 +2,9 @@ package com.example.jobala.guest;
 
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
+import com.example.jobala.jobopen.JobopenResponse;
+import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,6 +22,8 @@ import java.util.UUID;
 public class GuestService {
 
     private final GuestJPARepository guestJPARepository;
+    private final GuestQueryRepository guestQueryRepository;
+    private final ResumeJPARepository resumeJPARepository;
 
     // 프로필업데이트
     @Transactional
@@ -36,11 +42,23 @@ public class GuestService {
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setGuestProfileUpdateDTO(reqDTO,webImgPath);
+            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    public List<JobopenResponse.ListDTO> jobopenSearch(String skills, GuestResponse.SearchDTO resDTO) {
+        return guestQueryRepository.findAll(skills, resDTO);
+    }
+
+    public List<JobopenResponse.ListDTO> findAll() {
+        return guestQueryRepository.findByJoboopenAll();
+    }
+
+    public List<Resume> findResumeByUserId(Integer id) {
+        return resumeJPARepository.findByUserId(id);
     }
 }
