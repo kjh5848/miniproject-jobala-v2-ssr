@@ -35,13 +35,8 @@ public class CompController {
 
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        // [,]를 없애기위해 substring
-        String slicedSkills = skills.substring(1, skills.length() - 1);
-        List<ResumeResponse.ListDTO> resumeList = compRepository.findAll(slicedSkills, resDTO);
-
+        List<ResumeResponse.ListDTO> resumeList = compRepository.findAll(skills, resDTO);
         req.setAttribute("resumeList", resumeList);
-
         return "comp/scoutList";
     }
 
