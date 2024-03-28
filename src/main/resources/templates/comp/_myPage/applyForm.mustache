@@ -44,10 +44,9 @@
 
     <div class="container">
         <div id="applicantsList" style="margin-top: -50px;">
-            <h2 class="profileBox text-left mt-5 d-flex align-items-stretch" style="margin-bottom:0px;">내 공고 지원자 목록<span class="badge bg-info" id="applyCount"></span></h2>
+            <h2 class="profileBox text-left mt-5">내 공고 지원자 목록<span class="badge bg-info" id="applyCount"></span></h2>
             {{#CompApply}}
-            <div class="card shadow p-3 mb-3 bg-body rounded"
-                 style="position: relative; margin-top: -10px; margin-left:20px; width: 80%;">
+            <div class="card shadow p-3 mb-3 bg-body rounded">
 
                 <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
                     <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>

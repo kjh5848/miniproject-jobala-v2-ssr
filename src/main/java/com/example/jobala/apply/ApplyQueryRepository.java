@@ -20,7 +20,7 @@ public class ApplyQueryRepository {
         String q = """
                     SELECT at.id, jot.id, rt.id, jot.jobopen_title, rt.resume_title, jot.end_time, at.state
                     FROM apply_tb at
-                    join user_tb ut on at.resume_id = ut.id
+                    join user_tb ut on at.user_id = ut.id
                     INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
                     INNER JOIN resume_tb rt ON rt.id = at.resume_id
                     WHERE rt.user_id = ? and at.role = 1 ;
@@ -40,7 +40,7 @@ public class ApplyQueryRepository {
         String q = """
                 SELECT at.id,jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, at.state
                 FROM apply_tb at
-                join user_tb ut on at.resume_id = ut.id
+                join user_tb ut on at.user_id = ut.id
                 INNER JOIN jobopen_tb jt ON at.jobopen_id = jt.id
                 INNER JOIN resume_tb rt ON rt.id = at.resume_id
                 WHERE at.user_id = ? ;
@@ -64,7 +64,7 @@ public class ApplyQueryRepository {
             String q = """
                 select at.id, jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
                 from apply_tb at 
-                join user_tb ut on at.resume_id = ut.id
+                join user_tb ut on at.user_id = ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id
                 join resume_tb rt ON rt.id = at.resume_id
                 where jt.user_id= ? and at.role= 0 order by id desc;

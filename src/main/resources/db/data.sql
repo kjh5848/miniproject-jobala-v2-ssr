@@ -23,24 +23,24 @@ values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구'
 insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, img_filename,
                     img_title, created_at)
 values ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com1', 'actor1@nate.com', '1234', '이병헌', '01011112223', 1,
-        'cupanglogo.png', 'cupanglogo.png', now()),
+        'cupanglogo1.png', 'cupanglogo1.png', now()),
        ('737-546-7196', '송중기', '네이버', '서울특별시 종로구', 'com2', 'actor2@nate.com', '1234', '송중기', '01011112224', 1,
-        'naverlogo.png', 'naverlogo.png', now()),
+        'naverlogo1.png', 'naverlogo1.png', now()),
        ('657-546-2897', '전지현', '카카오', '서울특별시 강동구', 'com3', 'actor3@nate.com', '1234', '전지현', '01011112225', 1,
-        'kakaologo.svg', 'kakaologo.svg', now()),
+        'kakaologo1.svg', 'kakaologo1.svg', now()),
        ('567-543-7898', '아이유', '토스', '서울특별시 용산구', 'com4', 'singer1@nate.com', '1234', '아이유', '01011112226', 1,
         'toslogo.png', 'toslogo.png', now()),
        ('467-546-7899', '지드래곤', '배달의민족', '서울특별시 마포구', 'com5', 'singer2@nate.com', '1234', '지드래곤', '01011112227', 1,
-        'balogo.png', 'balogo.png',
+        'balogo1.png', 'balogo1.png',
         now()),
        ('367-546-7900', '수지', '라인', '서울특별시 서초구', 'com6', 'actor4@nate.com', '1234', '수지', '01011112228', 1,
-        'linelogo.png', 'linelogo.png', now()),
+        'linelogo1.png', 'linelogo1.png', now()),
        ('266-546-7901', '박보검', '당근마켓', '서울특별시 강남구', 'com7', 'actor5@nate.com', '1234', '박보검', '01011112229', 1,
-        'carrotlogo.png', 'carrotlogo.png', now()),
+        'carrotlogo1.png', 'carrotlogo1.png', now()),
        ('177-546-7902', '김수현', '하이브', '서울특별시 강동구', 'com8', 'actor6@nate.com', '1234', '김수현', '01011112230', 1,
-        'hibelogo.png', 'hibelogo.png', now()),
+        'hibelogo1.png', 'hibelogo1.png', now()),
        ('867-546-7903', '이민호', '겟인데어', '서울특별시 강남구', 'com9', 'actor7@nate.com', '1234', '이민호', '01011112231', 1,
-        'getintherelogo.png', 'getintherelogo.png', now());
+        'getintherelogo1.png', 'getintherelogo1.png', now());
 
 insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, skills, created_at)
 values (1, '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사',
