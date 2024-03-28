@@ -4,10 +4,13 @@ package com.example.jobala.comp;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.apply.ApplyJPARepository;
+import com.example.jobala.apply.ApplyRequest;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
+import com.example.jobala.resume.ResumeRequest;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,14 +51,13 @@ public class CompController {
     public String scoutList(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         List<ResumeResponse.ListDTO> resumeList = compRepository.findResumeAll();
-        req.setAttribute("resumeList", resumeList);
 
-        List<Resume> resumeList2 = resumeJPARepository.findAll();
+        req.setAttribute("resumeList", resumeList);
         return "comp/scoutList";
     }
 
     @GetMapping("/comp/scoutList/{id}")
-    public String scoutDetail(@PathVariable int id, HttpServletRequest req) {
+    public String scoutDetail(@PathVariable Integer id, HttpServletRequest req) {
         //1. 기업 정보 꺼내오기 (인증 체크)
         User sessionUser = (User) session.getAttribute("sessionUser");
         //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
@@ -65,6 +68,12 @@ public class CompController {
 
         return "geust/resume/detailForm";
     }
+
+//    @GetMapping("/comp/scoutList/{id}")
+//    public @ResponseBody List<ResumeRequest> getResumeList(@PathVariable Integer resumeId) {
+//        List<ResumeRequest> resumeList = new ArrayList<>();
+//        return resumeList;
+//    }
 
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
