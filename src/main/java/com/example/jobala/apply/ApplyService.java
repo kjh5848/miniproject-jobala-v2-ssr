@@ -19,16 +19,18 @@ public class ApplyService {
     private final ResumeJPARepository resumeJPARepository;
 
 
+    // 상태수정
     @Transactional
-    public void 상태수정(Integer applyId, String status) {
+    public void statusUpdate(Integer applyId, String status) {
         Apply apply = applyJPARepository.findById(applyId).orElseThrow(() ->
                 new Exception404("해당 ID로 조회된 지원정보가 없습니다 : " + applyId));
     
         apply.setState(status);
     }
 
+    // 지원후저장
     @Transactional
-    public void 지원후저장(ApplyRequest.ApplyRequestDTO reqDTO, User sessionUser) {
+    public void saveAfterApply(ApplyRequest.ApplyRequestDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())

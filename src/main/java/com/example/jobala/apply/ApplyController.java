@@ -20,26 +20,26 @@ public class ApplyController {
     private final ApplyQueryRepository applyQueryRepository;
 
     //기업이 제안한 상태 업데이트
-    @PostMapping("comp/applyStatus/update")
+    @PostMapping("comp/applyStatus/update")  // 주소 수정 필요
     public String updateCompApplicationStatus(
             @RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
-        applyService.상태수정(applyId, status);
+        applyService.statusUpdate(applyId, status);
         return "redirect:/applyForm";
     }
 
     //게스트가 제안
-    @PostMapping("guest/applyStatus/update")
+    @PostMapping("guest/applyStatus/update")  // 주소 수정 필요
     public String updateGuestApplicationStatus(@RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
-        applyService.상태수정(applyId, status);
+        applyService.statusUpdate(applyId, status);
 
         return "redirect:/positionForm";
     }
 
     //개인이 이력서 지원하기
-    @PostMapping("/Applys")
+    @PostMapping("/Applys") // 주소 수정 필요
     public String apply(ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        applyService.지원후저장(reqDTO, sessionUser);
+        applyService.saveAfterApply(reqDTO, sessionUser);
 
         if (sessionUser.getRole() == 1) {
             return "redirect:/guest/resume/" + reqDTO.getResumeId();

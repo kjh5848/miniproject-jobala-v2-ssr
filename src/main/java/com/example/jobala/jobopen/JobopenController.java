@@ -32,19 +32,19 @@ public class JobopenController {
     private final JobopenJPARepository jobopenJPARepository;
 
     //공고 삭제
-    @PostMapping("/comp/jobopen/{id}/detete")
+    @PostMapping("/comp/jobopen/{id}/detete")  // 주소 수정 필요
     public String delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenService.공고삭제(id,sessionUser.getId());
+        jobopenService.jobopenDelete(id,sessionUser.getId());
         return "redirect:/comp/mngForm";
     }
 
     //공고 수정
-    @PostMapping("/comp/jobopen/{id}/update")
+    @PostMapping("/comp/jobopen/{id}/update")  // 주소 수정 필요
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         System.out.println("id = " + id);
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenService.공고수정하기(id,sessionUser.getId(),reqDTO);
+        jobopenService.jobopenUpdate(id,sessionUser.getId(),reqDTO);
 
         return "redirect:/comp/mngForm";
     }
@@ -54,16 +54,16 @@ public class JobopenController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        Jobopen jobopen = jobopenService.공고보기(id);
+        Jobopen jobopen = jobopenService.jobopenFindById(id);
         req.setAttribute("jobopen", jobopen);
         return "comp/jobopen/updateForm";
     }
 
     //공고 등록
-    @PostMapping("/comp/jobopen/save")
+    @PostMapping("/comp/jobopen/save")  // 주소 수정 필요
     public String jobopenSave(JobopenRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenService.공고등록(reqDTO, sessionUser);
+        jobopenService.jobopenSave(reqDTO, sessionUser);
         return "redirect:/comp/mngForm";
     }
 
@@ -99,7 +99,7 @@ public class JobopenController {
         }
 
         // 채용공고 정보 가져오기
-        Jobopen jobopen = jobopenService.공고보기(id);
+        Jobopen jobopen = jobopenService.jobopenFindById(id);
 
         req.setAttribute("jobopen", jobopen);
 

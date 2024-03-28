@@ -15,7 +15,8 @@ import java.util.List;
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
 
-    public void 글삭제하기(int boardId, Integer sessionUserId) {
+    // 글삭제하기
+    public void boardDelete(int boardId, Integer sessionUserId) {
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
 
@@ -25,15 +26,17 @@ public class BoardService {
         boardJPARepository.deleteById(boardId);
     }
 
-    public BoardResponse.DetailDTO 글상세보기(int boardId, User sessionUser) {
+    // 글상세보기
+    public BoardResponse.DetailDTO boardDetail(int boardId, User sessionUser) {
         Board board = boardJPARepository.findByIdJoinUser(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
 
         return new BoardResponse.DetailDTO(board, sessionUser);
     }
 
+    // 글수정
     @Transactional
-    public void 글수정(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO){
+    public void boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO){
         //조회 및 예외처리
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
@@ -49,19 +52,22 @@ public class BoardService {
         board.setContent(reqDTO.getContent());
     }
 
-    public Board 글조회(int boardId){
+    // 글조회
+    public Board boardFindById(int boardId){
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
 
         return board;
     }
 
+    // 글쓰기
     @Transactional
-    public void 글쓰기(BoardRequest.SaveDTO reqDTO, User sessionUser){
+    public void boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser){
        boardJPARepository.save(reqDTO.toEntity(sessionUser));
     }
 
-    public List<Board> 글목록조회(){
+    // 글목록조회
+    public List<Board> boardFindAll(){
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         return boardJPARepository.findAll(sort);
     }

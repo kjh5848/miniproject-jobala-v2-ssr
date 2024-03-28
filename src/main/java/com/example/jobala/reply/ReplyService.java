@@ -15,8 +15,9 @@ public class ReplyService {
     private final ReplyJPARepository replyJPARepository;
     private final BoardJPARepository boardJPARepository;
 
+    // 댓글쓰기
     @Transactional
-    public void 댓글쓰기(ReplyRequest.SaveDTO reqDTO, User sessionUser){
+    public void replySave(ReplyRequest.SaveDTO reqDTO, User sessionUser){
        Board board = boardJPARepository.findById(reqDTO.getBoardId())
                .orElseThrow(() -> new Exception404("없는 게시글에 댓글을 작성 할 수 없습니다."));
 
@@ -25,8 +26,9 @@ public class ReplyService {
        replyJPARepository.save(reply);
     }
 
+    // 댓글삭제
     @Transactional
-    public void 댓글삭제(int replyId, int sessionUserId) {
+    public void replyDelete(int replyId, int sessionUserId) {
         Reply reply = replyJPARepository.findById(replyId)
                 .orElseThrow(() -> new Exception404("없는 댓글을 삭제할 수 없어요"));
 

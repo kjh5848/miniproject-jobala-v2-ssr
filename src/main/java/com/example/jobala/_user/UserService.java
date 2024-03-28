@@ -18,14 +18,15 @@ public class UserService {
     private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
 
-
-    public User 로그인(UserRequest.LoginDTO reqDTO) {
+    // 로그인
+    public User login(UserRequest.LoginDTO reqDTO) {
         return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다."));
     }
 
+    // 회원가입
     @Transactional
-    public User 회원가입(UserRequest.JoinDTO reqDTO) {
+    public User join(UserRequest.JoinDTO reqDTO) {
         Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
         if (userOP.isPresent()) {
             throw new Exception400("중복된 유저네임입니다.");
@@ -39,7 +40,8 @@ public class UserService {
         return user;
     }
 
-    public Optional<User> 중복체크(String username) {
+    // 중복체크
+    public Optional<User> usernameSameCheck(String username) {
         return userJPARepository.findByUsername(username);
     }
 
