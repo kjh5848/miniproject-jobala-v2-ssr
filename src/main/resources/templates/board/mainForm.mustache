@@ -48,15 +48,23 @@
         </div>
     </form>
     <br>
-<!--    <ul class="pagination d-flex justify-content-center">-->
-<!--        <li class="page-item ">-->
-<!--            <a class="page-link" href="">Previous</a>-->
-<!--        </li>-->
-<!--        <li class="page-item ">-->
-<!--            <a class="page-link" href="">Next</a>-->
-<!--        </li>-->
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item {{#first}}disabled{{/first}}">
+                    <a class="page-link" href="/board/mainForm?page={{previousPage}}" aria-label="Preview">
+                    <span aria-hidden="true">Preview</span>
+                    </a>
+                </li>
+                <li class="page-item {{#last}}{{/last}}{{^last}}disabled{{/last}}">
+                    <a class="page-link" href="/board/mainForm?page={{nextPage}}" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
-<!--    </ul>-->
 
 </div>
 
