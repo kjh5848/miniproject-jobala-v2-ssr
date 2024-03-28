@@ -23,24 +23,26 @@ values ('김주혁', 'cos1', 'cos@nate.com', '1234', '부산광역시 금정구'
 insert into user_tb(comp_num, ceo, compname, address, username, email, password, name, phone, role, img_filename,
                     img_title, created_at)
 values ('827-546-7895', '이병헌', '쿠팡', '서울특별시 강남구', 'com1', 'actor1@nate.com', '1234', '이병헌', '01011112223', 1,
-        'cupanglogo1.png', 'cupanglogo1.png', now()),
+        'cupang.png', 'cupang.png', now()),
        ('737-546-7196', '송중기', '네이버', '서울특별시 종로구', 'com2', 'actor2@nate.com', '1234', '송중기', '01011112224', 1,
-        'naverlogo1.png', 'naverlogo1.png', now()),
+        'naver.png', 'naver.png', now()),
        ('657-546-2897', '전지현', '카카오', '서울특별시 강동구', 'com3', 'actor3@nate.com', '1234', '전지현', '01011112225', 1,
-        'kakaologo1.svg', 'kakaologo1.svg', now()),
+        'kakao.png', 'kakao.png', now()),
        ('567-543-7898', '아이유', '토스', '서울특별시 용산구', 'com4', 'singer1@nate.com', '1234', '아이유', '01011112226', 1,
-        'toslogo.png', 'toslogo.png', now()),
+        'toss.png', 'toss.png', now()),
        ('467-546-7899', '지드래곤', '배달의민족', '서울특별시 마포구', 'com5', 'singer2@nate.com', '1234', '지드래곤', '01011112227', 1,
-        'balogo1.png', 'balogo1.png',
+        'baemin.png', 'baemin.png',
         now()),
        ('367-546-7900', '수지', '라인', '서울특별시 서초구', 'com6', 'actor4@nate.com', '1234', '수지', '01011112228', 1,
-        'linelogo1.png', 'linelogo1.png', now()),
+        'line.png', 'line.png', now()),
        ('266-546-7901', '박보검', '당근마켓', '서울특별시 강남구', 'com7', 'actor5@nate.com', '1234', '박보검', '01011112229', 1,
-        'carrotlogo1.png', 'carrotlogo1.png', now()),
+        'carrot.png', 'carrot.png', now()),
        ('177-546-7902', '김수현', '하이브', '서울특별시 강동구', 'com8', 'actor6@nate.com', '1234', '김수현', '01011112230', 1,
-        'hibelogo1.png', 'hibelogo1.png', now()),
+        'hybe.png', 'hybe.png', now()),
        ('867-546-7903', '이민호', '겟인데어', '서울특별시 강남구', 'com9', 'actor7@nate.com', '1234', '이민호', '01011112231', 1,
-        'getintherelogo1.png', 'getintherelogo1.png', now());
+        'getinthere.png', 'getinthere.png', now()),
+       ('664-236-7893', '송강호', 'NH농협은행', '서울특별시 강남구', 'com10', 'actor8@nate.com', '1234', '송강호', '01011112231', 1,
+        'nh.png', 'nh.png', now());
 
 insert into resume_tb(user_id, resume_title, hope_job, career, license, content, edu, skills, created_at)
 values (1, '도전적인 프론트엔드 개발자 지원서', '프론트엔드', '신입', '정보처리기사',
@@ -229,19 +231,19 @@ VALUES (0, 1, '1년차 개발자들', '1년차 개발자들 요즘 패기가 없
 
 --댓글 더미
 Insert Into reply_tb(user_id, board_id, comment, created_at)
-values ( 2, 1, '꼰대임?', now()),             --cos2이 1번 게시물에 댓글을 작성했다.
-       ( 3, 1, '넌 몇년차인데?ㅋㅋ', now()),       --cos3가 1번 게시물에 댓글을 작성했다.
-       ( 1, 2, '관심 받고 싶니?', now()),        --cos1이 2번 게시물에 댓글을 작성했다.
-       ( 3, 2, '너가 주면 난 내 전재산 준다', now()), --cos3가 2번 게시물에 댓글을 작성했다.
-       ( 2, 3, '뭐지', now()),               --cos3가 3번 게시물에 댓글을 작성했다.
-       ( 2, 3, '아재요?', now()),             -- cos2가 게시물 번호 1에 댓글을 남겼습니다.
-       ( 3, 4, '나이는 몇 살이세요? ㅎㅎ', now()),   -- cos3가 게시물 번호 1에 댓글을 남겼습니다.
-       ( 1, 5, '신경쓰여요?', now()),           -- cos1이 게시물 번호 2에 댓글을 남겼습니다.
-       ( 3, 6, '주시면 다 줄게요', now()),        -- cos3가 게시물 번호 2에 댓글을 남겼습니다.
-       ( 2, 7, '뭐라고요?', now()),            -- cos3가 게시물 번호 3에 댓글을 남겼습니다.
-       ( 1, 8, '힘내세요!', now()),
-       ( 2, 8, '오늘도 화이팅!', now()),
-       ( 3, 9, '바닥부터 다시 시작해보세요', now()),
-       ( 1, 9, '한걸음 먼저 나아가보세요', now());
+values (2, 1, '꼰대임?', now()),             --cos2이 1번 게시물에 댓글을 작성했다.
+       (3, 1, '넌 몇년차인데?ㅋㅋ', now()),       --cos3가 1번 게시물에 댓글을 작성했다.
+       (1, 2, '관심 받고 싶니?', now()),        --cos1이 2번 게시물에 댓글을 작성했다.
+       (3, 2, '너가 주면 난 내 전재산 준다', now()), --cos3가 2번 게시물에 댓글을 작성했다.
+       (2, 3, '뭐지', now()),               --cos3가 3번 게시물에 댓글을 작성했다.
+       (2, 3, '아재요?', now()),             -- cos2가 게시물 번호 1에 댓글을 남겼습니다.
+       (3, 4, '나이는 몇 살이세요? ㅎㅎ', now()),   -- cos3가 게시물 번호 1에 댓글을 남겼습니다.
+       (1, 5, '신경쓰여요?', now()),           -- cos1이 게시물 번호 2에 댓글을 남겼습니다.
+       (3, 6, '주시면 다 줄게요', now()),        -- cos3가 게시물 번호 2에 댓글을 남겼습니다.
+       (2, 7, '뭐라고요?', now()),            -- cos3가 게시물 번호 3에 댓글을 남겼습니다.
+       (1, 8, '힘내세요!', now()),
+       (2, 8, '오늘도 화이팅!', now()),
+       (3, 9, '바닥부터 다시 시작해보세요', now()),
+       (1, 9, '한걸음 먼저 나아가보세요', now());
 
 
