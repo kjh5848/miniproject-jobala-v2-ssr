@@ -21,7 +21,8 @@ public class ScrapService {
     private final ResumeJPARepository resumeJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
 
-    public Scrap 회사가스크랩(ScrapRequest.CompScrapDTO reqDTO, User sessionUser) {
+    // 회사가스크랩
+    public Scrap scrapByComp(ScrapRequest.CompScrapDTO reqDTO, User sessionUser) {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("스크랩 하려는 이력서를 찾을 수 없습니다."));
 
@@ -36,7 +37,8 @@ public class ScrapService {
         }
     }
 
-    public Scrap 게스트가스크랩(ScrapRequest.GuestScrap reqDTO, User sessionUser) {
+    // 게스트가스크랩
+    public Scrap scrapByGuest(ScrapRequest.GuestScrap reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new Exception404("스크랩 하려는 공고를 찾을 수 없습니다."));
 
@@ -51,12 +53,14 @@ public class ScrapService {
         }
     }
 
-    public List<ResumeResponse.ScrapDTO> 회사가스크랩한이력서조회(Integer id) {
+    // 회사가스크앱한이력서조회
+    public List<ResumeResponse.ScrapDTO> scrapResumeBycomp(Integer id) {
         List<ResumeResponse.ScrapDTO> respDTO = resumeJPARepository.findByUserIdJoinScrap(id);
         return respDTO;
     }
 
-    public List<JobopenResponse.ScrapDTO> 게스트가스크랩한공고조회(Integer id) {
+    // 게스트가스크랩한공고조회
+    public List<JobopenResponse.ScrapDTO> scrapJobopenByGuest(Integer id) {
         List<JobopenResponse.ScrapDTO> respDTO = jobopenJPARepository.findByUserIdJoinScrap(id);
         return respDTO;
     }

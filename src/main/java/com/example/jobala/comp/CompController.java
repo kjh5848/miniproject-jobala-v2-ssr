@@ -93,7 +93,7 @@ public class CompController {
         return "comp/_myPage/profileForm";
     }
 
-    @PostMapping("/comp/updateProfile")
+    @PostMapping("/comp/updateProfile") // 주소 수정 필요!
     public String updateProfile(@RequestParam MultipartFile imgFilename, CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
@@ -104,7 +104,7 @@ public class CompController {
         System.out.println("imgFilename = " + imgFilename);
         String img = String.valueOf(imgFilename);
         System.out.println("img = " + img);
-        compService.프로필업데이트(reqDTO, sessionUser);
+        compService.compUpdateProfile(reqDTO, sessionUser);
         return "redirect:/comp/profileForm";
     }
 }

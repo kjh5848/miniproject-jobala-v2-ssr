@@ -28,7 +28,7 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.DetailDTO board = boardService.글상세보기(id,sessionUser);
+        BoardResponse.DetailDTO board = boardService.boardDetail(id,sessionUser);
 
         req.setAttribute("board", board);
 
@@ -39,7 +39,7 @@ public class BoardController {
 
     @GetMapping("/board/mainForm")
     public String boardForm(HttpServletRequest req) {
-       List<Board> boardList = boardService.글목록조회();
+       List<Board> boardList = boardService.boardFindAll();
        req.setAttribute("boardList",boardList);
 
         Date date = new Date();
@@ -50,18 +50,18 @@ public class BoardController {
         return "board/mainForm";
     }
 
-    @PostMapping("/board/{id}/update")
+    @PostMapping("/board/{id}/update") // 주소 수정 필요
     public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO) {
 
         User sessionUser = (User) session.getAttribute("sessionUser");
-        boardService.글수정(id,sessionUser.getId(),reqDTO);
+        boardService.boardUpdate(id,sessionUser.getId(),reqDTO);
         return "redirect:/board/" + id ;
 
     }
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable int id, HttpServletRequest request) {
-        Board board = boardService.글조회(id);
+        Board board = boardService.boardFindById(id);
         request.setAttribute("board",board);
         return "board/updateForm";
     }
@@ -73,26 +73,25 @@ public class BoardController {
         return "board/saveForm";
     }
 
-    @PostMapping("/board/save")
+    @PostMapping("/board/save") // 주소 수정 필요
     public String save(BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         System.out.println(1);
         // 게시물 저장 로직
-        boardService.글쓰기(reqDTO,sessionUser);
+        boardService.boardSave(reqDTO,sessionUser);
         System.out.println();
 
         // 메인 폼으로 리다이렉트
         return "redirect:/board/mainForm";
     }
 
-
-    @PostMapping("/board/{id}/delete")
+    @PostMapping("/board/{id}/delete") // 주소 수정 필요
     public String delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) { // 401
             return "redirect:/loginForm";
         }
-        boardService.글삭제하기(id, sessionUser.getId());
+        boardService.boardDelete(id, sessionUser.getId());
         return "redirect:/board/mainForm";
     }
 }

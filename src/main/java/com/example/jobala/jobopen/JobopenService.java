@@ -18,18 +18,21 @@ public class JobopenService {
 
     private final JobopenJPARepository jobopenJPARepository;
 
-    public List<Jobopen> 공고목록보기() {
+    // 공고목록보기
+    public List<Jobopen> jobopenFindAll() {
         return  jobopenJPARepository.findAll();
     }
 
+    // 공고등록
     @Transactional
-    public Jobopen 공고등록(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
+    public Jobopen jobopenSave(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));
         return jobopen;
     }
 
+    // 공고삭제
     @Transactional
-    public Jobopen 공고삭제(Integer jobopenId, Integer sessionUserId) {
+    public Jobopen jobopenDelete(Integer jobopenId, Integer sessionUserId) {
         Jobopen jobopen = jobopenJPARepository.findById(jobopenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
 
@@ -40,8 +43,9 @@ public class JobopenService {
         return jobopen;
     }
 
+    // 공고수정하기
     @Transactional
-    public Jobopen 공고수정하기(int jobOpenId, int sessionUser, JobopenRequest.UpdateDTO reqDTO) {
+    public Jobopen jobopenUpdate(int jobOpenId, int sessionUser, JobopenRequest.UpdateDTO reqDTO) {
         //1.조회 및 예외 처리
         Jobopen jobopen = jobopenJPARepository.findById(jobOpenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
@@ -54,7 +58,8 @@ public class JobopenService {
         return jobopen;
     }
 
-    public Jobopen 공고보기(Integer jobopenId) {
+    // 공고보기
+    public Jobopen jobopenFindById(Integer jobopenId) {
         Jobopen jobopen = jobopenJPARepository.findByJobopenIdWithUser(jobopenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
 

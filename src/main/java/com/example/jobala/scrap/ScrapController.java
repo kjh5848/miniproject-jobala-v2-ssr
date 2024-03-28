@@ -26,7 +26,7 @@ public class ScrapController {
     @GetMapping("/comp/scrapForm")
     public String compScrapForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<ResumeResponse.ScrapDTO> respDTO =  scrapService.회사가스크랩한이력서조회(sessionUser.getId());
+        List<ResumeResponse.ScrapDTO> respDTO =  scrapService.scrapResumeBycomp(sessionUser.getId());
         req.setAttribute("resumeList", respDTO);
         return "comp/_myPage/scrapForm";
     }
@@ -36,7 +36,7 @@ public class ScrapController {
     public String scrapResume(ScrapRequest.CompScrapDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
-        scrapService.회사가스크랩(reqDTO, sessionUser);
+        scrapService.scrapByComp(reqDTO, sessionUser);
         return "redirect:/guest/resume/" + reqDTO.getResumeId();
     }
 
@@ -44,7 +44,7 @@ public class ScrapController {
     @GetMapping("/guest/scrapForm")
     public String guestScrapForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<JobopenResponse.ScrapDTO> respDTO = scrapService.게스트가스크랩한공고조회(sessionUser.getId());
+        List<JobopenResponse.ScrapDTO> respDTO = scrapService.scrapJobopenByGuest(sessionUser.getId());
         req.setAttribute("jobopenList", respDTO);
 
         return "guest/_myPage/scrapForm";
@@ -55,7 +55,7 @@ public class ScrapController {
     public String scrapJobopen(ScrapRequest.GuestScrap reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // 스크랩 했는지 확인 (null -> Scrap 안함, not null -> Scrap 함)
-        scrapService.게스트가스크랩(reqDTO, sessionUser);
+        scrapService.scrapByGuest(reqDTO, sessionUser);
         return "redirect:/comp/jobopen/" + reqDTO.getJobopenId();
     }
 

@@ -74,7 +74,7 @@ public class GuestController {
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }
 
-    @PostMapping("/guest/updateProfile")
+    @PostMapping("/guest/updateProfile") // 주소 수정 필요!
     public String updateProfile(@RequestParam MultipartFile imgFilename, GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
@@ -82,7 +82,7 @@ public class GuestController {
         System.out.println("imgFilename = " + imgFilename);
         String img = String.valueOf(imgFilename);
         System.out.println("img = " + img);
-        guestService.프로필업데이트(reqDTO, sessionUser);
+        guestService.guestUpdateProfile(reqDTO, sessionUser);
         return "redirect:/guest/profileForm";
     }
 }

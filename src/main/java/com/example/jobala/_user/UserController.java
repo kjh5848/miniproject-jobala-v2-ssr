@@ -38,7 +38,7 @@ public class UserController {
     public String login(UserRequest.LoginDTO reqDTO) {
         try {
             // userRepository에서 username과 password를 사용하여 사용자 검색
-            User sessionUser = userService.로그인(reqDTO);
+            User sessionUser = userService.login(reqDTO);
             session.setAttribute("sessionUser",sessionUser);
             // 권한 체크
             Boolean isCheck = false;
@@ -57,7 +57,7 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
-        User user = userService.회원가입(reqDTO);
+        User user = userService.join(reqDTO);
         req.setAttribute("user" ,user);
         return "/user/loginForm";
     }
@@ -66,7 +66,7 @@ public class UserController {
     @GetMapping("/api/username-same-check")
     public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
         System.out.println(username);
-        Optional<User> user = userService.중복체크(username);
+        Optional<User> user = userService.usernameSameCheck(username);
         return user.isEmpty() ? new ApiUtil<>(true) : new ApiUtil<>(false);
     }
 
