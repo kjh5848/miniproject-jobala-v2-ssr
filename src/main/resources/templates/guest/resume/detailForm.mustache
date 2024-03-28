@@ -12,14 +12,14 @@
                 <div>
                     <form action="/comp/scrap" method="post" enctype="application/x-www-form-urlencoded">
                         <input type="hidden" name="resumeId" value="{{resume.id}}">
-                        {{#isGuestScrap}}
-                            {{#isScrap}}
+                        {{#resume.isGuestScrap}}
+                            {{#resume.isScrap}}
                                 <i id="bookmark" class="fas fa-bookmark text-warning" style="font-size: 20px;"></i>
-                            {{/isScrap}}
-                            {{^isScrap}}
+                            {{/resume.isScrap}}
+                            {{^resume.isScrap}}
                                 <i id="bookmark" class="far fa-bookmark text-warning" style="font-size: 20px;"></i>
-                            {{/isScrap}}
-                        {{/isGuestScrap}}
+                            {{/resume.isScrap}}
+                        {{/resume.isGuestScrap}}
                     </form>
                     <h2 class="card-title">{{resume.resumeTitle}}</h2>
                 </div>

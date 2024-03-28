@@ -60,7 +60,7 @@ public class ResumeController {
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-
+        System.out.println("테스트 : "+respDTO);
         req.setAttribute("resume", respDTO);
         return "guest/resume/detailForm";
     }
