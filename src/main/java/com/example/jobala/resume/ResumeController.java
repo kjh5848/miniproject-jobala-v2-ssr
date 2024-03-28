@@ -29,7 +29,6 @@ public class ResumeController {
     @GetMapping("/guest/resume/saveForm")
     public String saveForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
         req.setAttribute("user", sessionUser);
         return "guest/resume/saveForm";
     }
@@ -39,7 +38,6 @@ public class ResumeController {
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
-        System.out.println("이력서 수정 실행");
         return "redirect:/guest/mngForm";
     }
 
@@ -48,7 +46,6 @@ public class ResumeController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Resume resume = resumeService.resumeFindById(id);
-
         req.setAttribute("user", sessionUser);
         req.setAttribute("resume", resume);
         return "guest/resume/updateForm";
@@ -58,7 +55,6 @@ public class ResumeController {
     @GetMapping("/guest/resume/{id}")
     public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
         Resume resume = resumeService.resumeFindById(id);
-
         boolean isGuestScrap = false;
         User sessionUser = null;
         // 스크랩

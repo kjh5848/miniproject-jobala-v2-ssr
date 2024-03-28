@@ -10,12 +10,6 @@ import com.example.jobala._core.errors.exception.*;
 // @Controller -> @ResponseBody붙이면 됨
 public class CustomExceptionHandler {
 
-    // 어떤 에러가 나타날때 처리할지 -> 분기해야함
-//    @ExceptionHandler(Exception.class)
-//    public @ResponseBody String error1(Exception e) {
-//        return Script.back(e.getMessage());
-//    }
-
     @ExceptionHandler(Exception400.class)
     public String ex400(Exception400 e, HttpServletRequest request){
         request.setAttribute("msg", e.getMessage());
@@ -42,4 +36,11 @@ public class CustomExceptionHandler {
         request.setAttribute("msg", e.getMessage());
         return "err/500";
     }
+
+    // 어떤 에러가 나타날때 처리할지 -> 분기해야함
+//    @ExceptionHandler(Exception.class)
+//    public @ResponseBody String error1(Exception e) {
+//        return Script.back(e.getMessage());
+//    }
+
 }

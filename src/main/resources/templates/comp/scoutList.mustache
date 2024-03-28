@@ -95,9 +95,9 @@
     <div class="row">
         {{#resumeList}}
             <div class="col-lg-4 col-md-6 col-12">
-                <a onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer; margin-left: 55px;">
+                <div onClick="location.href='/guest/resume/{{id}}'">
                     <div class="card col-3 border-0 shadow" style="width: 100%;">
-                        <img class="card-img-top" src="/image/{{imgFilename}}" style=" height: 500px; "
+                        <img class="card-img-top img-fluid" src="/image/{{imgFilename}}"
                              alt="이미지를 표시할 수 없습니다.">
                         <div class="card-body text-start">
                             <br>
@@ -106,7 +106,7 @@
                             <p class="card-text">{{resumeTitle}} <br> {{edu}} {{career}}</p>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         {{/resumeList}}
     </div>
