@@ -15,6 +15,7 @@ import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,20 +75,18 @@ public class CompController {
 //    }
 
     @GetMapping("/comp/mngForm")
-    public String mngForm(HttpServletRequest req) {
+    public String mngForm(HttpServletRequest req,@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3")int size) {
         // 채용 공고 목록 조회
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Jobopen> temp = compRepository.findJobopenById(sessionUser.getId());
-        List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.DTO(jobopen)).toList();
 
-        jobopenList.forEach(dto -> {
-            int count = applyJPARepository.countJobopenApplyById(dto.getId());
-            dto.setCount(count);
-        });
+        Page<JobopenResponse.DTO> jobopenPage = compService.jobopensFindAll(page, size,sessionUser.getId());
 
+        req.setAttribute("jobopenList", jobopenPage.getContent());
+        req.setAttribute("first", page == 0 ? true:false);
+        req.setAttribute("last",page < jobopenPage.getTotalPages() -1);
+        req.setAttribute("previousPage",page -1);
+        req.setAttribute("nextPage",page +1);
 
-//        req.setAttribute("count",countApplyList);
-        req.setAttribute("jobopenList", jobopenList);
         return "comp/_myPage/mngForm";
     }
 

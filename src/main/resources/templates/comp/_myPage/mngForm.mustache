@@ -62,7 +62,7 @@
                                 <button class="btn btn-info">수정</button>
                             </a>
 
-                            <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
+                            <form class="" action="/comp/jobopen/{{id}}/delete" method="post">
                                 <button class="btn btn-secondary">삭제</button>
                             </form>
                         </div>
@@ -112,20 +112,11 @@
 
         <div class="mt-5">
             <ul class="pagination justify-content-center">
-                <li class="page-item disabled text-info bg-light border-dark">
-                    <a class="page-link text-info bg-light" href="#">Previous</a>
+                <li class="page-item {{#first}}disabled{{/first}} text-info bg-light border-dark">
+                    <a class="page-link text-info bg-light" href="/comp/mngForm?page={{previousPage}}">Previous</a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">Next</a>
+                <li class="page-item {{#last}}{{/last}}{{^last}}disabled{{/last}}">
+                    <a class="page-link text-info bg-light" href="/comp/mngForm?page={{nextPage}}">Next</a>
                 </li>
             </ul>
         </div>
