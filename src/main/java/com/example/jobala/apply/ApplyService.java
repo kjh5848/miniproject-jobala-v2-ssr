@@ -45,4 +45,9 @@ public class ApplyService {
         List<Apply> applyList = applyJPARepository.findByUserId(id);
         return applyList.stream().map(apply -> new ApplyResponse.CompPositionDTO(apply)).toList();
     }
+
+    public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id) {
+        List<Apply> applyList = applyJPARepository.findByUserId(id);
+        return applyList.stream().map(apply -> new ApplyResponse.GuestApplyDTO(apply)).toList();
+    }
 }

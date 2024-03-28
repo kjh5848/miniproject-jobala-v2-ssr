@@ -37,6 +37,16 @@ public class ApplyResponse {
         private String resumeTitle;
         private Date endTime;
         private String state;
+
+        public GuestApplyDTO(Apply apply) {
+            this.id = apply.getId();
+            this.resumeId = apply.getResume().getId();
+            this.jobopenId = apply.getJobopen().getId();
+            this.jobopenTitle = apply.getJobopen().getJobopenTitle();
+            this.resumeTitle = apply.getResume().getResumeTitle();
+            this.endTime = apply.getJobopen().getEndTime();
+            this.state = apply.getState();
+        }
     }
 
     //기업 positionForm 응답DTO

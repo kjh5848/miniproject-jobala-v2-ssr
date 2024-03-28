@@ -59,9 +59,7 @@ public class ApplyController {
     public String positionForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) {
-//            List<ApplyResponse.CompPositionDTO> respCompDTO = applyQueryRepository.findApplyCompByUserId(sessionUser.getId());
             List<ApplyResponse.CompPositionDTO> respDTO = applyService.findApplyCompByUserId(sessionUser.getId());
-            System.out.println("안녕"+respDTO);
             req.setAttribute("CompPosition", respDTO);
             return "comp/_myPage/positionForm";
         } else {
@@ -80,7 +78,8 @@ public class ApplyController {
             req.setAttribute("CompApply", respDTO);
             return "comp/_myPage/applyForm";
         } else {
-            List<ApplyResponse.GuestApplyDTO> respDTO = applyQueryRepository.findByCompUserId(sessionUser.getId());
+            List<ApplyResponse.GuestApplyDTO> respDTO = applyService.findApplyGuestByUserId(sessionUser.getId());
+//            List<ApplyResponse.GuestApplyDTO> respDTO = applyQueryRepository.findApplyCompByUserId(sessionUser.getId());
             req.setAttribute("GuestApply", respDTO);
             return "guest/_myPage/applyForm";
         }
