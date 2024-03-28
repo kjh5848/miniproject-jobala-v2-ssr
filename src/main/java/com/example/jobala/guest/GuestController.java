@@ -37,11 +37,7 @@ public class GuestController {
 
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
-        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findAll(skills, resDTO);
-        System.out.println("시작");
-        System.out.println(skills);
-        System.out.println(resDTO);
-        System.out.println("끝");
+        List<JobopenResponse.ListDTO> jobopenList = guestService.jobopenSearch(skills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -49,7 +45,7 @@ public class GuestController {
 
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
-        List<JobopenResponse.ListDTO> jobopenList = guestQueryRepository.findByJoboopenAll();
+        List<JobopenResponse.ListDTO> jobopenList = guestService.findAll();
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
     }
@@ -58,7 +54,6 @@ public class GuestController {
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        int userId = sessionUser.getId();
         List<Resume> resumeList = guestQueryRepository.findResumeById(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
@@ -76,7 +71,6 @@ public class GuestController {
     @PostMapping("/guest/updateProfile") // 주소 수정 필요!
     public String updateProfile(@RequestParam MultipartFile imgFilename, GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        String img = String.valueOf(imgFilename);
         guestService.guestUpdateProfile(reqDTO, sessionUser);
         return "redirect:/guest/profileForm";
     }
