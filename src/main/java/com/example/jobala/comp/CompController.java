@@ -32,6 +32,7 @@ public class CompController {
     private final CompService compService;
     private final UserJPARepository userJPARepository;
     private final ResumeJPARepository resumeJPARepository;
+    private final CompJPARepository compJPARepository;
 
 
     @GetMapping("/comp/resumeSearch")
