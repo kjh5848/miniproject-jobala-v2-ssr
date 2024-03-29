@@ -49,7 +49,7 @@ public class GuestService {
         return user;
     }
 
-    //이력서 목록 조회
+    //이력서 페이징 하기 위한 목록 조회
     public Page<Resume> resumesFindAll(int page, int size) {
         Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"id"));
 

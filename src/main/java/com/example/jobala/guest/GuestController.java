@@ -56,7 +56,7 @@ public class GuestController {
         return "guest/jobSearch";
     }
 
-
+    //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req,@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3")int size) {
         User sessionUser = (User) session.getAttribute("sessionUser");

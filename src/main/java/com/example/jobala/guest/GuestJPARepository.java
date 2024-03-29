@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GuestJPARepository extends JpaRepository<Resume,Integer> {
 
-    //이력서 목로보기 페이징
+    //이력서 관리 페이징
     Page<Resume> findAll(Pageable pageable);
 }
