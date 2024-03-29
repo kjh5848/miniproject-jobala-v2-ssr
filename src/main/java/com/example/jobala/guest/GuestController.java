@@ -11,6 +11,7 @@ import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ public class GuestController {
     private final GuestQueryRepository guestQueryRepository;
     private final GuestJPARepository guestJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
+    private final GuestJPARepository guestJPARepository;
     private final UserService userService;
 
     // DEL: mainForm 삭제
@@ -54,11 +56,16 @@ public class GuestController {
     }
 
     //TODO: 서비스 만들기
+    //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
-    public String mngForm(HttpServletRequest req) {
+    public String mngForm(HttpServletRequest req,@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3")int size) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<Resume> resumeList = guestService.findResumeByUserId(sessionUser.getId());
-        req.setAttribute("resumeList", resumeList);
+        Page<Resume> resumePage = guestService.resumesFindAll(page, size);
+        req.setAttribute("resumeList",resumePage.getContent());
+        req.setAttribute("first", page == 0 ? true:false);
+        req.setAttribute("last",page < resumePage.getTotalPages() -1);
+        req.setAttribute("previousPage",page -1);
+        req.setAttribute("nextPage",page +1);
         return "guest/_myPage/mngForm";
     }
 
