@@ -22,5 +22,4 @@ public interface JobopenJPARepository extends JpaRepository<Jobopen, Integer> {
     @Query("SELECT j FROM Jobopen j JOIN FETCH j.user WHERE j.id = :jobopenId")
     Optional<Jobopen> findByJobopenIdWithUser(@Param("jobopenId") int jobopenId);
 
-
 }

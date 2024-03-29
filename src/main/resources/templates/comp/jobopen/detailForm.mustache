@@ -65,7 +65,7 @@
                         <h5 class="modal-title" id="applyModalLabel">이력서 목록</h5>
                     </div>
                     <div class="modal-body">
-                        {{#applyResumeList2}}
+                        {{#jobopen.applyResumeList}}
                             <div class="card row mt-3 shadow-lg p-3 bg-body rounded-5">
                                 <div class="card-body shadow-5">
                                     <div class="col-md-8 align-items-center">
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {{/applyResumeList2}}
+                        {{/jobopen.applyResumeList}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
@@ -159,13 +159,13 @@
     <!-- 회사 공고 이미지 -->
 
     <!-- 지원하기 버튼 -->
-    {{#isCompScrap}}
+    {{#jobopen.isGuestScrap}}
         <div class="d-flex justify-content-center mt-5 mb-5" style="width:100%; font-size: 50px;">
             <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">
                 입사지원하기
             </button>
         </div>
-    {{/isCompScrap}}
+    {{/jobopen.isGuestScrap}}
     <!-- 지원하기 버튼 -->
 
 

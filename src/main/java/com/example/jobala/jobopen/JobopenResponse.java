@@ -2,12 +2,15 @@ package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class JobopenResponse {
     @AllArgsConstructor
@@ -74,6 +77,32 @@ public class JobopenResponse {
         private boolean isScrap;
         private boolean isGuestScrap;
         private UserDTO userDTO;
+        private List<ResumeDTO> applyResumeList = new ArrayList<>();
+
+        public DetailDTO(Jobopen jobopen, User sessionUser, List<Resume> resumeList) {
+            this.id = jobopen.getId();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.career = jobopen.getCareer();
+            this.edu = jobopen.getEdu();
+            this.jobType = jobopen.getJobType();
+            this.salary = jobopen.getSalary();
+            this.compLocation = jobopen.getCompLocation();
+            this.hopeJob = jobopen.getHopeJob();
+            this.skills = jobopen.getSkills();
+            this.isScrap = false;
+            this.isGuestScrap = false;
+
+            this.userDTO = new UserDTO(jobopen.getUser());
+
+            // 개인 지원하기 - 모달창 이력서 목록
+            this.applyResumeList = resumeList.stream().map(r -> new ResumeDTO(r)).toList();
+
+            if (sessionUser != null) {
+                if (sessionUser.getRole() == 0) {
+                    this.isGuestScrap = true;
+                }
+            }
+        }
 
         public DetailDTO(Jobopen jobopen, User sessionUser) {
             this.id = jobopen.getId();
@@ -87,12 +116,26 @@ public class JobopenResponse {
             this.skills = jobopen.getSkills();
             this.isScrap = false;
             this.isGuestScrap = false;
+
             this.userDTO = new UserDTO(jobopen.getUser());
 
             if (sessionUser != null) {
                 if (sessionUser.getRole() == 0) {
                     this.isGuestScrap = true;
                 }
+            }
+        }
+
+        @Data
+        public class ResumeDTO {
+            private String resumeTitle;
+            private String edu;
+            private String career;
+
+            public ResumeDTO(Resume resume) {
+                this.resumeTitle = resume.getResumeTitle();
+                this.edu = resume.getEdu();
+                this.career = resume.getCareer();
             }
         }
 
