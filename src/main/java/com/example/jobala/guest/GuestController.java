@@ -36,10 +36,14 @@ public class GuestController {
 
 
     //TODO: 서비스 만들기
+    //공고 검색 결과 페이징 추가 중
     @GetMapping("/guest/jobopenSearch")
-    public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
-        List<JobopenResponse.ListDTO> jobopenList = guestService.jobopenSearch(skills, resDTO);
-        req.setAttribute("jobopenList", jobopenList);
+    public String jobopenSearch(HttpServletRequest req, @RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "3") int size,
+                                @RequestParam(value = "skills", defaultValue = "") String skills,
+                                GuestResponse.SearchDTO resDTO) {
+        Page<JobopenResponse.ListDTO> jobopenPage = guestService.jobopenSearch(page,size,skills, resDTO);
+        req.setAttribute("jobopenList", jobopenPage);
         return "guest/jobSearch";
     }
 
@@ -55,6 +59,8 @@ public class GuestController {
     //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req,@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3")int size) {
+        //이 로직에서 로그인한 유저 기준점의 이력서 결과 로직이추가되야 되며
+        //이 로직 자체는 인재채용의 가면 된다.
         User sessionUser = (User) session.getAttribute("sessionUser");
         Page<Resume> resumePage = guestService.resumesFindAll(page, size);
         req.setAttribute("resumeList",resumePage.getContent());

@@ -55,8 +55,10 @@ public class GuestService {
         return user;
     }
 
-    public List<JobopenResponse.ListDTO> jobopenSearch(String skills, GuestResponse.SearchDTO resDTO) {
-        return guestQueryRepository.findAll(skills, resDTO);
+    public Page<JobopenResponse.ListDTO> jobopenSearch(int page, int size,String skills, GuestResponse.SearchDTO resDTO) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"id"));
+
+        return (Page<JobopenResponse.ListDTO>) guestQueryRepository.findAll(skills, resDTO, pageable);
     }
 
     public List<JobopenResponse.ListDTO> findAll() {
