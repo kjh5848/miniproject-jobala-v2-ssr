@@ -41,8 +41,11 @@ public class ResumeController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-        req.setAttribute("user", sessionUser);
         req.setAttribute("resume", respDTO);
+
+        // 업데이트 페이지에서 체크박스 체크 로직
+
+
         return "guest/resume/updateForm";
     }
 
