@@ -37,7 +37,7 @@
                                 <th>이름</th>
                                 <td>{{resume.userDTO.name}}</td>
                                 <th>나이</th>
-                                <td>{{resume.userDTO.age}}</td>
+                                <td id="age">{{resume.userDTO.age}}</td>
                             </tr>
                             <tr>
                                 <th>이메일</th>
@@ -166,6 +166,36 @@
     $("#bookmark").click(function () {
         $(this).closest("form").submit(); // submit 이벤트 발생
     });
+
+    // 생년월일을 만나이로 변환
+    window.onload = function() {
+        // 생일을 기반으로 만 나이를 계산하는 함수
+        function calculateAge(birthdate) {
+            // 생일을 날짜 객체로 변환합니다.
+            var birthDate = new Date(birthdate);
+
+            // 현재 날짜를 가져옵니다.
+            var currentDate = new Date();
+
+            // 생일과 현재 날짜의 차이를 계산합니다.
+            var age = currentDate.getFullYear() - birthDate.getFullYear();
+            var birthMonth = birthDate.getMonth();
+            var currentMonth = currentDate.getMonth();
+
+            // 현재 월이 생일의 월보다 작거나 같으면 아직 생일이 도래하지 않은 것으로 간주하여 나이를 1 빼줍니다.
+            if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        // 생년월일을 기반으로 만 나이를 계산합니다.
+        var age = calculateAge("2000-04-25");
+
+        // 나이를 페이지에 표시합니다.
+        document.getElementById("age").textContent = "만 " + age + "세";
+    };
+
 </script>
 
 {{> layout/footer}}
