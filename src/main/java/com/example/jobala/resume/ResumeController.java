@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,13 +39,14 @@ public class ResumeController {
 
     // TODO: 글조회로 변경예정
     @GetMapping("/guest/resume/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+    public String updateForm(@PathVariable Integer id, HttpServletRequest req, Model model) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
         req.setAttribute("resume", respDTO);
 
         // 업데이트 페이지에서 체크박스 체크 로직
-
+        List<String> checkedSkills = resumeService.getCheckedSkills(id);
+        model.addAttribute(checkedSkills);
 
         return "guest/resume/updateForm";
     }
