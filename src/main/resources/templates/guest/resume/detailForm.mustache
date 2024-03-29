@@ -149,12 +149,12 @@
                             </div>
                         {{/resume.applyJobopenList}}
                     </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
-                                닫기
-                            </button>
-                            <button type="submit" class="btn btn-primary">제안하기</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+                            닫기
+                        </button>
+                        <button type="submit" class="btn btn-primary">제안하기</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,7 +190,7 @@
         }
 
         // 생년월일을 기반으로 만 나이를 계산합니다.
-        var age = calculateAge("2000-04-25");
+        var age = calculateAge("{{resume.userDTO.age}}");
 
         // 나이를 페이지에 표시합니다.
         document.getElementById("age").textContent = "만 " + age + "세";
