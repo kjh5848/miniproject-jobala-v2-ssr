@@ -23,11 +23,10 @@ public class UserController {
     private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
 
-    //TODO: 서비스 만들기
     //메인에서 공고목록보기
     @GetMapping("/")
     public String mainForm(HttpServletRequest req) {
-        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
+        List<Jobopen> jobopenList = userService.mainJobopenList();
         req.setAttribute("jobopenList", jobopenList);
         return "index";
     }

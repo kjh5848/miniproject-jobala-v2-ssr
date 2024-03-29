@@ -109,11 +109,16 @@ public class CompQueryRepository {
 
     public List<ResumeResponse.ListDTO> findResumeAll() {
         String q = """
-                SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
-                FROM resume_tb rt
-                JOIN user_tb ut ON rt.user_id = ut.id
-                ORDER BY rt.id DESC;
-                """;
+            SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
+            FROM resume_tb rt
+            JOIN user_tb ut ON rt.user_id = ut.id
+            WHERE (rt.id, rt.user_id) IN (
+                SELECT MAX(rt2.id), rt2.user_id
+                FROM resume_tb rt2
+                GROUP BY rt2.user_id
+            )
+            ORDER BY rt.id DESC;
+            """;
         Query query = em.createNativeQuery(q);
         JpaResultMapper rm = new JpaResultMapper();
         List<ResumeResponse.ListDTO> resumeList = rm.list(query, ResumeResponse.ListDTO.class);

@@ -3,9 +3,11 @@ package com.example.jobala._user;
 import com.example.jobala._core.errors.exception.Exception400;
 import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala.board.Board;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,14 @@ import java.util.Optional;
 public class UserService {
     private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
+
+    public List<Jobopen> mainJobopenList() {
+        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
+        if (jobopenList.isEmpty()) {
+            throw new Exception404("현재 등록 중인 공고가 없습니다.");
+        }
+        return jobopenList;
+    }
 
     // 로그인
     public User login(UserRequest.LoginDTO reqDTO) {

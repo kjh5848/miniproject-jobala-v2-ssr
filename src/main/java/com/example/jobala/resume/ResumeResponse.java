@@ -4,6 +4,7 @@ import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class ResumeResponse {
 
     @AllArgsConstructor
     @Data
-    public static class ScrapDTO{
+    public static class ScrapDTO {
         private int id;
         private String name;
         private String resumeTitle;
@@ -51,6 +52,7 @@ public class ResumeResponse {
         }
     }
 
+    @NoArgsConstructor
     @AllArgsConstructor
     @Data
     public static class ListDTO {
@@ -60,6 +62,21 @@ public class ResumeResponse {
         private String edu;
         private String career;
         private String imgFilename;
+        private User user;
+
+        public ListDTO(int id, String name, String resumeTitle, String edu, String career, String imgFilename) {
+            this.id = id;
+            this.name = name;
+            this.resumeTitle = resumeTitle;
+            this.edu = edu;
+            this.career = career;
+            this.imgFilename = imgFilename;
+        }
+
+        // 사용자 ID를 반환하는 getter 메서드
+        public Integer getUserId() {
+            return user.getId();
+        }
     }
 
     @AllArgsConstructor
@@ -78,7 +95,7 @@ public class ResumeResponse {
         private UserDTO userDTO;
         private List<JobopenDTO> applyJobopenList = new ArrayList<>();
 
-        public DetailDTO(Resume resume, User sessionUser ,List<Jobopen> jobopenList) {
+        public DetailDTO(Resume resume, User sessionUser, List<Jobopen> jobopenList) {
             this.id = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
