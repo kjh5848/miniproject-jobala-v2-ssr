@@ -2,8 +2,6 @@ package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
-import com.example.jobala.guest.GuestJPARepository;
-import com.example.jobala.guest.GuestRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +29,6 @@ public class CompService {
         // 이미지 파일의 저장 경로 설정
         String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
         Path imgPath = Paths.get("./image/" + GuestImgFilename);
-
         try {
             Files.write(imgPath, imgFilename.getBytes());
             String webImgPath = imgPath.toString().replace("\\", "/");

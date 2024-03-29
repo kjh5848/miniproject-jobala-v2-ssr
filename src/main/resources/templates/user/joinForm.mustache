@@ -4,14 +4,14 @@
 <div class="container mt-3">
     <div class="btn-group d-flex justify-content-center">
         <!--                개인이 로그인을 할때 사용-->
-        <form action="/guestJoin" method="post" onsubmit="return valid()">
+        <form action="/guestJoin" method="post">
             <input type="hidden" name="role" value="0">
             <button id="btnActiveGuest" type="button" class="btn btn-lg btn-light form-control"
                     data-bs-toggle="collapse" data-bs-target="#demo2">개인
             </button>
         </form>
         <!--                기업이 로그인을 할때 사용-->
-        <form action="/compJoin" method="post" onsubmit="return valid()">
+        <form action="/compJoin" method="post">
             <input type="hidden" name="role" value="1">
             <button id="btnActiveUser" type="button" class="btn btn-lg btn-light form-control" data-bs-toggle="collapse"
                     data-bs-target="#demo">기업
@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-header">기업 회원가입</div>
                         <div class="card-body" style="padding-top: 0px;">
-                            <form action="/join" method="post">
+                            <form action="/join" method="post" onsubmit="return valid()">
                                 <input type="hidden" name="role" value="1">
 
                                 <div class="mb-3">
@@ -130,7 +130,7 @@
                     <div class="card">
                         <div class="card-header">개인 회원가입</div>
                         <div class="card-body">
-                            <form action="/join" method="post">
+                            <form action="/join" method="post" onsubmit="return valid()">
                                 <input type="hidden" name="role" value="0">
                                 <div class="mb-3">
                                     <p>이름</p>
