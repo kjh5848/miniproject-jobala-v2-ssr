@@ -36,7 +36,7 @@ public class ResumeResponse {
     @AllArgsConstructor
     public static class CheckBoxDTO {
         private Boolean java;
-        private Boolean java_script;
+        private Boolean JavaScript;
         private Boolean spring;
         private Boolean html;
         private Boolean jquery;
@@ -44,7 +44,7 @@ public class ResumeResponse {
 
         public CheckBoxDTO(List<String> skillList) {
             this.java = skillList.contains("Java");
-            this.java_script = skillList.contains("Java_Script");
+            this.JavaScript = skillList.contains("JavaScript");
             this.spring = skillList.contains("Spring");
             this.html = skillList.contains("HTML");
             this.jquery = skillList.contains("jQuery");
