@@ -75,12 +75,13 @@ public class ResumeService {
         return respDTO;
     }
 
-    public List<String> getCheckedSkills(Integer id) {
+    public ResumeResponse.CheckBoxDTO getCheckedSkills(Integer id) {
         Resume resume = resumeJPARepository.findById(id).orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
         String skillsStr = resume.getSkills();
         skillsStr = skillsStr.substring(1, skillsStr.length() - 1);
         System.out.println("0번 : "+skillsStr);
         List<String> skills = Arrays.asList(skillsStr.split(","));
-        return skills;
+
+        return new ResumeResponse.CheckBoxDTO(skills);
     }
 }

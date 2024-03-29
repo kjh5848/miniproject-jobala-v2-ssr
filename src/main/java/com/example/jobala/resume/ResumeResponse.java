@@ -30,6 +30,27 @@ public class ResumeResponse {
         }
     }
 
+    // update시 체크되도록하는 DTO
+    @Data
+    @AllArgsConstructor
+    public static class CheckBoxDTO {
+        private Boolean java;
+        private Boolean java_script;
+        private Boolean spring;
+        private Boolean html;
+        private Boolean jquery;
+        private Boolean mysql;
+
+        public CheckBoxDTO(List<String> skillList) {
+            this.java = skillList.contains("Java");
+            this.java_script = skillList.contains("Java_Script");
+            this.spring = skillList.contains("Spring");
+            this.html = skillList.contains("HTML");
+            this.jquery = skillList.contains("jQuery");
+            this.mysql = skillList.contains("MySQL");
+        }
+    }
+
     @AllArgsConstructor
     @Data
     public static class ListDTO {
