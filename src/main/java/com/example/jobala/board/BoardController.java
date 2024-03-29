@@ -5,14 +5,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,7 +19,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-
     private final HttpSession session;
 
     @GetMapping("/board/{id}")
@@ -37,8 +34,8 @@ public class BoardController {
 
 
     @GetMapping("/board/mainForm")
-    public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
-        Page<Board> boardPage = boardService.글목록조회(page,size);
+    public String boardForm(@RequestParam(defaultValue = "0") int page, HttpServletRequest req) {
+        Page<Board> boardPage = boardService.글목록조회(page);
 
         req.setAttribute("boardList",boardPage.getContent());
         req.setAttribute("first", page == 0 ? true:false);
@@ -46,6 +43,7 @@ public class BoardController {
         req.setAttribute("previousPage",page -1);
         req.setAttribute("nextPage",page +1);
 
+        // TODO: Date 서비스 안에 넣기
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateStringWithoutTime = sdf.format(date);

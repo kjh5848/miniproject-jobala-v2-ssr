@@ -2,21 +2,18 @@ package com.example.jobala.board;
 
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
+    private final Paging paging;
 
     // 글삭제하기
     public void boardDelete(int boardId, Integer sessionUserId) {
@@ -70,10 +67,8 @@ public class BoardService {
     }
 
     // 글목록조회
-    public Page<Board> 글목록조회(int page, int size){
-        Pageable pageable = (Pageable) PageRequest.of(page, size,Sort.by(Sort.Direction.DESC,"id"));
-
-        return boardJPARepository.findAll(pageable);
+    public Page<Board> 글목록조회(int page){
+        return boardJPARepository.findAll(paging.boardPaging(page));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -23,6 +24,8 @@ import java.util.UUID;
 public class CompService {
     private final CompJPARepository compJPARepository;
     private final ApplyJPARepository applyJPARepository;
+    private final Paging paging;
+
 
     // 프로필업데이트
     @Transactional
@@ -51,18 +54,20 @@ public class CompService {
 
 
     //공고 관리 페이징
-    public Page<JobopenResponse.DTO> jobopensFindAll(int page, int size, Integer sessionUserId){
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
+    public Page<JobopenResponse.DTO> jobopensFindAll(int page, Integer sessionUserId){
+        Pageable pageable = paging.compPaging(page);
 
         List<Jobopen> temp = compJPARepository.findByUserIdOrderByDesc(sessionUserId);
+
         List<JobopenResponse.DTO> jobopenList = temp.stream().map(jobopen -> {
             JobopenResponse.DTO dto = new JobopenResponse.DTO(jobopen);
             int count = applyJPARepository.countJobopenApplyById(dto.getId());
             dto.setCount(count);
             return dto;
+
+
         }).toList();
 
-
-        return new PageImpl<>(jobopenList,pageable, jobopenList.size());
+        return new PageImpl<>(jobopenList,pageable,jobopenList.size());
     }
 }

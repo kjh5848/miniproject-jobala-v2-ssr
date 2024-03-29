@@ -39,7 +39,7 @@
             <h2>내가 올린 공고</h2>
         </div>
 
-        {{#jobopenList}}
+        {{#jobopenPage.content}}
             <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
                 <div class="card-body">
                     <div>
@@ -69,7 +69,24 @@
                     </div>
                 </div>
             </div>
-        {{/jobopenList}}
+        {{/jobopenPage.content}}
+
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item {{#first}}disabled{{/first}}">
+                        <a class="page-link" href="/comp/mainForm?page={{previousPage}}" aria-label="Preview">
+                        <span aria-hidden="true">Preview</span>
+                        </a>
+                    </li>
+                    <li class="page-item {{#last}}{{/last}}{{^last}}disabled{{/last}}">
+                        <a class="page-link" href="/comp/mainForm?page={{nextPage}}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
         {{#ApplyComp}}
             <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
@@ -110,16 +127,7 @@
             </a>
         </div>
 
-        <div class="mt-5">
-            <ul class="pagination justify-content-center">
-                <li class="page-item {{#first}}disabled{{/first}} text-info bg-light border-dark">
-                    <a class="page-link text-info bg-light" href="/comp/mngForm?page={{previousPage}}">Previous</a>
-                </li>
-                <li class="page-item {{#last}}{{/last}}{{^last}}disabled{{/last}}">
-                    <a class="page-link text-info bg-light" href="/comp/mngForm?page={{nextPage}}">Next</a>
-                </li>
-            </ul>
-        </div>
+
     </div>
     <!--공고관리 페이지-->
 {{> layout/footer}}

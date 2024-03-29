@@ -1,6 +1,5 @@
 package com.example.jobala.jobopen;
 
-import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,7 +35,7 @@ public class JobopenResponse {
         private java.sql.Date endTime; // 마감일
         private Integer role; // 역할 0 -> guest, 1 -> comp
         private int count;
-
+        private int totalPageSize;
 
         public DTO(Jobopen jobopen) {
             this.id = jobopen.getId();
