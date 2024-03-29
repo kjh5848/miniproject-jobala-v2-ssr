@@ -77,13 +77,6 @@ public class JobopenController {
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-
-        // 사용자가 있을 경우 이력서 목록 설정
-        if (sessionUser != null) {
-            List<Resume> applyResumeList = jobopenRepository.findResumeById(sessionUser);
-            req.setAttribute("applyResumeList", applyResumeList);
-        }
-
         // 채용공고 정보 가져오기
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
         req.setAttribute("jobopen", respDTO);
