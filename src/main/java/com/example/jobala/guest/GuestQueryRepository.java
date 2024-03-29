@@ -1,14 +1,15 @@
 package com.example.jobala.guest;
 
-import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class GuestQueryRepository {
         return jobopenList;
     }
 
-    public List<JobopenResponse.ListDTO> findAll(String skills, GuestResponse.SearchDTO resDTO) {
+    public Page<JobopenResponse.ListDTO> findAll(String skills, GuestResponse.SearchDTO resDTO, Pageable pageable) {
         String skillQuery = """
                SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
                FROM jobopen_tb jb 
@@ -149,6 +150,7 @@ public class GuestQueryRepository {
         }
 
         Query query = em.createNativeQuery(skillQuery);
+
         query.setParameter(1, "%"+skill[0]+"%");
         query.setParameter(2, "%"+skill[1]+"%");
         query.setParameter(3, "%"+skill[2]+"%");
@@ -175,6 +177,19 @@ public class GuestQueryRepository {
         JpaResultMapper rm = new JpaResultMapper();
         List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
 
-        return jobopenList;
+
+        // 결과를 Page 객체에 담아서 반환
+
+        //현재 페이지의 첫번째 검색 결과의 인덱스를 계산한다.
+        int start = (int) pageable.getOffset();
+
+        //현재 페이지의 마지막  검색 결과의 인덱스를 구하되, 실제 아이템의 크기를 초과 하지 않도록 한다.
+        int end = Math.min((start + pageable.getPageSize()), jobopenList.size());
+
+        // 현재 페이지에 해당하는 검색 결과 들을 sublist로 추출하여 새로운 페이지에 담음
+        Page<JobopenResponse.ListDTO> page = new PageImpl<>(jobopenList.subList(start, end), pageable, jobopenList.size());
+
+
+        return page;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._user.User;
+import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
