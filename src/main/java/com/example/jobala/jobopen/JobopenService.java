@@ -70,11 +70,12 @@ public class JobopenService {
         String skillsString = String.join(", ", skills);
 
         // isScrap
-        Optional<Scrap> scrap = scrapJPARepository.findGuestScrapByJobopenIdAndUserId(jobopenId, sessionUser.getId());
         JobopenResponse.DetailDTO respDTO = new JobopenResponse.DetailDTO(jobopen, sessionUser);
-        respDTO.setScrap(scrap.isPresent());
+        if (sessionUser != null){
+            Optional<Scrap> scrap = scrapJPARepository.findGuestScrapByJobopenIdAndUserId(jobopenId, sessionUser.getId());
+            respDTO.setScrap(scrap.isPresent());
+        }
         respDTO.setSkills(skillsString);
-
         return respDTO;
     }
 }

@@ -86,8 +86,6 @@ public class JobopenController {
 
         // 채용공고 정보 가져오기
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
-        System.out.println("응");
-        System.out.println(respDTO);
         req.setAttribute("jobopen", respDTO);
 
         return "comp/jobopen/detailForm";
