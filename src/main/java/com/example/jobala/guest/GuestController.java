@@ -45,13 +45,11 @@ public class GuestController {
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills,
                                 GuestResponse.SearchDTO resDTO, @RequestParam(value = "page",defaultValue = "0") int page) {
         Page<JobopenResponse.ListDTO> jobopenPage = guestService.jobOpenSearch(page,skills, resDTO);
-        System.out.println(1);
 
         JobOpenDTO jobOpenDTO = new JobOpenDTO();
         jobOpenDTO.setJobopenList(jobopenPage.getContent());
-        System.out.println("list : " + jobOpenDTO.getJobopenList());
         jobOpenDTO.setFirst(page == 0 ? true : false);
-        jobOpenDTO.setLast(page < jobopenPage.getTotalPages() -1);
+        jobOpenDTO.setLast(!jobopenPage.hasNext());
         jobOpenDTO.setPreviousPage(page -1);
         jobOpenDTO.setNextPage(page +1);
 

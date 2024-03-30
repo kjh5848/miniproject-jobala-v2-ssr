@@ -20,12 +20,12 @@
                             <div class="select-package bg-info p-3 m-2 rounded-3">
                                 <h4>기술스택</h4>
                                 <div class="checkbox-package">
-                                    <input type="checkbox" class="checkbox" name="skills" value=Java > Java
-                                    <input type="checkbox" class="checkbox" name="skills" value=Java_Script >JavaScript
-                                    <input type="checkbox" class="checkbox" name="skills" value=Spring > Spring
-                                    <input type="checkbox" class="checkbox" name="skills" value=HTML > HTML
-                                    <input type="checkbox" class="checkbox" name="skills" value=jQuery > jQuery
-                                    <input type="checkbox" class="checkbox" name="skills" value=MySQL > MySQL
+                                    <input type="checkbox" class="checkbox" name="skills" value=Java> Java
+                                    <input type="checkbox" class="checkbox" name="skills" value=Java_Script>JavaScript
+                                    <input type="checkbox" class="checkbox" name="skills" value=Spring> Spring
+                                    <input type="checkbox" class="checkbox" name="skills" value=HTML> HTML
+                                    <input type="checkbox" class="checkbox" name="skills" value=jQuery> jQuery
+                                    <input type="checkbox" class="checkbox" name="skills" value=MySQL> MySQL
                                 </div>
                             </div>
 
@@ -93,22 +93,22 @@
 
                 <!-- 채용공고 목록 -->
                 {{#jobopenList}}
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <a onclick="location.href='/comp/jobopen/{{id}}'" class="btn">
-                                <div class="card border-0 shadow" style="width: 100%;">
-                                    <img class="card-img-top img-fluid" src="/image/{{imgFilename}}"
-                                         alt="이미지를 표시할 수 없습니다.">
-                                    <div class="card-body text-start">
-                                        <br>
-                                        <h5 class="card-title">{{jobopenTitle}}</h5>
-                                        <hr>
-                                        <p class="card-text">{{compLocation}} {{career}} {{edu}} </p>
-                                        <hr>
-                                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <a onclick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                            <div class="card border-0 shadow" style="width: 100%;">
+                                <img class="card-img-top img-fluid" src="/image/{{imgFilename}}"
+                                     alt="이미지를 표시할 수 없습니다.">
+                                <div class="card-body text-start">
+                                    <br>
+                                    <h5 class="card-title">{{jobopenTitle}}</h5>
+                                    <hr>
+                                    <p class="card-text">{{compLocation}} {{career}} {{edu}} </p>
+                                    <hr>
                                 </div>
-                            </a>
-                        </div>
-                    {{/jobopenList}}
+                            </div>
+                        </a>
+                    </div>
+                {{/jobopenList}}
 
                 <!-- 채용공고 목록 -->
                 <div class="row">
@@ -130,10 +130,23 @@
                         </div>
                     {{/jobOpenDTO.jobopenList}}
                     <!-- 채용공고 목록 -->
-
-
+                    <!-- 페이징 -->
+                    <div class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {{#jobOpenDTO.first}}disabled{{/jobOpenDTO.first}}">
+                                <a class="page-link text-info bg-light"
+                                   href="/guest/jobopenSearch?page={{jobOpenDTO.previousPage}}">Previous</a>
+                            </li>
+                            <li class="page-item {{#jobOpenDTO.last}}disabled{{/jobOpenDTO.last}}">
+                                <a class="page-link text-info bg-light"
+                                   href="/guest/jobopenSearch?page={{jobOpenDTO.nextPage}}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 페이징 -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 {{> layout/footer}}
