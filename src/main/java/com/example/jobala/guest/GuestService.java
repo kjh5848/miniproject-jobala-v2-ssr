@@ -5,7 +5,6 @@ import com.example.jobala._user.User;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
-import com.example.jobala.resume.Resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,6 +35,7 @@ public class GuestService {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
+        System.out.println("reqDTO = " + reqDTO.getImgFilename());
         MultipartFile imgFilename = reqDTO.getImgFilename();
 
         // 이미지 파일의 저장 경로 설정
@@ -47,7 +47,7 @@ public class GuestService {
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setGuestProfileUpdateDTO(reqDTO,webImgPath);
+            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -69,7 +69,7 @@ public class GuestService {
 
     //이력서 페이징 하기 위한 목록 조회
     public Page<Resume> resumesFindAll(int page, int size) {
-        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"id"));
+        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
 
         return guestJPARepository.findAll(pageable);
     }

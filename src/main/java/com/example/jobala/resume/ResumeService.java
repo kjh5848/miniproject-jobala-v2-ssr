@@ -11,10 +11,10 @@ import com.example.jobala.scrap.ScrapJPARepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -69,11 +69,12 @@ public class ResumeService {
 
         // isScrap
         Optional<Scrap> scrap = scrapJPARepository.findCompScrapByResumeIdAndUserId(resumeId, sessionUser.getId());
-        ResumeResponse.DetailDTO respDTO = new ResumeResponse.DetailDTO(resume, sessionUser,jobopen);
+        ResumeResponse.DetailDTO respDTO = new ResumeResponse.DetailDTO(resume, sessionUser, jobopen);
         respDTO.setScrap(scrap.isPresent());
         respDTO.setSkills(skillsString);
         return respDTO;
     }
+
 
     public ResumeResponse.CheckBoxDTO getCheckedSkills(Integer id) {
         Resume resume = resumeJPARepository.findById(id).orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));

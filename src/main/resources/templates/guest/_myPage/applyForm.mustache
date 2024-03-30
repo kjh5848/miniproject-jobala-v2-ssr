@@ -1,5 +1,15 @@
 {{> layout/header}}
 
+
+<style>
+    .profileBox {
+        margin-top: 50px;
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 10px;
+        border: none;
+    }
+</style>
 <!--개인 지원현황 페이지-->
 <div class="container">
     <div class="card-body">
@@ -28,37 +38,34 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <div class="applyBox">
-                    <h2 class="text-left">지원 현황</h2>
-                    <div class="card shadow row">
-                        <table class="table p-3" style="margin-bottom: 0px;">
-                            <thead class="table-primary">
-                            <tr>
-                                <th>공고 제목</th>
-                                <th>이력서 제목</th>
-                                <th>마감일</th>
-                                <th>상태</th>
-                            </tr>
-                            </thead>
-                            {{#GuestApply}}
-                                <tbody>
-                                <tr>
-                                    <td onClick="location.href='/comp/jobopen/{{jobopenId}}'" >{{jobopenTitle}}</td>
-                                    <td onClick="location.href='/comp/jobopen/{{resumeId}}'">{{resumeTitle}}</td>
-                                    <td>{{endTime}}</td>
-                                    <td>{{state}}</td>
-                                </tr>
-                                </tbody>
-                            {{/GuestApply}}
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="profileBox">
+        <h2 class="text-left">지원 현황</h2>
+        <div class="card shadow row">
+            <table class="table p-3">
+                <thead class="table-primary">
+                <tr>
+                    <th></th>
+                    <th>공고 제목</th>
+                    <th>이력서 제목</th>
+                    <th>마감일</th>
+                    <th>상태</th>
+                </tr>
+                </thead>
+                {{#GuestApply}}
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td onClick="location.href='/comp/jobopen/{{jobopenId}}'">{{jobopenTitle}}</td>
+                        <td onClick="location.href='/guest/resume/{{resumeId}}'">{{resumeTitle}}</td>
+                        <td>{{endTime}}</td>
+                        <td>{{state}}</td>
+                    </tr>
+                    </tbody>
+                {{/GuestApply}}
+            </table>
         </div>
     </div>
+
     <br>
     <br>
     <br>
