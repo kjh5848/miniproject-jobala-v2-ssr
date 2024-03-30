@@ -23,4 +23,8 @@ public class Paging {
     public  Pageable mainPaging(int page) {
         return PageRequest.of(page, 9, Sort.by(Sort.Direction.DESC, "id"));
     }
+
+    public  Pageable jobOpenSearchPaging(int page) {
+        return PageRequest.of(page, 3, Sort.by(Sort.Direction.DESC, "id"));
+    }
 }

@@ -8,17 +8,17 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class JobopenResponse {
     @AllArgsConstructor
     @Data
     public static class ListDTO {
-        private Integer id;
-        private String jobopenTitle;
-        private String compLocation;
-        private String career;
-        private String edu;
-        private String imgFilename;
+        private List<Jobopen> jobopenList;
+        private boolean first;
+        private boolean last;
+        private int previousPage;
+        private int nextPage;
     }
 
     @Data

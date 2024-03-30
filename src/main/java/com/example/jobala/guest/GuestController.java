@@ -1,5 +1,6 @@
 package com.example.jobala.guest;
 
+import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserService;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +33,7 @@ public class GuestController {
     private final JobopenJPARepository jobopenJPARepository;
 
     private final UserService userService;
+    private final Paging paging;
 
     // DEL: mainForm 삭제
 
@@ -38,11 +41,12 @@ public class GuestController {
     //TODO: 서비스 만들기
     //공고 검색 결과 페이징 추가 중
     @GetMapping("/guest/jobopenSearch")
-    public String jobopenSearch(HttpServletRequest req, @RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "3") int size,
-                                @RequestParam(value = "skills", defaultValue = "") String skills,
-                                GuestResponse.SearchDTO resDTO) {
-        Page<JobopenResponse.ListDTO> jobopenPage = guestService.jobopenSearch(page,size,skills, resDTO);
+    public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills,
+                                GuestResponse.SearchDTO resDTO, @RequestParam(value = "page",defaultValue = "0") int page) {
+        Page<JobopenResponse.ListDTO> jobopenPage = guestService.jobOpenSearch(page,skills, resDTO);
+
+
+
         req.setAttribute("jobopenList", jobopenPage);
         return "guest/jobSearch";
     }

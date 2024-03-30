@@ -1,6 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
@@ -29,6 +30,7 @@ public class GuestService {
     private final GuestJPARepository guestJPARepository;
     private final GuestQueryRepository guestQueryRepository;
     private final ResumeJPARepository resumeJPARepository;
+    private final Paging paging;
 
     // 프로필업데이트
     @Transactional
@@ -55,10 +57,11 @@ public class GuestService {
         return user;
     }
 
-    public Page<JobopenResponse.ListDTO> jobopenSearch(int page, int size,String skills, GuestResponse.SearchDTO resDTO) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"id"));
+    //공고 검색 결과 페이징
+    public Page<JobopenResponse.ListDTO> jobOpenSearch(int page,String skills, GuestResponse.SearchDTO resDTO) {
+        Pageable pagigng =  paging.jobOpenSearchPaging(page);
 
-        return (Page<JobopenResponse.ListDTO>) guestQueryRepository.findAll(skills, resDTO, pageable);
+        return (Page<JobopenResponse.ListDTO>) guestQueryRepository.findAll(skills, resDTO, pagigng);
     }
 
     public List<JobopenResponse.ListDTO> findAll() {
