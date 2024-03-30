@@ -59,8 +59,6 @@ public class GuestController {
     //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req,@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3")int size) {
-        //이 로직에서 로그인한 유저 기준점의 이력서 결과 로직이추가되야 되며
-        //이 로직 자체는 인재채용의 가면 된다.
         User sessionUser = (User) session.getAttribute("sessionUser");
         Page<Resume> resumePage = guestService.resumesFindAll(page, size);
         req.setAttribute("resumeList",resumePage.getContent());
