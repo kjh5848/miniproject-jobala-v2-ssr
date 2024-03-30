@@ -68,6 +68,7 @@
                 <div class="d-flex m-2">
                     <div class="col-sm-4">
                         <select class="form-select" name="edu">
+                            <option value="">선택</option>
                             <option>고등학교 졸업</option>
                             <option>대학교 졸업</option>
                         </select>
@@ -93,7 +94,7 @@
             </div>
             <div class="col-sm-4 m-2">
                 <select class="form-select" name="license">
-                    <option value="">선택</option>
+                    <option value="">없음</option>
                     <option value="정보처리기사">정보처리기사</option>
                     <option value="sqld">SQLD</option>
                 </select>
@@ -114,7 +115,17 @@
     <br><br>
 </div>
 
-
+<!-- 선택박스 업데이트 페이지 미리 선택 -->
+<script>
+    const eduSelect = document.querySelector('select[name="edu"]');
+    eduSelect.value = '{{resume.edu}}';
+    const careerSelect = document.querySelector('select[name="career"]');
+    careerSelect.value = '{{resume.career}}';
+    const hopeJobSelect = document.querySelector('select[name="hopeJob"]');
+    hopeJobSelect.value = '{{resume.hopeJob}}';
+    const licenseSelect = document.querySelector('select[name="license"]');
+    licenseSelect.value = '{{resume.license}}';
+</script>
 
 
 

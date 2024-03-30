@@ -89,4 +89,12 @@ public class JobopenService {
         respDTO.setSkills(skillsString);
         return respDTO;
     }
+
+    public JobopenResponse.CheckBoxDTO getCheckedSkills(Integer id) {
+        Jobopen jobopen = jobopenJPARepository.findById(id).orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
+        String skillsStr = jobopen.getSkills();
+        skillsStr = skillsStr.substring(1, skillsStr.length() - 1).trim();
+        List<String> skills = Arrays.asList(skillsStr.split(","));
+        return new JobopenResponse.CheckBoxDTO(skills);
+    }
 }

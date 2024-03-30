@@ -165,7 +165,7 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
-    public static class ScrapDTO {
+    public static class ScrapDTO{
         private int id;
         private String compname;
         private String jobopenTitle;
@@ -179,6 +179,26 @@ public class JobopenResponse {
         }
     }
 
+    // update시 체크되도록하는 DTO
+    @Data
+    @AllArgsConstructor
+    public static class CheckBoxDTO {
+        private Boolean java;
+        private Boolean javaScript;
+        private Boolean spring;
+        private Boolean html;
+        private Boolean jquery;
+        private Boolean mysql;
+
+        public CheckBoxDTO(List<String> skillList) {
+            this.java = skillList.contains("Java");
+            this.javaScript = skillList.contains(" JavaScript");
+            this.spring = skillList.contains(" Spring");
+            this.html = skillList.contains(" HTML");
+            this.jquery = skillList.contains(" jQuery");
+            this.mysql = skillList.contains(" MySQL");
+        }
+    }
 }
 
 

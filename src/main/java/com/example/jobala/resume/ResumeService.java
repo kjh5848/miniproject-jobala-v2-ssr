@@ -81,7 +81,6 @@ public class ResumeService {
         String skillsStr = resume.getSkills();
         skillsStr = skillsStr.substring(1, skillsStr.length() - 1);
         List<String> skills = Arrays.asList(skillsStr.split(","));
-
         return new ResumeResponse.CheckBoxDTO(skills);
     }
 }

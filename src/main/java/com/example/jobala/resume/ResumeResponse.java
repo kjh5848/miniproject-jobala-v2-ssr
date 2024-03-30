@@ -44,11 +44,11 @@ public class ResumeResponse {
 
         public CheckBoxDTO(List<String> skillList) {
             this.java = skillList.contains("Java");
-            this.JavaScript = skillList.contains("JavaScript");
-            this.spring = skillList.contains("Spring");
-            this.html = skillList.contains("HTML");
-            this.jquery = skillList.contains("jQuery");
-            this.mysql = skillList.contains("MySQL");
+            this.JavaScript = skillList.contains(" JavaScript");
+            this.spring = skillList.contains(" Spring");
+            this.html = skillList.contains(" HTML");
+            this.jquery = skillList.contains(" jQuery");
+            this.mysql = skillList.contains(" MySQL");
         }
     }
 

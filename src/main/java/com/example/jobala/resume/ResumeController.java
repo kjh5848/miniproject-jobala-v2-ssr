@@ -47,7 +47,6 @@ public class ResumeController {
         // 업데이트 페이지에서 체크박스 체크 로직
         ResumeResponse.CheckBoxDTO checkedSkillsList = resumeService.getCheckedSkills(id);
         req.setAttribute("checkedSkillsList", checkedSkillsList);
-
         return "guest/resume/updateForm";
     }
 
