@@ -33,23 +33,13 @@ public class UserController {
 
     //서비스 변경 완료
     @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqDTO) {
-        try {
-            // userRepository에서 username과 password를 사용하여 사용자 검색
-            User sessionUser = userService.login(reqDTO);
-            session.setAttribute("sessionUser",sessionUser);
-            // 권한 체크
-            Boolean isCheck = false;
-            if (sessionUser.getRole() == 0) {
-                isCheck = true;
-            }
-            session.setAttribute("isCheck", isCheck);
-            session.setAttribute("sessionUser", sessionUser);
+    public String login(UserRequest.LoginDTO reqDTO, HttpSession session) {
+        User sessionUser = userService.login(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
+        Boolean isCheck = sessionUser.getRole() == 0;
+        session.setAttribute("isCheck", isCheck);
 
-            return "redirect:/";
-        } catch (EmptyResultDataAccessException e) {
-            throw new Exception401("유저네임 혹은 비밀번호가 틀렸어요");
-        }
+        return "redirect:/";
     }
 
     @PostMapping("/join")

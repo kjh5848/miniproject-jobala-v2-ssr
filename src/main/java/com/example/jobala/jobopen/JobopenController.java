@@ -76,7 +76,6 @@ public class JobopenController {
     }
 
     //공고 보기
-    //TODO: 서비스 만들기
     @GetMapping("/comp/jobopen/{id}")
     public String detailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");

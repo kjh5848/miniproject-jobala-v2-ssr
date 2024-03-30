@@ -37,7 +37,6 @@ public class CompController {
     private final CompJPARepository compJPARepository;
 
 
-    // TODO: 서비스 만들기
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
         List<ResumeResponse.ListDTO> resumeList = compService.searchResumes(skills, resDTO);
@@ -68,7 +67,6 @@ public class CompController {
 
     // DEL: getResumeList 삭제
 
-    // TODO: 서비스 만들기
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) req.getSession().getAttribute("sessionUser");

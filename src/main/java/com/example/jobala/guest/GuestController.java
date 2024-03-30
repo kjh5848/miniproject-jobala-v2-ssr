@@ -33,8 +33,6 @@ public class GuestController {
 
     // DEL: mainForm 삭제
 
-
-    //TODO: 서비스 만들기
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
         System.out.println("skills = " + skills);
@@ -44,7 +42,6 @@ public class GuestController {
         return "guest/jobSearch";
     }
 
-    //TODO: 서비스 만들기
     @GetMapping("/guest/jobSearch")
     public String jobSearch(HttpServletRequest req) {
         List<JobopenResponse.ListDTO> jobopenList = guestService.findAll();
@@ -52,7 +49,6 @@ public class GuestController {
         return "guest/jobSearch";
     }
 
-    //TODO: 서비스 만들기
     //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
     public String mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
@@ -66,7 +62,6 @@ public class GuestController {
         return "guest/_myPage/mngForm";
     }
 
-    //TODO: 서비스 만들기
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");

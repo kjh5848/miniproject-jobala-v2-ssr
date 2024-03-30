@@ -30,8 +30,14 @@ public class UserService {
 
     // 로그인
     public User login(UserRequest.LoginDTO reqDTO) {
-        return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
-                .orElseThrow(() -> new Exception401("인증되지 않았습니다."));
+        // username으로 사용자 검색
+        User user = userJPARepository.findByUsername(reqDTO.getUsername())
+                .orElseThrow(() -> new Exception401("사용자 이름이 존재하지 않습니다."));
+        // 비밀번호 일치 여부 확인
+        if (!user.getPassword().equals(reqDTO.getPassword())) {
+            throw new Exception401("비밀번호가 틀렸습니다.");
+        }
+        return user;
     }
 
     // 회원가입
