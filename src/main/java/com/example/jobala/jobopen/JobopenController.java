@@ -54,6 +54,10 @@ public class JobopenController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
         req.setAttribute("jobopen", respDTO);
+
+        // 업데이트 페이지에서 체크박스 체크 로직
+        JobopenResponse.CheckBoxDTO checkedSkillsList = jobopenService.getCheckedSkills(id);
+        req.setAttribute("checkedSkillsList", checkedSkillsList);
         return "comp/jobopen/updateForm";
     }
 

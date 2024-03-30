@@ -22,11 +22,10 @@
                     <p><b>학력</b></p>
                 </div>
 
-                <select class="form-select form-select-lg" name="edu">
+                <select class="form-select form-select-lg" name="edu" defaultValue="{{jobopen.edu}}">
                     <option value="고등학교 졸업">고등학교 졸업</option>
                     <option value="대학교 졸업">대학교 졸업</option>
                     <option value="학력 무관">학력 무관</option>
-
                 </select>
             </div>
             <div class="card-body ">
@@ -65,11 +64,9 @@
                 <div>
                     <p><b>희망직무</b></p>
                 </div>
-                <select class="form-select form-select-lg">
+                <select class="form-select form-select-lg" name="hopeJob">
                     <option value="프론트엔드">프론트엔드</option>
                     <option value="백엔드">백엔드</option>
-                    <option value="풀스택">풀스택</option>
-
                 </select>
             </div>
             <div class="card-body">
@@ -99,40 +96,40 @@
             <div class="row m-2">
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="Java">
+                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.java}}checked{{/checkedSkillsList.java}} value="Java">
                         <div>Java</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="JavaScript">
+                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.javaScript}}checked{{/checkedSkillsList.javaScript}} value="JavaScript">
                         <div>JavaScript</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="Spring">
+                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.spring}}checked{{/checkedSkillsList.spring}} value="Spring">
                         <div>Spring</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="HTML">
+                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.html}}checked{{/checkedSkillsList.html}} value="HTML">
                         <div>HTML</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="jQuery">
+                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.jquery}}checked{{/checkedSkillsList.jquery}} value="jQuery">
                         <div>jQuery</div>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="MySQL">
+                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.mysql}}checked{{/checkedSkillsList.mysql}} value="MySQL">
                         <div>MySQL</div>
                     </div>
-
+                </div>
 
                     <!-- 공고 상세 내용 -->
                     <!--        <script>-->
@@ -143,7 +140,6 @@
                     <!--                });-->
                     <!--            });-->
                     <!--        </script>-->
-                </div>
             </div>
         </div>
         <div class="d-flex justify-content-center mt-5">
@@ -154,7 +150,21 @@
     </form>
 </div>
 
-
+<!-- 선택박스 업데이트 페이지 미리 선택 -->
+<script>
+    const eduSelect = document.querySelector('select[name="edu"]');
+    eduSelect.value = '{{jobopen.edu}}';
+    const careerSelect = document.querySelector('select[name="career"]');
+    careerSelect.value = '{{jobopen.career}}';
+    const jobTypeSelect = document.querySelector('select[name="jobType"]');
+    jobTypeSelect.value = '{{jobopen.jobType}}';
+    const salarySelect = document.querySelector('select[name="salary"]');
+    salarySelect.value = '{{jobopen.salary}}';
+    const hopeJobSelect = document.querySelector('select[name="hopeJob"]');
+    hopeJobSelect.value = '{{jobopen.hopeJob}}';
+    const compLocationSelect = document.querySelector('select[name="compLocation"]');
+    compLocationSelect.value = '{{jobopen.compLocation}}';
+</script>
 
 
 

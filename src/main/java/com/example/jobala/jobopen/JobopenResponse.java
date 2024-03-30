@@ -74,6 +74,7 @@ public class JobopenResponse {
         private String compLocation;
         private String hopeJob;
         private String skills;
+        private Date endTime;
         private boolean isScrap;
         private boolean isGuestScrap;
         private UserDTO userDTO;
@@ -89,6 +90,7 @@ public class JobopenResponse {
             this.compLocation = jobopen.getCompLocation();
             this.hopeJob = jobopen.getHopeJob();
             this.skills = jobopen.getSkills();
+            this.endTime = jobopen.getEndTime();
             this.isScrap = false;
             this.isGuestScrap = false;
 
@@ -180,6 +182,26 @@ public class JobopenResponse {
         }
     }
 
+    // update시 체크되도록하는 DTO
+    @Data
+    @AllArgsConstructor
+    public static class CheckBoxDTO {
+        private Boolean java;
+        private Boolean javaScript;
+        private Boolean spring;
+        private Boolean html;
+        private Boolean jquery;
+        private Boolean mysql;
+
+        public CheckBoxDTO(List<String> skillList) {
+            this.java = skillList.contains("Java");
+            this.javaScript = skillList.contains(" JavaScript");
+            this.spring = skillList.contains(" Spring");
+            this.html = skillList.contains(" HTML");
+            this.jquery = skillList.contains(" jQuery");
+            this.mysql = skillList.contains(" MySQL");
+        }
+    }
 }
 
 
