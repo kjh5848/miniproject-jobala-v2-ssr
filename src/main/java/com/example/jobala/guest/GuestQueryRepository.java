@@ -28,7 +28,7 @@ public class GuestQueryRepository {
 
     public List<JobopenResponse.ListDTO> findByJoboopenAll() {
         String q = """
-                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
+                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename, jb.end_time 
                 from jobopen_tb jb 
                 join user_tb ut on jb.user_id = ut.id
                 order by jb.id desc;      
@@ -42,7 +42,7 @@ public class GuestQueryRepository {
 
     public List<JobopenResponse.ListDTO> findAll(String skills, GuestResponse.SearchDTO resDTO) {
         String skillQuery = """
-               SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
+               SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename, jb.end_time 
                FROM jobopen_tb jb 
                INNER JOIN user_tb ut ON jb.user_id = ut.id 
                where (jb.skills Like ? AND jb.skills LIKE ? AND jb.skills LIKE ? AND jb.skills LIKE ? AND jb.skills LIKE ? AND jb.skills LIKE ?) 

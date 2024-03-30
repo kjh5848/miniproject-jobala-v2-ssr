@@ -57,8 +57,8 @@
                     <tr style="cursor:pointer">
                         <td></td>
                         <td>{{name}}</td>
-                        <td onClick="location.href='/guest/resume/{{resumeId}}'"> {{resumeTitle}}</td>
-                        <td onClick="location.href='/comp/jobopen/{{jobopenId}}'">{{jobopenTitle}}</td>
+                        <td onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer"> {{resumeTitle}}</td>
+                        <td onClick="location.href='/comp/jobopen/{{jobopenId}}'" style="cursor:pointer">{{jobopenTitle}}</td>
                         <td>{{state}}</td>
                     </tr>
                 {{/CompPosition}}
@@ -67,8 +67,6 @@
             </table>
         </div>
     </div>
-
 </div>
-
 
 {{> layout/footer}}

@@ -1,165 +1,161 @@
 {{> layout/header}}
 
 <!--채용공고 등록페이지-->
-<div class="container  mt-5">
-    <!--채용공고 사진-->
-    <form id="UploadForm" action="/jobopen/upload" method="post" enctype="multipart/form-data">
-        <div style=" margin-top: 20px; margin-bottom: 20px;">
+<div class="container  d-flex justify-content-center">
+    <div class="card" style="width: 70%">
+        <div class="card-header ">
+            <h3 class="my-3 mx-3">공고 작성하기</h3>
+        </div>
+        <div class="card-body">
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <!-- 회사 이미지 및 정보 -->
-                    <div class="d-flex ">
-                        <div style="margin-left: 160px; margin-top: 20px; margin-bottom: 20px;">
-                            <div style="width: 500px; height: 190px; border: 1px solid #ccc; margin-bottom: 10px;">
-                                <img id="imgPreview" src="../images/avatar.png" alt="          "
-                                     style="width:100%; height: 100%;">
+            <form action="/comp/jobopen/save" method="post" enctype="multipart/form-data">
+                <div>
+                    <input class="mb-3" type="text" name="jobopenTitle" id="" placeholder="공고 제목"
+                           style="font-size: 30px; border-radius: 5px; width: 100%;">
+                </div>
+                <!-- 공고에 들어가야 될 내용  -->
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">스킬</h5>
+                    </div>
+                    <div class="card-body ">
+                        <div class="d-flex justify-content-around">
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="Java" name="skills"
+                                       value="Java" autocomplete="off">
+                                <label class="btn btn-lg btn-outline-info mx-1" for="Java">Java</label>
+
                             </div>
-                            <input type="file" name="imgFile" id="imgFile" onchange="previewImage(this);"
-                                   style="margin-bottom: 10px;">
-                            <input type="hidden" name="title" id="title"> <!-- 타이틀 입력란 -->
-                            <div>
-                                <button type="button" onclick="uploadImage()">사진 저장</button>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="JavaScript" name="skills"
+                                       value="JavaScript" autocomplete="off">
+                                <label class="btn btn-lg btn-outline-info mx-1" for="JavaScript">JavaScript</label>
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="Spring" name="skills"
+                                       value="Spring" autocomplete="off">
+                                <label class="btn btn-lg btn-outline-info mx-1" for="Spring">Spring</label>
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="HTML" name="skills"
+                                       value="HTML" autocomplete="off">
+                                <label class="btn btn-lg btn-outline-info mx-1" for="HTML">HTML</label>
+
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="jQuery" name="skills"
+                                       value="jQuery" autocomplete="off">
+                                <label class="btn btn-lg btn-outline-info mx-1" for="jQuery">jQuery</label>
+
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="MySQL" name="skills"
+                                       value="MySQL" autocomplete="off">
+                                <label class="btn btn-lg btn-outline-info mx-1" for="MySQL">MySQL</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">학력</h5>
+                        <div class="d-flex m-2">
+                            <div class="col-sm-4">
+                                <select class="form-select form-select-lg" name="edu">
+                                    <option value="고등학교 졸업">고등학교 졸업</option>
+                                    <option value="대학교 졸업">대학교 졸업</option>
+                                    <option value="학력 무관">학력 무관</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </form>
 
-    <form action="/comp/jobopen/save" method="post" enctype="multipart/form-data">
-        <div class="card mt-5">
-            <div class="card-body d-flex justify-content-center">
-                <input type="text" name="jobopenTitle" class="form-control" placeholder="공고제목">
-            </div>
-        </div>
-        <!-- 공고에 들어가야 될 내용  -->
-        <div class="card mt-5">
-            <div class="card-body">
-                <div>
-                    <p><b>학력</b></p>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">경력</h5>
+                        <div class="col-sm-4 m-2">
+                            <select class="form-select form-select-lg" name="career">
+                                <option value="">선택</option>
+                                <option value="신입">신입</option>
+                                <option value="경력">경력</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <select class="form-select form-select-lg" name="edu">
-                    <option value="">선택</option>
-                    <option value="고등학교 졸업">고등학교 졸업</option>
-                    <option value="대학교 졸업">대학교 졸업</option>
-                    <option value="학력 무관">학력 무관</option>
-                </select>
-            </div>
-            <div class="card-body ">
-                <div>
-                    <p><b>경력</b></p>
-                </div>
-                <select class="form-select form-select-lg" name="career">
-                    <option value="">선택</option>
-                    <option value="신입">신입</option>
-                    <option value="경력">경력</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>고용형태</b></p>
-                </div>
-                <select class="form-select form-select-lg" name="jobType">
-                    <option value="">선택</option>
-                    <option value="정규직">정규직</option>
-                    <option value="계약직">계약직</option>
-                    <option value="인턴">인턴</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>급여</b></p>
-                </div>
-                <select class="form-select form-select-lg" name="salary">
-                    <option value="">선택</option>
-                    <option value="협의">협의</option>
-                    <option value="3000만원 이상">3000만원 이상</option>
-                    <option value="5000만원 이상">5000만원 이상</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <div>
-                    <p><b>희망직무</b></p>
-                </div>
-                <select class="form-select form-select-lg" name="hopeJob">
-                    <option value="">선택</option>
-                    <option value="프론트엔드">프론트엔드</option>
-                    <option value="백엔드">백엔드</option>
-                    <option value="풀스택">풀스택</option>
-                </select>
-            </div>
 
-            <div class="card-body">
-                <div>
-                    <p><b>근무지역</b></p>
-                </div>
-                <select class="form-select form-select-lg" name="compLocation">
-                    <option value="">선택</option>
-                    <option value="서울">서울</option>
-                    <option value="부산">부산</option>
-                </select>
-            </div>
-            <div class="card-body">
-                <p><b>마감일</b></p>
-                <div class="form-group" name="">
-                    <input type="date" class="form-control" name="endTime">
-                </div>
-            </div>
-        </div>
 
-        <div class="card mb-2">
-            <div>
-                <h5 class="card-header">스킬</h5>
-            </div>
-            <div class="row m-2">
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="Java">
-                        <div>Java</div>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">고용형태</h5>
+                        <div class="col-sm-4 m-2">
+                            <select class="form-select form-select-lg" name="jobType">
+                                <option value="">선택</option>
+                                <option value="정규직">정규직</option>
+                                <option value="계약직">계약직</option>
+                                <option value="인턴">인턴</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="JavaScript">
-                        <div>JavaScript</div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="Spring">
-                        <div>Spring</div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="HTML">
-                        <div>HTML</div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="jQuery">
-                        <div>jQuery</div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" value="MySQL">
-                        <div>MySQL</div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="d-flex justify-content-center mt-5">
-            <div class="">
-                <button type="submit" class="btn btn-primary">저장 하기</button>
-            </div>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">급여</h5>
+                        <div class="col-sm-4 m-2">
+                            <select class="form-select form-select-lg" name="salary" >
+                                <option value="">선택</option>
+                                <option value="협의">협의</option>
+                                <option value="3000만원 이상">3000만원 이상</option>
+                                <option value="5000만원 이상">5000만원 이상</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">희망직무</h5>
+                        <div class="col-sm-4 m-2">
+                            <select class="form-select form-select-lg" name="hopeJob">
+                                <option value="">선택</option>
+                                <option value="프론트엔드">프론트엔드</option>
+                                <option value="백엔드">백엔드</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">근무지역</h5>
+                        <div class="col-sm-4 m-2">
+                            <select class="form-select form-select-lg" name="compLocation">
+                                <option value="전체">전체</option>
+                                <option value="서울">서울</option>
+                                <option value="부산">부산</option>
+                                <option value="부산">광주</option>
+                                <option value="부산">경기</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">마감일</h5>
+                        <div class="form-group">
+                            <input value="endTime" type="date" class="form-control" name="endTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class=" btn btn-primary btn-lg">수정완료</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
+
 
 <!-- 공고 상세 내용 -->
 <script>

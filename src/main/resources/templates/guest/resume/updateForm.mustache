@@ -1,118 +1,133 @@
 {{> layout/header}}
 
 <!-- 이력서 수정페이지 -->
-<div class="container">
-    <form action="/guest/resume/{{id}}/update" method="post">
-        <div>
-            <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목" value="{{resume.resumeTitle}}"
-                   style="font-size: 30px; border-radius: 5px; width: 100%;">
+<div class="container d-flex justify-content-center">
+    <div class="card" style="width: 70%">
+        <div class="card-header">
+            <h3 class="my-3 mx-3">이력서 수정하기</h3>
         </div>
-        <div class="card mb-2">
-            <div>
-                <h5 class="card-header">희망직무</h5>
-                <div class="container m-2">
-                    <select class="form-select" name="hopeJob">
-                        <option value="">선택</option>
-                        <option value="프론트엔드">프론트엔드</option>
-                        <option value="백엔드">백엔드</option>
-                    </select>
+        <div class="card-body">
+
+            <form action="/guest/resume/{{id}}/update" method="post">
+                <div>
+                    <input class="mb-3" type="text" name="resumeTitle" id="" placeholder="이력서 제목"
+                           value="{{resume.resumeTitle}}"
+                           style="font-size: 30px; border-radius: 5px; width: 100%;">
                 </div>
-            </div>
-        </div>
-        <div class="card mb-2">
-            <div>
-                <h5 class="card-header">스킬</h5>
-            </div>
-            <div class="row m-2">
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.java}}checked{{/checkedSkillsList.java}} value="Java" >
-                        <div>Java</div>
+
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">스킬</h5>
+                    </div>
+                    <div class="card-body ">
+                        <div class="d-flex justify-content-around">
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="Java" name="skills"
+                                       value="Java" autocomplete="off" {{#checkedSkillsList.java}}checked{{/checkedSkillsList.java}}>
+                                <label class="btn btn-lg btn-outline-info mx-1" for="Java">Java</label>
+
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="JavaScript" name="skills"
+                                       value="JavaScript" autocomplete="off" {{#checkedSkillsList.JavaScript}}checked{{/checkedSkillsList.JavaScript}}>
+                                <label class="btn btn-lg btn-outline-info mx-1" for="JavaScript">JavaScript</label>
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="Spring" name="skills"
+                                       value="Spring" autocomplete="off" {{#checkedSkillsList.Spring}}checked{{/checkedSkillsList.Spring}}>
+                                <label class="btn btn-lg btn-outline-info mx-1" for="Spring">Spring</label>
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="HTML" name="skills"
+                                       value="HTML" autocomplete="off" {{#checkedSkillsList.html}}checked{{/checkedSkillsList.html}}>
+                                <label class="btn btn-lg btn-outline-info mx-1" for="HTML">HTML</label>
+
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="jQuery" name="skills"
+                                       value="jQuery" autocomplete="off" {{#checkedSkillsList.jquery}}checked{{/checkedSkillsList.jquery}}>
+                                <label class="btn btn-lg btn-outline-info mx-1" for="jQuery">jQuery</label>
+
+                            </div>
+                            <div class="">
+                                <input type="checkbox" class="btn-check" id="MySQL" name="skills"
+                                       value="MySQL" autocomplete="off" {{#checkedSkillsList.mysql}}checked{{/checkedSkillsList.mysql}}>
+                                <label class="btn btn-lg btn-outline-info mx-1" for="MySQL">MySQL</label>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.JavaScript}}checked{{/checkedSkillsList.JavaScript}} value="JavaScript">
-                        <div>JavaScript</div>
+
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">희망직무</h5>
+                        <div class="container m-2">
+                            <select class="form-select form-select-lg" name="hopeJob">
+                                <option value="">선택</option>
+                                <option value="프론트엔드">프론트엔드</option>
+                                <option value="백엔드">백엔드</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.spring}}checked{{/checkedSkillsList.spring}} value="Spring">
-                        <div>Spring</div>
+
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">학력</h5>
+                        <div class="d-flex m-2">
+                            <div class="col-sm-4">
+                                <select class="form-select form-select-lg" name="edu">
+                                    <option value="">선택</option>
+                                    <option>고등학교 졸업</option>
+                                    <option>대학교 졸업</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.html}}checked{{/checkedSkillsList.html}} value="HTML">
-                        <div>HTML</div>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">경력</h5>
+                        <div class="col-sm-4 m-2">
+                            <select class="form-select form-select-lg" name="career">
+                                <option value="">선택</option>
+                                <option value="신입">신입</option>
+                                <option value="경력">경력</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.jquery}}checked{{/checkedSkillsList.jquery}} value="jQuery">
-                        <div>jQuery</div>
+                <div class="card my-4">
+                    <div class="d-flex justify-content-between card-header">
+                        <h5>자격증</h5>
                     </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check">
-                        <input type="checkbox" name="skills" class="form-check-input" {{#checkedSkillsList.mysql}}checked{{/checkedSkillsList.mysql}} value="MySQL">
-                        <div>MySQL</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-2">
-            <div>
-                <h5 class="card-header">학력</h5>
-                <div class="d-flex m-2">
-                    <div class="col-sm-4">
-                        <select class="form-select" name="edu">
-                            <option value="">선택</option>
-                            <option>고등학교 졸업</option>
-                            <option>대학교 졸업</option>
+                    <div class="col-sm-4 m-2">
+                        <select class="form-select form-select-lg" name="license">
+                            <option value="">없음</option>
+                            <option value="정보처리기사">정보처리기사</option>
+                            <option value="sqld">SQLD</option>
                         </select>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card mb-2">
-            <div>
-                <h5 class="card-header">경력</h5>
-                <div class="col-sm-4 m-2">
-                    <select class="form-select" name="career">
-                        <option value="">선택</option>
-                        <option value="신입">신입</option>
-                        <option value="경력">경력</option>
-                    </select>
+                <div class="card my-4">
+                    <div>
+                        <h5 class="card-header">자기소개서</h5>
+                        <textarea class="form-control" rows="5" id="comment"
+                                  name="content">{{resume.content}}</textarea>
+                    </div>
                 </div>
-            </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class=" btn btn-primary btn-lg">수정완료</button>
+                </div>
+            </form>
+            <br>
+            <br><br>
         </div>
-        <div class="card mb-2">
-            <div class="d-flex justify-content-between card-header">
-                <h5>자격증</h5>
-            </div>
-            <div class="col-sm-4 m-2">
-                <select class="form-select" name="license">
-                    <option value="">없음</option>
-                    <option value="정보처리기사">정보처리기사</option>
-                    <option value="sqld">SQLD</option>
-                </select>
-            </div>
-        </div>
-        <div class="card mb-2">
-            <div>
-                <h5 class="card-header">자기소개서</h5>
-                <textarea class="form-control" rows="5" id="comment" name="content">{{resume.content}}</textarea>
-            </div>
-        </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class=" btn btn-primary btn-lg">수정완료</button>
-        </div>
-    </form>
-    <br>
-    <br><br>
+    </div>
+
 </div>
 
 <!-- 선택박스 업데이트 페이지 미리 선택 -->

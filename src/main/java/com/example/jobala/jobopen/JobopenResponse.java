@@ -21,6 +21,8 @@ public class JobopenResponse {
         private String career;
         private String edu;
         private String imgFilename;
+        private Date endTime; // 마감일
+
     }
 
     @Data
