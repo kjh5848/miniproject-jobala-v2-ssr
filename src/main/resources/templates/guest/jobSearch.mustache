@@ -94,7 +94,7 @@
                 <!-- 채용공고 목록 -->
                 <!-- 채용공고 목록 -->
                 <div class="row">
-                    {{#jobopenList}}
+                    {{#jobopenList.jobopenList}}
                         <div class="col-lg-4 col-md-6 col-12">
                             <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
                                 <div class="card border-0 shadow" style="width: 100%;">
@@ -110,35 +110,24 @@
                                 </div>
                             </a>
                         </div>
-                    {{/jobopenList}}
+                    {{/jobopenList.jobopenList}}
                     <!-- 채용공고 목록 -->
 
 
                     <!-- 페이징 -->
                     <div class="mt-5">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item disabled text-info bg-light border-dark">
-                                <a class="page-link text-info bg-light" href="#">Previous</a>
+                            <li class="page-item {{#jobopenList.first}}disabled{{/jobopenList.first}}">
+                                <a class="page-link text-info bg-light" href="/guest/jobopenSearch?page={{jobopenList.previousPage}}">Previous</a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link text-info bg-light" href="#">Next</a>
+                            <li class="page-item {{#jobopenList.last}}disabled{{/jobopenList.last}}">
+                                <a class="page-link text-info bg-light" href="/guest/jobopenSearch?page={{jobopenList.nextPage}}">Next</a>
                             </li>
                         </ul>
                     </div>
                     <!-- 페이징 -->
-
                 </div>
             </div>
         </div>
-
     </div>
 {{> layout/footer}}

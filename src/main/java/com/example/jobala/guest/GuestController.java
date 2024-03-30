@@ -4,6 +4,7 @@ import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserService;
+import com.example.jobala.jobopen.JobOpenDTO;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
@@ -44,10 +45,18 @@ public class GuestController {
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills,
                                 GuestResponse.SearchDTO resDTO, @RequestParam(value = "page",defaultValue = "0") int page) {
         Page<JobopenResponse.ListDTO> jobopenPage = guestService.jobOpenSearch(page,skills, resDTO);
+        System.out.println(1);
+
+        JobOpenDTO jobOpenDTO = new JobOpenDTO();
+        jobOpenDTO.setJobopenList(jobopenPage.getContent());
+        System.out.println("list : " + jobOpenDTO.getJobopenList());
+        jobOpenDTO.setFirst(page == 0 ? true : false);
+        jobOpenDTO.setLast(page < jobopenPage.getTotalPages() -1);
+        jobOpenDTO.setPreviousPage(page -1);
+        jobOpenDTO.setNextPage(page +1);
 
 
-
-        req.setAttribute("jobopenList", jobopenPage);
+        req.setAttribute("jobopenList", jobOpenDTO);
         return "guest/jobSearch";
     }
 
