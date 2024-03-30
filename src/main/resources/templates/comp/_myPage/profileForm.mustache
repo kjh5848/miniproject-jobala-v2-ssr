@@ -7,17 +7,6 @@
         padding: 30px;
         border-radius: 10px;
     }
-
-    .profileImage {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-    }
-
-    .editButton {
-        position: relative;
-        bottom: -50px;
-    }
 </style>
 
 <div class="container">
@@ -50,16 +39,15 @@
 <div class="card-body">
     {{#compProfile}}
         <form action="/comp/updateProfile" method="post" enctype="multipart/form-data">
-            <div class="content profileBox">
+            <div class="content profileBox container" style="width: 60%">
                 <h2>프로필 관리</h2>
                 <h3>회사 및 담당자 정보</h3>
-                <div class="card">
-                    <div class="card-body" style="width:50%">
-                        <img class="card-img-top rounded" id="imgPreview" src="/image/{{imgFilename}}">
-                        <div class="form-group">
+                <div class="d-flex justify-content-center my-5">
+                    <div class="card " STYLE="width: 350PX">
+                        <img class=" card-img-top" id="imgPreview" src="/image/{{imgFilename}}">
+                        <div class="card-body">
                             <div class="input-group">
-                                <input type="file" id="inputGroupFile04"
-                                       aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="imgFilename"
+                                <input type="file" class="form-control" name="imgFilename"
                                        value="{{imgFilename}}" onchange="previewImage(this)">
                             </div>
                         </div>
@@ -116,5 +104,20 @@
         // 선택된 파일을 가져오기
         const file = input.files[0];
 
+        // FileReader 객체를 생성
+        const reader = new FileReader();
+
+        // FileReader의 onload 이벤트 핸들러를 정의
+        // 파일 읽기가 완료되면 이 함수가 실행되고, 이벤트 객체 e를 매개변수로 받기
+        reader.onload = function (e) {
+            // 파일을 읽어들인 데이터 URL을 이미지 요소의 src 속성에 할당하여 이미지를 표시
+            imgPreview.src = e.target.result;
+        };
+
+        // 선택된 파일을 Data URL로 읽기
+        // 파일의 내용이 Base64로 인코딩된 문자열로 반환
+        reader.readAsDataURL(file);
+    }
+</script>
 
 {{> layout/footer}}

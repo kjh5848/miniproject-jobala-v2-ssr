@@ -4,14 +4,10 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.apply.ApplyJPARepository;
-import com.example.jobala.apply.ApplyQueryRepository;
-import com.example.jobala.guest.GuestJPARepository;
-import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,7 +84,7 @@ public class CompService {
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setCompProfileUpdateDTO(reqDTO,webImgPath);
+            user.setCompProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

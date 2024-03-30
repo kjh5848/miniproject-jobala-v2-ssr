@@ -2,7 +2,6 @@ package com.example.jobala.jobopen;
 
 import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,7 +39,8 @@ public class JobopenResponse {
         private java.sql.Date endTime; // 마감일
         private Integer role; // 역할 0 -> guest, 1 -> comp
         private int count;
-
+        @CreationTimestamp
+        private Timestamp createdAt; //생성일
 
         public DTO(Jobopen jobopen) {
             this.id = jobopen.getId();
@@ -57,9 +57,6 @@ public class JobopenResponse {
             this.role = jobopen.getRole();
             this.count = jobopen.getId();
         }
-
-        @CreationTimestamp
-        private Timestamp createdAt; //생성일
     }
 
     @AllArgsConstructor
@@ -74,6 +71,7 @@ public class JobopenResponse {
         private String compLocation;
         private String hopeJob;
         private String skills;
+        private Date endTime; // 마감일
         private boolean isScrap;
         private boolean isGuestScrap;
         private UserDTO userDTO;
@@ -88,6 +86,7 @@ public class JobopenResponse {
             this.salary = jobopen.getSalary();
             this.compLocation = jobopen.getCompLocation();
             this.hopeJob = jobopen.getHopeJob();
+            this.endTime = jobopen.getEndTime();
             this.skills = jobopen.getSkills();
             this.isScrap = false;
             this.isGuestScrap = false;
@@ -166,7 +165,7 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
-    public static class ScrapDTO{
+    public static class ScrapDTO {
         private int id;
         private String compname;
         private String jobopenTitle;

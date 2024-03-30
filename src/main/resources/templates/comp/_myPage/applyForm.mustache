@@ -1,10 +1,6 @@
 {{> layout/header}}
 
 <style>
-    .text-left {
-        text-align: left;
-    }
-
     .profileBox {
         margin-top: 50px;
         border: 2px solid #ccc;
@@ -43,16 +39,18 @@
     </div>
 
     <div class="container">
-        <div id="applicantsList" style="margin-top: -50px;">
-            <h2 class="profileBox text-left mt-5">내 공고 지원자 목록<span class="badge bg-info" id="applyCount"></span></h2>
+        <div class="profileBox">
+            <div class="d-flex justify-content-between mt-5 mb-2">
+                <h2>내 공고 지원자 목록</h2>
+            </div>
             {{#CompApply}}
-            <div class="card shadow p-3 mb-3 bg-body rounded">
+                <div class="card form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
 
-                <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
-                    <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>
-                <h3 onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">{{resumeTitle}}</h3>
-                <p>{{name}}     {{state}}</p>
-                <p><small>{{edu}}</small><br><small>{{endTime}}</small></p>
+                    <p onClick="location.href='/comp/mngForm'" style="cursor:pointer">
+                        <button class="btn btn-primary btn-sm">공고</button>  {{jobopenTitle}}</p>
+                    <h3 onClick="location.href='/guest/resume/{{resumeId}}'" style="cursor:pointer">{{resumeTitle}}</h3>
+                    <p>{{name}}     {{state}}</p>
+                    <p><small>{{edu}}</small><br><small>{{endTime}}</small></p>
 
                     <div class="button-container d-flex flex-column justify-content-center align-items-end position-absolute top-50 end-0 translate-middle-y mt-3">
 
@@ -74,45 +72,45 @@
                         </form>
                     </div>
 
-            </div>
+                </div>
             {{/CompApply}}
         </div>
     </div>
 
-<script>
-    // document.addEventListener("DOMContentLoaded", function() {
-    //     // '제안' 섹션의 개수 계산
-    //     var tbody = document.querySelector("table.table tbody");
-    //     var numberOfOffers = tbody ? tbody.querySelectorAll("tr").length : 0;
-    //     document.getElementById("offerCount").textContent = numberOfOffers;
-    //
-    //     // '내 공고 지원자 목록' 섹션의 개수 계산
-    //     var applicantsList = document.getElementById("applicantsList");
-    //     var numberOfCards = applicantsList.querySelectorAll(".card").length;
-    //     document.getElementById("applyCount").textContent = numberOfCards;
-    //
-    //     // 모든 합격, 불합격 버튼에 대한 이벤트 리스너 추가
-    //     var allButtons = document.querySelectorAll('.btn-info, .btn-secondary');
-    //
-    //     allButtons.forEach(function(button) {
-    //         button.addEventListener('click', function(event) {
-    //             console.log("버튼 클릭됨:", this);
-    //             // 클릭된 버튼이 속한 카드 내의 모든 버튼을 찾습니다.
-    //             var buttonsInCard = this.closest('.card').querySelectorAll('.btn-info, .btn-secondary');
-    //
-    //             // 클릭된 버튼을 비활성화하고, 다른 버튼을 활성화합니다.
-    //             buttonsInCard.forEach(function(btn) {
-    //                 if (btn === button) {
-    //                     btn.disabled = true; // 클릭된 버튼 비활성화
-    //                 } else {
-    //                     btn.disabled = false; // 다른 버튼 활성화
-    //                 }
-    //             });
-    //         });
-    //     });
-    // });
+    <script>
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     // '제안' 섹션의 개수 계산
+        //     var tbody = document.querySelector("table.table tbody");
+        //     var numberOfOffers = tbody ? tbody.querySelectorAll("tr").length : 0;
+        //     document.getElementById("offerCount").textContent = numberOfOffers;
+        //
+        //     // '내 공고 지원자 목록' 섹션의 개수 계산
+        //     var applicantsList = document.getElementById("applicantsList");
+        //     var numberOfCards = applicantsList.querySelectorAll(".card").length;
+        //     document.getElementById("applyCount").textContent = numberOfCards;
+        //
+        //     // 모든 합격, 불합격 버튼에 대한 이벤트 리스너 추가
+        //     var allButtons = document.querySelectorAll('.btn-info, .btn-secondary');
+        //
+        //     allButtons.forEach(function(button) {
+        //         button.addEventListener('click', function(event) {
+        //             console.log("버튼 클릭됨:", this);
+        //             // 클릭된 버튼이 속한 카드 내의 모든 버튼을 찾습니다.
+        //             var buttonsInCard = this.closest('.card').querySelectorAll('.btn-info, .btn-secondary');
+        //
+        //             // 클릭된 버튼을 비활성화하고, 다른 버튼을 활성화합니다.
+        //             buttonsInCard.forEach(function(btn) {
+        //                 if (btn === button) {
+        //                     btn.disabled = true; // 클릭된 버튼 비활성화
+        //                 } else {
+        //                     btn.disabled = false; // 다른 버튼 활성화
+        //                 }
+        //             });
+        //         });
+        //     });
+        // });
 
-</script>
+    </script>
 
 </div>
 {{> layout/footer}}

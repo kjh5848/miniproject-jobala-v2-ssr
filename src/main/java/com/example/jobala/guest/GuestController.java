@@ -55,14 +55,14 @@ public class GuestController {
     //TODO: 서비스 만들기
     //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
-    public String mngForm(HttpServletRequest req,@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "3")int size) {
+    public String mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Page<Resume> resumePage = guestService.resumesFindAll(page, size);
-        req.setAttribute("resumeList",resumePage.getContent());
-        req.setAttribute("first", page == 0 ? true:false);
-        req.setAttribute("last",page < resumePage.getTotalPages() -1);
-        req.setAttribute("previousPage",page -1);
-        req.setAttribute("nextPage",page +1);
+        req.setAttribute("resumeList", resumePage.getContent());
+        req.setAttribute("first", page == 0 ? true : false);
+        req.setAttribute("last", page < resumePage.getTotalPages() - 1);
+        req.setAttribute("previousPage", page - 1);
+        req.setAttribute("nextPage", page + 1);
         return "guest/_myPage/mngForm";
     }
 
@@ -71,12 +71,13 @@ public class GuestController {
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User guestProfile = userService.guestInfo(sessionUser.getId());
+        System.out.println("guestProfile = " + guestProfile);
         req.setAttribute("guestProfile", guestProfile);
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }
 
     @PostMapping("/guest/updateProfile") // 주소 수정 필요!
-    public String updateProfile( GuestRequest.GuestProfileUpdateDTO reqDTO) {
+    public String updateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         guestService.guestUpdateProfile(reqDTO, sessionUser);
         return "redirect:/guest/profileForm";

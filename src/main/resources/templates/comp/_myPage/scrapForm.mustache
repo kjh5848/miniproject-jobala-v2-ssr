@@ -1,5 +1,16 @@
 {{> layout/header}}
 
+<style>
+    .profileBox {
+        margin-top: 50px;
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 10px;
+        border: none;
+    }
+</style>
+
+
 <!--기업 스크랩 페이지-->
 <div class="container">
     <div class="card-body">
@@ -29,41 +40,39 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col" style="margin-top: 30px;">
-                <div class="applyBox" >
-                    <h2 class="text-left">스크랩한 인재</h2>
-                    <div class="card shadow row">
-                        <table class="table p-3" style="margin-bottom: 0px;">
-                            <thead class="table-primary">
-                            <tr>
-                                <th scope="col">이름</th>
-                                <th scope="col">이력서 제목</th>
-                                <th scope="col">학력</th>
-                                <th scope="col">경력</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {{#resumeList}}
-                                <tr onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer;">
-                                    <td>{{name}}</td>
-                                    <td>{{resumeTitle}}</td>
-                                    <td>{{edu}}</td>
-                                    <td>{{career}}</td>
-                                </tr>
-                            {{/resumeList}}
-                            <!-- Add more rows as needed -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+        <div class="profileBox" id="profileForm">
+            <h2 class="text-left mb-4">스크랩한 인재
+            </h2>
+            <div class="card shadow row">
+                <table class="table p-3">
+                    <thead class="table-primary">
+                    <tr>
+                        <th></th>
+                        <th scope="col">이름</th>
+                        <th scope="col">이력서 제목</th>
+                        <th scope="col">학력</th>
+                        <th scope="col">경력</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#resumeList}}
+                        <tr onClick="location.href='/guest/resume/{{id}}'" style="cursor:pointer;">
+                            <td>{{name}}</td>
+                            <td>{{resumeTitle}}</td>
+                            <td>{{edu}}</td>
+                            <td>{{career}}</td>
+                        </tr>
+                    {{/resumeList}}
+                    <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
-    <br>
-    <br>
-    <br>
 </div>
+
 <!-- Footer content goes here -->
 
 

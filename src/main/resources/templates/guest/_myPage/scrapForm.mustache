@@ -1,5 +1,16 @@
 {{> layout/header}}
 
+
+<style>
+    .profileBox {
+        margin-top: 50px;
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 10px;
+        border: none;
+    }
+</style>
+
 <!--개인 스크랩 페이지-->
 <div class="container">
     <div class="card-body">
@@ -28,35 +39,33 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <div class="applyBox">
-                <h2 class="text-left">스크랩한 기업</h2>
-                <div class="card shadow row">
-                    <table class="table p-3" style="margin-bottom: 0px;">
-                        <thead class="table-primary">
-                        <tr>
-                            <th scope="col">회사명</th>
-                            <th scope="col">공고</th>
-                            <th scope="col">경력</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{#jobopenList}}
-                            <tr onClick="location.href='/comp/jobopen/{{id}}'">
-                                <td>{{compname}}</td>
-                                <td>{{jobopenTitle}}</td>
-                                <td>{{career}}</td>
-                            </tr>
-                        {{/jobopenList}}
-                        <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="profileBox">
+        <h2 class="text-left">스크랩한 기업</h2>
+        <div class="card shadow row">
+            <table class="table p-3">
+                <thead class="table-primary">
+                <tr>
+                    <th></th>
+                    <th scope="col">회사명</th>
+                    <th scope="col">공고</th>
+                    <th scope="col">경력</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#jobopenList}}
+                    <tr onClick="location.href='/comp/jobopen/{{id}}'">
+                        <td></td>
+                        <td>{{compname}}</td>
+                        <td>{{jobopenTitle}}</td>
+                        <td>{{career}}</td>
+                    </tr>
+                {{/jobopenList}}
+                <!-- Add more rows as needed -->
+                </tbody>
+            </table>
         </div>
-
     </div>
+
     <br>
     <br>
     <br>

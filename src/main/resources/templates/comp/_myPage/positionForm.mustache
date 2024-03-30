@@ -1,10 +1,6 @@
 {{> layout/header}}
 
 <style>
-    .text-left {
-        text-align: left;
-    }
-
     .profileBox {
         margin-top: 50px;
         border: 2px solid #ccc;
@@ -42,37 +38,36 @@
         </div>
     </div>
 
-    <div class="card border-0">
-        <div class="profileBox" id="profileForm">
-            <h2 class="text-left mb-4" style="margin-top: -50px;">제안 <span class="badge bg-info" id="offerCount"></span>
-            </h2>
-            <div class="card shadow row">
-                <table class="table p-3" style="margin-bottom: 0px;">
-                    <thead class="table-primary">
-                    <tr>
-                        <th></th>
-                        <th>이름</th>
-                        <th scope="col">이력서</th>
-                        <th scope="col">공고명</th>
-                        <th scope="col">상태</th>
+    <div class="profileBox">
+        <h2 class="text-left mb-4">제안
+        </h2>
+        <div class="card shadow row">
+            <table class="table p-3">
+                <thead class="table-primary">
+                <tr>
+                    <th></th>
+                    <th>이름</th>
+                    <th scope="col">이력서</th>
+                    <th scope="col">공고명</th>
+                    <th scope="col">상태</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#CompPosition}}
+                    <tr style="cursor:pointer">
+                        <td></td>
+                        <td>{{name}}</td>
+                        <td onClick="location.href='/guest/resume/{{resumeId}}'"> {{resumeTitle}}</td>
+                        <td onClick="location.href='/comp/jobopen/{{jobopenId}}'">{{jobopenTitle}}</td>
+                        <td>{{state}}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {{#CompPosition}}
-                        <tr  style="cursor:pointer">
-                            <td></td>
-                            <td>{{name}}</td>
-                            <td onClick="location.href='/guest/resume/{{resumeId}}'"> {{resumeTitle}}</td>
-                            <td onClick="location.href='/comp/jobopen/{{jobopenId}}'">{{jobopenTitle}}</td>
-                            <td>{{state}}</td>
-                        </tr>
-                    {{/CompPosition}}
-                    <!-- 추가 제안 내용들 -->
-                    </tbody>
-                </table>
-            </div>
+                {{/CompPosition}}
+                <!-- 추가 제안 내용들 -->
+                </tbody>
+            </table>
         </div>
     </div>
+
 </div>
 
 

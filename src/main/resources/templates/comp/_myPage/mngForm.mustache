@@ -1,8 +1,16 @@
 {{> layout/header}}
-
+<style>
+    .profileBox {
+        margin-top: 50px;
+        border: 2px solid #ccc;
+        padding: 30px;
+        border-radius: 10px;
+        border: none;
+    }
+</style>
 <!--공고관리 페이지-->
 
-<div class="card-body">
+<div class="container">
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -31,104 +39,104 @@
     </div>
 
 
-    <div class="container mt-3 ">
-        {{#sessionUser}}
-            😊안녕하세요. <span class="text-primary">{{name}}</span> 담당자님</h3>
-        {{/sessionUser}}
-        <div class="d-flex justify-content-between mt-5 mb-2">
-            <h2>내가 올린 공고</h2>
-        </div>
+    <div class="container">
+        <div class="profileBox">
+            <div class="d-flex justify-content-between mt-5 mb-2">
+                <h2>내가 올린 공고</h2>
+            </div>
 
-        {{#jobopenList}}
-            <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
-                <div class="card-body">
-                    <div>
-                        <a onClick="location.href='/comp/jobopen/{{id}}'" style="cursor:pointer">
-                            <div class="card-text mb-5 text-truncate">
-                                <h2>{{jobopenTitle}}</h2>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex justify-content-between">
+            {{#jobopenList}}
+                <div class="card form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
+                    <div class="card-body">
                         <div>
-                            <a href="/applyForm">
-                                <button type="button" class="btn btn-primary">
-                                    지원자 현황 <span class="badge bg-danger">{{count}}</span>
-                                </button>
+                            <a onClick="location.href='/comp/jobopen/{{id}}'" style="cursor:pointer">
+                                <div class="card-text mb-5 text-truncate">
+                                    <h2>{{jobopenTitle}}</h2>
+                                </div>
                             </a>
                         </div>
-                        <div class="align-self-center">
-                            <a href="/comp/jobopen/{{id}}/updateForm">
-                                <button class="btn btn-info">수정</button>
-                            </a>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a href="/applyForm">
+                                    <button type="button" class="btn btn-primary">
+                                        지원자 현황 <span class="badge bg-danger">{{count}}</span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="align-self-center">
+                                <a href="/comp/jobopen/{{id}}/updateForm">
+                                    <button class="btn btn-info">수정</button>
+                                </a>
 
-                            <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
-                                <button class="btn btn-secondary">삭제</button>
-                            </form>
+                                <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
+                                    <button class="btn btn-secondary">삭제</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {{/jobopenList}}
+            {{/jobopenList}}
 
-        {{#ApplyComp}}
-            <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
-                <div class="card-body">
-                    <div>
-                        <a href="/comp/jobopen/{{id}}" style="cursor:pointer">
-                            <div class="card-text mb-5 text-truncate">
-                                <h2>{{jobopenTitle}}</h2>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="d-flex justify-content-between">
+            {{#ApplyComp}}
+                <div class="card border- form-control d-flex justify-content-between mb-4 shadow-lg p-3 mb-5 bg-body rounded-5">
+                    <div class="card-body">
                         <div>
-                            <a href="/applyPositionForm">
-                                <button type="button" class="btn btn-primary">
-                                    지원자 현황 <span class="badge bg-danger">{{count}}</span>
-                                </button>
+                            <a href="/comp/jobopen/{{id}}" style="cursor:pointer">
+                                <div class="card-text mb-5 text-truncate">
+                                    <h2>{{jobopenTitle}}</h2>
+                                </div>
                             </a>
                         </div>
-                        <div class="align-self-center">
-                            <a href="/comp/jobopen/{{id}}/updateForm">
-                                <button class="btn btn-info">수정</button>
-                            </a>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a href="/applyPositionForm">
+                                    <button type="button" class="btn btn-primary">
+                                        지원자 현황 <span class="badge bg-danger">{{count}}</span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="align-self-center">
+                                <a href="/comp/jobopen/{{id}}/updateForm">
+                                    <button class="btn btn-info">수정</button>
+                                </a>
 
-                            <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
-                                <button class="btn btn-secondary">삭제</button>
-                            </form>
+                                <form class="" action="/comp/jobopen/{{id}}/detete" method="post">
+                                    <button class="btn btn-secondary">삭제</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+            {{/ApplyComp}}
+
+
+            <div class="text-center my-5">
+                <a href="/comp/jobopen/saveForm">
+                    <button class="btn btn-primary">공고만들기</button>
+                </a>
             </div>
-        {{/ApplyComp}}
 
-
-        <div class="text-center mb-5">
-            <a href="/comp/jobopen/saveForm">
-                <button class="btn btn-primary">공고만들기</button>
-            </a>
-        </div>
-
-        <div class="mt-5">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled text-info bg-light border-dark">
-                    <a class="page-link text-info bg-light" href="#">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-info bg-light" href="#">Next</a>
-                </li>
-            </ul>
+            <div>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled text-info bg-light border-dark">
+                        <a class="page-link text-info bg-light" href="#">Previous</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-info bg-light" href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <!--공고관리 페이지-->
+</div>
+<!--공고관리 페이지-->
 {{> layout/footer}}

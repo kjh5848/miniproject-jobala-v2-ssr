@@ -23,20 +23,20 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.DetailDTO board = boardService.boardDetail(id,sessionUser);
+        BoardResponse.DetailDTO board = boardService.boardDetail(id, sessionUser);
         req.setAttribute("board", board);
         return "board/detailForm";
     }
 
     @GetMapping("/board/mainForm")
     public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
-        Page<Board> boardPage = boardService.글목록조회(page,size);
+        Page<Board> boardPage = boardService.글목록조회(page, size);
 
-        req.setAttribute("boardList",boardPage.getContent());
-        req.setAttribute("first", page == 0 ? true:false);
-        req.setAttribute("last",page < boardPage.getTotalPages() -1);
-        req.setAttribute("previousPage",page -1);
-        req.setAttribute("nextPage",page +1);
+        req.setAttribute("boardList", boardPage.getContent());
+        req.setAttribute("first", page == 0 ? true : false);
+        req.setAttribute("last", page < boardPage.getTotalPages() - 1);
+        req.setAttribute("previousPage", page - 1);
+        req.setAttribute("nextPage", page + 1);
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,15 +48,14 @@ public class BoardController {
     @PostMapping("/board/{id}/update") // 주소 수정 필요
     public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        boardService.boardUpdate(id,sessionUser.getId(),reqDTO);
-        return "redirect:/board/" + id ;
-
+        boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
+        return "redirect:/board/" + id;
     }
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable int id, HttpServletRequest request) {
         Board board = boardService.boardFindById(id);
-        request.setAttribute("board",board);
+        request.setAttribute("board", board);
         return "board/updateForm";
     }
 
@@ -70,7 +69,7 @@ public class BoardController {
     @PostMapping("/board/save") // 주소 수정 필요
     public String save(BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        boardService.boardSave(reqDTO,sessionUser);
+        boardService.boardSave(reqDTO, sessionUser);
         System.out.println();
         return "redirect:/board/mainForm";
     }
