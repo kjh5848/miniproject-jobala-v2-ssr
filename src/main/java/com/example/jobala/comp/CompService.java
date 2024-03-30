@@ -83,7 +83,6 @@ public class CompService {
         // 이미지 파일의 저장 경로 설정
         String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
         Path imgPath = Paths.get("./image/" + GuestImgFilename);
-
         try {
             Files.write(imgPath, imgFilename.getBytes());
             String webImgPath = imgPath.toString().replace("\\", "/");

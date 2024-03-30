@@ -82,27 +82,21 @@
             {{/GuestPosition}}
 
 
-            <div class="container mt-3">
-                <ul
-                        class="pagination justify-content-center"
-                        style="margin-bottom: 50px; "
-                >
-                    <li class="page-item disabled text-info bg-light border-dark">
-                        <a class="page-link text-info bg-light" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-info bg-light" href="#">Next</a>
-                    </li>
-                </ul>
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item {{#first}}disabled{{/first}}">
+                            <a class="page-link" href="/board/mainForm?page={{previousPage}}" aria-label="Preview">
+                            <span aria-hidden="true">Preview</span>
+                            </a>
+                        </li>
+                        <li class="page-item {{#last}}{{/last}}{{^last}}disabled{{/last}}">
+                            <a class="page-link" href="/board/mainForm?page={{nextPage}}" aria-label="Next">
+                            <span aria-hidden="true">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

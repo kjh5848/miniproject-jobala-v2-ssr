@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -38,6 +37,8 @@ public class GuestController {
     //TODO: 서비스 만들기
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
+        System.out.println("skills = " + skills);
+        System.out.println("resDTO = " + resDTO);
         List<JobopenResponse.ListDTO> jobopenList = guestService.jobopenSearch(skills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
@@ -69,16 +70,14 @@ public class GuestController {
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
         User guestProfile = userService.guestInfo(sessionUser.getId());
         req.setAttribute("guestProfile", guestProfile);
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }
 
     @PostMapping("/guest/updateProfile") // 주소 수정 필요!
-    public String updateProfile(@RequestParam MultipartFile imgFilename, GuestRequest.GuestProfileUpdateDTO reqDTO) {
+    public String updateProfile( GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        String img = String.valueOf(imgFilename);
         guestService.guestUpdateProfile(reqDTO, sessionUser);
         return "redirect:/guest/profileForm";
     }
