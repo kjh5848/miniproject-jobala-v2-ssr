@@ -8,84 +8,120 @@
     <br><br>
     <!-- 필터링 start -->
     <form id="searchForm" action="/comp/resumeSearch" method="get" enctype="application/x-www-form-urlencoded">
-        <div class="card-body select-box border border-2 mb-5 rounded-3">
-            <div class="select-box ">
-                <div class="select-package bg-info p-3 m-2 rounded-3">
-                    <h4>기술스택</h4>
-                    <div class="checkbox-package">
-                        <input type="checkbox" class="checkbox" name="skills" value=Java /> Java
-                        <input type="checkbox" class="checkbox" name="skills" value=JavaScript />JavaScript
-                        <input type="checkbox" class="checkbox" name="skills" value=Spring /> Spring
-                        <input type="checkbox" class="checkbox" name="skills" value=HTML /> HTML
-                        <input type="checkbox" class="checkbox" name="skills" value=jQuery /> jQuery
-                        <input type="checkbox" class="checkbox" name="skills" value=MySQL /> MySQL
-                    </div>
+        <div class="my-3">
+            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
+                    data-bs-target="#demo">
+                인재 필터
+            </button>
+        </div>
+        <div id="demo" class="mt-3 collapse">
+            <div class="p-2 m-2 rounded-3 shadow d-flex align-items-center" id="accordion">
+                <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#skills">
+                    기술스택
+                </button>
+                <div id="skills" class="p-2 collapse">
+                    <input type="checkbox" class="btn-check" id="전체" name="skills"
+                           value=Java,Java_Script,HTML,jQuery,MySQL autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="전체">전체</label>
 
-                    <script>
-                        // 기술스택 필터 적용
-                        var skillArr = new Array(); //필터 내용을 저장하는 배열
+                    <input type="checkbox" class="btn-check" id="Java" name="skills" value=Java
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="Java">Java</label>
 
-                        //필터 내용을 저장하는 function
-                        function skillsFilter(target) {
+                    <input type="checkbox" class="btn-check" id="Java_Script" name="skills"
+                           value=Java_Script autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="Java_Script">Java_Script</label>
 
-                            var skillVal = target.value; //check value
-                            var confirmCheck = target.checked; //check여부 확인
-                            console.log("필터 선택값 : " + skillVal);
-                            console.log("선택여부 : " + confirmCheck);
+                    <input type="checkbox" class="btn-check" id="HTML" name="skills" value=HTML
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="HTML">HTML</label>
 
-                            if (confirmCheck == true) { // check true
-                                skillArr.push(skillVal); // check value filter 배열에 입력
-                            } else { // check false
-                                skillArr.splice(skillArr.indexOf(skillVal), 1); // check value filter 배열내용 삭제
-                            }
-                            console.log("필터입력값 출력 : " + skillArr);
-                        }
+                    <input type="checkbox" class="btn-check" id="jQuery" name="skills" value=jQuery
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="jQuery">jQuery</label>
 
-                        // function applyFilters() {
-                        //
-                        //     var skillString = JSON.stringify(skillArr); // JSON 문자열로 변환
-                        //     document.getElementById("skillsInput").value = skillString; // 숨겨진 input에 값 설정
-                        //
-                        //     // 폼 제출
-                        //     document.getElementById("searchForm").submit(); // 올바른 폼 ID를 사용
-                        // }
-                    </script>
-
-                </div>
-
-                <div class="select-package bg-info p-3 m-2 rounded-3">
-                    <h4>경력</h4>
-                    <div class="checkbox-package">
-                        <input type="checkbox" name="career" class="checkbox" value="신입"/> 신입
-                        <input type="checkbox" name="career" class="checkbox" value="경력"/> 경력
-                    </div>
-                </div>
-
-                <div class="select-package bg-info p-3 m-2 rounded-3">
-                    <h4>학력</h4>
-                    <div class="checkbox-package">
-                        <input type="checkbox" name="edu" class="checkbox" value="고등학교 졸업"/> 고졸
-                        <input type="checkbox" name="edu" class="checkbox" value="대학교 졸업"/> 대졸
-                    </div>
-                </div>
-
-                <div class="select-package bg-info p-3 m-2 rounded-3">
-                    <h4>희망 직무</h4>
-                    <div class="checkbox-package">
-                        <input type="checkbox" name="hopeJob" class="checkbox" value="프론트엔드"/>
-                        프론트엔드
-                        <input type="checkbox" name="hopeJob" class="checkbox" value="백엔드"/> 백엔드
-                    </div>
-                </div>
-
-                <div class="text-center my-3"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
-<!--                    <input type="hidden" name="skills" id="skillsInput">-->
-                    <button type="submit" class="btn btn-primary mx-2"> <!-- 좌우 여백만 추가 -->
-                        필터 적용하기
-                    </button>
+                    <input type="checkbox" class="btn-check" id="MySQL" name="skills" value=MySQL
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="MySQL">MySQL</label>
                 </div>
             </div>
+
+            <div class="p-2 m-2 rounded-3 shadow d-flex align-items-center">
+                <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#career">
+                    경력
+                </button>
+
+                <div id="career" class="p-2 collapse">
+                    <input type="checkbox" class="btn-check" id="careerAll" name="career"
+                           value="신입,경력" autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="careerAll">전체</label>
+
+                    <input type="checkbox" class="btn-check" id="신입" name="career" value="신입"
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="신입">신입</label>
+
+                    <input type="checkbox" class="btn-check" id="경력" name="career" value="경력"
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="경력">경력</label>
+                </div>
+            </div>
+
+            <div class=" p-2 m-2 rounded-3 shadow d-flex align-items-center">
+                <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#edu">
+                    학력
+                </button>
+                <div id="edu" class="p-2 collapse">
+                    <input type="checkbox" class="btn-check" id="eduAll" name="edu"
+                           value="고등학교 졸업,대학교 졸업" autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="eduAll">전체</label>
+
+                    <input type="checkbox" class="btn-check" id="고등학교 졸업" name="edu" value="고등학교 졸업"
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="고등학교 졸업">고등학교 졸업</label>
+
+
+                    <input type="checkbox" class="btn-check" id="대학교 졸업" name="edu" value="대학교 졸업"
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="대학교 졸업">대학교 졸업</label>
+
+
+                </div>
+            </div>
+
+            <div class=" p-2 m-2 rounded-3 shadow d-flex align-items-center">
+                <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#hopeJob">
+                    희망 직무
+                </button>
+                <div id="hopeJob" class="p-2 collapse">
+                    <input type="checkbox" class="btn-check" id="hopeJobAll" name="hopeJob"
+                           value="프론트엔드,백엔드" autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="hopeJobAll">전체</label>
+
+
+                    <input type="checkbox" class="btn-check" id="프론트엔드" name="hopeJob" value="프론트엔드"
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="프론트엔드">프론트엔드</label>
+
+                    <input type="checkbox" class="btn-check" id="백엔드" name="hopeJob" value="백엔드"
+                           autocomplete="off">
+                    <label class="btn btn-lg btn-outline-info mx-1" for="백엔드">백엔드</label>
+
+                </div>
+            </div>
+
+            <div class="text-center my-5"> <!-- 가운데 정렬 및 위아래 여백 추가 -->
+                <input type="hidden" name="skills" id="skillsInput">
+                <button type="submit" class="btn btn-lg btn-primary mx-2">
+                    <!-- 좌우 여백만 추가 -->
+                    필터 적용하기
+                </button>
+            </div>
         </div>
+
     </form>
 
     <!-- 필터링 end -->
@@ -103,7 +139,7 @@
                             <br>
                             <h5 class="card-title">{{name}}</h5>
                             <hr>
-                                <p class="card-text">{{resumeTitle}}</p>
+                            <p class="card-text">{{resumeTitle}}</p>
                             <hr>
                             <p>{{edu}} {{career}}</p>
                         </div>
@@ -113,45 +149,35 @@
         {{/resumeList}}
     </div>
 </div>
-<br><br><br>
-<!-- 인재 명단 end -->
 
-<!--<script>-->
-<!--    // 대체 이미지 URL을 사용자가 맞춤 설정할 수 있도록 함수를 정의합니다.-->
-<!--    function setResumeImageURL(resumeList) {-->
-<!--        // jobopenList 엘리먼트를 가져옵니다. 셀렉터는 jobopenList를 감싸는 엘리먼트에 적용되어야 정확합니다.-->
-<!--        var cards = document.querySelectorAll('.card img');-->
+<script>
+    // 기술스택 필터 적용
+    var skillArr = new Array(); //필터 내용을 저장하는 배열
 
-<!--        // 각 card에 대해 함수를 실행합니다.-->
-<!--        cards.forEach(function (card, index) {-->
-<!--            if (resumeList[index] && resumeList[index].imageURL) {-->
-<!--                // imageURL을 제공된 URL로 설정합니다.-->
-<!--                card.src = resumeList[index].imageURL;-->
-<!--            } else {-->
-<!--                // 이미지 URL이 존재하지 않으면 기본 이미지로 설정합니다.-->
-<!--                card.src = '/path/to/default/image.jpg'; // 경로를 적절한 기본 이미지 경로로 대체-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
+    //필터 내용을 저장하는 function
+    function skillsFilter(target) {
 
-<!--    // 문서가 로드될 때 함수를 호출합니다.-->
-<!--    document.addEventListener('DOMContentLoaded', function () {-->
-<!--        // 모의 데이터: 실제 사용할 때는 서버에서 데이터를 가져오거나 다른 방식으로 구성하세요.-->
-<!--        var mockResumeList = [-->
-<!--            {id: 9, imageURL: '/image/userimage9.png'},-->
-<!--            {id: 8, imageURL: '/image/userimage8.png'},-->
-<!--            {id: 7, imageURL: '/image/userimage7.png'},-->
-<!--            {id: 6, imageURL: '/image/userimage6.png'},-->
-<!--            {id: 5, imageURL: '/image/userimage5.png'},-->
-<!--            {id: 4, imageURL: '/image/userimage4.png'},-->
-<!--            {id: 3, imageURL: '/image/userImage3.jpg'},-->
-<!--            {id: 2, imageURL: '/image/userImage2.jpg'},-->
-<!--            {id: 1, imageURL: '/image/userImage.jpg'}-->
-<!--        ];-->
+        var skillVal = target.value; //check value
+        var confirmCheck = target.checked; //check여부 확인
+        console.log("필터 선택값 : " + skillVal);
+        console.log("선택여부 : " + confirmCheck);
 
-<!--        // 함수 호출-->
-<!--        setResumeImageURL(mockResumeList);-->
-<!--    });-->
-<!--</script>-->
+        if (confirmCheck == true) { // check true
+            skillArr.push(skillVal); // check value filter 배열에 입력
+        } else { // check false
+            skillArr.splice(skillArr.indexOf(skillVal), 1); // check value filter 배열내용 삭제
+        }
+        console.log("필터입력값 출력 : " + skillArr);
+    }
+
+    // function applyFilters() {
+    //
+    //     var skillString = JSON.stringify(skillArr); // JSON 문자열로 변환
+    //     document.getElementById("skillsInput").value = skillString; // 숨겨진 input에 값 설정
+    //
+    //     // 폼 제출
+    //     document.getElementById("searchForm").submit(); // 올바른 폼 ID를 사용
+    // }
+</script>
 
 {{> layout/footer}}
