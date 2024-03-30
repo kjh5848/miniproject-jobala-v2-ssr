@@ -35,6 +35,7 @@ public class CompController {
     // TODO: 서비스 만들기
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
+
         List<ResumeResponse.ListDTO> resumeList = compQueryRepository.findAll(skills, resDTO);
         req.setAttribute("resumeList", resumeList);
         return "comp/scoutList";
