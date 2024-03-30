@@ -41,14 +41,17 @@
             <div class="card-body">
                 {{#guestProfile}}
                     <form action="/guest/updateProfile" method="post" enctype="multipart/form-data">
-                        <div class="content profileBox container" style="width: 60%">
+                        <div class="content profileBox">
                             <h2>프로필 관리</h2>
-                            <div class="d-flex justify-content-center my-5">
-                                <div class="card" STYLE="width: 350PX">
-                                    <img class="card-img-top" id="imgPreview" src="/image/{{imgFilename}}">
-                                    <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img class="card-img-top rounded" id="imgPreview" src="/image/{{imgFilename}}"
+                                         style="width: 200px">
+                                    <div class="form-group">
                                         <div class="input-group">
-                                            <input type="file" class="form-control" name="imgFilename"
+                                            <input type="file" id="inputGroupFile04"
+                                                   aria-describedby="inputGroupFileAddon04" aria-label="Upload"
+                                                   name="imgFilename"
                                                    value="{{imgFilename}}" onchange="previewImage(this)">
                                         </div>
                                     </div>
@@ -88,6 +91,9 @@
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
 <script>
     // HTML 문서에서 ID가 'imgPreview'인 이미지 요소를 찾아 imgPreview 변수에 할당
     const imgPreview = document.getElementById('imgPreview');
