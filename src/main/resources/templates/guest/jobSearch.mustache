@@ -92,11 +92,9 @@
                 <!-- 구직자 기술스택 매칭리스트 목록 -->
 
                 <!-- 채용공고 목록 -->
-                <!-- 채용공고 목록 -->
-                <div class="row">
-                    {{#jobopenList.jobopenList}}
+                {{#jobopenList}}
                         <div class="col-lg-4 col-md-6 col-12">
-                            <a onClick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                            <a onclick="location.href='/comp/jobopen/{{id}}'" class="btn">
                                 <div class="card border-0 shadow" style="width: 100%;">
                                     <img class="card-img-top img-fluid" src="/image/{{imgFilename}}"
                                          alt="이미지를 표시할 수 없습니다.">
@@ -110,22 +108,30 @@
                                 </div>
                             </a>
                         </div>
-                    {{/jobopenList.jobopenList}}
+                    {{/jobopenList}}
+
+                <!-- 채용공고 목록 -->
+                <div class="row">
+                    {{#jobOpenDTO.jobopenList}}
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <a onclick="location.href='/comp/jobopen/{{id}}'" class="btn">
+                                <div class="card border-0 shadow" style="width: 100%;">
+                                    <img class="card-img-top img-fluid" src="/image/{{imgFilename}}"
+                                         alt="이미지를 표시할 수 없습니다.">
+                                    <div class="card-body text-start">
+                                        <br>
+                                        <h5 class="card-title">{{jobopenTitle}}</h5>
+                                        <hr>
+                                        <p class="card-text">{{compLocation}} {{career}} {{edu}} </p>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {{/jobOpenDTO.jobopenList}}
                     <!-- 채용공고 목록 -->
 
 
-                    <!-- 페이징 -->
-                    <div class="mt-5">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item {{#jobopenList.first}}disabled{{/jobopenList.first}}">
-                                <a class="page-link text-info bg-light" href="/guest/jobopenSearch?page={{jobopenList.previousPage}}">Previous</a>
-                            </li>
-                            <li class="page-item {{#jobopenList.last}}disabled{{/jobopenList.last}}">
-                                <a class="page-link text-info bg-light" href="/guest/jobopenSearch?page={{jobopenList.nextPage}}">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- 페이징 -->
                 </div>
             </div>
         </div>

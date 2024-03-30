@@ -56,7 +56,7 @@ public class GuestController {
         jobOpenDTO.setNextPage(page +1);
 
 
-        req.setAttribute("jobopenList", jobOpenDTO);
+        req.setAttribute("jobOpenDTO", jobOpenDTO);
         return "guest/jobSearch";
     }
 
