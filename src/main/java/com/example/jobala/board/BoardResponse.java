@@ -116,6 +116,14 @@ public class BoardResponse {
         private String title;
         private Timestamp createdAt; // LocalDateTime을 사용하면 안된다.
         private String username;
+
+        public MainDetailDTO(Board board) {
+            this.id = getId();
+            this.userId = getUserId();
+            this.title = getTitle();
+            this.createdAt = getCreatedAt();
+            this.username = getUsername();
+        }
     }
 
     // 자유게시판 상세페이지
