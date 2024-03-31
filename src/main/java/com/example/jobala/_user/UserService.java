@@ -3,11 +3,10 @@ package com.example.jobala._user;
 import com.example.jobala._core.errors.exception.Exception400;
 import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._core.errors.exception.Exception404;
-import com.example.jobala.board.Board;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,15 +28,17 @@ public class UserService {
     }
 
     // 로그인
-    public User login(UserRequest.LoginDTO reqDTO) {
-        // username으로 사용자 검색
-        User user = userJPARepository.findByUsername(reqDTO.getUsername())
-                .orElseThrow(() -> new Exception401("사용자 이름이 존재하지 않습니다."));
-        // 비밀번호 일치 여부 확인
-        if (!user.getPassword().equals(reqDTO.getPassword())) {
-            throw new Exception401("비밀번호가 틀렸습니다.");
+    public UserResponse.LoginResponseDTO login(UserRequest.LoginDTO reqDTO) {
+        try {
+            User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+                    .orElseThrow(() -> new EmptyResultDataAccessException(1));
+
+            Boolean isCheck = user.getRole() == 0;
+
+            return new UserResponse.LoginResponseDTO(user, isCheck);
+        } catch (EmptyResultDataAccessException e) {
+            throw new Exception401("유저네임 혹은 비밀번호가 틀렸어요");
         }
-        return user;
     }
 
     // 회원가입
