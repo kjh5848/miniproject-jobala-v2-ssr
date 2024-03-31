@@ -5,6 +5,7 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
 import com.example.jobala.board.Board;
 import com.example.jobala.board.BoardJPARepository;
+import com.example.jobala.board.BoardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +18,14 @@ public class ReplyService {
 
     // 댓글쓰기
     @Transactional
-    public void replySave(ReplyRequest.SaveDTO reqDTO, User sessionUser){
+    public ReplyResponse.ReplySaveDTO replySave(ReplyRequest.SaveDTO reqDTO, User sessionUser){
        Board board = boardJPARepository.findById(reqDTO.getBoardId())
                .orElseThrow(() -> new Exception404("없는 게시글에 댓글을 작성 할 수 없습니다."));
 
-       Reply reply = reqDTO.toEntity(sessionUser, board);
+        Reply reply = reqDTO.toEntity(sessionUser, board);
 
-       replyJPARepository.save(reply);
+        replyJPARepository.save(reply);
+        return new ReplyResponse.ReplySaveDTO(reply);
     }
 
     // 댓글삭제
