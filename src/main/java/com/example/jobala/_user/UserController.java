@@ -7,10 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.example.jobala._core.errors.exception.Exception401;
 
 import java.util.List;
@@ -33,11 +30,10 @@ public class UserController {
 
     //서비스 변경 완료
     @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqDTO, HttpSession session) {
-        User sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", sessionUser);
-        Boolean isCheck = sessionUser.getRole() == 0;
-        session.setAttribute("isCheck", isCheck);
+    public String login(UserRequest.LoginDTO reqDTO) {
+        UserResponse.LoginResponseDTO loginResponse = userService.login(reqDTO);
+        session.setAttribute("sessionUser", loginResponse.getUser());
+        session.setAttribute("isCheck", loginResponse.getIsCheck());
 
         return "redirect:/";
     }
