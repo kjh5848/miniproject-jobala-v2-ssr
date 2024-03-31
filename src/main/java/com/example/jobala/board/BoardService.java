@@ -59,14 +59,14 @@ public class BoardService {
     public Board boardFindById(int boardId){
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
-
         return board;
     }
 
     // 글쓰기
     @Transactional
-    public void boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser){
-       boardJPARepository.save(reqDTO.toEntity(sessionUser));
+    public BoardResponse.BoardSaveDTO boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser){
+       Board board = boardJPARepository.save(reqDTO.toEntity(sessionUser));
+       return new BoardResponse.BoardSaveDTO(board);
     }
 
     // 글목록조회
@@ -75,5 +75,4 @@ public class BoardService {
 
         return boardJPARepository.findAll(pageable);
     }
-
 }
