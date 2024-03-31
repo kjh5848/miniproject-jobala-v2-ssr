@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,6 +32,7 @@ public class BoardController {
     @GetMapping("/board/mainForm")
     public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
         Page<Board> boardPage = boardService.글목록조회(page, size);
+        List<BoardResponse.MainDetailDTO> respDTO = boardService.boardFindAll();
 
         req.setAttribute("boardList", boardPage.getContent());
         req.setAttribute("first", page == 0 ? true : false);

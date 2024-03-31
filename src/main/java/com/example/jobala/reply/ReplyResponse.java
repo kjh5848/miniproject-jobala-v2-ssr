@@ -27,4 +27,17 @@ public class ReplyResponse {
             else replyOwner = sessionUser.getId() == userId;
         }
     }
+
+    @Data
+    public static class ReplySaveDTO {
+        private Integer id;
+        private Integer boardId;
+        private String comment;
+
+        public ReplySaveDTO(Reply reply) {
+            this.id = reply.getId();
+            this.boardId = reply.getBoard().getId();
+            this.comment = reply.getComment();
+        }
+    }
 }

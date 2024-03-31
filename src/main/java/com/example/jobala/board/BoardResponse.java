@@ -11,6 +11,58 @@ import java.util.List;
 
 public class BoardResponse {
 
+    // 글쓰기DTO
+    @Data
+    public static class BoardSaveDTO {
+        private Integer id;
+        private String title;
+        private String content;
+        private UserDTO user;
+
+        @Data
+        public class UserDTO {
+            private int id;
+
+            public UserDTO(User user) {
+                this.id = user.getId();
+            }
+        }
+
+
+        public BoardSaveDTO(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.content = board.getContent();
+            this.user = new UserDTO(board.getUser());
+        }
+    }
+
+    // 글 수정DTO
+    @Data
+    public static class BoardUpdateDTO {
+        private Integer id;
+        private String title;
+        private String content;
+        private UserDTO user;
+
+        @Data
+        public class UserDTO {
+            private int id;
+
+            public UserDTO(User user) {
+                this.id = user.getId();
+            }
+        }
+
+
+        public BoardUpdateDTO(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.content = board.getContent();
+            this.user = new UserDTO(board.getUser());
+        }
+    }
+
     @Data
     public static class DetailDTO {
         private int id;
@@ -64,6 +116,14 @@ public class BoardResponse {
         private String title;
         private Timestamp createdAt; // LocalDateTime을 사용하면 안된다.
         private String username;
+
+        public MainDetailDTO(Board board) {
+            this.id = getId();
+            this.userId = getUserId();
+            this.title = getTitle();
+            this.createdAt = getCreatedAt();
+            this.username = getUsername();
+        }
     }
 
     // 자유게시판 상세페이지
