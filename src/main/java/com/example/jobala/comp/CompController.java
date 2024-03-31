@@ -32,11 +32,8 @@ public class CompController {
     private final CompQueryRepository compQueryRepository;
     private final ApplyJPARepository applyJPARepository;
     private final CompService compService;
-    private final UserJPARepository userJPARepository;
-    private final ResumeJPARepository resumeJPARepository;
-    private final CompJPARepository compJPARepository;
 
-
+    //인재 이력서 검색하기
     @GetMapping("/comp/resumeSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
         List<ResumeResponse.ListDTO> resumeList = compService.searchResumes(skills, resDTO);
@@ -44,6 +41,7 @@ public class CompController {
         return "comp/scoutList";
     }
 
+    //인재 명단 목록
     @GetMapping("/comp/scoutList")
     public String scoutList(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -52,21 +50,9 @@ public class CompController {
         return "comp/scoutList";
     }
 
-    @GetMapping("/comp/scoutList/{id}")
-    public String scoutDetail(@PathVariable Integer id, HttpServletRequest req) {
-        //1. 기업 정보 꺼내오기 (인증 체크)
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        //2. 인재 명단에서 인재 클릭 시 이력서로 들어가지는 로직 짜기
-        Resume resume = (Resume) compQueryRepository.findResumeById(id);
-
-        req.setAttribute("sessionUser", sessionUser);
-        req.setAttribute("resume", resume);
-
-        return "guest/resume/detailForm";
-    }
-
     // DEL: getResumeList 삭제
 
+    //마이페이지 - 공고 관리
     @GetMapping("/comp/mngForm")
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) req.getSession().getAttribute("sessionUser");
@@ -75,6 +61,7 @@ public class CompController {
         return "comp/_myPage/mngForm";
     }
 
+    // 마이페이지 - 프로필관리
     @GetMapping("/comp/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -83,7 +70,7 @@ public class CompController {
         return "comp/_myPage/profileForm";
     }
 
-
+    // 마이페이지 프로필 업데이트
     @PostMapping("/comp/updateProfile") // 주소 수정 필요!
     public String updateProfile(CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
