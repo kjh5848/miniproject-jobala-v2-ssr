@@ -35,23 +35,34 @@ public class GuestService {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
-        System.out.println("reqDTO = " + reqDTO.getImgFilename());
         MultipartFile imgFilename = reqDTO.getImgFilename();
 
+        // 사진이 변경되었는지 여부 확인
+        boolean isImgChanged = imgFilename != null && !imgFilename.isEmpty();
+
         // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
-        Path imgPath = Paths.get("./image/" + GuestImgFilename);
-
-        try {
-            Files.write(imgPath, imgFilename.getBytes());
-            String webImgPath = imgPath.toString().replace("\\", "/");
-            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-
-            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        String webImgPath = null;
+        if (isImgChanged) {
+            String guestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
+            Path imgPath = Paths.get("./image/" + guestImgFilename);
+            try {
+                Files.write(imgPath, imgFilename.getBytes());
+                webImgPath = imgPath.toString().replace("\\", "/");
+                webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+
+        // 사진이 변경되었는지 여부에 따라 프로필 업데이트 진행
+        if (isImgChanged) {
+            // 사진이 변경된 경우: 새로운 이미지 파일 경로와 함께 업데이트
+            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
+        } else {
+            // 사진이 변경되지 않은 경우: 이전의 이미지 파일 경로를 유지하고 업데이트
+            user.setGuestProfileUpdateDTO(reqDTO, user.getImgFilename());
+        }
+
         return user;
     }
 
