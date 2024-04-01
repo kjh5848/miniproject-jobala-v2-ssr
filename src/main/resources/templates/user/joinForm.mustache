@@ -53,20 +53,20 @@
                                 <div class="mb-3" id="list">
                                     <p>회사 주소</p>
                                     <div class="d-flex text-nowrap">
-                                        <input type="text" class="form-control" name="address" id="sample4_postcode2"
-                                               placeholder="우편번호" aria-label="우편번호 입력">
-                                        <input type="button" onclick="sample4_execDaumPostcode2()"
+                                        <input type="text" class="form-control" id="postcode2"
+                                               placeholder="우편번호" name="zipcode" aria-label="우편번호 입력">
+                                        <input type="button" onclick="execDaumPostcode2()"
                                                class="btn btn-primary btn-block" value="우편번호 찾기">
                                     </div>
                                     <br>
-                                    <input type="text" class="form-control" name="address" id="sample4_roadAddress2"
+                                    <input type="text" class="form-control" name="address" id="roadAddress2"
                                            placeholder="도로명주소">
-                                    <input type="text" class="form-control" name="address" id="sample4_jibunAddress2"
+                                    <input type="text" class="form-control" name="jibunAddress"  id="jibunAddress2"
                                            placeholder="지번주소">
                                     <span id="guide" style="color:#999;display:none"></span>
-                                    <input type="text" class="form-control" name="address" id="sample4_detailAddress2"
+                                    <input type="text" class="form-control" name="detailAddress" id="detailAddress2"
                                            placeholder="상세주소">
-                                    <input type="text" class="form-control" name="address" id="sample4_extraAddress2"
+                                    <input type="text" class="form-control" name="extraAddress" id="extraAddress2"
                                            placeholder="참고항목">
                                 </div>
 
@@ -165,20 +165,20 @@
                                 <div class="mb-3" id="list">
                                     <p>거주지</p>
                                     <div class="d-flex text-nowrap">
-                                        <input type="text" class="form-control" name="address" id="sample4_postcode" placeholder="우편번호"
+                                        <input type="text" class="form-control" name="zipcode" id="postcode" placeholder="우편번호"
                                                aria-label="우편번호 입력">
-                                        <input type="button" onclick="sample4_execDaumPostcode()"
-                                               class="btn btn-primary btn-block"  value="우편번호 찾기">
+                                        <input type="button" onclick="execDaumPostcode()"
+                                               class="btn btn-primary btn-block" value="우편번호 찾기">
                                     </div>
                                     <br>
-                                    <input type="text" class="form-control" name="address" id="sample4_roadAddress"
+                                    <input type="text" class="form-control" name="address"  id="roadAddress"
                                            placeholder="도로명주소">
-                                    <input type="text" class="form-control"name="address" id="sample4_jibunAddress"
+                                    <input type="text" class="form-control" name="jibunAddress" id="jibunAddress"
                                            placeholder="지번주소">
                                     <span id="guide" style="color:#999;display:none"></span>
-                                    <input type="text" class="form-control"name="address" id="sample4_detailAddress"
+                                    <input type="text" class="form-control" name="detailAddress"   id="detailAddress"
                                            placeholder="상세주소">
-                                    <input type="text" class="form-control"name="address" id="sample4_extraAddress"
+                                    <input type="text" class="form-control" name="extraAddress" id="extraAddress"
                                            placeholder="참고항목">
                                 </div>
                                 <div class="mb-3">
@@ -311,7 +311,7 @@
         document.form.zipNo.value = zipNo;
     }
 
-    function sample4_execDaumPostcode() {
+    function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -336,15 +336,15 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("roadAddress").value = roadAddr;
+                document.getElementById("jibunAddress").value = data.jibunAddress;
 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if (roadAddr !== '') {
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    document.getElementById("extraAddress").value = extraRoadAddr;
                 } else {
-                    document.getElementById("sample4_extraAddress").value = '';
+                    document.getElementById("extraAddress").value = '';
                 }
 
                 var guideTextBox = document.getElementById("guide");
@@ -366,7 +366,7 @@
         }).open();
     }
 
-    function sample4_execDaumPostcode2() {
+    function execDaumPostcode2() {
         new daum.Postcode({
             oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -391,15 +391,15 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode2').value = data.zonecode;
-                document.getElementById("sample4_roadAddress2").value = roadAddr;
-                document.getElementById("sample4_jibunAddress2").value = data.jibunAddress;
+                document.getElementById('postcode2').value = data.zonecode;
+                document.getElementById("roadAddress2").value = roadAddr;
+                document.getElementById("jibunAddress2").value = data.jibunAddress;
 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if (roadAddr !== '') {
-                    document.getElementById("sample4_extraAddress2").value = extraRoadAddr;
+                    document.getElementById("extraAddress2").value = extraRoadAddr;
                 } else {
-                    document.getElementById("sample4_extraAddress2").value = '';
+                    document.getElementById("extraAddress2").value = '';
                 }
 
                 var guideTextBox = document.getElementById("guide");
