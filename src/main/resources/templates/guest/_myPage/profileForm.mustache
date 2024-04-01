@@ -44,12 +44,11 @@
                         <div class="content profileBox container" style="width: 60%">
                             <h2>프로필 관리</h2>
                             <div class="d-flex justify-content-center my-5">
-                                <div class="card " style="width:50%">
-                                    <img class="card-img-top rounded" id="imgPreview" src="/image/{{imgFilename}}" >
+                                <div class="card " STYLE="width: 300PX">
+                                    <img class=" card-img-top" id="imgPreview" src="/image/{{imgFilename}}">
                                     <div class="card-body">
                                         <div class="input-group">
-                                            <input type="file" id="inputGroupFile04"
-                                                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="imgFilename"
+                                            <input type="file" class="form-control"  id="inputGroupFile02" name="imgFilename"
                                                    value="{{imgFilename}}" onchange="previewImage(this)">
                                         </div>
                                     </div>

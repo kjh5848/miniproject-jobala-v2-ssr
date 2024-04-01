@@ -38,6 +38,7 @@ public class GuestController {
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
         System.out.println("skills = " + skills);
+        System.out.println("resDTO = " + resDTO);
         List<JobopenResponse.ListDTO> jobopenList = guestService.jobopenSearch(skills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
