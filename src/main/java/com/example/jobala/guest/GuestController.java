@@ -70,6 +70,7 @@ public class GuestController {
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User guestProfile = userService.guestInfo(sessionUser.getId());
+        System.out.println("guestProfile = " + guestProfile);
         req.setAttribute("guestProfile", guestProfile);
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }
