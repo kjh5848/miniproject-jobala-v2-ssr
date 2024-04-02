@@ -33,7 +33,7 @@ public class GuestService {
     @Transactional
     public User guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
+                .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다."));
 
         MultipartFile imgFilename = reqDTO.getImgFilename();
 
@@ -78,10 +78,4 @@ public class GuestService {
         return resumeJPARepository.findByUserId(id);
     }
 
-    //이력서 페이징 하기 위한 목록 조회
-    public Page<Resume> resumesFindAll(int page, int size) {
-        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
-
-        return guestJPARepository.findAll(pageable);
-    }
 }

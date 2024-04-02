@@ -51,19 +51,14 @@ public class GuestController {
 
     //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
-    public String mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
+    public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        Page<Resume> resumePage = guestService.resumesFindAll(page, size);
-
-        req.setAttribute("resumeList", resumePage.getContent());
-        req.setAttribute("first", page == 0 ? true : false);
-        req.setAttribute("last", page < resumePage.getTotalPages() - 1);
-        req.setAttribute("previousPage", page - 1);
-        req.setAttribute("nextPage", page + 1);
+        int userId = sessionUser.getId();
+        System.out.println(userId);
+        List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
+        req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
     }
-
     @GetMapping("/guest/profileForm")
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
