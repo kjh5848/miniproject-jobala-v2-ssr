@@ -4,7 +4,6 @@ import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
-import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
