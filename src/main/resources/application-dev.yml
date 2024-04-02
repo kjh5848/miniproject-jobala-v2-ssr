@@ -5,6 +5,8 @@ server:
       force: true
     session:
       timeout: 30m
+#      jsessionid가 URL에 뜨는 URL 리라이팅 현상 방지
+      tracking-modes: cookie
   port: 8080
 
 spring:

@@ -1,10 +1,10 @@
 package com.example.jobala._core.interceptor;
 
 import com.example.jobala._core.errors.exception.Exception401;
+import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 
