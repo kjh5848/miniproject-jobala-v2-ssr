@@ -1,16 +1,4 @@
 {{> layout/header}}
-
-
-<style>
-    .profileBox {
-        margin-top: 50px;
-        border: 2px solid #ccc;
-        padding: 30px;
-        border-radius: 10px;
-        border: none;
-    }
-</style>
-
 <!--개인 이력서 관리 페이지-->
 <div class="container">
     <div class="card-body">
@@ -39,58 +27,47 @@
             </div>
         </div>
     </div>
-    <div class="profileBox">
-        <h2 class="text-left">이력서 관리</h2>
-        <div class="card shadow row">
-            <table class="table p-3" style="margin-bottom: 0px;">
-                <thead class="table-primary">
-                <tr>
-                    <th></th>
-                    <th>제목</th>
-                    <th>관리</th>
-                </tr>
-                </thead>
-                <tbody id="resumeTable">
-                {{#resumeList}}
-                    <tr>
-                        <td></td>
-                        <td>
-                            <a class="page-link" href="/guest/resume/{{id}}"  style="cursor:pointer">{{resumeTitle}}</a>
-                        </td>
-
-                        <td class="d-flex">
-                            <a href="/guest/resume/{{id}}/updateForm" class="btn btn-primary btn-sm">수정</a>
-                            <form action="/resume/{{id}}/delete" method="post">
-                                <button class="btn btn-danger btn-sm" style="margin-left: 5px;">삭제</button>
-                            </form>
-                        </td>
-                    </tr>
-                {{/resumeList}}
-                </tbody>
-            </table>
-        </div>
-        <div class="text-center my-5"> <!-- Center the button -->
-            <a href="/guest/resume/saveForm" class="btn btn-primary">새로운 이력서 작성하기</a>
-            <!-- Styled in blue color -->
-        </div>
-        <div class="d-flex justify-content-center">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item {{#first}}disabled{{/first}}">
-                        <a class="page-link" href="/guest/mngForm?page={{previousPage}}"
-                        aria-label="Preview">
-                        <span aria-hidden="true">Preview</span>
-                        </a>
-                    </li>
-                    <li class="page-item {{#last}}{{/last}}{{^last}}disabled{{/last}}">
-                        <a class="page-link" href="/guest/mngForm?page={{nextPage}}" aria-label="Next">
-                        <span aria-hidden="true">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <div class="applyBox">
+                    <h2 class="text-left">이력서 관리</h2>
+                    <div class="card shadow row">
+                        <table class="table p-3" style="margin-bottom: 0px;">
+                            <thead class="table-primary">
+                            <tr>
+                                <th>제목</th>
+                                <th>관리</th>
+                            </tr>
+                            </thead>
+                            <tbody id="resumeTable">
+                            {{#resumeList}}
+                                <tr>
+                                    <td>
+                                        <a class="page-link" href="/guest/resume/{{id}}">{{resumeTitle}}</a>
+                                    </td>
+                                    <td class="d-flex">
+                                        <a href="/guest/resume/{{id}}/updateForm" class="btn btn-primary btn-sm">수정</a>
+                                        <form action="/resume/{{id}}/delete" method="post">
+                                            <button class="btn btn-danger btn-sm" style="margin-left: 5px;">삭제</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {{/resumeList}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center"> <!-- Center the button -->
+                        <a href="/guest/resume/saveForm" class="btn btn-primary">새로운 이력서 작성하기</a>
+                        <!-- Styled in blue color -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 </div>
 
 {{> layout/footer}}
