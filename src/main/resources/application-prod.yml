@@ -1,0 +1,30 @@
+server:
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+    session:
+      tracking-modes: cookie
+  port: 5000
+
+spring:
+  mustache:
+    servlet:
+      expose-session-attributes: true
+      expose-request-attributes: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DBMAME}
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_batch_fetch_size: 10
+    open-in-view: true
+
+logging:
+  level:
+    '[shop.mtcoding.blog]': INFO

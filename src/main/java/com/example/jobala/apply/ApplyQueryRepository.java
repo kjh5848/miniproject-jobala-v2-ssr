@@ -18,10 +18,10 @@ public class ApplyQueryRepository {
     public List<ApplyResponse.GuestPositionDTO> findJopOpenByUserId(int userId) {
         //개인이 제안받은 현황보기
         String q = """
-                    SELECT at.id, jot.id, rt.id, jot.jobopen_title, rt.resume_title, jot.end_time, at.state
+                    SELECT at.id, jt.id, rt.id, jt.jobopen_title, rt.resume_title, jt.end_time, at.state, jt.salary
                     FROM apply_tb at
                     join user_tb ut on at.user_id = ut.id
-                    INNER JOIN jobopen_tb jot ON at.jobopen_id = jot.id
+                    INNER JOIN jobopen_tb jt ON at.jobopen_id = jt.id
                     INNER JOIN resume_tb rt ON rt.id = at.resume_id
                     WHERE rt.user_id = ? and at.role = 1 ;
                     """;
@@ -62,7 +62,7 @@ public class ApplyQueryRepository {
     //기업 applyForm
     public List<ApplyResponse.CompApplyDTO> findByUserId(int sessionUserId, int role) {
             String q = """
-                select at.id, jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state
+                select at.id, jt.id, rt.id, jt.jobopen_title, rt.resume_title, ut.name, rt.edu, jt.end_time, at.state, jt.career
                 from apply_tb at 
                 join user_tb ut on at.user_id = ut.id
                 join jobopen_tb jt ON at.jobopen_id = jt.id

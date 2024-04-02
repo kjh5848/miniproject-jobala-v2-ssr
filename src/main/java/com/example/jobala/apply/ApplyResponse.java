@@ -23,6 +23,8 @@ public class ApplyResponse {
         private String edu;
         private Date endTime;
         private String state;
+        private String career;
+
     }
 
     // 개인 applyForm 응답DTO
@@ -84,6 +86,7 @@ public class ApplyResponse {
         private String resumeTitle;
         private Date endTime;
         private String state;
+        private String salary;
     }
 }
 
