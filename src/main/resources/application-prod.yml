@@ -17,6 +17,9 @@ spring:
     url: jdbc:mysql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DBMAME}
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
+  sql:
+    init:
+      data-locations: classpath:db/data.sql
   jpa:
     hibernate:
       ddl-auto: none
