@@ -30,4 +30,4 @@ spring:
 
 logging:
   level:
-    '[shop.mtcoding.blog]': INFO
+    '[com.example.jobala]': INFO

@@ -35,8 +35,6 @@ public class GuestController {
 
     @GetMapping("/guest/jobopenSearch")
     public String jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
-        System.out.println("skills = " + skills);
-        System.out.println("resDTO = " + resDTO);
         List<JobopenResponse.ListDTO> jobopenList = guestService.jobopenSearch(skills, resDTO);
         req.setAttribute("jobopenList", jobopenList);
         return "guest/jobSearch";
@@ -54,7 +52,6 @@ public class GuestController {
     public String mngForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         int userId = sessionUser.getId();
-        System.out.println(userId);
         List<Resume> resumeList = guestRepository.findResumeById(sessionUser.getId());
         req.setAttribute("resumeList", resumeList);
         return "guest/_myPage/mngForm";
@@ -63,7 +60,6 @@ public class GuestController {
     public String profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User guestProfile = userService.guestInfo(sessionUser.getId());
-        System.out.println("guestProfile = " + guestProfile);
         req.setAttribute("guestProfile", guestProfile);
         return "guest/_myPage/profileForm"; // 파일 확장자를 생략한 뷰의 경로
     }
