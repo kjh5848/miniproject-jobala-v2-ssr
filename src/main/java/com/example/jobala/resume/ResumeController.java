@@ -69,9 +69,9 @@ public class ResumeController {
 
     //이력서 삭제
     @PostMapping("/resume/{id}/delete")  // 주소 수정 필요
-    public String delete(@PathVariable int id, ResumeRequest.DeleteDTO reqDTO) {
+    public String delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.resumeDelete(id, reqDTO.getId());
+        resumeService.resumeDelete(id, sessionUser.getId());
         return "redirect:/guest/mngForm";
     }
 }

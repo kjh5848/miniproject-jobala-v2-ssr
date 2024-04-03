@@ -13,6 +13,7 @@ public class GuestRequest {
         private String password;
         private String phone;
         private String email;
+        private String address;
         private String imgTitle;
         private MultipartFile imgFilename;
     }

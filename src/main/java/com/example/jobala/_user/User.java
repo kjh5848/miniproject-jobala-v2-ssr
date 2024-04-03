@@ -76,6 +76,7 @@ public class User {
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
+        this.address = reqDTO.getAddress();
         this.imgTitle = reqDTO.getImgTitle();
         this.imgFilename = webImgPath;
     }
