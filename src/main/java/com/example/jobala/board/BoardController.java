@@ -72,7 +72,6 @@ public class BoardController {
     public String save(BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.boardSave(reqDTO, sessionUser);
-        System.out.println();
         return "redirect:/board/mainForm";
     }
 
