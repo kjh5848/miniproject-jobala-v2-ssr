@@ -15,6 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println("preHandle............");
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("sessionUser");
+
         if(sessionUser == null){
             throw new Exception401("로그인 하셔야 해요");
         }

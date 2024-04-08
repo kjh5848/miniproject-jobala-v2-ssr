@@ -1,14 +1,15 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.jobopen.*;
+import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.jobopen.JobopenJPARepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import com.example.jobala._core.errors.exception.Exception401;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class UserController {
     public String join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
         User user = userService.join(reqDTO);
         req.setAttribute("user" ,user);
-        return "/user/loginForm";
+        return "user/loginForm";
     }
 
     // TODO : DTO시 삭제 예정
