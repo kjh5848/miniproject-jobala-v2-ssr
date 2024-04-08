@@ -1,19 +1,16 @@
 package com.example.jobala.jobopen;
 
-import com.example.jobala._user.User;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapJPARepository;
-import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +66,6 @@ public class JobopenService {
     public JobopenResponse.DetailDTO findJobopenById(Integer jobopenId, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findByJobopenIdWithUser(jobopenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
-
         List<String> skills = Arrays.stream(jobopen.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
         String skillsString = String.join(", ", skills);
 

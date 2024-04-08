@@ -38,7 +38,7 @@ public class JobopenResponse {
         private String compLocation; //근무지역
         private String jobType; // 고용형태
         private String salary; //연봉
-        private java.sql.Date endTime; // 마감일
+        private Date endTime; // 마감일
         private Integer role; // 역할 0 -> guest, 1 -> comp
         private int count;
         @CreationTimestamp
@@ -114,6 +114,7 @@ public class JobopenResponse {
             this.salary = jobopen.getSalary();
             this.compLocation = jobopen.getCompLocation();
             this.hopeJob = jobopen.getHopeJob();
+            this.endTime = jobopen.getEndTime();
             this.skills = jobopen.getSkills();
             this.isScrap = false;
             this.isGuestScrap = false;
