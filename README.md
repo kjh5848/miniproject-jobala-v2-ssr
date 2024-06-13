@@ -3,7 +3,7 @@
 > # I am
 | 이름 | 사진 | 역할 |  
 |:--:|:--:|:---------------:|
-| 김주혁 | <img src="https://github.com/kjh5848/miniproject-jobala-v2-ssr/assets/153582123/01f59beb-1535-4356-9c39-c26c339390ac" width="200px"/> | 전체적인 프로젝트 세팅<br/>(기업) 채용공고 관리 - 보기, 등록, 수정, 삭제<br/>(기업) 관심 구직자 - 구독 북마크, 스크랩|
+| 김주혁 | <img src="https://github.com/kjh5848/miniproject-jobala-v2-ssr/assets/153582123/01f59beb-1535-4356-9c39-c26c339390ac" width="200px"/> | 전체적인 프로젝트 세팅<br>(기업) 채용공고 관리 - 보기, 등록, 수정, 삭제<br>(기업) 관심 구직자 - 구독 북마크, 스크랩|
 
 ---
 <br/>
@@ -38,7 +38,6 @@
 | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/d20420bf-008c-4fd0-a7e0-8983d7606c7c" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/c4180860-481a-46f0-a0e2-df05bdf8a586" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/9d7395db-e810-466e-bd9d-9216d18d0395" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/84715293-8f3a-4939-8122-c85438791364" alt="profile" width="100" height="100"> |
 | 김주혁 | 박선규 | 박찬혁 | 송민경 | 장유진 |
 ---
-
 <br/>
 
 > ## 프로젝트 소개
